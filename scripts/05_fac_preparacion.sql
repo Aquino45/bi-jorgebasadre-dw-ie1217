@@ -1,5 +1,5 @@
 ﻿/* ============================================================================
-   05_fac_preparacion_v5_1.sql — PREPARACION CURRICULAR
+   05_fac_preparacion.sql — PREPARACION CURRICULAR
    CAMBIOS v5.1: borra sus tablas temporales al iniciar (reejecucion en la
    misma ventana) y renumera dos THROW que chocaban con el 06:
    51060 -> 51049 (mes fuera de DimTiempo), 51061 -> 51050 (colision).

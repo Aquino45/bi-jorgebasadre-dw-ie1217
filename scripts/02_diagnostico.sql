@@ -1,5 +1,5 @@
 ﻿/* ============================================================================
-   ARCHIVO   : 02_diagnostico_calidad_v5_1.sql
+   ARCHIVO   : 02_diagnostico.sql
    CAMBIOS v5.1: el conteo de espacios al final usa DATALENGTH (con <> SQL
                  Server ignora el espacio final y el conteo salia en cero);
                  se corrige la nota del bloque 4 sobre espacios y JOIN.

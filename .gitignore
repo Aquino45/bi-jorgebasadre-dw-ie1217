@@ -9,3 +9,6 @@ data/
 *.tmp
 Thumbs.db
 desktop.ini
+
+# Respaldo local de versiones anteriores (ya estan en el tag v5.1)
+_respaldo_v5_1/

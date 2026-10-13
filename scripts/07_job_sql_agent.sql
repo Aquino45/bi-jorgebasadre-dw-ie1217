@@ -1,5 +1,5 @@
 ﻿/* =============================================================================
-   07_job_sql_agent_v5_1.sql — AUTOMATIZACION DEL ETL CON SQL SERVER AGENT
+   07_job_sql_agent.sql — AUTOMATIZACION DEL ETL CON SQL SERVER AGENT
    Base: DW_IE1217 | SQL Server 2017 o posterior (no Express: no trae Agente)
 
    QUE HACE
@@ -372,7 +372,7 @@ BEGIN TRY
         @command = N'EXEC ctl.usp_IniciarLote @Origen = N''SQL Agent'';',
         @on_success_action = 3, @on_fail_action = 4, @on_fail_step_id = 10;
 
-    SET @Cmd = @Sqlcmd + N'01_staging_secundaria_v5_1.sql"';
+    SET @Cmd = @Sqlcmd + N'01_staging.sql"';
     SET @Log = @RutaLogs + N'01_staging.log';
     EXEC msdb.dbo.sp_add_jobstep @job_id = @JobId, @step_id = 2,
         @step_name = N'01 Staging', @subsystem = N'CmdExec',
@@ -385,7 +385,7 @@ BEGIN TRY
         @command = N'EXEC ctl.usp_ValidarStaging @CaidaMaximaPct = 50;',
         @on_success_action = 3, @on_fail_action = 4, @on_fail_step_id = 10;
 
-    SET @Cmd = @Sqlcmd + N'02_diagnostico_calidad_v5_1.sql"';
+    SET @Cmd = @Sqlcmd + N'02_diagnostico.sql"';
     SET @Log = @RutaLogs + N'02_diagnostico.log';
     EXEC msdb.dbo.sp_add_jobstep @job_id = @JobId, @step_id = 4,
         @step_name = N'02 Diagnostico', @subsystem = N'CmdExec',
@@ -393,7 +393,7 @@ BEGIN TRY
         @output_file_name = @Log,
         @on_success_action = 3, @on_fail_action = 4, @on_fail_step_id = 10;
 
-    SET @Cmd = @Sqlcmd + N'03_dimensiones_v5_1.sql"';
+    SET @Cmd = @Sqlcmd + N'03_dimensiones.sql"';
     SET @Log = @RutaLogs + N'03_dimensiones.log';
     EXEC msdb.dbo.sp_add_jobstep @job_id = @JobId, @step_id = 5,
         @step_name = N'03 Dimensiones', @subsystem = N'CmdExec',
@@ -401,7 +401,7 @@ BEGIN TRY
         @output_file_name = @Log,
         @on_success_action = 3, @on_fail_action = 4, @on_fail_step_id = 10;
 
-    SET @Cmd = @Sqlcmd + N'04_fac_matricula_v5_1.sql"';
+    SET @Cmd = @Sqlcmd + N'04_fac_matricula.sql"';
     SET @Log = @RutaLogs + N'04_matricula.log';
     EXEC msdb.dbo.sp_add_jobstep @job_id = @JobId, @step_id = 6,
         @step_name = N'04 Matricula', @subsystem = N'CmdExec',
@@ -409,7 +409,7 @@ BEGIN TRY
         @output_file_name = @Log,
         @on_success_action = 3, @on_fail_action = 4, @on_fail_step_id = 10;
 
-    SET @Cmd = @Sqlcmd + N'05_fac_preparacion_v5_1.sql"';
+    SET @Cmd = @Sqlcmd + N'05_fac_preparacion.sql"';
     SET @Log = @RutaLogs + N'05_preparacion.log';
     EXEC msdb.dbo.sp_add_jobstep @job_id = @JobId, @step_id = 7,
         @step_name = N'05 Preparacion', @subsystem = N'CmdExec',
@@ -417,7 +417,7 @@ BEGIN TRY
         @output_file_name = @Log,
         @on_success_action = 3, @on_fail_action = 4, @on_fail_step_id = 10;
 
-    SET @Cmd = @Sqlcmd + N'06_fac_aprendizajes_v5_1.sql"';
+    SET @Cmd = @Sqlcmd + N'06_fac_aprendizajes.sql"';
     SET @Log = @RutaLogs + N'06_aprendizajes.log';
     EXEC msdb.dbo.sp_add_jobstep @job_id = @JobId, @step_id = 8,
         @step_name = N'06 Aprendizajes', @subsystem = N'CmdExec',

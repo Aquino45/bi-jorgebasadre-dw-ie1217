@@ -1,5 +1,16 @@
 ﻿/* ============================================================================
-   06_fac_aprendizajes_v5_1.sql — GESTION DE LOS APRENDIZAJES
+   06_fac_aprendizajes.sql
+   CAMBIOS RESPECTO A v5.1 (13/10/2026):
+   - La validacion "Competencia incompatible con area" compara el AreaID de la
+     competencia (DimCompetencia.AreaID) con el AreaID del area de la fila
+     (DimArea), en lugar de AreaKey. DimCompetencia ya no tiene AreaKey (v5.2).
+     Comparacion binaria: el mismo criterio de D15.
+   - Resultado esperado: sin cambio en cifras (87 filas incompatibles); verificar
+     con una re-ejecucion.
+   Requiere haber ejecutado antes 03_dimensiones.sql.
+   ============================================================================ */
+/* ============================================================================
+   06_fac_aprendizajes.sql — GESTION DE LOS APRENDIZAJES
    CAMBIOS v5.1:
      - Nota VACIA = sin evidencia. BULK INSERT guarda la celda vacia como
        NULL y la v5 solo reconocia '' : esas filas iban a la bitacora como
@@ -192,8 +203,8 @@ FROM stg.NotaCompetencia AS n;
 SELECT o.*,
        p.PeriodoKey, p.Bimestre AS BimestreReal,
        t.TiempoKey AS FechaCierreKey,
-       e.EstudianteKey, s.SeccionKey, a.AreaKey,
-       c.CompetenciaKey, c.AreaKey AS AreaDeCompetenciaKey,
+       e.EstudianteKey, s.SeccionKey, a.AreaKey, a.AreaID AS AreaIDDeArea,
+       c.CompetenciaKey, c.AreaID AS AreaIDDeCompetencia,
        d.DocenteKey, asg.DocenteID AS DocenteAsignado,
        m.MatriculaKey,
        TRY_CONVERT(DECIMAL(6,3), REPLACE(o.NotaTexto, N',', N'.')) AS NotaNumerica,
@@ -263,7 +274,8 @@ SELECT x.*,
             WHEN x.SeccionKey IS NULL THEN N'Seccion anual desconocida'
             WHEN x.AreaKey IS NULL THEN N'Area desconocida'
             WHEN x.CompetenciaKey IS NULL THEN N'Competencia desconocida'
-            WHEN x.AreaDeCompetenciaKey <> x.AreaKey
+            WHEN x.AreaIDDeCompetencia COLLATE Latin1_General_BIN
+                 <> x.AreaIDDeArea COLLATE Latin1_General_BIN
                  THEN N'Competencia incompatible con area'
             WHEN x.DocenteKey IS NULL THEN N'Sin asignacion docente'
             WHEN x.MatriculaKey IS NULL THEN N'Sin matricula aprobada en seccion'

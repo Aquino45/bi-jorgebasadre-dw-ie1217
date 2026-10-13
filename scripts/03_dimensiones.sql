@@ -1,5 +1,16 @@
 ﻿/* ============================================================================
-   ARCHIVO   : 03_dimensiones_v5_1.sql   [PASO 1 DEL ETL]
+   03_dimensiones.sql
+   CAMBIOS RESPECTO A v5.1 (13/10/2026):
+   - dw.DimCompetencia ya NO tiene AreaKey ni la FK FK_DimComp_Area hacia
+     dw.DimArea. Motivo: modelo en estrella; las dimensiones no se relacionan
+     entre si. Se conservan AreaID y NombreArea (desnormalizados).
+   - Sobre una base ya cargada con v5.1, el bloque v5.2 elimina la FK y la
+     columna. El resto de dimensiones no cambia.
+   - El script 06 v5.2 compara el area de la competencia por AreaID.
+   Orden: 03 v5.2 y luego 06 v5.2. No se cambian 01, 02, 04 ni 05.
+   ============================================================================ */
+/* ============================================================================
+   ARCHIVO   : 03_dimensiones.sql   [PASO 1 DEL ETL]
    CAMBIOS v5.1:
      - DimSeccion.Ciclo pasa a NVARCHAR(20): 'No definido' no cabia en 10
        (error 2628). Si la tabla ya existe, se amplia sola con ALTER.
@@ -465,9 +476,10 @@ GO
    5. DimArea y DimCompetencia
    ----------------------------------------------------------------------------
    DimCompetencia guarda el area DESNORMALIZADA (AreaID y NombreArea como
-   columnas propias) ademas de la clave a DimArea. Es redundante a proposito:
-   permite agrupar por area sin un join extra, que es justo lo que un modelo
-   estrella busca. Normalizarlo seria copo de nieve.
+   columnas propias). NO tiene clave a DimArea: en un modelo estrella las
+   dimensiones no se relacionan entre si (v5.2). El area se consulta por texto
+   dentro de la propia dimension; la relacion area-hecho vive en
+   FacLogroCompetencia.AreaKey.
    ============================================================================ */
 IF OBJECT_ID('dw.DimArea', 'U') IS NULL
 BEGIN
@@ -512,19 +524,27 @@ CREATE TABLE dw.DimCompetencia (
     CompetenciaID     NVARCHAR(20)  NOT NULL,
     NombreCompetencia NVARCHAR(200) NULL,
     TipoCompetencia   NVARCHAR(30)  NULL,
-    AreaKey           INT           NOT NULL,
-    AreaID            NVARCHAR(20)  NULL,       -- desnormalizado a proposito
-    NombreArea        NVARCHAR(100) NULL,       -- desnormalizado a proposito
+    AreaID            NVARCHAR(20)  NULL,       -- desnormalizado (sin FK a DimArea)
+    NombreArea        NVARCHAR(100) NULL,       -- desnormalizado
     CONSTRAINT PK_DimCompetencia PRIMARY KEY CLUSTERED (CompetenciaKey),
-    CONSTRAINT UQ_DimCompetencia UNIQUE (CompetenciaID),
-    CONSTRAINT FK_DimComp_Area FOREIGN KEY (AreaKey) REFERENCES dw.DimArea(AreaKey)
+    CONSTRAINT UQ_DimCompetencia UNIQUE (CompetenciaID)
 );
 END;
 GO
+/* v5.2: correccion sobre una base ya cargada con v5.1. Si la tabla aun tiene
+   AreaKey y su FK, se eliminan. En una base nueva no hace nada (idempotente). */
+IF EXISTS (SELECT 1 FROM sys.foreign_keys
+           WHERE name = N'FK_DimComp_Area'
+             AND parent_object_id = OBJECT_ID(N'dw.DimCompetencia'))
+    ALTER TABLE dw.DimCompetencia DROP CONSTRAINT FK_DimComp_Area;
+GO
+IF COL_LENGTH(N'dw.DimCompetencia', N'AreaKey') IS NOT NULL
+    ALTER TABLE dw.DimCompetencia DROP COLUMN AreaKey;
+GO
 SET IDENTITY_INSERT dw.DimCompetencia ON;
 INSERT INTO dw.DimCompetencia (CompetenciaKey, CompetenciaID, NombreCompetencia,
-                               TipoCompetencia, AreaKey, AreaID, NombreArea)
-SELECT -1, N'N/D', N'No definida', N'No definida', -1, N'N/D', N'No definida'
+                               TipoCompetencia, AreaID, NombreArea)
+SELECT -1, N'N/D', N'No definida', N'No definida', N'N/D', N'No definida'
 WHERE NOT EXISTS (SELECT 1 FROM dw.DimCompetencia WHERE CompetenciaKey = -1);
 SET IDENTITY_INSERT dw.DimCompetencia OFF;
 
@@ -533,7 +553,7 @@ USING (
     SELECT LTRIM(RTRIM(c.CompetenciaID)) AS CompetenciaID,
            LTRIM(RTRIM(c.NombreCompetencia)) AS NombreCompetencia,
            LTRIM(RTRIM(c.TipoCompetencia)) AS TipoCompetencia,
-           ISNULL(a.AreaKey, -1) AS AreaKey, ISNULL(a.AreaID, N'N/D') AS AreaID,
+           ISNULL(a.AreaID, N'N/D') AS AreaID,
            ISNULL(a.NombreArea, N'No definida') AS NombreArea
     FROM stg.Competencia c
     LEFT JOIN dw.DimArea a ON a.AreaID = LTRIM(RTRIM(c.AreaID))
@@ -541,11 +561,11 @@ USING (
 ) AS o ON d.CompetenciaID = o.CompetenciaID
 WHEN MATCHED THEN UPDATE SET
     d.NombreCompetencia = o.NombreCompetencia, d.TipoCompetencia = o.TipoCompetencia,
-    d.AreaKey = o.AreaKey, d.AreaID = o.AreaID, d.NombreArea = o.NombreArea
+    d.AreaID = o.AreaID, d.NombreArea = o.NombreArea
 WHEN NOT MATCHED BY TARGET THEN
-    INSERT (CompetenciaID, NombreCompetencia, TipoCompetencia, AreaKey, AreaID, NombreArea)
+    INSERT (CompetenciaID, NombreCompetencia, TipoCompetencia, AreaID, NombreArea)
     VALUES (o.CompetenciaID, o.NombreCompetencia, o.TipoCompetencia,
-            o.AreaKey, o.AreaID, o.NombreArea);
+            o.AreaID, o.NombreArea);
 GO
 
 /* ============================================================================
@@ -786,6 +806,14 @@ UNION ALL SELECT 'dw.DimMotivoRechazo',    COUNT(*), SUM(CASE WHEN MotivoKey    
 
    Si DimEstudiante trae MAS de 373, la deduplicacion no funciono.
    Si trae MENOS, se perdieron filas: revisar el filtro de codigo vacio.      */
+
+/* v5.2: sin FK, la integridad area-competencia se verifica aqui.
+   Cada competencia debe apuntar a un AreaID existente en DimArea. Esperado: 0. */
+SELECT 'Competencias con AreaID inexistente en DimArea (esperado 0)' AS Prueba,
+       COUNT(*) AS Filas
+FROM dw.DimCompetencia AS c
+WHERE c.CompetenciaKey <> -1
+  AND NOT EXISTS (SELECT 1 FROM dw.DimArea AS a WHERE a.AreaID = c.AreaID);
 
 /* Pruebas de integridad: las cuatro consultas deben devolver cero */
 SELECT 'Claves que aun tienen basura invisible' AS Prueba, COUNT(*) AS Filas

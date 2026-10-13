@@ -1,5 +1,5 @@
 ﻿/* ============================================================================
-   04_fac_matricula_v5_1.sql — DATAMART: MATRICULAS Y VACANTES
+   04_fac_matricula.sql — DATAMART: MATRICULAS Y VACANTES
    CAMBIOS v5.1: borra sus tablas temporales al iniciar (antes, reejecutar en
    la misma ventana fallaba con 'There is already an object named #...'), y
    el detalle del THROW 51004 muestra tambien las fechas fuera de DimTiempo.

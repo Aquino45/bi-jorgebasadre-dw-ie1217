@@ -1,5 +1,5 @@
 ﻿/* ============================================================================
-   ARCHIVO   : 01_staging_secundaria_v5_1.sql
+   ARCHIVO   : 01_staging.sql
    CAMBIOS v5.1: solo comentarios del encabezado (17 CSV; escala de notas).
    PROYECTO  : DataMart de Gestion Academica - Nivel SECUNDARIA
    INSTITUCION: I.E.P. N 1217 "Jorge Basadre Grohmann" - Chaclacayo, UGEL 06

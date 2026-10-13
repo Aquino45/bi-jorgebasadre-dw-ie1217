@@ -484,7 +484,7 @@ EXEC msdb.dbo.sp_update_job @job_name = N'ETL_IE1217_Carga', @enabled = 0;  -- p
 |---|---|
 | `01_staging.sql`, `02_diagnostico.sql`, `04_fac_matricula.sql`, `05_fac_preparacion.sql` | ✅ Vigentes sin cambios (v5.1 / v5.1b) |
 | `03_dimensiones.sql`, `06_fac_aprendizajes.sql`, `07_job_sql_agent.sql` | 🟦 v5.2 (D21, D22): pendiente de re-ejecutar y subir a GitHub |
-| Versiones anteriores | Etiqueta `v5.1` en Git. Copias en `_respaldo_v5_1\` (fuera del repo). No usar archivos sueltos con número de versión |
+| Versiones anteriores | Etiqueta `v5.1` en Git. Copia en `D:\BI_IE1217_respaldo\v5.1_scripts\` (fuera del repo, verificada contra el tag). No usar archivos sueltos con número de versión |
 | `Guia_ETL_3_datamarts_IE1217_v5_1.docx` | ✅ Vigente (sustituye al PDF v5) |
 | `Guia_ETL_3_datamarts_IE1217_v5.pdf` | Histórico |
 | `Matriz_BI_Gestion_de_ProcesosV.2` | ⏳ Requiere ajustes (P2, P3, P4, P9) |

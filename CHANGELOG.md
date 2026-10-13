@@ -14,7 +14,7 @@
 ### Verificado el 13/10/2026
 - 03 y 06 ejecutados sobre `DW_IE1217`: 28 competencias, 0 con área inexistente, 0 FK entre dimensiones.
 - Sin cambio en cifras: 44 815 en el hecho + 581 en bitácora (87 incompatibles), 379 sin evidencia; 04 y 05 intactos (600 / 769).
-- Job recreado con los nombres nuevos; su primera ejecución queda por reportar.
+- Job recreado con los nombres nuevos. Primera ejecución: lote 4 «Exitoso» (13/10/2026 13:45, 12 s) con 600 / 769 / 44 815 + 581.
 
 ## v5.1 — 24/09/2026 (verificado)
 

@@ -24,7 +24,7 @@
 | ETL 01→06 v5.1 (staging, diagnóstico, dimensiones, tres hechos) | ✅ Ejecutado de punta a punta y cuadrado con el origen |
 | Tres datamarts (matrícula, preparación, aprendizajes) | ✅ Cargados en `DW_IE1217` |
 | Guía de lectura y sustentación v5.1 (Word) | ✅ Entregada, con cifras verificadas |
-| Script 07: control de lotes + job de SQL Server Agent | ✅ Job creado (10 pasos verificados) · 🟦 primera ejecución del job pendiente de reportar |
+| Script 07: control de lotes + job de SQL Server Agent | ✅ Job recreado (v5.2) · primera ejecución exitosa el 13/10/2026 (lote 4: 600 / 769 / 44 815 + 581) |
 | Script 08: calendario de cargas por proceso | 🟨 Diseño propuesto, esperando confirmar ventanas y frecuencias |
 | Catálogo métricas → indicadores → KPI (`Metricas_KPI_DW_IE1217.xlsx`) | ✅ Entregado (42 filas: 22 métricas cargadas en los scripts, 20 indicadores/KPI planificados para Power BI) |
 | Capa de KPI en Power BI (DAX) | 🟨 Siguiente fase; criterio aprobado por el ingeniero |
@@ -180,7 +180,7 @@ Flujo en una línea: **copiar → revisar → hacer catálogos → llenar los tr
 
 ### 5.6 Automatización (07)
 - ✅ Job `ETL_IE1217_Carga` creado con 10 pasos y su flujo de éxito/fallo comprobado en `msdb`.
-- 🟦 Primera ejecución con `sp_start_job` y lote «Exitoso» en `ctl.vw_HistorialLotes`: **pendiente de reportar**.
+- ✅ Primera ejecución exitosa: lote 4, 13/10/2026 13:45 (disparado por el horario del Agente), 12 s, los 10 pasos en éxito y «Exitoso» en `ctl.vw_HistorialLotes` con 600 / 769 / 44 815 + 581.
 - Lotes 1–3 (06/10/2026) fallaron en «01 Staging»: no existía `C:\BI_IE1217\logs` («Unable to open Step output file»). El 13/10/2026 se crearon `C:\BI_IE1217\scripts` y `logs`, se copiaron los scripts con nombres fijos, se dieron los permisos de 12.4 y se recreó el job con el 07 (cada 15 minutos). El Agente quedó en ejecución.
 
 ---
@@ -496,7 +496,7 @@ EXEC msdb.dbo.sp_update_job @job_name = N'ETL_IE1217_Carga', @enabled = 0;  -- p
 ---
 
 ## 15. Próximos pasos sugeridos (en orden)
-1. Reportar la primera ejecución del job recreado (lote «Exitoso» en `ctl.vw_HistorialLotes` con 600 / 769 / 44 815 / 581).
+1. ✅ Hecho el 13/10/2026: job recreado y lote 4 «Exitoso». Falta decidir si el job queda cada 15 minutos (demostración) o diario (`@Frecuencia = N'DIARIO'` en el 07).
 2. Cerrar con el equipo P1, P2, P3, P4 y P5 (para P5, elegir entre las tres opciones de la sección 8).
 3. Si se aprueba P1, ajustar el 03 y el 05 y volver a verificar.
 4. Confirmar ventanas y frecuencias y escribir el script 08 (P8).

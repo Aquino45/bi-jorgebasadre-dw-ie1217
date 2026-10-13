@@ -259,7 +259,14 @@ Flujo en una línea: **copiar → revisar → hacer catálogos → llenar los tr
 
 ### 6.11 Guía de exposición (13/10/2026)
 - `docs/guias_detalles/Guia_Exposicion_DW_IE1217.docx` (8 páginas): orden de la exposición, contexto y alcance, Matriz BI, matriz bus y granularidad, arquitectura, scripts 01–07 con cifras verificadas, automatización (07 verificado, 08 propuesto), Power BI, pendientes P1–P5, preguntas probables y glosario.
-- Revisión de la Matriz BI: 10 observaciones registradas como P12 (sin corregir todavía).
+- Revisión de la Matriz BI: 10 observaciones registradas como P12 (resueltas en 6.12).
+- Guía v2 (13/10/2026): Matriz BI V.3 con tabla «antes → ahora», grano por medida (palabra + nivel) y versión pública/interna con Estado Script SQL / Power BI. La v1 queda en `docs/guias_detalles/versiones antiguas/`.
+
+### 6.12 Matriz BI V.3 (13/10/2026) — D25
+- `docs/insumos/Matriz_BI_Gestion_de_ProcesosV.3.xlsx` (Drive: misma versión en la carpeta del proyecto). La V.2 pasa a `docs/insumos/versiones antiguas/` y a `Extra/Versiones antiguas` en Drive.
+- Regla: **no se toca la estructura**; se corrigen fórmulas y se agregan notas breves entre paréntesis (gris, cursiva, tamaño 8).
+- Cambios: pendientes = solicitadas − validadas − rechazadas (sigue KPI); tiempo promedio de validación ÷ solicitudes con fecha de solicitud y de revisión (→ Indicador); rendimiento promedio ÷ notas con evidencia (→ Indicador); incidencias = sesiones reprogramadas «(aproximación…)»; fila nueva KPI «% de docentes con retraso» «(umbral por definir (P4))»; información requerida 2.0 reescrita; 3.0 y 5.0 «(fuera del alcance del DW)»; Frecuencia y Responsable «(propuesta)»; guía de lectura con el nombre de la matriz al lado.
+- Se conservan las filas y columnas ocultas del original (Meta, Frecuencia y Responsable siguen en columnas ocultas N–P).
 
 ---
 
@@ -291,6 +298,7 @@ Flujo en una línea: **copiar → revisar → hacer catálogos → llenar los tr
 | D22 | **Versionado con Git** (repositorio privado en GitHub): nombres de archivo fijos y sin número de versión; cada versión es una etiqueta (`v5.1`, `v5.2`); commits con formato `tipo(área): descripción`; los datos del colegio nunca se suben | Evitar archivos con número de versión, reenvíos y versiones mezcladas (D20); saber qué versión corrió cada quien | ✅ Publicado el 13/10/2026 en GitHub (`Aquino45/bi-jorgebasadre-dw-ie1217`, etiquetas `v5.1` y `v5.2`) |
 | D23 | La matriz de métricas y dimensiones es un documento **previo al ETL**: dimensiones y atributos rotulados por concepto (nombre técnico solo como comentario), fórmulas en palabras, estado de definición (Acordada / Propuesta / Pendiente / Parcial / No medible) y sin cifras de la carga. Se excluyen las 5 métricas que agregó el ETL (días hasta SIAGIE, TIC, recursos, niveles de logro, competencias aprobadas) y los procesos 3.0 y 5.0. El mapeo origen → DW sí usa nombres reales | Pedido del equipo para la sustentación | ✅ Aplicado en v2.0 (13/10/2026) |
 | D24 | Dos versiones de Métricas y Dimensiones: **interna** (Git, con anotaciones) y **pública** (Drive, solo lo esencial). Grano **por medida** como granularidad (una palabra + nivel de jerarquía). En la pública, Estado binario: **Script SQL** / **Power BI** | Pedido del profesor (granularidad) y del equipo (versión limpia para presentar) | ✅ Aplicado en v2.1 (13/10/2026) |
+| D25 | Matriz BI **V.3** sin cambiar su estructura: se corrigen fórmulas (pendientes, tiempo de validación, rendimiento) y se agregan notas discretas entre paréntesis donde algo es aproximado, propuesto o está fuera de alcance; nueva fila KPI «% de docentes con retraso». La versión anterior se mueve a «versiones antiguas», nunca se borra. | Cumplir la revisión P12 sin rehacer el documento del equipo y dejando visible qué es propuesta. |
 
 ---
 
@@ -306,10 +314,10 @@ Flujo en una línea: **copiar → revisar → hacer catálogos → llenar los tr
 | P6 | **Bitácora persistente para 04 y 05** | Hoy los 6 sin padrón, 9 duplicadas, 45 `-DUP` y 28 sin sección solo se ven en pantalla. Propuesta: reutilizar el patrón de `BitacoraNota`. | Opcional |
 | P7 | **Meses de cobertura parcial** | Junio 2025 (109 sesiones) y mayo 2026 (435) están incompletos. Decidir si se filtran o se rotulan en el tablero. | Tablero |
 | P8 | **Calendario de cargas (script 08)** | Ventanas y frecuencias propuestas en la sección 9; falta confirmarlas. Hacen falta las fechas **programadas** de cierre de bimestre del año en curso. | Automatización |
-| P9 | **Columnas amarillas de la Matriz BI** | Meta, Frecuencia y Responsable del dato siguen vacías. | Matriz BI |
+| P9 | **Columnas amarillas de la Matriz BI** | Frecuencia y Responsable llenados como 🟨 propuesta en la V.3 (D25); la **Meta** la fija el colegio. | Matriz BI |
 | P10 | **Detalle histórico de material** | El título, la observación y la fecha exacta de cada entrega solo quedan en staging. Decidir si basta. | Opcional |
 | P11 | **Control de versiones de los scripts** | ✅ Resuelto con D22 (Git, nombres fijos, etiquetas). | — |
-| P12 | **Corregir la Matriz BI** (`Matriz_BI_Gestion_de_ProcesosV.2 (3).xlsx`) | Revisión del 13/10/2026: (1) tiempo promedio de validación debe dividir entre solicitudes con ambas fechas, no entre validadas; (2) «matrículas pendientes» no es KPI ni medible (P3) y su fórmula da rechazadas; (3) rendimiento promedio debe dividir entre notas con evidencia; (4) «Información requerida» de 2.0 repite la de 3.0; (5) la pregunta de 2.0 pide % de docentes con retraso sin KPI (P4); (6) incidencias de programación pide cruces que la fuente no trae; (7) no usa el nivel Indicador de su leyenda; (8) Meta, Frecuencia y Responsable vacías (P9); (9) 3.0 y 5.0 siguen en la matriz; (10) la guía de lectura usa otros nombres de columna. | Matriz BI |
+| P12 | **Corregir la Matriz BI** | ✅ Resuelto con D25 (V.3, 13/10/2026). Revisión del 13/10/2026: (1) tiempo promedio de validación debe dividir entre solicitudes con ambas fechas, no entre validadas; (2) «matrículas pendientes» no es KPI ni medible (P3) y su fórmula da rechazadas; (3) rendimiento promedio debe dividir entre notas con evidencia; (4) «Información requerida» de 2.0 repite la de 3.0; (5) la pregunta de 2.0 pide % de docentes con retraso sin KPI (P4); (6) incidencias de programación pide cruces que la fuente no trae; (7) no usa el nivel Indicador de su leyenda; (8) Meta, Frecuencia y Responsable vacías (P9); (9) 3.0 y 5.0 siguen en la matriz; (10) la guía de lectura usa otros nombres de columna. | Matriz BI |
 
 ---
 
@@ -503,9 +511,9 @@ EXEC msdb.dbo.sp_update_job @job_name = N'ETL_IE1217_Carga', @enabled = 0;  -- p
 | Versiones anteriores | Etiqueta `v5.1` en Git. Copia en `D:\BI_IE1217_respaldo\v5.1_scripts\` (fuera del repo, verificada contra el tag). No usar archivos sueltos con número de versión |
 | `Guia_ETL_3_datamarts_IE1217_v5_1.docx` | ✅ Vigente (sustituye al PDF v5) |
 | `Guia_ETL_3_datamarts_IE1217_v5.pdf` | Histórico |
-| `Matriz_BI_Gestion_de_ProcesosV.2` | ⏳ Requiere ajustes (P2, P3, P4, P9) |
+| `docs/insumos/Matriz_BI_Gestion_de_ProcesosV.3.xlsx` | ✅ Vigente (D25, 13/10/2026). V.2 en `docs/insumos/versiones antiguas/`. Siguen abiertos P2–P5 y la Meta |
 | `Metricas_y_Dimensiones.xlsx` v2.1 interna (Matriz bus, V2, Mapeo origen-DW, Control de versiones) | ✅ Vigente (13/10/2026). V1 y v2.0 en `docs/insumos/versiones antiguas/`; versión pública en Drive (D24) |
-| `docs/guias_detalles/Guia_Exposicion_DW_IE1217.docx` | ✅ Guía de exposición (13/10/2026): orden de la sustentación, Matriz BI, matriz bus, arquitectura, scripts, automatización, Power BI, pendientes, preguntas probables y glosario |
+| `docs/guias_detalles/Guia_Exposicion_DW_IE1217.docx` | ✅ Guía de exposición v2 (13/10/2026; v1 en `versiones antiguas/`): orden de la sustentación, Matriz BI, matriz bus, arquitectura, scripts, automatización, Power BI, pendientes, preguntas probables y glosario |
 | `Metricas_KPI_DW_IE1217.xlsx` | ✅ Catálogo de métricas → KPI (13/10/2026) |
 | `BITACORA_CONTEXTO_DW_IE1217.md` | Este documento |
 

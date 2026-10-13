@@ -65,7 +65,7 @@
 | Carpeta de datos | `C:\BI_IE1217\data` (17 CSV + `_catalogo_defectos.csv`) |
 | Carpeta de scripts (para el job) | `C:\BI_IE1217\scripts` |
 | Carpeta de logs (para el job) | `C:\BI_IE1217\logs` |
-| SQL Server Agent | Aparecía como «Agent XPs deshabilitado» (servicio detenido); hay que iniciarlo en modo Automático |
+| SQL Server Agent | En ejecución desde el 13/10/2026. Su inicio estaba en Manual: dejarlo en Automático (Configuration Manager) |
 | Codificación de scripts | UTF-8 **con BOM** (para que SSMS y sqlcmd lean bien la ñ) |
 
 ---
@@ -181,6 +181,7 @@ Flujo en una línea: **copiar → revisar → hacer catálogos → llenar los tr
 ### 5.6 Automatización (07)
 - ✅ Job `ETL_IE1217_Carga` creado con 10 pasos y su flujo de éxito/fallo comprobado en `msdb`.
 - 🟦 Primera ejecución con `sp_start_job` y lote «Exitoso» en `ctl.vw_HistorialLotes`: **pendiente de reportar**.
+- Lotes 1–3 (06/10/2026) fallaron en «01 Staging»: no existía `C:\BI_IE1217\logs` («Unable to open Step output file»). El 13/10/2026 se crearon `C:\BI_IE1217\scripts` y `logs`, se copiaron los scripts con nombres fijos, se dieron los permisos de 12.4 y se recreó el job con el 07 (cada 15 minutos). El Agente quedó en ejecución.
 
 ---
 
@@ -246,7 +247,7 @@ Flujo en una línea: **copiar → revisar → hacer catálogos → llenar los tr
 - **Sin cambios:** 01, 02, 04 y 05 siguen en v5.1.
 - **Orden de ejecución:** 03 v5.2 → 06 v5.2. No hace falta re-ejecutar 04 ni 05.
 - **Versionado:** los archivos ya no llevan número de versión; la versión es la etiqueta Git (D22).
-- **Estado:** 🟦 implementado y **no ejecutado**. Las cifras no se dan por verificadas hasta la re-ejecución (esperado: 87 incompatibles, 28 competencias, 0 área inexistente).
+- **Estado:** ✅ verificado el 13/10/2026. Antes se respaldó la base (`DW_IE1217_pre_v5_2_20261013.bak`, carpeta de backup por defecto de la instancia, verificado con `RESTORE VERIFYONLY`). Resultado de 03 y 06: 28 competencias + fila -1, 0 competencias con área inexistente, 0 FK entre dimensiones, `AreaKey` eliminada; 44 815 en el hecho + 581 en bitácora (264 / 198 / 87 / 32), 379 sin evidencia, mismos registros y promedios por bimestre. 04 y 05 sin cambios (600 / 769).
 
 ---
 
@@ -274,8 +275,8 @@ Flujo en una línea: **copiar → revisar → hacer catálogos → llenar los tr
 | D18 | **Métricas en el DW, KPI en Power BI** | Propuesta del ingeniero; ya era el diseño (D04) | ✅ acordado |
 | D19 | KPI de recepción a 14 días: denominador **sin** las entregas sin fecha de recepción | No se sabe si esas 5 llegaron tarde | 🟨 para el DAX |
 | D20 | Todo el equipo usa **solo v5.1**; no mezclar versiones | El 04 v5.1 depende del 03 v5.1; el 04 y el 06 v5 fallan con 8117 | ✅ (superada en parte por D21: 03, 06 y 07 pasan a v5.2) |
-| D21 | `DimCompetencia` **sin `AreaKey` ni FK a `DimArea`**; el área va desnormalizada (`AreaID`, `NombreArea`). La relación área-hecho queda en `FacLogroCompetencia.AreaKey` | El profesor exige modelo en estrella: las dimensiones no se relacionan entre sí. Única violación encontrada | 🟦 Implementado en 03 v5.2 y 06 v5.2 · sin ejecutar |
-| D22 | **Versionado con Git** (repositorio privado en GitHub): nombres de archivo fijos y sin número de versión; cada versión es una etiqueta (`v5.1`, `v5.2`); commits con formato `tipo(área): descripción`; los datos del colegio nunca se suben | Evitar archivos con número de versión, reenvíos y versiones mezcladas (D20); saber qué versión corrió cada quien | 🟦 Commits y etiquetas locales el 13/10/2026 · falta subir a GitHub |
+| D21 | `DimCompetencia` **sin `AreaKey` ni FK a `DimArea`**; el área va desnormalizada (`AreaID`, `NombreArea`). La relación área-hecho queda en `FacLogroCompetencia.AreaKey` | El profesor exige modelo en estrella: las dimensiones no se relacionan entre sí. Única violación encontrada | ✅ Verificado el 13/10/2026: 03 y 06 ejecutados, cifras idénticas a v5.1 |
+| D22 | **Versionado con Git** (repositorio privado en GitHub): nombres de archivo fijos y sin número de versión; cada versión es una etiqueta (`v5.1`, `v5.2`); commits con formato `tipo(área): descripción`; los datos del colegio nunca se suben | Evitar archivos con número de versión, reenvíos y versiones mezcladas (D20); saber qué versión corrió cada quien | ✅ Publicado el 13/10/2026 en GitHub (`Aquino45/bi-jorgebasadre-dw-ie1217`, etiquetas `v5.1` y `v5.2`) |
 
 ---
 
@@ -483,7 +484,7 @@ EXEC msdb.dbo.sp_update_job @job_name = N'ETL_IE1217_Carga', @enabled = 0;  -- p
 | Archivo | Estado |
 |---|---|
 | `01_staging.sql`, `02_diagnostico.sql`, `04_fac_matricula.sql`, `05_fac_preparacion.sql` | ✅ Vigentes sin cambios (v5.1 / v5.1b) |
-| `03_dimensiones.sql`, `06_fac_aprendizajes.sql`, `07_job_sql_agent.sql` | 🟦 v5.2 (D21, D22): pendiente de re-ejecutar y subir a GitHub |
+| `03_dimensiones.sql`, `06_fac_aprendizajes.sql`, `07_job_sql_agent.sql` | ✅ v5.2 (D21, D22): verificada el 13/10/2026 y publicada en GitHub |
 | Versiones anteriores | Etiqueta `v5.1` en Git. Copia en `D:\BI_IE1217_respaldo\v5.1_scripts\` (fuera del repo, verificada contra el tag). No usar archivos sueltos con número de versión |
 | `Guia_ETL_3_datamarts_IE1217_v5_1.docx` | ✅ Vigente (sustituye al PDF v5) |
 | `Guia_ETL_3_datamarts_IE1217_v5.pdf` | Histórico |
@@ -495,7 +496,7 @@ EXEC msdb.dbo.sp_update_job @job_name = N'ETL_IE1217_Carga', @enabled = 0;  -- p
 ---
 
 ## 15. Próximos pasos sugeridos (en orden)
-1. Subir el repo a GitHub (`git push -u origin main --tags`) y re-ejecutar 03 v5.2 y 06 v5.2 (o el job v5.2) sobre `DW_IE1217` y comprobar: 87 filas incompatibles sin cambio, 28 competencias y 0 competencias con área inexistente. Después, reportar la primera ejecución del job (lote Exitoso con 600 / 769 / 44 815).
+1. Reportar la primera ejecución del job recreado (lote «Exitoso» en `ctl.vw_HistorialLotes` con 600 / 769 / 44 815 / 581).
 2. Cerrar con el equipo P1, P2, P3, P4 y P5 (para P5, elegir entre las tres opciones de la sección 8).
 3. Si se aprueba P1, ajustar el 03 y el 05 y volver a verificar.
 4. Confirmar ventanas y frecuencias y escribir el script 08 (P8).

@@ -1,6 +1,6 @@
 # Changelog
 
-## v5.2 — 13/10/2026 (sin ejecutar todavía)
+## v5.2 — 13/10/2026 (verificado)
 
 ### Corregido
 - `dw.DimCompetencia` ya no tiene `AreaKey` ni la FK a `dw.DimArea`. El modelo debe ser estrella (D21).
@@ -11,8 +11,10 @@
 - 07: el job apunta a los nombres nuevos.
 - Se agregan README, CHANGELOG y la bitácora de contexto.
 
-### Pendiente de verificar
-- Re-ejecutar 03 y 06 sobre `DW_IE1217`. Esperado: 87 filas incompatibles sin cambio, 28 competencias, 0 con área inexistente.
+### Verificado el 13/10/2026
+- 03 y 06 ejecutados sobre `DW_IE1217`: 28 competencias, 0 con área inexistente, 0 FK entre dimensiones.
+- Sin cambio en cifras: 44 815 en el hecho + 581 en bitácora (87 incompatibles), 379 sin evidencia; 04 y 05 intactos (600 / 769).
+- Job recreado con los nombres nuevos; su primera ejecución queda por reportar.
 
 ## v5.1 — 24/09/2026 (verificado)
 

@@ -1,0 +1,11 @@
+# Datos del colegio (DNI, nombres, notas): NUNCA se suben
+data_sinte/
+data/
+*.rar
+*.zip
+
+# Temporales de Office y del sistema
+~$*
+*.tmp
+Thumbs.db
+desktop.ini

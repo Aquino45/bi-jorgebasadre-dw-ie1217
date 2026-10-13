@@ -1,0 +1,10 @@
+# Texto con finales de linea LF en todos los equipos
+*.sql text eol=lf
+*.md  text eol=lf
+*.csv text eol=lf
+# Binarios: nunca convertir
+*.pdf  binary
+*.docx binary
+*.xlsx binary
+*.png  binary
+*.rar  binary

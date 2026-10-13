@@ -10,3 +10,9 @@ data/
 Thumbs.db
 desktop.ini
 
+
+# Configuracion local de Claude / Claude Code: solo en la PC de cada uno
+.claude/
+CLAUDE.md
+CLAUDE.local.md
+.mcp.json

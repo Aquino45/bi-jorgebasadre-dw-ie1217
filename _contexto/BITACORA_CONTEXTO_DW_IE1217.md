@@ -250,10 +250,16 @@ Flujo en una línea: **copiar → revisar → hacer catálogos → llenar los tr
 - **Estado:** ✅ verificado el 13/10/2026. Antes se respaldó la base (`DW_IE1217_pre_v5_2_20261013.bak`, carpeta de backup por defecto de la instancia, verificado con `RESTORE VERIFYONLY`). Resultado de 03 y 06: 28 competencias + fila -1, 0 competencias con área inexistente, 0 FK entre dimensiones, `AreaKey` eliminada; 44 815 en el hecho + 581 en bitácora (264 / 198 / 87 / 32), 379 sin evidencia, mismos registros y promedios por bimestre. 04 y 05 sin cambios (600 / 769).
 
 ### 6.10 Matriz de métricas y dimensiones v2.0 (13/10/2026) — D23
-- Archivo: `docs/insumos/Metricas_y_Dimensiones.xlsx` (Git) y `Metricas_y_Dimensiones_v2.0.xlsx` (Drive). La versión anterior pasó a `docs/insumos/versiones antiguas/`.
+- Archivo: `docs/insumos/Metricas_y_Dimensiones.xlsx` (Git) y `Metricas_y_Dimensiones_v2.1.xlsx` (Drive). La versión anterior pasó a `docs/insumos/versiones antiguas/`.
+- **v2.1 (13/10/2026):** (1) el grano va **por medida**, como granularidad: una palabra + nivel de jerarquía (Matrícula–Año, Sección–Año, Asignación–Mes, Docente–Mes, Asignación–Año, Calificación–Bimestre, Estudiante–Bimestre), pedido del profesor; (2) corrige la observación de «% de estudiantes con bajo rendimiento»: «alguna área menor a 11» es la propuesta P5 (opción 2); lo pendiente es elegir entre las opciones 1, 2 y 3.
+- **Dos versiones del archivo (D24):** la **interna** (Git, `docs/insumos/Metricas_y_Dimensiones.xlsx`) conserva fórmulas, observaciones, estado de definición, leyenda, comentarios técnicos y control de versiones. La **pública** (Drive, `Metricas_y_Dimensiones_v2.1.xlsx`, copia local en `D:\BI_IE1217_respaldo\publica\`) solo tiene Matriz bus, V2 y Mapeo, con fórmula y observación cortas y **Estado = Script SQL** (métrica calculada en el ETL) **o Power BI** (indicador/KPI en DAX); omite retraso promedio, recepción oportuna y cobertura (propuestas no pedidas). La v2.0 quedó en `docs/insumos/versiones antiguas/`.
 - Hojas: **Matriz bus** (3 procesos × 10 dimensiones), **V2** (31 medidas × atributos, reemplaza a la V1), **Mapeo origen-DW** (43 filas, reemplaza a la Hoja 5) y **Control de versiones**.
 - Nombres del mapeo comprobados contra `INFORMATION_SCHEMA` de `DW_IE1217` (202 columnas, 0 diferencias).
 - Versionado del documento: nombre fijo en Git; en Drive con la versión en el nombre; v2.1… para correcciones menores, v3.0 para cambios de estructura.
+
+### 6.11 Guía de exposición (13/10/2026)
+- `docs/guias_detalles/Guia_Exposicion_DW_IE1217.docx` (8 páginas): orden de la exposición, contexto y alcance, Matriz BI, matriz bus y granularidad, arquitectura, scripts 01–07 con cifras verificadas, automatización (07 verificado, 08 propuesto), Power BI, pendientes P1–P5, preguntas probables y glosario.
+- Revisión de la Matriz BI: 10 observaciones registradas como P12 (sin corregir todavía).
 
 ---
 
@@ -284,6 +290,7 @@ Flujo en una línea: **copiar → revisar → hacer catálogos → llenar los tr
 | D21 | `DimCompetencia` **sin `AreaKey` ni FK a `DimArea`**; el área va desnormalizada (`AreaID`, `NombreArea`). La relación área-hecho queda en `FacLogroCompetencia.AreaKey` | El profesor exige modelo en estrella: las dimensiones no se relacionan entre sí. Única violación encontrada | ✅ Verificado el 13/10/2026: 03 y 06 ejecutados, cifras idénticas a v5.1 |
 | D22 | **Versionado con Git** (repositorio privado en GitHub): nombres de archivo fijos y sin número de versión; cada versión es una etiqueta (`v5.1`, `v5.2`); commits con formato `tipo(área): descripción`; los datos del colegio nunca se suben | Evitar archivos con número de versión, reenvíos y versiones mezcladas (D20); saber qué versión corrió cada quien | ✅ Publicado el 13/10/2026 en GitHub (`Aquino45/bi-jorgebasadre-dw-ie1217`, etiquetas `v5.1` y `v5.2`) |
 | D23 | La matriz de métricas y dimensiones es un documento **previo al ETL**: dimensiones y atributos rotulados por concepto (nombre técnico solo como comentario), fórmulas en palabras, estado de definición (Acordada / Propuesta / Pendiente / Parcial / No medible) y sin cifras de la carga. Se excluyen las 5 métricas que agregó el ETL (días hasta SIAGIE, TIC, recursos, niveles de logro, competencias aprobadas) y los procesos 3.0 y 5.0. El mapeo origen → DW sí usa nombres reales | Pedido del equipo para la sustentación | ✅ Aplicado en v2.0 (13/10/2026) |
+| D24 | Dos versiones de Métricas y Dimensiones: **interna** (Git, con anotaciones) y **pública** (Drive, solo lo esencial). Grano **por medida** como granularidad (una palabra + nivel de jerarquía). En la pública, Estado binario: **Script SQL** / **Power BI** | Pedido del profesor (granularidad) y del equipo (versión limpia para presentar) | ✅ Aplicado en v2.1 (13/10/2026) |
 
 ---
 
@@ -302,6 +309,7 @@ Flujo en una línea: **copiar → revisar → hacer catálogos → llenar los tr
 | P9 | **Columnas amarillas de la Matriz BI** | Meta, Frecuencia y Responsable del dato siguen vacías. | Matriz BI |
 | P10 | **Detalle histórico de material** | El título, la observación y la fecha exacta de cada entrega solo quedan en staging. Decidir si basta. | Opcional |
 | P11 | **Control de versiones de los scripts** | ✅ Resuelto con D22 (Git, nombres fijos, etiquetas). | — |
+| P12 | **Corregir la Matriz BI** (`Matriz_BI_Gestion_de_ProcesosV.2 (3).xlsx`) | Revisión del 13/10/2026: (1) tiempo promedio de validación debe dividir entre solicitudes con ambas fechas, no entre validadas; (2) «matrículas pendientes» no es KPI ni medible (P3) y su fórmula da rechazadas; (3) rendimiento promedio debe dividir entre notas con evidencia; (4) «Información requerida» de 2.0 repite la de 3.0; (5) la pregunta de 2.0 pide % de docentes con retraso sin KPI (P4); (6) incidencias de programación pide cruces que la fuente no trae; (7) no usa el nivel Indicador de su leyenda; (8) Meta, Frecuencia y Responsable vacías (P9); (9) 3.0 y 5.0 siguen en la matriz; (10) la guía de lectura usa otros nombres de columna. | Matriz BI |
 
 ---
 
@@ -496,7 +504,8 @@ EXEC msdb.dbo.sp_update_job @job_name = N'ETL_IE1217_Carga', @enabled = 0;  -- p
 | `Guia_ETL_3_datamarts_IE1217_v5_1.docx` | ✅ Vigente (sustituye al PDF v5) |
 | `Guia_ETL_3_datamarts_IE1217_v5.pdf` | Histórico |
 | `Matriz_BI_Gestion_de_ProcesosV.2` | ⏳ Requiere ajustes (P2, P3, P4, P9) |
-| `Metricas_y_Dimensiones.xlsx` v2.0 (Matriz bus, V2, Mapeo origen-DW, Control de versiones) | ✅ Vigente (13/10/2026). La V1 original quedó en `docs/insumos/versiones antiguas/` |
+| `Metricas_y_Dimensiones.xlsx` v2.1 interna (Matriz bus, V2, Mapeo origen-DW, Control de versiones) | ✅ Vigente (13/10/2026). V1 y v2.0 en `docs/insumos/versiones antiguas/`; versión pública en Drive (D24) |
+| `docs/guias_detalles/Guia_Exposicion_DW_IE1217.docx` | ✅ Guía de exposición (13/10/2026): orden de la sustentación, Matriz BI, matriz bus, arquitectura, scripts, automatización, Power BI, pendientes, preguntas probables y glosario |
 | `Metricas_KPI_DW_IE1217.xlsx` | ✅ Catálogo de métricas → KPI (13/10/2026) |
 | `BITACORA_CONTEXTO_DW_IE1217.md` | Este documento |
 

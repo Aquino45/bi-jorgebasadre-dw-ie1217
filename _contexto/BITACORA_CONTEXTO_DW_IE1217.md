@@ -28,7 +28,7 @@
 | Script 08: calendario de cargas por proceso | 🟨 Diseño propuesto, esperando confirmar ventanas y frecuencias |
 | Catálogo métricas → indicadores → KPI (`Metricas_KPI_DW_IE1217.xlsx`) | ✅ Entregado (42 filas: 22 métricas cargadas en los scripts, 20 indicadores/KPI planificados para Power BI) |
 | Capa de KPI en Power BI (DAX) | 🟨 Siguiente fase; criterio aprobado por el ingeniero |
-| Matriz bus (hoja V1) y mapeo (Hoja 5) del Excel | ⏳ Desactualizados respecto del modelo; hay que reescribirlos |
+| Matriz bus, V2 y mapeo (`docs/insumos/Metricas_y_Dimensiones.xlsx`) | ✅ v2.0 del 13/10/2026: matriz previa al ETL rotulada por concepto + mapeo origen → DW con nombres reales (D23) |
 | Definiciones de KPI ambiguas (validada, pendientes, docente con retraso, estudiante aprobado) | ⏳ Pendientes de acuerdo |
 
 **Idea central para la sustentación:** el DW entrega **métricas atómicas y verificadas**; los **indicadores y KPI** se construyen en el modelo semántico de Power BI. Si el colegio redefine un KPI, se ajusta una medida DAX sin recargar datos.
@@ -249,6 +249,12 @@ Flujo en una línea: **copiar → revisar → hacer catálogos → llenar los tr
 - **Versionado:** los archivos ya no llevan número de versión; la versión es la etiqueta Git (D22).
 - **Estado:** ✅ verificado el 13/10/2026. Antes se respaldó la base (`DW_IE1217_pre_v5_2_20261013.bak`, carpeta de backup por defecto de la instancia, verificado con `RESTORE VERIFYONLY`). Resultado de 03 y 06: 28 competencias + fila -1, 0 competencias con área inexistente, 0 FK entre dimensiones, `AreaKey` eliminada; 44 815 en el hecho + 581 en bitácora (264 / 198 / 87 / 32), 379 sin evidencia, mismos registros y promedios por bimestre. 04 y 05 sin cambios (600 / 769).
 
+### 6.10 Matriz de métricas y dimensiones v2.0 (13/10/2026) — D23
+- Archivo: `docs/insumos/Metricas_y_Dimensiones.xlsx` (Git) y `Metricas_y_Dimensiones_v2.0.xlsx` (Drive). La versión anterior pasó a `docs/insumos/versiones antiguas/`.
+- Hojas: **Matriz bus** (3 procesos × 10 dimensiones), **V2** (31 medidas × atributos, reemplaza a la V1), **Mapeo origen-DW** (43 filas, reemplaza a la Hoja 5) y **Control de versiones**.
+- Nombres del mapeo comprobados contra `INFORMATION_SCHEMA` de `DW_IE1217` (202 columnas, 0 diferencias).
+- Versionado del documento: nombre fijo en Git; en Drive con la versión en el nombre; v2.1… para correcciones menores, v3.0 para cambios de estructura.
+
 ---
 
 ## 7. Decisiones tomadas (con su porqué)
@@ -277,6 +283,7 @@ Flujo en una línea: **copiar → revisar → hacer catálogos → llenar los tr
 | D20 | Todo el equipo usa **solo v5.1**; no mezclar versiones | El 04 v5.1 depende del 03 v5.1; el 04 y el 06 v5 fallan con 8117 | ✅ (superada en parte por D21: 03, 06 y 07 pasan a v5.2) |
 | D21 | `DimCompetencia` **sin `AreaKey` ni FK a `DimArea`**; el área va desnormalizada (`AreaID`, `NombreArea`). La relación área-hecho queda en `FacLogroCompetencia.AreaKey` | El profesor exige modelo en estrella: las dimensiones no se relacionan entre sí. Única violación encontrada | ✅ Verificado el 13/10/2026: 03 y 06 ejecutados, cifras idénticas a v5.1 |
 | D22 | **Versionado con Git** (repositorio privado en GitHub): nombres de archivo fijos y sin número de versión; cada versión es una etiqueta (`v5.1`, `v5.2`); commits con formato `tipo(área): descripción`; los datos del colegio nunca se suben | Evitar archivos con número de versión, reenvíos y versiones mezcladas (D20); saber qué versión corrió cada quien | ✅ Publicado el 13/10/2026 en GitHub (`Aquino45/bi-jorgebasadre-dw-ie1217`, etiquetas `v5.1` y `v5.2`) |
+| D23 | La matriz de métricas y dimensiones es un documento **previo al ETL**: dimensiones y atributos rotulados por concepto (nombre técnico solo como comentario), fórmulas en palabras, estado de definición (Acordada / Propuesta / Pendiente / Parcial / No medible) y sin cifras de la carga. Se excluyen las 5 métricas que agregó el ETL (días hasta SIAGIE, TIC, recursos, niveles de logro, competencias aprobadas) y los procesos 3.0 y 5.0. El mapeo origen → DW sí usa nombres reales | Pedido del equipo para la sustentación | ✅ Aplicado en v2.0 (13/10/2026) |
 
 ---
 
@@ -489,7 +496,7 @@ EXEC msdb.dbo.sp_update_job @job_name = N'ETL_IE1217_Carga', @enabled = 0;  -- p
 | `Guia_ETL_3_datamarts_IE1217_v5_1.docx` | ✅ Vigente (sustituye al PDF v5) |
 | `Guia_ETL_3_datamarts_IE1217_v5.pdf` | Histórico |
 | `Matriz_BI_Gestion_de_ProcesosV.2` | ⏳ Requiere ajustes (P2, P3, P4, P9) |
-| `Metricas y Dimensiones` (V1, Hoja 5) | ⏳ Desactualizado; usar como plantilla a corregir, no como fuente de verdad |
+| `Metricas_y_Dimensiones.xlsx` v2.0 (Matriz bus, V2, Mapeo origen-DW, Control de versiones) | ✅ Vigente (13/10/2026). La V1 original quedó en `docs/insumos/versiones antiguas/` |
 | `Metricas_KPI_DW_IE1217.xlsx` | ✅ Catálogo de métricas → KPI (13/10/2026) |
 | `BITACORA_CONTEXTO_DW_IE1217.md` | Este documento |
 
@@ -500,7 +507,7 @@ EXEC msdb.dbo.sp_update_job @job_name = N'ETL_IE1217_Carga', @enabled = 0;  -- p
 2. Cerrar con el equipo P1, P2, P3, P4 y P5 (para P5, elegir entre las tres opciones de la sección 8).
 3. Si se aprueba P1, ajustar el 03 y el 05 y volver a verificar.
 4. Confirmar ventanas y frecuencias y escribir el script 08 (P8).
-5. Reescribir la hoja V1 y la Hoja 5 con el modelo real.
+5. ✅ Hecho el 13/10/2026: V1 → V2 y Hoja 5 → Mapeo origen-DW (`Metricas_y_Dimensiones.xlsx` v2.0).
 6. Construir el catálogo de medidas DAX (métricas → indicadores → KPI con meta) y el modelo en Power BI.
 7. Que cada integrante replique la carga y compare con la sección 5.
 

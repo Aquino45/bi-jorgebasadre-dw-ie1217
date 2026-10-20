@@ -6,7 +6,14 @@
    Codigos de este script: 51049 a 51059.
    Ejecutar despues de 04_fac_matricula.sql (base DW_IE1217, SQL Server 2017+).
 
-   UNA tabla de hechos: docente + area + seccion + anio escolar + mes.
+   CAMBIOS v6.1: el grano suma el BIMESTRE academico. Cada sesion toma el
+   bimestre de su fecha en DimTiempo (cierres oficiales), asi que un mes que
+   cruza dos bimestres (mayo, agosto y octubre de 2025; mayo de 2026) se
+   parte en dos filas. MesTiempoKey se reemplaza por TramoTiempoKey: el primer
+   dia del mes DENTRO de su bimestre. Con eso Preparacion y Aprendizajes se
+   cruzan por bimestre sin descuadre (resuelve la decision pendiente 1).
+
+   UNA tabla de hechos: docente + area + seccion + anio escolar + mes + bimestre.
    Las sesiones se cuentan por mes de clase; la dotacion de material pertenece
    al mes en que debio entregarse (marzo para el lote 2025-2026), aunque
    alguna entrega efectiva se haya producido despues.
@@ -35,7 +42,7 @@ BEGIN
         PreparacionKey              INT IDENTITY(1,1) NOT NULL,
         AnioEscolar                 SMALLINT NOT NULL,
         MesEscolar                  TINYINT NOT NULL,
-        MesTiempoKey                INT NOT NULL, -- primer dia del mes de analisis
+        TramoTiempoKey              INT NOT NULL, -- primer dia del mes dentro de su bimestre
         DocenteKey                  INT NOT NULL,
         AreaKey                     INT NOT NULL,
         SeccionKey                  INT NOT NULL,
@@ -77,8 +84,8 @@ BEGIN
         FechaCargaDW               DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
         CONSTRAINT PK_FacPreparacion PRIMARY KEY CLUSTERED (PreparacionKey),
         CONSTRAINT UQ_FacPreparacion_Grano UNIQUE
-            (AnioEscolar, MesEscolar, DocenteKey, AreaKey, SeccionKey),
-        CONSTRAINT FK_FacPreparacion_Tiempo FOREIGN KEY (MesTiempoKey)
+            (TramoTiempoKey, DocenteKey, AreaKey, SeccionKey),
+        CONSTRAINT FK_FacPreparacion_Tiempo FOREIGN KEY (TramoTiempoKey)
             REFERENCES dw.DimTiempo(TiempoKey),
         CONSTRAINT FK_FacPreparacion_Docente FOREIGN KEY (DocenteKey)
             REFERENCES dw.DimDocente(DocenteKey),
@@ -130,7 +137,18 @@ DROP TABLE IF EXISTS #MaterialFechas;
 DROP TABLE IF EXISTS #InicioClases;
 DROP TABLE IF EXISTS #MaterialPreparado;
 DROP TABLE IF EXISTS #MaterialesMes;
+DROP TABLE IF EXISTS #Tramo;
 DROP TABLE IF EXISTS #GranoPreparacion;
+DROP TABLE IF EXISTS #GranoPreparacion;
+
+/* Tramos mes x bimestre del calendario academico: la clave de cada tramo es
+   su primer dia en DimTiempo (p. ej. mayo 2025 -> 01/05 en el I Bimestre y
+   24/05 en el II). El bimestre lo decide DimTiempo, no este script. */
+SELECT Anio, Mes, Bimestre, MIN(TiempoKey) AS TramoKey
+INTO #Tramo
+FROM dw.DimTiempo
+WHERE TiempoKey > 0
+GROUP BY Anio, Mes, Bimestre;
 
 /* 1. Limpiar claves de la asignacion docente y exigir una sola persona
    responsable por area/seccion/anio. No atribuir material al docente errado. */
@@ -266,7 +284,7 @@ IF EXISTS (
 )
     THROW 51050, N'Dos sesiones validas comparten docente, fecha, area y seccion.', 1;
 
-SELECT AnioEscolar, MONTH(FechaSesion) AS MesEscolar,
+SELECT AnioEscolar, MONTH(FechaSesion) AS MesEscolar, TramoKey,
        DocenteKey, AreaKey, SeccionKey,
        COUNT(*) AS SesionesProgramadas,
        SUM(CASE WHEN Estado IN (N'Dictada', N'Dictada con retraso')
@@ -301,10 +319,14 @@ SELECT AnioEscolar, MONTH(FechaSesion) AS MesEscolar,
        SUM(CASE WHEN Estado IN (N'Dictada', N'Dictada con retraso') AND TIC = 1
                 THEN 1 ELSE 0 END) AS SesionesConTIC
 INTO #SesionesMes
-FROM #SesionNormalizada
+FROM (SELECT sn.*, tr.TramoKey
+      FROM #SesionNormalizada AS sn
+      LEFT JOIN dw.DimTiempo AS t ON t.Fecha = sn.FechaSesion
+      LEFT JOIN #Tramo AS tr
+        ON tr.Anio = t.Anio AND tr.Mes = t.Mes AND tr.Bimestre = t.Bimestre) AS x
 WHERE rn = 1 AND DocenteKey IS NOT NULL AND FechaSesion IS NOT NULL
   AND YEAR(FechaSesion) = AnioEscolar
-GROUP BY AnioEscolar, MONTH(FechaSesion), DocenteKey, AreaKey, SeccionKey;
+GROUP BY AnioEscolar, MONTH(FechaSesion), TramoKey, DocenteKey, AreaKey, SeccionKey;
 
 /* 3. Entregas: el catalogo MaterialID decide si es texto o cuaderno; no
    confiar en TipoMaterial escrito libremente. La cantidad 'a tiempo' se
@@ -437,7 +459,7 @@ IF EXISTS (SELECT 1 FROM #MaterialPreparado
            GROUP BY AnioEscolar, SeccionID, MaterialID HAVING COUNT(*) > 1)
     THROW 51059, N'Entrega duplicada del mismo material a una seccion y anio.', 1;
 
-SELECT AnioEscolar, MONTH(InicioClases) AS MesEscolar,
+SELECT AnioEscolar, MONTH(InicioClases) AS MesEscolar, TramoKey,
        DocenteKey, AreaKey, SeccionKey,
        COUNT(*) AS RegistrosMaterial,
        SUM(Recibidos) AS MaterialesRecibidosIE,
@@ -472,32 +494,36 @@ SELECT AnioEscolar, MONTH(InicioClases) AS MesEscolar,
        SUM(CASE WHEN DocenteOrigen <> DocenteAsignado THEN 1 ELSE 0 END)
            AS RegistrosDocenteCorregido
 INTO #MaterialesMes
-FROM #MaterialPreparado
-GROUP BY AnioEscolar, MONTH(InicioClases), DocenteKey, AreaKey, SeccionKey;
+FROM (SELECT mp.*, tr.TramoKey
+      FROM #MaterialPreparado AS mp
+      LEFT JOIN dw.DimTiempo AS t ON t.Fecha = mp.InicioClases
+      LEFT JOIN #Tramo AS tr
+        ON tr.Anio = t.Anio AND tr.Mes = t.Mes AND tr.Bimestre = t.Bimestre) AS x
+GROUP BY AnioEscolar, MONTH(InicioClases), TramoKey, DocenteKey, AreaKey, SeccionKey;
 
 /* 4. UNION DE GRANOS ya agregados: nunca unir sesiones directamente con
    entregas (1:N), porque multiplicaria la cantidad de ejemplares. */
-SELECT AnioEscolar, MesEscolar, DocenteKey, AreaKey, SeccionKey
+SELECT AnioEscolar, MesEscolar, TramoKey, DocenteKey, AreaKey, SeccionKey
 INTO #GranoPreparacion
 FROM #SesionesMes
 UNION
-SELECT AnioEscolar, MesEscolar, DocenteKey, AreaKey, SeccionKey
+SELECT AnioEscolar, MesEscolar, TramoKey, DocenteKey, AreaKey, SeccionKey
 FROM #MaterialesMes;
 
-IF EXISTS (
-    SELECT 1 FROM #GranoPreparacion AS g
-    LEFT JOIN dw.DimTiempo AS t
-      ON t.TiempoKey = g.AnioEscolar * 10000 + g.MesEscolar * 100 + 1
-    WHERE t.TiempoKey IS NULL
-)
-    THROW 51049, N'Mes fuera de DimTiempo: extender calendario en 03 y repetir.', 1;
+/* Toda fila necesita su tramo en DimTiempo, y el material debe caer dentro
+   del periodo escolar (bimestre > 0): se programa al inicio de clases. */
+IF EXISTS (SELECT 1 FROM #GranoPreparacion WHERE TramoKey IS NULL)
+   OR EXISTS (SELECT 1 FROM #MaterialesMes AS m
+              JOIN dw.DimTiempo AS t ON t.TiempoKey = m.TramoKey
+              WHERE t.Bimestre = 0)
+    THROW 51049, N'Fecha fuera de DimTiempo o material fuera del periodo escolar: revisar el calendario del 03.', 1;
 
 BEGIN TRY
     BEGIN TRANSACTION;
     DELETE FROM dm_preparacion.FacPreparacion;
 
     INSERT INTO dm_preparacion.FacPreparacion (
-        AnioEscolar, MesEscolar, MesTiempoKey, DocenteKey, AreaKey, SeccionKey,
+        AnioEscolar, MesEscolar, TramoTiempoKey, DocenteKey, AreaKey, SeccionKey,
         SesionesProgramadas, SesionesDictadas, SesionesDictadasHorario,
         SesionesDictadasRetraso, SesionesNoDictadas, SesionesReprogramadas,
         SesionesEstadoDesconocido, HorasPedagogicasProgramadas,
@@ -515,8 +541,7 @@ BEGIN TRY
         RegistrosCantidadCorregida,
         RegistrosDocenteCorregido
     )
-    SELECT g.AnioEscolar, g.MesEscolar,
-           g.AnioEscolar * 10000 + g.MesEscolar * 100 + 1,
+    SELECT g.AnioEscolar, g.MesEscolar, g.TramoKey,
            g.DocenteKey, g.AreaKey, g.SeccionKey,
            ISNULL(s.SesionesProgramadas, 0), ISNULL(s.SesionesDictadas, 0),
            ISNULL(s.SesionesDictadasHorario, 0),
@@ -541,11 +566,11 @@ BEGIN TRY
            m.RegistrosProgramacionSinFecha,
            m.RegistrosCantidadCorregida, m.RegistrosDocenteCorregido
     FROM #GranoPreparacion AS g
-    LEFT JOIN #SesionesMes AS s ON s.AnioEscolar = g.AnioEscolar
-        AND s.MesEscolar = g.MesEscolar AND s.DocenteKey = g.DocenteKey
+    LEFT JOIN #SesionesMes AS s ON s.TramoKey = g.TramoKey
+        AND s.DocenteKey = g.DocenteKey
         AND s.AreaKey = g.AreaKey AND s.SeccionKey = g.SeccionKey
-    LEFT JOIN #MaterialesMes AS m ON m.AnioEscolar = g.AnioEscolar
-        AND m.MesEscolar = g.MesEscolar AND m.DocenteKey = g.DocenteKey
+    LEFT JOIN #MaterialesMes AS m ON m.TramoKey = g.TramoKey
+        AND m.DocenteKey = g.DocenteKey
         AND m.AreaKey = g.AreaKey AND m.SeccionKey = g.SeccionKey;
 
     COMMIT TRANSACTION;
@@ -557,7 +582,8 @@ END CATCH;
 
 /* 5. Reconciliacion del lote. Esperado: 6425 sesiones de origen, 45 copias,
    28 sin seccion, 6352 sesiones validas, 200 entregas, 21 cantidades
-   recuperadas, 6 docentes corregidos; 769 filas mensuales (439+330).
+   recuperadas, 6 docentes corregidos. Hasta v6.0 eran 769 filas mensuales
+   (439+330); en v6.1 los meses partidos por un cierre suman filas.
    Son referencias del lote actual, no cifras fijas del proceso. */
 SELECT COUNT(*) AS SesionesOrigen,
        SUM(CASE WHEN rn > 1 THEN 1 ELSE 0 END) AS Duplicadas,
@@ -565,7 +591,7 @@ SELECT COUNT(*) AS SesionesOrigen,
            AS SinAsignacion
 FROM #SesionNormalizada;
 
-SELECT AnioEscolar, COUNT(*) AS FilasMensuales,
+SELECT AnioEscolar, COUNT(*) AS Filas,
        SUM(SesionesProgramadas) AS SesionesProgramadas,
        SUM(SesionesDictadasHorario) AS DictadasEnHorario,
        CAST(100.0 * SUM(SesionesDictadasHorario)
@@ -585,13 +611,15 @@ SELECT AnioEscolar, COUNT(*) AS FilasMensuales,
 FROM dm_preparacion.FacPreparacion
 GROUP BY AnioEscolar ORDER BY AnioEscolar;
 
-SELECT AnioEscolar, MesEscolar, COUNT(*) AS FilasMensuales,
-       SUM(SesionesProgramadas) AS Sesiones,
-       SUM(MaterialesPorEntregar) AS EjemplaresPorEntregar,
-       SUM(MaterialesEntregadosATiempo) AS EjemplaresATiempo
-FROM dm_preparacion.FacPreparacion
-GROUP BY AnioEscolar, MesEscolar
-ORDER BY AnioEscolar, MesEscolar;
+SELECT f.AnioEscolar, f.MesEscolar, t.Bimestre, t.NombreBimestre,
+       COUNT(*) AS Filas,
+       SUM(f.SesionesProgramadas) AS Sesiones,
+       SUM(f.MaterialesPorEntregar) AS EjemplaresPorEntregar,
+       SUM(f.MaterialesEntregadosATiempo) AS EjemplaresATiempo
+FROM dm_preparacion.FacPreparacion AS f
+JOIN dw.DimTiempo AS t ON t.TiempoKey = f.TramoTiempoKey
+GROUP BY f.AnioEscolar, f.MesEscolar, t.Bimestre, t.NombreBimestre
+ORDER BY f.AnioEscolar, f.MesEscolar, t.Bimestre;
 
 /* Metrica 'incidencias de programacion': el origen no ofrece cruces de horario
    ni historial de cambios. SesionesReprogramadas es un dato disponible,

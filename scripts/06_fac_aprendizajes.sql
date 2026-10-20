@@ -1,5 +1,15 @@
 ﻿/* ============================================================================
    06_fac_aprendizajes.sql
+   CAMBIOS v6.1 (20/10/2026), matriz v2.1 corregida por el equipo:
+   - DimCompetencia vuelve a una fila por competencia: el hecho guarda la
+     clave de la competencia evaluada. El nivel de logro sale del modelo y
+     del hecho (sin conteos C/B/A/AD ni CompetenciaAprobada): las preguntas
+     de la Matriz BI usan la nota de 0 a 20 y el umbral de 11.
+   - La escala C/B/A/AD queda SOLO como regla de este script, para traducir
+     a numero las notas que el CSV trae escritas en letra (148 en el lote).
+   - El periodo se toma de DimTiempo sin la marca EsCierreBimestre: la fecha
+     informada debe caer dentro de un bimestre, y FechaCierreKey es el ultimo
+     dia de ese bimestre (la fecha oficial de cierre).
    CAMBIOS v6.0 (20/10/2026), segun la matriz de metricas y dimensiones v2.1:
    - El bimestre sale de DimTiempo (fecha oficial de cierre). Sin PeriodoKey:
      DimPeriodoAcademico ya no existe. Grano: estudiante + competencia +
@@ -42,12 +52,11 @@
    * CP-O3 -> CP-03, CP 07 -> CP-07, cp-05 -> CP-05; la competencia debe
      pertenecer al area que figura en la fila. CP-99 no se inventa.
    * La letra capturada en vez del numero se traduce al punto medio de SU
-     rango (regla de DimCompetencia). La conversion numero -> letra tambien
-     se toma exclusivamente de esa dimension.
+     rango en la escala del MINEDU (#Escala, fija en este script).
    * Los decimales validos se redondean al entero superior desde .5
      (ROUND de SQL Server). Nunca se redondea una nota fuera de 0..20.
    * Las competencias realmente sin evidencia SI entran: nota NULL,
-     fila S/E de su competencia, EvaluadaConEvidencia=0, SinEvidencia=1.
+     EvaluadaConEvidencia=0, SinEvidencia=1 (nunca 0).
    * Nota invalida, competencia/area incompatibles o referencias ausentes:
      no se les asigna artificialmente un nivel; quedan en stg.BitacoraNota.
    * Ante copias, se prefiere el CodigoCompetencia literal de catalogo,
@@ -84,16 +93,11 @@ BEGIN
         EstudianteKey          INT NOT NULL,
         SeccionKey             INT NOT NULL,
         DocenteKey             INT NOT NULL,
-        CompetenciaKey         INT NOT NULL,   -- fila competencia x nivel de logro
+        CompetenciaKey         INT NOT NULL,   -- competencia evaluada (con su curso)
         NotaVigesimal          DECIMAL(5,2) NULL,
         CompetenciasRegistradas TINYINT NOT NULL,
         EvaluadaConEvidencia   TINYINT NOT NULL,
         SinEvidencia           TINYINT NOT NULL,
-        EnInicioC              TINYINT NOT NULL,
-        EnProcesoB             TINYINT NOT NULL,
-        LogroEsperadoA         TINYINT NOT NULL,
-        LogroDestacadoAD       TINYINT NOT NULL,
-        CompetenciaAprobada    TINYINT NOT NULL,
         BimestreCorregido      BIT NOT NULL,
         CompetenciaCorregida   BIT NOT NULL,
         DocenteCorregido       BIT NOT NULL,
@@ -117,12 +121,6 @@ BEGIN
             CompetenciasRegistradas = 1
             AND EvaluadaConEvidencia IN (0, 1) AND SinEvidencia IN (0, 1)
             AND EvaluadaConEvidencia + SinEvidencia = 1
-            AND EnInicioC IN (0, 1) AND EnProcesoB IN (0, 1)
-            AND LogroEsperadoA IN (0, 1) AND LogroDestacadoAD IN (0, 1)
-            AND CompetenciaAprobada IN (0, 1)
-            AND EnInicioC + EnProcesoB + LogroEsperadoA + LogroDestacadoAD
-                = EvaluadaConEvidencia
-            AND CompetenciaAprobada = EnProcesoB + LogroEsperadoA + LogroDestacadoAD
             AND ((SinEvidencia = 1 AND NotaVigesimal IS NULL)
                  OR (EvaluadaConEvidencia = 1 AND NotaVigesimal BETWEEN 0 AND 20))
         )
@@ -156,16 +154,22 @@ DROP TABLE IF EXISTS #Clasificada;
 DROP TABLE IF EXISTS #Conflictos;
 DROP TABLE IF EXISTS #Ordenadas;
 DROP TABLE IF EXISTS #Escala;
+DROP TABLE IF EXISTS #FinBimestre;
 
-/* Regla nota -> nivel: se toma de DimCompetencia (una sola regla para todas
-   las competencias). Si dos competencias tuvieran rangos distintos para el
-   mismo nivel, la carga se detiene. */
-SELECT DISTINCT NivelLogro, NotaDesde, NotaHasta, OrdenNivel
-INTO #Escala
-FROM dw.DimCompetencia
-WHERE CompetenciaKey > 0 AND OrdenNivel > 0;
-IF EXISTS (SELECT 1 FROM #Escala GROUP BY NivelLogro HAVING COUNT(*) > 1)
-    THROW 51063, N'Rangos distintos para un mismo nivel en DimCompetencia; se cancela la carga.', 1;
+/* Escala oficial del MINEDU (secundaria). NO es una dimension: solo sirve
+   para traducir a numero la letra que algunas filas del CSV traen en lugar
+   de la nota (C -> 5, B -> 12, A -> 15.5, AD -> 19: punto medio del rango). */
+SELECT * INTO #Escala FROM (VALUES
+    (N'C', 0, 10), (N'B', 11, 13), (N'A', 14, 17), (N'AD', 18, 20)
+) AS v(NivelLogro, NotaDesde, NotaHasta);
+
+/* Ultimo dia de cada bimestre academico = su fecha oficial de cierre
+   (en un bimestre aun abierto, el ultimo dia del calendario cargado). */
+SELECT Anio, Bimestre, MAX(TiempoKey) AS FechaCierreKey
+INTO #FinBimestre
+FROM dw.DimTiempo
+WHERE TiempoKey > 0 AND Bimestre > 0
+GROUP BY Anio, Bimestre;
 
 /* Asignacion oficial: la clave de docente del hecho se obtiene del horario
    del area y seccion, no de un identificador mal escrito en una nota. */
@@ -211,13 +215,14 @@ FROM stg.NotaCompetencia AS n;
    archivo se usa para medir la correccion y decidir entre copias. */
 SELECT o.*,
        t.Bimestre AS BimestreReal,
-       t.TiempoKey AS FechaCierreKey,
+       fb.FechaCierreKey,
+       t.TiempoKey AS FechaInformadaKey,
        e.EstudianteKey, s.SeccionKey, a.AreaKey, a.AreaID AS AreaIDDeArea,
        c.CompetenciaKey, c.AreaID AS AreaIDDeCompetencia,
        d.DocenteKey, asg.DocenteID AS DocenteAsignado,
        m.MatriculaKey,
        TRY_CONVERT(DECIMAL(6,3), REPLACE(o.NotaTexto, N',', N'.')) AS NotaNumerica,
-       el.OrdenNivel AS EscalaDeLetra,
+       el.NivelLogro AS LetraCapturada,
        el.NotaDesde AS InicioLetra, el.NotaHasta AS FinLetra,
        CASE WHEN o.NotaTexto IS NULL OR o.NotaTexto = N''
                       OR o.NotaTexto LIKE N'NO SE %'
@@ -234,8 +239,9 @@ SELECT o.*,
 INTO #Vinculada
 FROM #OrigenNormalizado AS o
 LEFT JOIN dw.DimTiempo AS t
-    ON t.Fecha = o.FechaCierre AND t.AnioEscolar = o.AnioEscolar
-       AND t.EsCierreBimestre = 1
+    ON t.Fecha = o.FechaCierre AND t.Anio = o.AnioEscolar AND t.Bimestre > 0
+LEFT JOIN #FinBimestre AS fb
+    ON fb.Anio = t.Anio AND fb.Bimestre = t.Bimestre
 LEFT JOIN dw.DimEstudiante AS e
     ON e.CodigoEstudiante = o.EstudianteIDLimpio AND e.EstudianteKey <> -1
 LEFT JOIN stg.Seccion AS sec
@@ -246,8 +252,7 @@ LEFT JOIN dw.DimSeccion AS s
                      + UPPER(LTRIM(RTRIM(sec.Seccion)))
 LEFT JOIN dw.DimArea AS a ON a.AreaID = o.AreaIDLimpia AND a.AreaKey <> -1
 LEFT JOIN dw.DimCompetencia AS c
-    ON c.CompetenciaID = o.CompetenciaIDLimpia AND c.NivelLogro = N'S/E'
-       AND c.CompetenciaKey <> -1
+    ON c.CompetenciaID = o.CompetenciaIDLimpia AND c.CompetenciaKey <> -1
 LEFT JOIN #Asignacion AS asg
     ON asg.AnioEscolar = o.AnioEscolar AND asg.SeccionID = o.SeccionIDLimpia
        AND asg.AreaID = o.AreaIDLimpia
@@ -263,7 +268,7 @@ LEFT JOIN dm_matricula.FacMatricula AS m
    intervalo vigente. Las notas fuera de escala siguen fuera, sin recorte. */
 SELECT v.*,
        CASE WHEN v.EsSinEvidencia = 1 THEN CAST(NULL AS DECIMAL(5,2))
-            WHEN v.EscalaDeLetra IS NOT NULL
+            WHEN v.LetraCapturada IS NOT NULL
                 THEN CAST((CONVERT(DECIMAL(5,2), v.InicioLetra)
                            + v.FinLetra) / 2.0 AS DECIMAL(5,2))
             WHEN v.NotaNumerica BETWEEN 0 AND 20
@@ -274,8 +279,6 @@ INTO #Transformada FROM #Vinculada AS v;
 /* Un codigo de competencia que pertenece a otra area NO es una evaluacion
    de esa competencia. Tampoco se imputa una nota textual irreconocible. */
 SELECT x.*,
-       escala.OrdenNivel AS EscalaFinalKey,
-       cf.CompetenciaKey AS CompetenciaFinalKey,
        CASE WHEN x.FechaCierreKey IS NULL
                       OR x.AnioEscolar IS NULL
                       THEN N'Periodo o fecha de cierre desconocidos'
@@ -290,26 +293,11 @@ SELECT x.*,
             WHEN x.MatriculaKey IS NULL THEN N'Sin matricula aprobada en seccion'
             WHEN x.EsSinEvidencia = 0 AND x.NotaFinal IS NULL
                  THEN N'Nota inexistente o fuera de rango'
-            WHEN x.EsSinEvidencia = 0 AND escala.OrdenNivel IS NULL
-                 THEN N'Nota sin equivalencia en la escala de logro'
             ELSE CAST(NULL AS NVARCHAR(80)) END AS MotivoRechazo
 INTO #Clasificada
-FROM #Transformada AS x
-LEFT JOIN #Escala AS escala
-    ON x.NotaFinal >= escala.NotaDesde
-       AND x.NotaFinal < CONVERT(DECIMAL(5,2), escala.NotaHasta) + 1
-LEFT JOIN dw.DimCompetencia AS cf
-    ON cf.CompetenciaID = x.CompetenciaIDLimpia AND cf.CompetenciaKey <> -1
-   AND cf.NivelLogro = CASE WHEN x.EsSinEvidencia = 1 THEN N'S/E' ELSE escala.NivelLogro END;
+FROM #Transformada AS x;
 
-/* Una configuracion solapada de escala o una seccion anual repetida no debe
-   multiplicar ni seleccionar evaluaciones arbitrariamente. */
-IF EXISTS (SELECT 1 FROM #Escala a JOIN #Escala b
-           ON a.OrdenNivel < b.OrdenNivel
-           AND a.NotaDesde <= b.NotaHasta AND b.NotaDesde <= a.NotaHasta)
-    THROW 51063, N'Rangos solapados en la escala de logro; se cancela la carga.', 1;
-IF EXISTS (SELECT 1 FROM #Clasificada WHERE MotivoRechazo IS NULL AND CompetenciaFinalKey IS NULL)
-    THROW 51067, N'Una nota valida no encontro su fila competencia x nivel en DimCompetencia.', 1;
+/* Una seccion anual repetida no debe multiplicar evaluaciones. */
 IF (SELECT COUNT(*) FROM #Clasificada) <> (SELECT COUNT(*) FROM stg.NotaCompetencia)
     THROW 51064, N'Un JOIN multiplico las notas; revisar catalogos y secciones.', 1;
 
@@ -368,22 +356,16 @@ BEGIN TRY
         (AnioEscolar, FechaCierreKey, EstudianteKey,
          SeccionKey, DocenteKey, CompetenciaKey,
          NotaVigesimal, CompetenciasRegistradas, EvaluadaConEvidencia,
-         SinEvidencia, EnInicioC, EnProcesoB, LogroEsperadoA,
-         LogroDestacadoAD, CompetenciaAprobada, BimestreCorregido,
+         SinEvidencia, BimestreCorregido,
          CompetenciaCorregida, DocenteCorregido, NotaDesdeLetra,
          NotaRedondeada)
     SELECT AnioEscolar, FechaCierreKey, EstudianteKey,
-           SeccionKey, DocenteKey, CompetenciaFinalKey,
+           SeccionKey, DocenteKey, CompetenciaKey,
            NotaFinal, 1, 1 - EsSinEvidencia, EsSinEvidencia,
-           CASE WHEN EscalaFinalKey = 1 THEN 1 ELSE 0 END,
-           CASE WHEN EscalaFinalKey = 2 THEN 1 ELSE 0 END,
-           CASE WHEN EscalaFinalKey = 3 THEN 1 ELSE 0 END,
-           CASE WHEN EscalaFinalKey = 4 THEN 1 ELSE 0 END,
-           CASE WHEN EscalaFinalKey IN (2, 3, 4) THEN 1 ELSE 0 END,
            CASE WHEN PrioridadBimestre = 0 THEN 1 ELSE 0 END,
            CASE WHEN PrioridadCompetencia = 0 THEN 1 ELSE 0 END,
            CASE WHEN DocenteAsignado <> DocenteIDLimpio THEN 1 ELSE 0 END,
-           CASE WHEN EscalaDeLetra IS NOT NULL THEN 1 ELSE 0 END,
+           CASE WHEN LetraCapturada IS NOT NULL THEN 1 ELSE 0 END,
            CASE WHEN NotaNumerica BETWEEN 0 AND 20
                      AND NotaNumerica <> ROUND(NotaNumerica, 0)
                 THEN 1 ELSE 0 END
@@ -393,14 +375,6 @@ BEGIN TRY
        (SELECT COUNT(*) FROM dm_aprendizajes.FacLogroCompetencia)
        + (SELECT COUNT(*) FROM stg.BitacoraNota)
         THROW 51066, N'No cuadran origen, hecho e incidencias; se revierte la carga.', 1;
-
-    /* Grano: una sola nota por estudiante + competencia + bimestre, aunque la
-       competencia tenga cinco filas (una por nivel) en la dimension. */
-    IF EXISTS (SELECT 1 FROM dm_aprendizajes.FacLogroCompetencia f
-               JOIN dw.DimCompetencia c ON c.CompetenciaKey = f.CompetenciaKey
-               GROUP BY f.FechaCierreKey, f.EstudianteKey, c.CompetenciaID
-               HAVING COUNT(*) > 1)
-        THROW 51068, N'Dos notas para el mismo estudiante, competencia y bimestre; se revierte la carga.', 1;
 
     COMMIT TRANSACTION;
 END TRY
@@ -418,6 +392,12 @@ SELECT (SELECT COUNT(*) FROM stg.NotaCompetencia) AS FilasOrigen,
 
 SELECT Motivo, COUNT(*) AS Filas
 FROM stg.BitacoraNota GROUP BY Motivo ORDER BY Filas DESC, Motivo;
+
+/* Fechas de cierre del CSV que no son el cierre oficial de su bimestre
+   (se cargan con el cierre oficial; esperado 0 en este lote). */
+SELECT COUNT(*) AS NotasConFechaDistintaAlCierre
+FROM #Clasificada
+WHERE MotivoRechazo IS NULL AND FechaInformadaKey <> FechaCierreKey;
 
 SELECT t.Anio AS AnioEscolar, t.Bimestre, COUNT(*) AS CompetenciasRegistradas,
        SUM(f.EvaluadaConEvidencia) AS Evaluadas,

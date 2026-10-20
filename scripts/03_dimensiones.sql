@@ -1,5 +1,16 @@
 ﻿/* ============================================================================
    03_dimensiones.sql
+   CAMBIOS v6.1 (20/10/2026) — matriz v2.1 corregida por el equipo:
+   - DimTiempo: Fecha (dia), Anio, Mes y Bimestre. Salen AnioEscolar (era igual
+     al anio), EsCierreBimestre (control interno del 06) y EsFilaEspecial (las
+     filas especiales se reconocen por TiempoKey < 0).
+   - DimCompetencia vuelve a una fila por competencia: curso (area), tipo de
+     competencia y competencia. El nivel de logro sale del modelo: ninguna
+     pregunta de la Matriz BI lo pide y el origen no lo trae (solo la nota).
+   - DimMotivoRechazo y stg.MotivoRechazoCategoria se eliminan: la matriz ya
+     no analiza el rechazo por motivo (el texto sigue en stg.Matricula).
+   ============================================================================ */
+/* ============================================================================
    CAMBIOS v6.0 (20/10/2026) — dimensiones segun la matriz de metricas y
    dimensiones v2.1 del equipo (solo lo que responde las preguntas de la
    Matriz BI; el CSV completo se conserva en staging):
@@ -73,7 +84,7 @@ IF SCHEMA_ID('dw') IS NULL EXEC('CREATE SCHEMA dw');
 GO
 
 /* ----------------------------------------------------------------------------
-   MIGRACION v6.0 (se ejecuta una sola vez)
+   MIGRACION v6.0 / v6.1 (se ejecuta una sola vez)
    Si la base todavia tiene la estructura v5.x (DimPeriodoAcademico,
    DimEscalaLogro o columnas que la matriz v2.1 ya no pide), se eliminan los
    tres hechos y las dimensiones para crearlos con la estructura nueva. Los
@@ -86,8 +97,11 @@ IF OBJECT_ID(N'dw.DimPeriodoAcademico', N'U') IS NOT NULL
    OR COL_LENGTH(N'dw.DimTiempo', N'EsDiaHabil') IS NOT NULL
    OR COL_LENGTH(N'dw.DimEstudiante', N'DNI') IS NOT NULL
    OR COL_LENGTH(N'dw.DimMotivoRechazo', N'Motivo') IS NOT NULL
+   OR COL_LENGTH(N'dw.DimTiempo', N'AnioEscolar') IS NOT NULL      -- base v6.0
+   OR COL_LENGTH(N'dw.DimCompetencia', N'NivelLogro') IS NOT NULL
+   OR OBJECT_ID(N'dw.DimMotivoRechazo', N'U') IS NOT NULL
 BEGIN
-    PRINT 'Migracion v6.0: se recrean los hechos y las dimensiones.';
+    PRINT 'Migracion v6.1: se recrean los hechos y las dimensiones.';
     DROP TABLE IF EXISTS dm_aprendizajes.FacLogroCompetencia;
     DROP TABLE IF EXISTS dm_preparacion.FacPreparacion;
     DROP TABLE IF EXISTS dm_matricula.FacMatricula;
@@ -101,6 +115,7 @@ BEGIN
     DROP TABLE IF EXISTS dw.DimTipoMatricula;
     DROP TABLE IF EXISTS dw.DimMotivoRechazo;
     DROP TABLE IF EXISTS dw.DimTiempo;
+    DROP TABLE IF EXISTS stg.MotivoRechazoCategoria;
 END;
 GO
 
@@ -130,23 +145,20 @@ IF OBJECT_ID('dw.DimTiempo', 'U') IS NULL
 BEGIN
 CREATE TABLE dw.DimTiempo (
     TiempoKey        INT          NOT NULL,
-    Fecha            DATE         NULL,     -- Dia
+    Fecha            DATE         NULL,     -- Dia (NULL en las filas -1 y -2)
     Anio             SMALLINT     NULL,
-    AnioEscolar      SMALLINT     NULL,     -- en este colegio coincide con el anio calendario
     Mes              TINYINT      NULL,
     NombreMes        NVARCHAR(15) NULL,
     Bimestre         TINYINT      NULL,     -- 0 = fuera del periodo escolar
     NombreBimestre   NVARCHAR(40) NULL,
-    EsCierreBimestre BIT          NOT NULL DEFAULT 0,  -- fecha oficial de cierre
-    EsFilaEspecial   BIT          NOT NULL DEFAULT 0,
     CONSTRAINT PK_DimTiempo PRIMARY KEY CLUSTERED (TiempoKey)
 );
 END;
 GO
 
 /* Miembros especiales */
-INSERT INTO dw.DimTiempo (TiempoKey, NombreMes, NombreBimestre, EsFilaEspecial)
-SELECT v.TiempoKey, v.Nombre, v.Nombre, 1
+INSERT INTO dw.DimTiempo (TiempoKey, NombreMes, NombreBimestre)
+SELECT v.TiempoKey, v.Nombre, v.Nombre
 FROM (VALUES (-1, N'No aplica'), (-2, N'No registrado')) AS v(TiempoKey, Nombre)
 WHERE NOT EXISTS (SELECT 1 FROM dw.DimTiempo t WHERE t.TiempoKey = v.TiempoKey);
 
@@ -155,15 +167,15 @@ WHERE NOT EXISTS (SELECT 1 FROM dw.DimTiempo t WHERE t.TiempoKey = v.TiempoKey);
     SELECT CAST('2024-01-01' AS DATE) AS F
     UNION ALL SELECT DATEADD(DAY, 1, F) FROM Calendario WHERE F < '2027-12-31'
 )
-INSERT INTO dw.DimTiempo (TiempoKey, Fecha, Anio, AnioEscolar, Mes, NombreMes,
-                          Bimestre, NombreBimestre, EsCierreBimestre, EsFilaEspecial)
+INSERT INTO dw.DimTiempo (TiempoKey, Fecha, Anio, Mes, NombreMes,
+                          Bimestre, NombreBimestre)
 SELECT
-    CONVERT(INT, FORMAT(F, 'yyyyMMdd')), F, YEAR(F), YEAR(F), MONTH(F),
+    CONVERT(INT, FORMAT(F, 'yyyyMMdd')), F, YEAR(F), MONTH(F),
     CASE MONTH(F) WHEN 1 THEN N'Enero' WHEN 2 THEN N'Febrero' WHEN 3 THEN N'Marzo'
                   WHEN 4 THEN N'Abril' WHEN 5 THEN N'Mayo'    WHEN 6 THEN N'Junio'
                   WHEN 7 THEN N'Julio' WHEN 8 THEN N'Agosto'  WHEN 9 THEN N'Setiembre'
                   WHEN 10 THEN N'Octubre' WHEN 11 THEN N'Noviembre' ELSE N'Diciembre' END,
-    0, N'Sin calendario academico', 0, 0
+    0, N'Sin calendario academico'
 FROM Calendario
 WHERE NOT EXISTS (SELECT 1 FROM dw.DimTiempo t
                   WHERE t.TiempoKey = CONVERT(INT, FORMAT(F, 'yyyyMMdd')))
@@ -200,9 +212,7 @@ UPDATE t SET
     NombreBimestre = CASE WHEN x.Bimestre = 0 THEN x.Texto
                           ELSE CASE x.Bimestre WHEN 1 THEN N'I' WHEN 2 THEN N'II'
                                                WHEN 3 THEN N'III' ELSE N'IV' END
-                               + N' Bimestre' + CASE WHEN x.SinCierre = 1 THEN N' (sin cierre)' ELSE N'' END END,
-    EsCierreBimestre = CASE WHEN EXISTS (SELECT 1 FROM #Cierres c WHERE c.FechaCierre = t.Fecha)
-                            THEN 1 ELSE 0 END
+                               + N' Bimestre' + CASE WHEN x.SinCierre = 1 THEN N' (sin cierre)' ELSE N'' END END
 FROM dw.DimTiempo AS t
 CROSS APPLY (
     SELECT
@@ -219,7 +229,7 @@ CROSS APPLY (
                   AND (SELECT COUNT(*) FROM #Cierres c WHERE c.AnioEscolar = t.Anio) < 4
              THEN 1 ELSE 0 END AS SinCierre
 ) AS x
-WHERE t.EsFilaEspecial = 0;
+WHERE t.TiempoKey > 0;
 GO
 
 /* ============================================================================
@@ -430,15 +440,13 @@ GO
 /* ============================================================================
    5. DimArea y DimCompetencia
    ----------------------------------------------------------------------------
-   DimArea la usa preparacion (las sesiones y entregas son por area, sin
-   competencia). DimCompetencia la usan las notas y, segun la matriz v2.1,
-   junta en una sola dimension el area, el tipo de competencia, la
-   competencia y el NIVEL DE LOGRO: hay una fila por cada competencia x nivel
-   (S/E, C, B, A, AD). Cada nota apunta a la fila de su competencia con el
-   nivel que obtuvo. Ninguna dimension se relaciona con otra (estrella).
-
-   La regla nota -> nivel vive AQUI y en ningun otro lado. La fila S/E
-   («Sin evidencia») recibe las notas vacias: NULL en el hecho, nunca 0 ni C.
+   DimArea (el «curso» de la matriz) la usa preparacion: las sesiones y las
+   entregas son por area, sin competencia. DimCompetencia la usan las notas:
+   una fila por competencia, con su curso y su tipo (Especifica/Transversal)
+   copiados en la misma fila. Es la version reducida de la jerarquia
+   curso -> competencia, sin relacion entre dimensiones (estrella).
+   El origen no tiene un nivel mas fino que la competencia: no hay
+   actividades ni tareas, y la nota se registra por competencia y bimestre.
    ============================================================================ */
 IF OBJECT_ID('dw.DimArea', 'U') IS NULL
 BEGIN
@@ -474,24 +482,18 @@ CREATE TABLE dw.DimCompetencia (
     CompetenciaKey    INT IDENTITY(1,1) NOT NULL,
     AreaID            NVARCHAR(20)  NULL,       -- desnormalizado (sin FK a DimArea)
     NombreArea        NVARCHAR(100) NULL,
-    TipoCompetencia   NVARCHAR(30)  NULL,
+    TipoCompetencia   NVARCHAR(30)  NULL,       -- Especifica / Transversal
     CompetenciaID     NVARCHAR(20)  NOT NULL,
     NombreCompetencia NVARCHAR(200) NULL,
-    NivelLogro        NVARCHAR(10)  NOT NULL,   -- S/E, C, B, A, AD
-    DescripcionNivel  NVARCHAR(40)  NULL,
-    NotaDesde         TINYINT       NULL,       -- regla del nivel (vacia en S/E)
-    NotaHasta         TINYINT       NULL,
-    OrdenNivel        TINYINT       NOT NULL,   -- 0 S/E, 1 C ... 4 AD
-    EsAprobatorio     BIT           NOT NULL,
     CONSTRAINT PK_DimCompetencia PRIMARY KEY CLUSTERED (CompetenciaKey),
-    CONSTRAINT UQ_DimCompetencia UNIQUE (CompetenciaID, NivelLogro)
+    CONSTRAINT UQ_DimCompetencia UNIQUE (CompetenciaID)
 );
 END;
 GO
 SET IDENTITY_INSERT dw.DimCompetencia ON;
 INSERT INTO dw.DimCompetencia (CompetenciaKey, AreaID, NombreArea, TipoCompetencia,
-       CompetenciaID, NombreCompetencia, NivelLogro, DescripcionNivel, OrdenNivel, EsAprobatorio)
-SELECT -1, N'N/D', N'No definida', N'No definida', N'N/D', N'No definida', N'N/D', N'No definido', 0, 0
+       CompetenciaID, NombreCompetencia)
+SELECT -1, N'N/D', N'No definida', N'No definida', N'N/D', N'No definida'
 WHERE NOT EXISTS (SELECT 1 FROM dw.DimCompetencia WHERE CompetenciaKey = -1);
 SET IDENTITY_INSERT dw.DimCompetencia OFF;
 
@@ -501,29 +503,17 @@ USING (
            ISNULL(a.NombreArea, N'No definida') AS NombreArea,
            LTRIM(RTRIM(c.TipoCompetencia)) AS TipoCompetencia,
            LTRIM(RTRIM(c.CompetenciaID)) AS CompetenciaID,
-           LTRIM(RTRIM(c.NombreCompetencia)) AS NombreCompetencia,
-           n.NivelLogro, n.DescripcionNivel, n.NotaDesde, n.NotaHasta, n.OrdenNivel, n.EsAprobatorio
+           LTRIM(RTRIM(c.NombreCompetencia)) AS NombreCompetencia
     FROM stg.Competencia AS c
     LEFT JOIN dw.DimArea AS a ON a.AreaID = LTRIM(RTRIM(c.AreaID))
-    CROSS JOIN (VALUES
-        (N'S/E', N'Sin evidencia suficiente', CAST(NULL AS TINYINT), CAST(NULL AS TINYINT), 0, 0),
-        (N'C',   N'En inicio',         0, 10, 1, 0),
-        (N'B',   N'En proceso',       11, 13, 2, 1),
-        (N'A',   N'Logro esperado',   14, 17, 3, 1),
-        (N'AD',  N'Logro destacado',  18, 20, 4, 1)
-    ) AS n(NivelLogro, DescripcionNivel, NotaDesde, NotaHasta, OrdenNivel, EsAprobatorio)
     WHERE NULLIF(LTRIM(RTRIM(c.CompetenciaID)), N'') IS NOT NULL
-) AS o ON d.CompetenciaID = o.CompetenciaID AND d.NivelLogro = o.NivelLogro
+) AS o ON d.CompetenciaID = o.CompetenciaID
 WHEN MATCHED THEN UPDATE SET
     d.AreaID = o.AreaID, d.NombreArea = o.NombreArea, d.TipoCompetencia = o.TipoCompetencia,
-    d.NombreCompetencia = o.NombreCompetencia, d.DescripcionNivel = o.DescripcionNivel,
-    d.NotaDesde = o.NotaDesde, d.NotaHasta = o.NotaHasta,
-    d.OrdenNivel = o.OrdenNivel, d.EsAprobatorio = o.EsAprobatorio
+    d.NombreCompetencia = o.NombreCompetencia
 WHEN NOT MATCHED BY TARGET THEN
-    INSERT (AreaID, NombreArea, TipoCompetencia, CompetenciaID, NombreCompetencia,
-            NivelLogro, DescripcionNivel, NotaDesde, NotaHasta, OrdenNivel, EsAprobatorio)
-    VALUES (o.AreaID, o.NombreArea, o.TipoCompetencia, o.CompetenciaID, o.NombreCompetencia,
-            o.NivelLogro, o.DescripcionNivel, o.NotaDesde, o.NotaHasta, o.OrdenNivel, o.EsAprobatorio);
+    INSERT (AreaID, NombreArea, TipoCompetencia, CompetenciaID, NombreCompetencia)
+    VALUES (o.AreaID, o.NombreArea, o.TipoCompetencia, o.CompetenciaID, o.NombreCompetencia);
 GO
 
 /* ============================================================================
@@ -594,51 +584,6 @@ WHEN NOT MATCHED BY TARGET THEN
 GO
 
 /* ============================================================================
-   7. DimMotivoRechazo
-   ----------------------------------------------------------------------------
-   Segun la matriz v2.1 la dimension guarda la CATEGORIA del rechazo. El
-   texto del motivo queda en staging: stg.MotivoRechazoCategoria guarda cada
-   motivo de la fuente con su categoria y el 04 la usa para asignar la clave.
-   Las aprobadas apuntan a -1 'No aplica'; una rechazada sin motivo, a -2.
-   ============================================================================ */
-DROP TABLE IF EXISTS stg.MotivoRechazoCategoria;
-SELECT DISTINCT
-    LTRIM(RTRIM(Observacion)) AS Motivo,
-    CASE WHEN LTRIM(RTRIM(Observacion)) LIKE N'%vacante%' THEN N'Capacidad de la IE'
-         WHEN LTRIM(RTRIM(Observacion)) LIKE N'%plazo%'   THEN N'Fuera de cronograma'
-         WHEN LTRIM(RTRIM(Observacion)) LIKE N'%otra IE%' THEN N'Duplicidad en SIAGIE'
-         WHEN LTRIM(RTRIM(Observacion)) LIKE N'%RENIEC%'  THEN N'Identidad'
-         ELSE N'Documentaria' END AS Categoria
-INTO stg.MotivoRechazoCategoria
-FROM stg.Matricula
-WHERE UPPER(LTRIM(RTRIM(EstadoMatricula))) LIKE N'RECHAZ%'
-  AND NULLIF(LTRIM(RTRIM(Observacion)), N'') IS NOT NULL;
-GO
-
-IF OBJECT_ID('dw.DimMotivoRechazo', 'U') IS NULL
-BEGIN
-CREATE TABLE dw.DimMotivoRechazo (
-    MotivoKey    INT IDENTITY(1,1) NOT NULL,
-    Categoria    NVARCHAR(40)  NOT NULL,
-    CONSTRAINT PK_DimMotivoRechazo PRIMARY KEY CLUSTERED (MotivoKey),
-    CONSTRAINT UQ_DimMotivoRechazo UNIQUE (Categoria)
-);
-END;
-GO
-SET IDENTITY_INSERT dw.DimMotivoRechazo ON;
-INSERT INTO dw.DimMotivoRechazo (MotivoKey, Categoria)
-SELECT v.MotivoKey, v.Categoria
-FROM (VALUES (-1, N'No aplica'), (-2, N'No registrado')) AS v(MotivoKey, Categoria)
-WHERE NOT EXISTS (SELECT 1 FROM dw.DimMotivoRechazo d WHERE d.MotivoKey = v.MotivoKey);
-SET IDENTITY_INSERT dw.DimMotivoRechazo OFF;
-
-MERGE dw.DimMotivoRechazo AS d
-USING (SELECT DISTINCT Categoria FROM stg.MotivoRechazoCategoria) AS o
-ON d.Categoria = o.Categoria
-WHEN NOT MATCHED BY TARGET THEN INSERT (Categoria) VALUES (o.Categoria);
-GO
-
-/* ============================================================================
    VERIFICACION DEL PASO 1
    ============================================================================ */
 PRINT '=== 03_dimensiones.sql ejecutado ===';
@@ -650,12 +595,11 @@ UNION ALL SELECT 'dw.DimDocente',          COUNT(*), SUM(CASE WHEN DocenteKey   
 UNION ALL SELECT 'dw.DimSeccion',          COUNT(*), SUM(CASE WHEN SeccionKey     < 0 THEN 1 ELSE 0 END) FROM dw.DimSeccion
 UNION ALL SELECT 'dw.DimArea',             COUNT(*), SUM(CASE WHEN AreaKey        < 0 THEN 1 ELSE 0 END) FROM dw.DimArea
 UNION ALL SELECT 'dw.DimCompetencia',      COUNT(*), SUM(CASE WHEN CompetenciaKey < 0 THEN 1 ELSE 0 END) FROM dw.DimCompetencia
-UNION ALL SELECT 'dw.DimTipoMatricula',    COUNT(*), SUM(CASE WHEN TipoMatriculaKey < 0 THEN 1 ELSE 0 END) FROM dw.DimTipoMatricula
-UNION ALL SELECT 'dw.DimMotivoRechazo',    COUNT(*), SUM(CASE WHEN MotivoKey      < 0 THEN 1 ELSE 0 END) FROM dw.DimMotivoRechazo;
+UNION ALL SELECT 'dw.DimTipoMatricula',    COUNT(*), SUM(CASE WHEN TipoMatriculaKey < 0 THEN 1 ELSE 0 END) FROM dw.DimTipoMatricula;
 
 /* Conteos esperados (sin contar miembros especiales):
    DimEstudiante 373 | DimDocente 15 | DimSeccion 10 | DimArea 11
-   DimCompetencia 140 (28 competencias x 5 niveles) | DimMotivoRechazo 4 categorias
+   DimCompetencia 28
    DimTipoMatricula: pocas decenas
 
    Si DimEstudiante trae MAS de 373, la deduplicacion no funciono.
@@ -669,10 +613,9 @@ FROM dw.DimCompetencia AS c
 WHERE c.CompetenciaKey <> -1
   AND NOT EXISTS (SELECT 1 FROM dw.DimArea AS a WHERE a.AreaID = c.AreaID);
 
-/* Bimestre academico por anio: dias de clase y fechas de cierre. */
-SELECT Anio, Bimestre, NombreBimestre, MIN(Fecha) AS Desde, MAX(Fecha) AS Hasta,
-       SUM(CAST(EsCierreBimestre AS INT)) AS Cierres
-FROM dw.DimTiempo WHERE EsFilaEspecial = 0 AND Anio IN (2025, 2026)
+/* Bimestre academico por anio: primer y ultimo dia de cada bimestre. */
+SELECT Anio, Bimestre, NombreBimestre, MIN(Fecha) AS Desde, MAX(Fecha) AS Hasta
+FROM dw.DimTiempo WHERE TiempoKey > 0 AND Anio IN (2025, 2026)
 GROUP BY Anio, Bimestre, NombreBimestre ORDER BY Anio, MIN(Fecha);
 
 /* Pruebas de integridad: las tres consultas deben devolver cero */

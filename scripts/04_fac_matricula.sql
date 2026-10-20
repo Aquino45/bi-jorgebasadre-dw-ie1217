@@ -7,6 +7,9 @@
    v5.1b: SUM sobre la columna BIT ViaCorregida (error 8117) -> CAST a INT.
    v6.0: el motivo del rechazo se clasifica con stg.MotivoRechazoCategoria
    (creada por el 03) y el hecho guarda la clave de su CATEGORIA.
+   v6.1: sin DimMotivoRechazo (la matriz ya no analiza el rechazo por motivo):
+   sale MotivoKey. Las rechazadas se cuentan con MatriculasRechazadas y el
+   texto del motivo sigue en stg.Matricula.Observacion.
    Ejecutar DESPUES de 01_staging, 02_diagnostico y 03_dimensiones.
    Base: DW_IE1217 | SQL Server 2017 o posterior.
 
@@ -41,7 +44,6 @@ BEGIN
         EstudianteKey              INT NOT NULL,
         SeccionKey                 INT NOT NULL,
         TipoMatriculaKey           INT NOT NULL,
-        MotivoKey                  INT NOT NULL,
         FechaSolicitudKey          INT NOT NULL,
         FechaRevisionKey           INT NOT NULL,
         FechaAsignacionKey         INT NOT NULL,
@@ -67,8 +69,6 @@ BEGIN
             REFERENCES dw.DimSeccion(SeccionKey),
         CONSTRAINT FK_FacMatricula_Tipo FOREIGN KEY (TipoMatriculaKey)
             REFERENCES dw.DimTipoMatricula(TipoMatriculaKey),
-        CONSTRAINT FK_FacMatricula_Motivo FOREIGN KEY (MotivoKey)
-            REFERENCES dw.DimMotivoRechazo(MotivoKey),
         CONSTRAINT FK_FacMatricula_Solicitud FOREIGN KEY (FechaSolicitudKey)
             REFERENCES dw.DimTiempo(TiempoKey),
         CONSTRAINT FK_FacMatricula_Revision FOREIGN KEY (FechaRevisionKey)
@@ -227,9 +227,6 @@ SELECT
     b.FechaSiagieRaw, b.FechaSolicitud, b.FechaRevision,
     b.FechaAsignacion, b.FechaSiagie,
     e.EstudianteKey, ds.SeccionKey, dtm.TipoMatriculaKey, ss.Aforo,
-    CASE WHEN b.Estado = N'Aprobado' THEN -1
-         WHEN b.Observacion IS NULL THEN -2
-         ELSE dm.MotivoKey END AS MotivoKey,
     CASE WHEN b.ViaCanonica = N'Ratificacion de continuidad' THEN -1
          WHEN b.FechaSolicitud IS NULL THEN -2
          ELSE CONVERT(INT, CONVERT(CHAR(8), b.FechaSolicitud, 112))
@@ -267,10 +264,6 @@ LEFT JOIN dw.DimSeccion AS ds
 LEFT JOIN dw.DimTipoMatricula AS dtm
     ON dtm.TipoMatricula = b.Tipo AND dtm.ViaMatricula = b.ViaCanonica
    AND dtm.FaseProceso = b.Fase AND dtm.EstadoMatricula = b.Estado
-LEFT JOIN stg.MotivoRechazoCategoria AS mc
-    ON mc.Motivo = b.Observacion AND b.Estado = N'Rechazado'
-LEFT JOIN dw.DimMotivoRechazo AS dm
-    ON dm.Categoria = mc.Categoria
 WHERE b.rn = 1;
 
 IF NOT EXISTS (SELECT 1 FROM #MatriculaPreparada)
@@ -311,7 +304,7 @@ IF EXISTS (
     LEFT JOIN dw.DimTiempo AS t4 ON t4.TiempoKey = p.FechaSiagieKey
     WHERE p.AnioEscolar IS NULL OR p.MatriculaID IS NULL OR p.MatriculaID = N''
        OR p.SeccionKey IS NULL OR p.TipoMatriculaKey IS NULL
-       OR p.MotivoKey IS NULL OR p.Aforo IS NULL OR p.Aforo <= 0
+       OR p.Aforo IS NULL OR p.Aforo <= 0
        OR t1.TiempoKey IS NULL OR t2.TiempoKey IS NULL
        OR t3.TiempoKey IS NULL OR t4.TiempoKey IS NULL
        OR p.Estado NOT IN (N'Aprobado', N'Rechazado')
@@ -319,7 +312,7 @@ IF EXISTS (
 BEGIN
     SELECT p.MatriculaID, p.AnioEscolar, p.SeccionID, p.Tipo,
            p.ViaCanonica, p.Estado, p.SeccionKey, p.TipoMatriculaKey,
-           p.MotivoKey, p.Aforo, p.FechaSolicitudKey,
+           p.Aforo, p.FechaSolicitudKey,
            p.FechaRevisionKey, p.FechaAsignacionKey, p.FechaSiagieKey
     FROM #MatriculaPreparada AS p
     LEFT JOIN dw.DimTiempo AS t1 ON t1.TiempoKey = p.FechaSolicitudKey
@@ -328,7 +321,7 @@ BEGIN
     LEFT JOIN dw.DimTiempo AS t4 ON t4.TiempoKey = p.FechaSiagieKey
     WHERE p.AnioEscolar IS NULL OR p.MatriculaID IS NULL OR p.MatriculaID = N''
        OR p.SeccionKey IS NULL OR p.TipoMatriculaKey IS NULL
-       OR p.MotivoKey IS NULL OR p.Aforo IS NULL OR p.Aforo <= 0
+       OR p.Aforo IS NULL OR p.Aforo <= 0
        OR t1.TiempoKey IS NULL OR t2.TiempoKey IS NULL
        OR t3.TiempoKey IS NULL OR t4.TiempoKey IS NULL
        OR p.Estado NOT IN (N'Aprobado', N'Rechazado');
@@ -350,7 +343,7 @@ BEGIN TRY
 
     INSERT INTO dm_matricula.FacMatricula (
         MatriculaID, AnioEscolar, EstudianteKey, SeccionKey,
-        TipoMatriculaKey, MotivoKey, FechaSolicitudKey, FechaRevisionKey,
+        TipoMatriculaKey, FechaSolicitudKey, FechaRevisionKey,
         FechaAsignacionKey, FechaSiagieKey, AforoSeccionSnapshot,
         MatriculasRegistradas, SolicitudesVacante, MatriculasAprobadas,
         MatriculasRechazadas, VacantesOcupadas, DiasValidacion,
@@ -359,7 +352,7 @@ BEGIN TRY
     )
     SELECT
         p.MatriculaID, p.AnioEscolar, p.EstudianteKey, p.SeccionKey,
-        p.TipoMatriculaKey, p.MotivoKey, p.FechaSolicitudKey,
+        p.TipoMatriculaKey, p.FechaSolicitudKey,
         p.FechaRevisionKey, p.FechaAsignacionKey, p.FechaSiagieKey,
         p.Aforo, 1,
         CASE WHEN p.ViaCanonica = N'Solicitud de vacante' THEN 1 ELSE 0 END,

@@ -12,7 +12,8 @@
      1. El proyecto se acota al nivel SECUNDARIA (ciclos VI y VII).
      2. En secundaria el calificativo oficial es literal (AD / A / B / C).
         El registro de origen trae la nota vigesimal 0-20 por competencia;
-        el DataMart la conserva y DERIVA la letra con dw.DimCompetencia (v6.0).
+        el DataMart conserva la nota; la letra se deriva al consultar con la
+        escala oficial (v6.1: la matriz no pide el nivel como dimension).
      3. El nivel de logro se registra POR COMPETENCIA, no por area. El
         calificativo del area se DERIVA de sus competencias, lo que cambia
         el grano del hecho de aprendizajes.

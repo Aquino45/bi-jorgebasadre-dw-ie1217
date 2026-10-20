@@ -1,5 +1,27 @@
 # Changelog
 
+## v6.1 — 20/10/2026 (verificado)
+
+Ajustes a la matriz v2.1 que hizo el equipo el 20/10/2026: Tiempo sin año escolar, el grupo «Cursos» (curso, competencia, tipo de competencia) en lugar de Área + Nivel de logro, y sin Motivo de rechazo.
+
+### Cambiado
+- `DimTiempo`: fecha, año, mes y bimestre. Salen `AnioEscolar` (era igual al año), `EsCierreBimestre` y `EsFilaEspecial` (las filas −1 y −2 se reconocen por la clave).
+- `DimCompetencia` vuelve a una fila por competencia (28 + fila −1): curso (`AreaID`, `NombreArea`), tipo de competencia y competencia. El nivel de logro sale del modelo: ninguna pregunta de la Matriz BI lo pide y el origen solo trae la nota.
+- `FacLogroCompetencia`: guarda la clave de la competencia; sin `EnInicioC`, `EnProcesoB`, `LogroEsperadoA`, `LogroDestacadoAD` ni `CompetenciaAprobada`. La escala C/B/A/AD queda solo en el 06, para traducir las 148 notas escritas en letra. `FechaCierreKey` es el último día del bimestre de la fecha informada.
+- `FacPreparacion`: el grano suma el bimestre. `MesTiempoKey` pasa a `TramoTiempoKey` (primer día del mes dentro de su bimestre). Mayo de 2025 se parte en I y II Bimestre: 879 filas (549 + 330). Resuelve P1.
+- `FacMatricula`: sin `MotivoKey`.
+
+### Eliminado
+- `DimMotivoRechazo` y `stg.MotivoRechazoCategoria` (el motivo literal sigue en `stg.Matricula.Observacion`).
+
+### Migración
+- El 03 detecta una base v6.0 y recrea una sola vez los hechos y las dimensiones.
+
+### Verificado el 20/10/2026 (respaldo previo `DW_IE1217_pre_v6_1_20261020.bak`)
+- 600 matrículas (579 / 21), ocupación 96,33 % / 96,67 %; 6 352 sesiones, 200 registros de material, % en horario 83,38 % / 83,41 %; 44 815 notas + 581 en bitácora (264, 198, 87, 32); 379 sin evidencia; 148 letras convertidas.
+- Comparación contra el respaldo v6.0: 0 diferencias nota por nota (estudiante + competencia + bimestre); totales de sesiones, horario, minutos de retraso y materiales idénticos.
+- 0 fechas de cierre distintas del cierre oficial; 0 FK entre dimensiones.
+
 ## v6.0 — 20/10/2026 (verificado)
 
 Dimensiones según la matriz de métricas y dimensiones v2.1 del equipo: el DW guarda solo lo que responde las preguntas de la Matriz BI; el CSV completo sigue en staging.

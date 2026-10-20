@@ -430,9 +430,9 @@ GO
 /* ============================================================================
    7. COHERENCIA CONTRA EL CALENDARIO
       Requiere DimTiempo. Si aun no existe, omitir este bloque.
-      EsDiaHabil solo distingue lunes-viernes y EsPeriodoEscolar es una
-      aproximacion mensual; no validan feriados ni los extremos reales de
-      cada anio lectivo. Los resultados son alertas exploratorias.
+      v6.0: el dia habil se calcula aqui (lunes a viernes, sin feriados) y el
+      periodo escolar sale del bimestre de DimTiempo (0 = fuera del periodo).
+      Los resultados son alertas exploratorias.
    ============================================================================ */
 IF OBJECT_ID('dw.DimTiempo') IS NOT NULL
 BEGIN
@@ -440,13 +440,13 @@ BEGIN
     FROM stg.Asistencia a
     INNER JOIN dw.DimTiempo t
             ON t.Fecha = TRY_CONVERT(DATE, LEFT(LTRIM(RTRIM(a.Fecha)), 10), 23)
-    WHERE t.EsDiaHabil = 0
+    WHERE DATEDIFF(DAY, '19000101', t.Fecha) % 7 >= 5   -- 1900-01-01 fue lunes
     UNION ALL
     SELECT 'Asistencia fuera del periodo escolar', COUNT(*)
     FROM stg.Asistencia a
     INNER JOIN dw.DimTiempo t
             ON t.Fecha = TRY_CONVERT(DATE, LEFT(LTRIM(RTRIM(a.Fecha)), 10), 23)
-    WHERE t.EsPeriodoEscolar = 0;
+    WHERE t.Bimestre = 0;
 END
 GO
 

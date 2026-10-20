@@ -5,6 +5,8 @@
    el detalle del THROW 51004 muestra tambien las fechas fuera de DimTiempo.
    Requiere el 03 v5.1 (DimTipoMatricula con via corregida).
    v5.1b: SUM sobre la columna BIT ViaCorregida (error 8117) -> CAST a INT.
+   v6.0: el motivo del rechazo se clasifica con stg.MotivoRechazoCategoria
+   (creada por el 03) y el hecho guarda la clave de su CATEGORIA.
    Ejecutar DESPUES de 01_staging, 02_diagnostico y 03_dimensiones.
    Base: DW_IE1217 | SQL Server 2017 o posterior.
 
@@ -265,8 +267,10 @@ LEFT JOIN dw.DimSeccion AS ds
 LEFT JOIN dw.DimTipoMatricula AS dtm
     ON dtm.TipoMatricula = b.Tipo AND dtm.ViaMatricula = b.ViaCanonica
    AND dtm.FaseProceso = b.Fase AND dtm.EstadoMatricula = b.Estado
+LEFT JOIN stg.MotivoRechazoCategoria AS mc
+    ON mc.Motivo = b.Observacion AND b.Estado = N'Rechazado'
 LEFT JOIN dw.DimMotivoRechazo AS dm
-    ON dm.Motivo = b.Observacion AND b.Estado = N'Rechazado'
+    ON dm.Categoria = mc.Categoria
 WHERE b.rn = 1;
 
 IF NOT EXISTS (SELECT 1 FROM #MatriculaPreparada)

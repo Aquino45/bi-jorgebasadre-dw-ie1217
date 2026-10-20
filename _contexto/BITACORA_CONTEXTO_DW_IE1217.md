@@ -2,8 +2,8 @@
 
 **Curso:** Business Intelligence · Ingeniería de Sistemas · UPeU
 **Cliente:** I.E.P. N° 1217 "Jorge Basadre Grohmann" · Chaclacayo · UGEL 06
-**Versión vigente del ETL:** v5.2, publicada como etiqueta en Git (03, 06 y 07 corregidos el 13/10/2026 · 01, 02, 04 y 05 sin cambios desde v5.1)
-**Última actualización de esta bitácora:** 19/10/2026
+**Versión vigente del ETL:** v6.0 (20/10/2026): dimensiones según la matriz de métricas y dimensiones v2.1 del equipo; cifras verificadas sin cambio. v5.2 queda como etiqueta anterior.
+**Última actualización de esta bitácora:** 20/10/2026
 **Carga verificada en SQL Server:** 24/09/2026
 
 > **Para qué sirve este documento.** Retomar el proyecto en cualquier momento (personas o Claude) sin reconstruir la historia: qué existe, qué se verificó, qué se decidió y por qué, qué cambió entre versiones y qué falta decidir.
@@ -293,6 +293,25 @@ Flujo en una línea: **copiar → revisar → hacer catálogos → llenar los tr
   - Sale «Matrículas pendientes».
   - Entran: rechazadas, % de cobertura de vacantes, vacantes disponibles, % de docentes con retraso (en horarios y en material), retraso promedio, variación del rendimiento y notas con evidencia.
 
+### 6.14 ETL v6.0: dimensiones según la matriz v2.1 (20/10/2026) — D27
+- **Base:** la hoja V2 de `Metricas_y_Dimensiones_v2.1.xlsx` del equipo, **solo lo visible**. Las columnas ocultas D (Grano), Y (Periodo · Año escolar) y AE (Motivo) no se tomaron en cuenta. Periodo académico no se implementa.
+- **Dimensiones nuevas** (el CSV completo sigue en staging):
+  - **Tiempo:** año, año escolar, mes, bimestre y fecha. El bimestre sale de los cierres oficiales y del inicio de clases (primera sesión: 17/03/2025 y 16/03/2026). 2026-III queda "sin cierre".
+  - **Estudiante:** código, nombre, sexo y fecha de nacimiento (la edad se calcula).
+  - **Docente:** código, nombre, sexo y condición.
+  - **Sección:** ciclo, grado y sección.
+  - **Área:** código y nombre.
+  - **Competencia:** área, tipo, competencia **y nivel de logro**: una fila por competencia × nivel, 140 filas.
+  - **Tipo de matrícula:** tipo, vía, fase y estado.
+  - **Motivo de rechazo:** solo la categoría.
+- **Eliminadas:** DimPeriodoAcademico y DimEscalaLogro. FacLogroCompetencia queda sin PeriodoKey, AreaKey ni EscalaKey.
+- **Verificación:** respaldo `DW_IE1217_pre_v6_0_20261020.bak`; se ejecutaron 03, 02, 04, 05 y 06. Las cifras son idénticas a la v5.2:
+  - 600 matrículas (579 / 21) · 769 filas de preparación · 6 352 sesiones · 44 815 notas + 581 en bitácora · 379 sin evidencia.
+  - Niveles: C 7 040 · B 14 668 · A 17 707 · AD 5 021.
+  - 0 duplicados de grano · 0 FK entre dimensiones.
+- **Advertencia registrada:** la categoría del motivo la asigna el ETL con reglas de texto; el motivo literal solo queda en staging (`stg.MotivoRechazoCategoria`).
+- **Pendiente para alinear con la propuesta de rediseño (fases 2–6):** preparación sigue siendo un solo hecho con granos mes/año; el cupo sigue dentro de FacMatricula; la Matriz BI V.4 tiene medidas que la v2.1 no lista.
+
 ---
 
 ## 7. Decisiones tomadas (con su porqué)
@@ -323,6 +342,7 @@ Flujo en una línea: **copiar → revisar → hacer catálogos → llenar los tr
 | D22 | **Versionado con Git** (repositorio privado en GitHub): nombres de archivo fijos y sin número de versión; cada versión es una etiqueta (`v5.1`, `v5.2`); commits con formato `tipo(área): descripción`; los datos del colegio nunca se suben | Evitar archivos con número de versión, reenvíos y versiones mezcladas (D20); saber qué versión corrió cada quien | ✅ Publicado el 13/10/2026 en GitHub (`Aquino45/bi-jorgebasadre-dw-ie1217`, etiquetas `v5.1` y `v5.2`) |
 | D23 | La matriz de métricas y dimensiones es un documento **previo al ETL**: dimensiones y atributos rotulados por concepto (nombre técnico solo como comentario), fórmulas en palabras, estado de definición (Acordada / Propuesta / Pendiente / Parcial / No medible) y sin cifras de la carga. Se excluyen las 5 métricas que agregó el ETL (días hasta SIAGIE, TIC, recursos, niveles de logro, competencias aprobadas) y los procesos 3.0 y 5.0. El mapeo origen → DW sí usa nombres reales | Pedido del equipo para la sustentación | ✅ Aplicado en v2.0 (13/10/2026) |
 | D24 | Dos versiones de Métricas y Dimensiones: **interna** (Git, con anotaciones) y **pública** (Drive, solo lo esencial). Grano **por medida** como granularidad (una palabra + nivel de jerarquía). En la pública, Estado binario: **Script SQL** / **Power BI** | Pedido del profesor (granularidad) y del equipo (versión limpia para presentar) | ✅ Aplicado en v2.1 (13/10/2026) |
+| D27 | ETL **v6.0** según la matriz v2.1 visible: menos atributos por dimensión, Competencia × Nivel de logro en una sola dimensión, bimestre oficial dentro de Tiempo, Motivo de rechazo solo con la categoría | Decisión del equipo (20/10/2026): el DW solo guarda lo que responde las preguntas; el profesor observó dimensiones con un solo atributo y Tiempo/Periodo duplicados | ✅ Verificado (20/10/2026) |
 | D26 | Matriz BI **V.4** reconstruida desde la propia fila: cada medida sale de la pregunta, la comparación o la respuesta BI, y de un campo real de CSV (columnas Origen y Sustento). Definiciones acordadas: P2, P4, P5, P13, P14, P15 y P16 | Observación del profesor y regla «nada inventado»; base de la fase 2 (matriz bus) | ✅ Aplicado (19/10/2026) |
 | D25 | Matriz BI **V.3** sin cambiar su estructura: se corrigen fórmulas (pendientes, tiempo de validación, rendimiento) y se agregan notas discretas entre paréntesis donde algo es aproximado, propuesto o está fuera de alcance; nueva fila KPI «% de docentes con retraso». La versión anterior se mueve a «versiones antiguas», nunca se borra. | Cumplir la revisión P12 sin rehacer el documento del equipo y dejando visible qué es propuesta. |
 
@@ -332,7 +352,7 @@ Flujo en una línea: **copiar → revisar → hacer catálogos → llenar los tr
 
 | N° | Tema | Situación y propuesta | Impacto |
 |---|---|---|---|
-| P1 | **Bimestre compartido** | `DimTiempo.Bimestre` se aproxima por mes y **no coincide** con los cierres oficiales de `DimPeriodoAcademico` (p. ej. 26–30/05/2025 figura como I y es II; octubre figura como IV y hasta el 24/10 es III). **Propuesta:** calcular `DimTiempo.Bimestre` desde `DimPeriodoAcademico` y agregar `PeriodoKey` a `FacPreparacion` con grano docente + área + sección + bimestre + mes. **Solo se puede resolver en el ETL**, no en Power BI. | Cambio de modelo (03 y 05) |
+| P1 | **Bimestre compartido** | ✅ Resuelto con D27 (v6.0): el bimestre de DimTiempo sale de los cierres oficiales y DimPeriodoAcademico ya no existe. Antes: `DimTiempo.Bimestre` se aproxima por mes y **no coincide** con los cierres oficiales de `DimPeriodoAcademico` (p. ej. 26–30/05/2025 figura como I y es II; octubre figura como IV y hasta el 24/10 es III). **Propuesta:** calcular `DimTiempo.Bimestre` desde `DimPeriodoAcademico` y agregar `PeriodoKey` a `FacPreparacion` con grano docente + área + sección + bimestre + mes. **Solo se puede resolver en el ETL**, no en Power BI. | Cambio de modelo (03 y 05) |
 | P2 | **Matrícula «validada» y «solicitada»** | ✅ Acordado el 19/10/2026 (D26): solicitada = toda matrícula registrada; validada = aprobada. Antes: validada = aprobada; solicitadas = **todas las registradas** (300 por año). Con solicitudes de vacante (76) el % daría más de 100. Resultado: 579/600 = 96,5 %. | Definición en la matriz y en DAX |
 | P3 | **Matrículas pendientes** | ✅ Resuelto en la V.4 (D26): se quita y entran rechazadas y % de cobertura de vacantes. Antes: ⛔ la fuente no tiene estado pendiente. Propuesta: reemplazar por **rechazadas** o **% de rechazo** y agregar el **% de ocupación** (la matriz lo nombra en la visualización pero no como KPI). | Matriz BI |
 | P4 | **Docente con retraso** | ✅ Acordado el 19/10/2026 (D26): menos del 80 % de sus sesiones en horario en el mes. Antes: la pregunta del cliente es «% de docentes con retraso», pero las fórmulas son de sesiones. Falta fijar umbral (p. ej. menos del 80 % de sesiones en horario), periodo y denominador. | Medida DAX |
@@ -537,7 +557,7 @@ EXEC msdb.dbo.sp_update_job @job_name = N'ETL_IE1217_Carga', @enabled = 0;  -- p
 | Archivo | Estado |
 |---|---|
 | `01_staging.sql`, `02_diagnostico.sql`, `04_fac_matricula.sql`, `05_fac_preparacion.sql` | ✅ Vigentes sin cambios (v5.1 / v5.1b) |
-| `03_dimensiones.sql`, `06_fac_aprendizajes.sql`, `07_job_sql_agent.sql` | ✅ v5.2 (D21, D22): verificada el 13/10/2026 y publicada en GitHub |
+| `03_dimensiones.sql`, `06_fac_aprendizajes.sql` | ✅ v6.0 (D27): verificada el 20/10/2026 (01, 02 y 04 con ajustes menores; 05 y 07 sin cambios) |
 | Versiones anteriores | Etiqueta `v5.1` en Git. Copia en `D:\BI_IE1217_respaldo\v5.1_scripts\` (fuera del repo, verificada contra el tag). No usar archivos sueltos con número de versión |
 | `Guia_ETL_3_datamarts_IE1217_v5_1.docx` | ✅ Vigente (sustituye al PDF v5) |
 | `Guia_ETL_3_datamarts_IE1217_v5.pdf` | Histórico |

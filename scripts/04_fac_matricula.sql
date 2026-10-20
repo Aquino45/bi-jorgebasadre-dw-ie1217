@@ -10,6 +10,16 @@
    v6.1: sin DimMotivoRechazo (la matriz ya no analiza el rechazo por motivo):
    sale MotivoKey. Las rechazadas se cuentan con MatriculasRechazadas y el
    texto del motivo sigue en stg.Matricula.Observacion.
+   v6.2: el hecho guarda SOLO las medidas que la matriz v2.1 marca «Script
+   SQL», con sus nombres: solicitadas, validadas, rechazadas, dias de
+   validacion, cupo maximo por aula y vacantes ocupadas. Salen las solicitudes
+   de vacante, los dias hasta SIAGIE, los contadores de casos, la marca de via
+   corregida, la fecha de carga y el rol fecha de asignacion (ninguna medida
+   lo usa). Los promedios y porcentajes se calculan en Power BI.
+   Grano propio (Kimball: no mezclar granos): el cupo maximo por aula y las
+   vacantes ocupadas son de SECCION + ANIO, asi que pasan a un segundo hecho,
+   dm_matricula.FacCupoSeccion (una fila por seccion y anio). FacMatricula
+   queda con grano estudiante + anio y sin columnas repetidas.
    Ejecutar DESPUES de 01_staging, 02_diagnostico y 03_dimensiones.
    Base: DW_IE1217 | SQL Server 2017 o posterior.
 
@@ -35,31 +45,30 @@ GO
 IF SCHEMA_ID(N'dm_matricula') IS NULL EXEC(N'CREATE SCHEMA dm_matricula');
 GO
 
+/* v6.2: si el hecho tiene la estructura anterior (con medidas que la matriz
+   no pide), se elimina y se crea de nuevo; se recarga completo mas abajo. */
+IF COL_LENGTH(N'dm_matricula.FacMatricula', N'SolicitudesVacante') IS NOT NULL
+   OR COL_LENGTH(N'dm_matricula.FacMatricula', N'CupoMaximoAula') IS NOT NULL
+    DROP TABLE dm_matricula.FacMatricula;
+
 IF OBJECT_ID(N'dm_matricula.FacMatricula', N'U') IS NULL
 BEGIN
     CREATE TABLE dm_matricula.FacMatricula (
-        MatriculaKey               INT IDENTITY(1,1) NOT NULL,
-        MatriculaID                NVARCHAR(30) NOT NULL, -- identificador del origen
-        AnioEscolar                SMALLINT NOT NULL,
-        EstudianteKey              INT NOT NULL,
-        SeccionKey                 INT NOT NULL,
-        TipoMatriculaKey           INT NOT NULL,
-        FechaSolicitudKey          INT NOT NULL,
-        FechaRevisionKey           INT NOT NULL,
-        FechaAsignacionKey         INT NOT NULL,
-        FechaSiagieKey             INT NOT NULL,
-        AforoSeccionSnapshot       SMALLINT NOT NULL,
-        MatriculasRegistradas      TINYINT NOT NULL,
-        SolicitudesVacante         TINYINT NOT NULL,
-        MatriculasAprobadas        TINYINT NOT NULL,
-        MatriculasRechazadas       TINYINT NOT NULL,
-        VacantesOcupadas           TINYINT NOT NULL,
-        DiasValidacion             SMALLINT NULL,
-        CasosConValidacion         TINYINT NOT NULL,
-        DiasHastaSiagie           SMALLINT NULL,
-        CasosConDiasHastaSiagie    TINYINT NOT NULL,
-        ViaCorregida               BIT NOT NULL,
-        FechaCargaDW               DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
+        MatriculaKey          INT IDENTITY(1,1) NOT NULL,
+        MatriculaID           NVARCHAR(30) NOT NULL, -- identificador del origen (dimension degenerada)
+        AnioEscolar           SMALLINT NOT NULL,     -- anio de la matricula, no de sus fechas
+        EstudianteKey         INT NOT NULL,
+        SeccionKey            INT NOT NULL,
+        TipoMatriculaKey      INT NOT NULL,
+        FechaSolicitudKey     INT NOT NULL,          -- rol: solicitud
+        FechaRevisionKey      INT NOT NULL,          -- rol: revision (dia de las rechazadas)
+        FechaSiagieKey        INT NOT NULL,          -- rol: registro SIAGIE (dia de las validadas)
+        /* Medidas de la matriz v2.1 marcadas «Script SQL» (los % y promedios
+           marcados «Power BI» se calculan en el modelo con estas columnas). */
+        MatriculasSolicitadas TINYINT NOT NULL,      -- 1 por matricula registrada
+        MatriculasValidadas   TINYINT NOT NULL,      -- validada = aprobada
+        MatriculasRechazadas  TINYINT NOT NULL,
+        DiasValidacion        SMALLINT NULL,         -- solicitud -> revision; NULL si no aplica
         CONSTRAINT PK_FacMatricula PRIMARY KEY CLUSTERED (MatriculaKey),
         CONSTRAINT UQ_FacMatricula_EstudianteAnio UNIQUE (AnioEscolar, EstudianteKey),
         CONSTRAINT UQ_FacMatricula_ID UNIQUE (MatriculaID),
@@ -73,25 +82,37 @@ BEGIN
             REFERENCES dw.DimTiempo(TiempoKey),
         CONSTRAINT FK_FacMatricula_Revision FOREIGN KEY (FechaRevisionKey)
             REFERENCES dw.DimTiempo(TiempoKey),
-        CONSTRAINT FK_FacMatricula_Asignacion FOREIGN KEY (FechaAsignacionKey)
-            REFERENCES dw.DimTiempo(TiempoKey),
         CONSTRAINT FK_FacMatricula_Siagie FOREIGN KEY (FechaSiagieKey)
             REFERENCES dw.DimTiempo(TiempoKey),
         CONSTRAINT CK_FacMatricula_Medidas CHECK (
-            MatriculasRegistradas = 1
-            AND SolicitudesVacante IN (0, 1)
-            AND MatriculasAprobadas IN (0, 1)
+            MatriculasSolicitadas = 1
+            AND MatriculasValidadas IN (0, 1)
             AND MatriculasRechazadas IN (0, 1)
-            AND MatriculasAprobadas + MatriculasRechazadas = 1
-            AND VacantesOcupadas = MatriculasAprobadas
-            AND CasosConValidacion IN (0, 1)
-            AND CasosConDiasHastaSiagie IN (0, 1)
-            AND (DiasValidacion IS NULL AND CasosConValidacion = 0
-                 OR DiasValidacion >= 0 AND CasosConValidacion = 1)
-            AND (DiasHastaSiagie IS NULL AND CasosConDiasHastaSiagie = 0
-                 OR DiasHastaSiagie >= 0 AND CasosConDiasHastaSiagie = 1)
-            AND AforoSeccionSnapshot > 0
+            AND MatriculasValidadas + MatriculasRechazadas = 1
+            AND (DiasValidacion IS NULL OR DiasValidacion >= 0)
         )
+    );
+END;
+GO
+
+/* Segundo hecho del datamart: snapshot anual del aula.
+   Grano: seccion + anio escolar. AnioTiempoKey = 1 de enero del anio escolar,
+   para filtrar por DimTiempo.Anio sin crear una dimension de un solo campo. */
+IF OBJECT_ID(N'dm_matricula.FacCupoSeccion', N'U') IS NULL
+BEGIN
+    CREATE TABLE dm_matricula.FacCupoSeccion (
+        CupoKey          INT IDENTITY(1,1) NOT NULL,
+        AnioTiempoKey    INT NOT NULL,
+        SeccionKey       INT NOT NULL,
+        CupoMaximoAula   SMALLINT NOT NULL,   -- vacantes de la seccion en el anio (secciones.csv)
+        VacantesOcupadas SMALLINT NOT NULL,   -- matriculas validadas en la seccion y anio
+        CONSTRAINT PK_FacCupoSeccion PRIMARY KEY CLUSTERED (CupoKey),
+        CONSTRAINT UQ_FacCupoSeccion_Grano UNIQUE (AnioTiempoKey, SeccionKey),
+        CONSTRAINT FK_FacCupo_Tiempo FOREIGN KEY (AnioTiempoKey)
+            REFERENCES dw.DimTiempo(TiempoKey),
+        CONSTRAINT FK_FacCupo_Seccion FOREIGN KEY (SeccionKey)
+            REFERENCES dw.DimSeccion(SeccionKey),
+        CONSTRAINT CK_FacCupo CHECK (CupoMaximoAula > 0 AND VacantesOcupadas >= 0)
     );
 END;
 GO
@@ -300,30 +321,28 @@ IF EXISTS (
     SELECT 1 FROM #MatriculaPreparada AS p
     LEFT JOIN dw.DimTiempo AS t1 ON t1.TiempoKey = p.FechaSolicitudKey
     LEFT JOIN dw.DimTiempo AS t2 ON t2.TiempoKey = p.FechaRevisionKey
-    LEFT JOIN dw.DimTiempo AS t3 ON t3.TiempoKey = p.FechaAsignacionKey
     LEFT JOIN dw.DimTiempo AS t4 ON t4.TiempoKey = p.FechaSiagieKey
     WHERE p.AnioEscolar IS NULL OR p.MatriculaID IS NULL OR p.MatriculaID = N''
        OR p.SeccionKey IS NULL OR p.TipoMatriculaKey IS NULL
        OR p.Aforo IS NULL OR p.Aforo <= 0
        OR t1.TiempoKey IS NULL OR t2.TiempoKey IS NULL
-       OR t3.TiempoKey IS NULL OR t4.TiempoKey IS NULL
+       OR t4.TiempoKey IS NULL
        OR p.Estado NOT IN (N'Aprobado', N'Rechazado')
 )
 BEGIN
     SELECT p.MatriculaID, p.AnioEscolar, p.SeccionID, p.Tipo,
            p.ViaCanonica, p.Estado, p.SeccionKey, p.TipoMatriculaKey,
            p.Aforo, p.FechaSolicitudKey,
-           p.FechaRevisionKey, p.FechaAsignacionKey, p.FechaSiagieKey
+           p.FechaRevisionKey, p.FechaSiagieKey
     FROM #MatriculaPreparada AS p
     LEFT JOIN dw.DimTiempo AS t1 ON t1.TiempoKey = p.FechaSolicitudKey
     LEFT JOIN dw.DimTiempo AS t2 ON t2.TiempoKey = p.FechaRevisionKey
-    LEFT JOIN dw.DimTiempo AS t3 ON t3.TiempoKey = p.FechaAsignacionKey
     LEFT JOIN dw.DimTiempo AS t4 ON t4.TiempoKey = p.FechaSiagieKey
     WHERE p.AnioEscolar IS NULL OR p.MatriculaID IS NULL OR p.MatriculaID = N''
        OR p.SeccionKey IS NULL OR p.TipoMatriculaKey IS NULL
        OR p.Aforo IS NULL OR p.Aforo <= 0
        OR t1.TiempoKey IS NULL OR t2.TiempoKey IS NULL
-       OR t3.TiempoKey IS NULL OR t4.TiempoKey IS NULL
+       OR t4.TiempoKey IS NULL
        OR p.Estado NOT IN (N'Aprobado', N'Rechazado');
     THROW 51004, N'Faltan dimensiones, aforo o fechas en DimTiempo. Revisar staging y volver a ejecutar 03.', 1;
 END;
@@ -336,35 +355,46 @@ IF EXISTS (SELECT 1 FROM #MatriculaPreparada
            GROUP BY MatriculaID HAVING COUNT(*) > 1)
     THROW 51006, N'MatriculaID no es unico tras limpieza.', 1;
 
-/* 3. Recarga atomica del unico hecho del datamart. */
+/* 3. Recarga atomica de los dos hechos del datamart. */
 BEGIN TRY
     BEGIN TRANSACTION;
     DELETE FROM dm_matricula.FacMatricula;
 
     INSERT INTO dm_matricula.FacMatricula (
-        MatriculaID, AnioEscolar, EstudianteKey, SeccionKey,
-        TipoMatriculaKey, FechaSolicitudKey, FechaRevisionKey,
-        FechaAsignacionKey, FechaSiagieKey, AforoSeccionSnapshot,
-        MatriculasRegistradas, SolicitudesVacante, MatriculasAprobadas,
-        MatriculasRechazadas, VacantesOcupadas, DiasValidacion,
-        CasosConValidacion, DiasHastaSiagie, CasosConDiasHastaSiagie,
-        ViaCorregida
+        MatriculaID, AnioEscolar, EstudianteKey, SeccionKey, TipoMatriculaKey,
+        FechaSolicitudKey, FechaRevisionKey, FechaSiagieKey,
+        MatriculasSolicitadas, MatriculasValidadas, MatriculasRechazadas,
+        DiasValidacion
     )
     SELECT
         p.MatriculaID, p.AnioEscolar, p.EstudianteKey, p.SeccionKey,
-        p.TipoMatriculaKey, p.FechaSolicitudKey,
-        p.FechaRevisionKey, p.FechaAsignacionKey, p.FechaSiagieKey,
-        p.Aforo, 1,
-        CASE WHEN p.ViaCanonica = N'Solicitud de vacante' THEN 1 ELSE 0 END,
+        p.TipoMatriculaKey, p.FechaSolicitudKey, p.FechaRevisionKey,
+        p.FechaSiagieKey,
+        1,
         CASE WHEN p.Estado = N'Aprobado' THEN 1 ELSE 0 END,
         CASE WHEN p.Estado = N'Rechazado' THEN 1 ELSE 0 END,
-        CASE WHEN p.Estado = N'Aprobado' THEN 1 ELSE 0 END,
-        p.DiasValidacion,
-        CASE WHEN p.DiasValidacion IS NOT NULL THEN 1 ELSE 0 END,
-        p.DiasHastaSiagie,
-        CASE WHEN p.DiasHastaSiagie IS NOT NULL THEN 1 ELSE 0 END,
-        CASE WHEN p.ViaOriginal <> p.ViaCanonica THEN 1 ELSE 0 END
+        p.DiasValidacion
     FROM #MatriculaPreparada AS p;
+
+    /* Cupo por aula: todas las secciones del anio, con o sin matriculas. */
+    DELETE FROM dm_matricula.FacCupoSeccion;
+    INSERT INTO dm_matricula.FacCupoSeccion
+        (AnioTiempoKey, SeccionKey, CupoMaximoAula, VacantesOcupadas)
+    SELECT sa.AnioEscolar * 10000 + 101, ds.SeccionKey, sa.Aforo,
+           ISNULL((SELECT SUM(f.MatriculasValidadas)
+                   FROM dm_matricula.FacMatricula AS f
+                   WHERE f.AnioEscolar = sa.AnioEscolar
+                     AND f.SeccionKey = ds.SeccionKey), 0)
+    FROM #SeccionAnual AS sa
+    JOIN dw.DimSeccion AS ds
+      ON ds.CodigoCorto = CONVERT(NVARCHAR(3), sa.Grado) + sa.Seccion
+    WHERE sa.AnioEscolar IN (SELECT DISTINCT AnioEscolar FROM #MatriculaPreparada)
+      AND sa.Aforo > 0;
+
+    /* Toda matricula validada debe caer en un aula del snapshot. */
+    IF (SELECT SUM(VacantesOcupadas) FROM dm_matricula.FacCupoSeccion)
+       <> (SELECT SUM(MatriculasValidadas) FROM dm_matricula.FacMatricula)
+        THROW 51008, N'Las vacantes ocupadas no cuadran con las matriculas validadas.', 1;
 
     COMMIT TRANSACTION;
 END TRY
@@ -386,41 +416,37 @@ LEFT JOIN dw.DimEstudiante AS e ON e.CodigoEstudiante = b.CodigoEstudiante
 WHERE b.rn = 1 AND e.EstudianteKey IS NULL;
 
 SELECT f.AnioEscolar,
-       SUM(f.MatriculasRegistradas) AS Matriculas,
-       SUM(f.SolicitudesVacante) AS SolicitudesDeVacante,
-       SUM(f.MatriculasAprobadas) AS Aprobadas,
+       SUM(f.MatriculasSolicitadas) AS Solicitadas,
+       SUM(f.MatriculasValidadas) AS Validadas,
        SUM(f.MatriculasRechazadas) AS Rechazadas,
-       SUM(f.VacantesOcupadas) AS VacantesOcupadas,
-       SUM(CAST(f.ViaCorregida AS INT)) AS ViasCorregidas,  -- BIT no se puede sumar
-       SUM(f.CasosConValidacion) AS CasosConValidacion,
-       CAST(SUM(CAST(f.DiasValidacion AS DECIMAL(14,2))) /
-            NULLIF(SUM(f.CasosConValidacion), 0) AS DECIMAL(10,2))
-           AS PromedioDiasValidacion
+       COUNT(f.DiasValidacion) AS SolicitudesConAmbasFechas,  -- COUNT ignora NULL
+       CAST(AVG(CAST(f.DiasValidacion AS DECIMAL(14,2))) AS DECIMAL(10,2))
+           AS TiempoPromedioValidacion
 FROM dm_matricula.FacMatricula AS f
 GROUP BY f.AnioEscolar ORDER BY f.AnioEscolar;
 
-/* El aforo esta repetido en cada matricula del aula: JAMAS SUMAR la columna
-   directamente. Agrupar por anio+seccion y tomar MAX antes de sumar. */
-;WITH Aulas AS (
-    SELECT AnioEscolar, SeccionKey,
-           MAX(AforoSeccionSnapshot) AS Aforo,
-           SUM(VacantesOcupadas) AS Ocupadas
-    FROM dm_matricula.FacMatricula
-    GROUP BY AnioEscolar, SeccionKey
-)
-SELECT AnioEscolar, SUM(Aforo) AS VacantesTotales,
-       SUM(Ocupadas) AS VacantesOcupadas,
-       SUM(Aforo) - SUM(Ocupadas) AS VacantesLibres,
-       CAST(100.0 * SUM(Ocupadas) / NULLIF(SUM(Aforo), 0)
-            AS DECIMAL(6,2)) AS PorcentajeOcupacion
-FROM Aulas GROUP BY AnioEscolar ORDER BY AnioEscolar;
+/* Control de calidad (ya no se guarda en el hecho): vias corregidas por tipo. */
+SELECT AnioEscolar, SUM(CASE WHEN ViaOriginal <> ViaCanonica THEN 1 ELSE 0 END) AS ViasCorregidas
+FROM #MatriculaPreparada GROUP BY AnioEscolar ORDER BY AnioEscolar;
 
-/* Control de los 4 roles: cada matricula conserva una clave en cada uno. */
+/* Ocupacion: en FacCupoSeccion cada aula aparece UNA vez por anio, asi que
+   el cupo ya se puede sumar (antes habia que tomar MAX por aula). */
+SELECT t.Anio AS AnioEscolar, COUNT(*) AS Aulas,
+       SUM(c.CupoMaximoAula) AS CupoTotal,
+       SUM(c.VacantesOcupadas) AS VacantesOcupadas,
+       SUM(c.CupoMaximoAula) - SUM(c.VacantesOcupadas) AS VacantesLibres,
+       CAST(100.0 * SUM(c.VacantesOcupadas) / NULLIF(SUM(c.CupoMaximoAula), 0)
+            AS DECIMAL(6,2)) AS PorcentajeOcupacion
+FROM dm_matricula.FacCupoSeccion AS c
+JOIN dw.DimTiempo AS t ON t.TiempoKey = c.AnioTiempoKey
+GROUP BY t.Anio ORDER BY t.Anio;
+
+/* Control de los 3 roles: cada matricula conserva una clave en cada uno. */
 SELECT AnioEscolar,
        SUM(CASE WHEN FechaSolicitudKey = -1 THEN 1 ELSE 0 END) AS SolicitudNoAplica,
        SUM(CASE WHEN FechaSolicitudKey = -2 THEN 1 ELSE 0 END) AS SolicitudSinRegistro,
        SUM(CASE WHEN FechaSiagieKey = -2 THEN 1 ELSE 0 END) AS SiagieSinRegistro,
-       SUM(CASE WHEN FechaSiagieKey = -2 AND MatriculasAprobadas = 1
+       SUM(CASE WHEN FechaSiagieKey = -2 AND MatriculasValidadas = 1
                 THEN 1 ELSE 0 END) AS SiagieAprobadasConFechaInvalida
 FROM dm_matricula.FacMatricula
 GROUP BY AnioEscolar ORDER BY AnioEscolar;

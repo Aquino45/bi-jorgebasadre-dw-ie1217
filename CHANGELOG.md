@@ -1,5 +1,24 @@
 # Changelog
 
+## v6.2 — 20/10/2026 (verificado)
+
+Hechos según la matriz v2.1: cada hecho guarda solo las medidas marcadas «Script SQL», con los nombres del Excel; los % y promedios («Power BI») se calculan en el modelo. Se separan los dos granos que estaban mezclados (Kimball: un grano por hecho).
+
+### Agregado
+- `dm_matricula.FacCupoSeccion` (sección + año, 20 filas): cupo máximo por aula y vacantes ocupadas. `AnioTiempoKey` = 1 de enero del año escolar.
+- `dm_preparacion.FacEntregaMaterial` (docente + área + sección + año, 100 filas): materiales programados y entregados a tiempo; `FechaProgramadaKey` = inicio de clases.
+
+### Cambiado
+- `FacMatricula` (22 → 13 columnas): `MatriculasSolicitadas`, `MatriculasValidadas`, `MatriculasRechazadas`, `DiasValidacion`; roles de fecha solicitud, revisión y SIAGIE. Salen solicitudes de vacante, días hasta SIAGIE, contadores de casos, vía corregida, fecha de carga, rol de asignación, aforo y vacantes ocupadas (pasan a FacCupoSeccion).
+- `FacPreparacion` (42 → 9 columnas): `SesionesProgramadas`, `SesionesDictadasHorario`, `MinutosRetraso`, `IncidenciasProgramacion` (= reprogramadas, como dice la matriz). Sin año ni mes (salen de `TramoTiempoKey`) y sin material.
+- `FacLogroCompetencia` (17 → 8 columnas): `NotaVigesimal` y `CompetenciasSinEvidencia`. Salen registradas/evaluadas (en Power BI: COUNTROWS y COUNT de la nota), marcas de corrección y año.
+- Los controles de calidad (vías corregidas, horas, recursos, TIC, letras convertidas, redondeos…) se calculan y muestran en cada script; ya no se guardan.
+- Cada script elimina y recrea su hecho si encuentra la estructura anterior.
+
+### Verificado el 20/10/2026 (respaldo previo `DW_IE1217_pre_v6_2_20261020.bak`)
+- Comparación fila por fila contra la v6.1: 0 diferencias en matrícula, cupo, sesiones, material y notas.
+- 600 matrículas (579 / 21), ocupación 96,33 % / 96,67 %; 879 filas de sesiones (6 352 sesiones, 83,38 % / 83,41 % en horario); 100 asignaciones con material (61,97 % / 70,28 % a tiempo); 44 815 notas + 581 en bitácora; 379 sin evidencia.
+
 ## v6.1 — 20/10/2026 (verificado)
 
 Ajustes a la matriz v2.1 que hizo el equipo el 20/10/2026: Tiempo sin año escolar, el grupo «Cursos» (curso, competencia, tipo de competencia) en lugar de Área + Nivel de logro, y sin Motivo de rechazo.

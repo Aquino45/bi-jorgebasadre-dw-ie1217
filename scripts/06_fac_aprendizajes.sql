@@ -1,5 +1,11 @@
 ﻿/* ============================================================================
    06_fac_aprendizajes.sql
+   CAMBIOS v6.2 (20/10/2026): el hecho guarda SOLO las medidas que la matriz
+   v2.1 marca «Script SQL»: la nota (su suma es la «suma de notas obtenidas»)
+   y CompetenciasSinEvidencia. Salen los contadores de competencias
+   registradas y evaluadas (en Power BI: COUNTROWS y COUNT de la nota), las
+   marcas de correccion y el anio (sale de FechaCierreKey). Las correcciones
+   se siguen contando aqui y se muestran como control al final.
    CAMBIOS v6.1 (20/10/2026), matriz v2.1 corregida por el equipo:
    - DimCompetencia vuelve a una fila por competencia: el hecho guarda la
      clave de la competencia evaluada. El nivel de logro sale del modelo y
@@ -56,7 +62,7 @@
    * Los decimales validos se redondean al entero superior desde .5
      (ROUND de SQL Server). Nunca se redondea una nota fuera de 0..20.
    * Las competencias realmente sin evidencia SI entran: nota NULL,
-     EvaluadaConEvidencia=0, SinEvidencia=1 (nunca 0).
+     CompetenciasSinEvidencia = 1 (nunca 0).
    * Nota invalida, competencia/area incompatibles o referencias ausentes:
      no se les asigna artificialmente un nivel; quedan en stg.BitacoraNota.
    * Ante copias, se prefiere el CodigoCompetencia literal de catalogo,
@@ -84,26 +90,23 @@ IF SCHEMA_ID(N'dm_aprendizajes') IS NULL
     EXEC(N'CREATE SCHEMA dm_aprendizajes');
 GO
 
+/* v6.2: si el hecho tiene la estructura anterior, se elimina y se crea de
+   nuevo; se recarga completo mas abajo. */
+IF COL_LENGTH(N'dm_aprendizajes.FacLogroCompetencia', N'EvaluadaConEvidencia') IS NOT NULL
+    DROP TABLE dm_aprendizajes.FacLogroCompetencia;
+
 IF OBJECT_ID(N'dm_aprendizajes.FacLogroCompetencia', N'U') IS NULL
 BEGIN
     CREATE TABLE dm_aprendizajes.FacLogroCompetencia (
-        LogroKey               BIGINT IDENTITY(1,1) NOT NULL,
-        AnioEscolar            SMALLINT NOT NULL,
-        FechaCierreKey         INT NOT NULL,
-        EstudianteKey          INT NOT NULL,
-        SeccionKey             INT NOT NULL,
-        DocenteKey             INT NOT NULL,
-        CompetenciaKey         INT NOT NULL,   -- competencia evaluada (con su curso)
-        NotaVigesimal          DECIMAL(5,2) NULL,
-        CompetenciasRegistradas TINYINT NOT NULL,
-        EvaluadaConEvidencia   TINYINT NOT NULL,
-        SinEvidencia           TINYINT NOT NULL,
-        BimestreCorregido      BIT NOT NULL,
-        CompetenciaCorregida   BIT NOT NULL,
-        DocenteCorregido       BIT NOT NULL,
-        NotaDesdeLetra         BIT NOT NULL,
-        NotaRedondeada         BIT NOT NULL,
-        FechaCargaDW           DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
+        LogroKey                 BIGINT IDENTITY(1,1) NOT NULL,
+        FechaCierreKey           INT NOT NULL,   -- cierre oficial del bimestre
+        EstudianteKey            INT NOT NULL,
+        SeccionKey               INT NOT NULL,
+        DocenteKey               INT NOT NULL,
+        CompetenciaKey           INT NOT NULL,   -- competencia evaluada (con su curso)
+        /* Medidas de la matriz v2.1 marcadas «Script SQL». */
+        NotaVigesimal            DECIMAL(5,2) NULL,  -- 0 a 20; NULL = sin evidencia, nunca 0
+        CompetenciasSinEvidencia TINYINT NOT NULL,   -- 1 si la competencia se registro sin nota
         CONSTRAINT PK_FacLogroCompetencia PRIMARY KEY CLUSTERED (LogroKey),
         CONSTRAINT UQ_FacLogroCompetencia_Grano UNIQUE
             (FechaCierreKey, EstudianteKey, CompetenciaKey),
@@ -118,11 +121,8 @@ BEGIN
         CONSTRAINT FK_FacLogro_Competencia FOREIGN KEY (CompetenciaKey)
             REFERENCES dw.DimCompetencia(CompetenciaKey),
         CONSTRAINT CK_FacLogro_Consistencia CHECK (
-            CompetenciasRegistradas = 1
-            AND EvaluadaConEvidencia IN (0, 1) AND SinEvidencia IN (0, 1)
-            AND EvaluadaConEvidencia + SinEvidencia = 1
-            AND ((SinEvidencia = 1 AND NotaVigesimal IS NULL)
-                 OR (EvaluadaConEvidencia = 1 AND NotaVigesimal BETWEEN 0 AND 20))
+            (CompetenciasSinEvidencia = 1 AND NotaVigesimal IS NULL)
+            OR (CompetenciasSinEvidencia = 0 AND NotaVigesimal BETWEEN 0 AND 20)
         )
     );
 END;
@@ -262,7 +262,7 @@ LEFT JOIN #Escala AS el
     ON el.NivelLogro = o.NotaTexto
 LEFT JOIN dm_matricula.FacMatricula AS m
     ON m.AnioEscolar = o.AnioEscolar AND m.EstudianteKey = e.EstudianteKey
-       AND m.SeccionKey = s.SeccionKey AND m.MatriculasAprobadas = 1;
+       AND m.SeccionKey = s.SeccionKey AND m.MatriculasValidadas = 1;
 
 /* Decimales -> entero por regla documentada; letra -> punto medio del
    intervalo vigente. Las notas fuera de escala siguen fuera, sin recorte. */
@@ -353,22 +353,10 @@ BEGIN TRY
     FROM #Ordenadas WHERE rn > 1;
 
     INSERT INTO dm_aprendizajes.FacLogroCompetencia
-        (AnioEscolar, FechaCierreKey, EstudianteKey,
-         SeccionKey, DocenteKey, CompetenciaKey,
-         NotaVigesimal, CompetenciasRegistradas, EvaluadaConEvidencia,
-         SinEvidencia, BimestreCorregido,
-         CompetenciaCorregida, DocenteCorregido, NotaDesdeLetra,
-         NotaRedondeada)
-    SELECT AnioEscolar, FechaCierreKey, EstudianteKey,
-           SeccionKey, DocenteKey, CompetenciaKey,
-           NotaFinal, 1, 1 - EsSinEvidencia, EsSinEvidencia,
-           CASE WHEN PrioridadBimestre = 0 THEN 1 ELSE 0 END,
-           CASE WHEN PrioridadCompetencia = 0 THEN 1 ELSE 0 END,
-           CASE WHEN DocenteAsignado <> DocenteIDLimpio THEN 1 ELSE 0 END,
-           CASE WHEN LetraCapturada IS NOT NULL THEN 1 ELSE 0 END,
-           CASE WHEN NotaNumerica BETWEEN 0 AND 20
-                     AND NotaNumerica <> ROUND(NotaNumerica, 0)
-                THEN 1 ELSE 0 END
+        (FechaCierreKey, EstudianteKey, SeccionKey, DocenteKey, CompetenciaKey,
+         NotaVigesimal, CompetenciasSinEvidencia)
+    SELECT FechaCierreKey, EstudianteKey, SeccionKey, DocenteKey, CompetenciaKey,
+           NotaFinal, EsSinEvidencia
     FROM #Ordenadas WHERE rn = 1;
 
     IF (SELECT COUNT(*) FROM stg.NotaCompetencia) <>
@@ -400,20 +388,28 @@ FROM #Clasificada
 WHERE MotivoRechazo IS NULL AND FechaInformadaKey <> FechaCierreKey;
 
 SELECT t.Anio AS AnioEscolar, t.Bimestre, COUNT(*) AS CompetenciasRegistradas,
-       SUM(f.EvaluadaConEvidencia) AS Evaluadas,
-       SUM(f.SinEvidencia) AS SinEvidencia,
-       SUM(CAST(f.NotaDesdeLetra AS INT)) AS LetrasConvertidas,  -- BIT no se suma
-       SUM(CAST(f.NotaRedondeada AS INT)) AS NotasRedondeadas,
-       AVG(f.NotaVigesimal) AS PromedioCompetencias
+       COUNT(f.NotaVigesimal) AS ConNota,               -- COUNT ignora NULL
+       SUM(f.CompetenciasSinEvidencia) AS SinEvidencia,
+       SUM(f.NotaVigesimal) AS SumaNotas,
+       AVG(f.NotaVigesimal) AS RendimientoPromedio      -- AVG ignora NULL
 FROM dm_aprendizajes.FacLogroCompetencia AS f
 JOIN dw.DimTiempo AS t ON t.TiempoKey = f.FechaCierreKey
 GROUP BY t.Anio, t.Bimestre ORDER BY t.Anio, t.Bimestre;
+
+/* Controles de calidad del lote (ya no se guardan en el hecho). */
+SELECT SUM(CASE WHEN LetraCapturada IS NOT NULL THEN 1 ELSE 0 END) AS LetrasConvertidas,
+       SUM(CASE WHEN NotaNumerica BETWEEN 0 AND 20
+                     AND NotaNumerica <> ROUND(NotaNumerica, 0) THEN 1 ELSE 0 END) AS NotasRedondeadas,
+       SUM(CASE WHEN PrioridadBimestre = 0 THEN 1 ELSE 0 END) AS BimestresCorregidos,
+       SUM(CASE WHEN PrioridadCompetencia = 0 THEN 1 ELSE 0 END) AS CompetenciasCorregidas,
+       SUM(CASE WHEN DocenteAsignado <> DocenteIDLimpio THEN 1 ELSE 0 END) AS DocentesCorregidos
+FROM #Ordenadas WHERE rn = 1;
 
 /* Ejemplo del KPI de personas: DISTINCTCOUNT, NO suma de filas de competencias.
    Aqui 'estudiante con bajo rendimiento' = al menos una competencia con nota
    menor a 11 en el periodo; el filtro de area/seccion puede aplicarse igual. */
 SELECT t.Anio AS AnioEscolar, t.Bimestre,
-       COUNT(DISTINCT CASE WHEN f.EvaluadaConEvidencia = 1
+       COUNT(DISTINCT CASE WHEN f.NotaVigesimal IS NOT NULL
                            THEN f.EstudianteKey END) AS EstudiantesEvaluados,
        COUNT(DISTINCT CASE WHEN f.NotaVigesimal < 11
                            THEN f.EstudianteKey END) AS EstudiantesConAlMenosUnaBaja

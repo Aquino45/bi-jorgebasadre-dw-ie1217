@@ -13,6 +13,19 @@
    dia del mes DENTRO de su bimestre. Con eso Preparacion y Aprendizajes se
    cruzan por bimestre sin descuadre (resuelve la decision pendiente 1).
 
+   CAMBIOS v6.2: el hecho guarda SOLO las medidas que la matriz v2.1 marca
+   «Script SQL», con sus nombres: sesiones programadas, dictadas en horario,
+   minutos de retraso, incidencias de programacion (= reprogramadas, como
+   dice la matriz), materiales programados y entregados a tiempo. Los demas
+   conteos (horas, recursos, TIC, textos/cuadernos, contadores de calidad)
+   se siguen calculando aqui como CONTROL y se muestran al final, pero no se
+   guardan. Anio y mes salen de DimTiempo por TramoTiempoKey.
+   Grano propio (Kimball: no mezclar granos): los materiales son ANUALES
+   (se programan para el inicio de clases), asi que pasan a un segundo hecho,
+   dm_preparacion.FacEntregaMaterial: docente + area + seccion + anio, con la
+   fecha programada (inicio de clases) como clave de tiempo. FacPreparacion
+   queda solo con sesiones, por mes y bimestre.
+
    UNA tabla de hechos: docente + area + seccion + anio escolar + mes + bimestre.
    Las sesiones se cuentan por mes de clase; la dotacion de material pertenece
    al mes en que debio entregarse (marzo para el lote 2025-2026), aunque
@@ -23,8 +36,8 @@
    otra vez en abril al consultar tendencias mensuales.
 
    El material individual (titulo, fechas y observaciones) permanece completo
-   en stg.EntregaMaterial. Este hecho conserva sus cantidades por tipo de
-   material y docente, pero su grano mensual no admite el detalle individual.
+   en stg.EntregaMaterial. Este hecho guarda solo los ejemplares programados
+   y entregados a tiempo; su grano mensual no admite el detalle individual.
 
    Se usan las asignaciones de stg.CargaHoraria para identificar al docente
    responsable tanto de sesiones como de entregas. Las discrepancias del CSV
@@ -36,52 +49,25 @@ GO
 IF SCHEMA_ID(N'dm_preparacion') IS NULL EXEC(N'CREATE SCHEMA dm_preparacion');
 GO
 
+/* v6.2: si el hecho tiene la estructura anterior, se elimina y se crea de
+   nuevo; se recarga completo mas abajo. */
+IF COL_LENGTH(N'dm_preparacion.FacPreparacion', N'HorasPedagogicasProgramadas') IS NOT NULL
+   OR COL_LENGTH(N'dm_preparacion.FacPreparacion', N'MaterialesProgramados') IS NOT NULL
+    DROP TABLE dm_preparacion.FacPreparacion;
+
 IF OBJECT_ID(N'dm_preparacion.FacPreparacion', N'U') IS NULL
 BEGIN
     CREATE TABLE dm_preparacion.FacPreparacion (
         PreparacionKey              INT IDENTITY(1,1) NOT NULL,
-        AnioEscolar                 SMALLINT NOT NULL,
-        MesEscolar                  TINYINT NOT NULL,
         TramoTiempoKey              INT NOT NULL, -- primer dia del mes dentro de su bimestre
         DocenteKey                  INT NOT NULL,
         AreaKey                     INT NOT NULL,
         SeccionKey                  INT NOT NULL,
+        /* Medidas de la matriz v2.1 marcadas «Script SQL». */
         SesionesProgramadas         INT NOT NULL,
-        SesionesDictadas            INT NOT NULL,
-        SesionesDictadasHorario     INT NOT NULL,
-        SesionesDictadasRetraso     INT NOT NULL,
-        SesionesNoDictadas          INT NOT NULL,
-        SesionesReprogramadas       INT NOT NULL,
-        SesionesEstadoDesconocido   INT NOT NULL,
-        HorasPedagogicasProgramadas INT NOT NULL,
-        HorasPedagogicasDictadas    INT NOT NULL,
-        MinutosRetraso              INT NOT NULL,
-        SesionesRetrasoInvalido     INT NOT NULL,
-        RecursosProgramadosSesion   INT NOT NULL,
-        RecursosUtilizadosSesion    INT NOT NULL,
-        SesionesRecursosInvalidos   INT NOT NULL,
-        SesionesConTIC              INT NOT NULL,
-        -- Todas las cantidades siguientes son ejemplares fisicos.
-        MaterialesRecibidosIE       INT NULL,
-        MaterialesPorEntregar       INT NULL,
-        MaterialesEntregadosATiempo INT NULL,
-        MaterialesEntregadosTarde   INT NULL,
-        MaterialesNoEntregados      INT NULL,
-        TextosPorEntregar          INT NULL,
-        TextosEntregadosATiempo    INT NULL,
-        TextosEntregadosTarde      INT NULL,
-        TextosNoEntregados         INT NULL,
-        CuadernosPorEntregar       INT NULL,
-        CuadernosEntregadosATiempo INT NULL,
-        CuadernosEntregadosTarde   INT NULL,
-        CuadernosNoEntregados      INT NULL,
-        RegistrosMaterial          INT NULL,
-        RegistrosRecibidos14Dias   INT NULL, -- 14 dias o mas antes de clases
-        RegistrosRecepcionSinFecha INT NULL,
-        RegistrosProgramacionSinFecha INT NULL,
-        RegistrosCantidadCorregida INT NULL,
-        RegistrosDocenteCorregido  INT NULL,
-        FechaCargaDW               DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
+        SesionesDictadasHorario     INT NOT NULL, -- dictadas sin retraso
+        MinutosRetraso              INT NOT NULL, -- suma de minutos de retraso
+        IncidenciasProgramacion     INT NOT NULL, -- aproximacion: sesiones reprogramadas
         CONSTRAINT PK_FacPreparacion PRIMARY KEY CLUSTERED (PreparacionKey),
         CONSTRAINT UQ_FacPreparacion_Grano UNIQUE
             (TramoTiempoKey, DocenteKey, AreaKey, SeccionKey),
@@ -94,35 +80,40 @@ BEGIN
         CONSTRAINT FK_FacPreparacion_Seccion FOREIGN KEY (SeccionKey)
             REFERENCES dw.DimSeccion(SeccionKey),
         CONSTRAINT CK_FacPreparacion_Cantidades CHECK (
-            MesEscolar BETWEEN 1 AND 12 AND SesionesProgramadas >= 0
-            AND SesionesDictadas >= 0 AND SesionesDictadasHorario >= 0
-            AND SesionesDictadasRetraso >= 0 AND SesionesNoDictadas >= 0
-            AND SesionesReprogramadas >= 0 AND SesionesEstadoDesconocido >= 0
-            AND SesionesDictadasHorario <= SesionesDictadas
-            AND SesionesDictadasRetraso <= SesionesDictadas
-            AND SesionesDictadasHorario + SesionesDictadasRetraso <= SesionesDictadas
-            AND SesionesDictadas + SesionesNoDictadas + SesionesReprogramadas
-                + SesionesEstadoDesconocido = SesionesProgramadas
-            AND HorasPedagogicasProgramadas >= 0 AND HorasPedagogicasDictadas >= 0
-            AND MinutosRetraso >= 0 AND SesionesRetrasoInvalido >= 0
-            AND RecursosProgramadosSesion >= 0 AND RecursosUtilizadosSesion >= 0
-            AND SesionesRecursosInvalidos >= 0 AND SesionesConTIC >= 0
-            AND (MaterialesPorEntregar IS NULL
-                 OR (MaterialesPorEntregar >= 0 AND MaterialesRecibidosIE >= 0
-                     AND MaterialesEntregadosATiempo >= 0
-                     AND MaterialesEntregadosTarde >= 0
-                     AND MaterialesNoEntregados >= 0
-                     AND MaterialesPorEntregar = MaterialesEntregadosATiempo
-                                                   + MaterialesEntregadosTarde
-                                                   + MaterialesNoEntregados
-                     AND MaterialesPorEntregar = TextosPorEntregar + CuadernosPorEntregar
-                     AND MaterialesEntregadosATiempo = TextosEntregadosATiempo
-                                                      + CuadernosEntregadosATiempo
-                     AND MaterialesEntregadosTarde = TextosEntregadosTarde
-                                                    + CuadernosEntregadosTarde
-                     AND MaterialesNoEntregados = TextosNoEntregados
-                                                  + CuadernosNoEntregados))
+            SesionesProgramadas >= 0 AND SesionesDictadasHorario >= 0
+            AND IncidenciasProgramacion >= 0 AND MinutosRetraso >= 0
+            AND SesionesDictadasHorario + IncidenciasProgramacion <= SesionesProgramadas
         )
+    );
+END;
+GO
+
+/* Segundo hecho del datamart: dotacion anual de material por asignacion.
+   Grano: docente + area + seccion + anio escolar. */
+IF OBJECT_ID(N'dm_preparacion.FacEntregaMaterial', N'U') IS NULL
+BEGIN
+    CREATE TABLE dm_preparacion.FacEntregaMaterial (
+        EntregaKey                  INT IDENTITY(1,1) NOT NULL,
+        FechaProgramadaKey          INT NOT NULL, -- inicio de clases del anio
+        DocenteKey                  INT NOT NULL,
+        AreaKey                     INT NOT NULL,
+        SeccionKey                  INT NOT NULL,
+        MaterialesProgramados       INT NOT NULL, -- ejemplares por entregar
+        MaterialesEntregadosATiempo INT NOT NULL,
+        CONSTRAINT PK_FacEntregaMaterial PRIMARY KEY CLUSTERED (EntregaKey),
+        CONSTRAINT UQ_FacEntregaMaterial_Grano UNIQUE
+            (FechaProgramadaKey, DocenteKey, AreaKey, SeccionKey),
+        CONSTRAINT FK_FacEntrega_Tiempo FOREIGN KEY (FechaProgramadaKey)
+            REFERENCES dw.DimTiempo(TiempoKey),
+        CONSTRAINT FK_FacEntrega_Docente FOREIGN KEY (DocenteKey)
+            REFERENCES dw.DimDocente(DocenteKey),
+        CONSTRAINT FK_FacEntrega_Area FOREIGN KEY (AreaKey)
+            REFERENCES dw.DimArea(AreaKey),
+        CONSTRAINT FK_FacEntrega_Seccion FOREIGN KEY (SeccionKey)
+            REFERENCES dw.DimSeccion(SeccionKey),
+        CONSTRAINT CK_FacEntrega CHECK (
+            MaterialesProgramados >= 0
+            AND MaterialesEntregadosATiempo BETWEEN 0 AND MaterialesProgramados)
     );
 END;
 GO
@@ -138,7 +129,6 @@ DROP TABLE IF EXISTS #InicioClases;
 DROP TABLE IF EXISTS #MaterialPreparado;
 DROP TABLE IF EXISTS #MaterialesMes;
 DROP TABLE IF EXISTS #Tramo;
-DROP TABLE IF EXISTS #GranoPreparacion;
 DROP TABLE IF EXISTS #GranoPreparacion;
 
 /* Tramos mes x bimestre del calendario academico: la clave de cada tramo es
@@ -460,6 +450,7 @@ IF EXISTS (SELECT 1 FROM #MaterialPreparado
     THROW 51059, N'Entrega duplicada del mismo material a una seccion y anio.', 1;
 
 SELECT AnioEscolar, MONTH(InicioClases) AS MesEscolar, TramoKey,
+       MIN(CONVERT(INT, CONVERT(CHAR(8), InicioClases, 112))) AS FechaProgramadaKey,
        DocenteKey, AreaKey, SeccionKey,
        COUNT(*) AS RegistrosMaterial,
        SUM(Recibidos) AS MaterialesRecibidosIE,
@@ -501,21 +492,19 @@ FROM (SELECT mp.*, tr.TramoKey
         ON tr.Anio = t.Anio AND tr.Mes = t.Mes AND tr.Bimestre = t.Bimestre) AS x
 GROUP BY AnioEscolar, MONTH(InicioClases), TramoKey, DocenteKey, AreaKey, SeccionKey;
 
-/* 4. UNION DE GRANOS ya agregados: nunca unir sesiones directamente con
-   entregas (1:N), porque multiplicaria la cantidad de ejemplares. */
+/* 4. Cada hecho con su propio grano: sesiones por mes + bimestre en
+   FacPreparacion; material por anio en FacEntregaMaterial. Nunca se unen
+   sesiones con entregas (1:N), porque multiplicaria los ejemplares. */
 SELECT AnioEscolar, MesEscolar, TramoKey, DocenteKey, AreaKey, SeccionKey
 INTO #GranoPreparacion
-FROM #SesionesMes
-UNION
-SELECT AnioEscolar, MesEscolar, TramoKey, DocenteKey, AreaKey, SeccionKey
-FROM #MaterialesMes;
+FROM #SesionesMes;
 
 /* Toda fila necesita su tramo en DimTiempo, y el material debe caer dentro
    del periodo escolar (bimestre > 0): se programa al inicio de clases. */
 IF EXISTS (SELECT 1 FROM #GranoPreparacion WHERE TramoKey IS NULL)
    OR EXISTS (SELECT 1 FROM #MaterialesMes AS m
-              JOIN dw.DimTiempo AS t ON t.TiempoKey = m.TramoKey
-              WHERE t.Bimestre = 0)
+              LEFT JOIN dw.DimTiempo AS t ON t.TiempoKey = m.FechaProgramadaKey
+              WHERE t.TiempoKey IS NULL OR t.Bimestre = 0)
     THROW 51049, N'Fecha fuera de DimTiempo o material fuera del periodo escolar: revisar el calendario del 03.', 1;
 
 BEGIN TRY
@@ -523,55 +512,27 @@ BEGIN TRY
     DELETE FROM dm_preparacion.FacPreparacion;
 
     INSERT INTO dm_preparacion.FacPreparacion (
-        AnioEscolar, MesEscolar, TramoTiempoKey, DocenteKey, AreaKey, SeccionKey,
-        SesionesProgramadas, SesionesDictadas, SesionesDictadasHorario,
-        SesionesDictadasRetraso, SesionesNoDictadas, SesionesReprogramadas,
-        SesionesEstadoDesconocido, HorasPedagogicasProgramadas,
-        HorasPedagogicasDictadas, MinutosRetraso, SesionesRetrasoInvalido,
-        RecursosProgramadosSesion, RecursosUtilizadosSesion,
-        SesionesRecursosInvalidos, SesionesConTIC,
-        MaterialesRecibidosIE, MaterialesPorEntregar,
-        MaterialesEntregadosATiempo, MaterialesEntregadosTarde,
-        MaterialesNoEntregados, TextosPorEntregar, TextosEntregadosATiempo,
-        TextosEntregadosTarde, TextosNoEntregados,
-        CuadernosPorEntregar, CuadernosEntregadosATiempo,
-        CuadernosEntregadosTarde, CuadernosNoEntregados,
-        RegistrosMaterial, RegistrosRecibidos14Dias,
-        RegistrosRecepcionSinFecha, RegistrosProgramacionSinFecha,
-        RegistrosCantidadCorregida,
-        RegistrosDocenteCorregido
+        TramoTiempoKey, DocenteKey, AreaKey, SeccionKey,
+        SesionesProgramadas, SesionesDictadasHorario, MinutosRetraso,
+        IncidenciasProgramacion
     )
-    SELECT g.AnioEscolar, g.MesEscolar, g.TramoKey,
-           g.DocenteKey, g.AreaKey, g.SeccionKey,
-           ISNULL(s.SesionesProgramadas, 0), ISNULL(s.SesionesDictadas, 0),
+    SELECT g.TramoKey, g.DocenteKey, g.AreaKey, g.SeccionKey,
+           ISNULL(s.SesionesProgramadas, 0),
            ISNULL(s.SesionesDictadasHorario, 0),
-           ISNULL(s.SesionesDictadasRetraso, 0),
-           ISNULL(s.SesionesNoDictadas, 0), ISNULL(s.SesionesReprogramadas, 0),
-           ISNULL(s.SesionesEstadoDesconocido, 0),
-           ISNULL(s.HorasPedagogicasProgramadas, 0),
-           ISNULL(s.HorasPedagogicasDictadas, 0), ISNULL(s.MinutosRetraso, 0),
-           ISNULL(s.SesionesRetrasoInvalido, 0),
-           ISNULL(s.RecursosProgramadosSesion, 0),
-           ISNULL(s.RecursosUtilizadosSesion, 0),
-           ISNULL(s.SesionesRecursosInvalidos, 0),
-           ISNULL(s.SesionesConTIC, 0),
-           m.MaterialesRecibidosIE, m.MaterialesPorEntregar,
-           m.MaterialesEntregadosATiempo, m.MaterialesEntregadosTarde,
-           m.MaterialesNoEntregados, m.TextosPorEntregar,
-           m.TextosEntregadosATiempo, m.TextosEntregadosTarde,
-           m.TextosNoEntregados, m.CuadernosPorEntregar,
-           m.CuadernosEntregadosATiempo, m.CuadernosEntregadosTarde,
-           m.CuadernosNoEntregados, m.RegistrosMaterial,
-           m.RegistrosRecibidos14Dias, m.RegistrosRecepcionSinFecha,
-           m.RegistrosProgramacionSinFecha,
-           m.RegistrosCantidadCorregida, m.RegistrosDocenteCorregido
+           ISNULL(s.MinutosRetraso, 0),
+           ISNULL(s.SesionesReprogramadas, 0)
     FROM #GranoPreparacion AS g
     LEFT JOIN #SesionesMes AS s ON s.TramoKey = g.TramoKey
         AND s.DocenteKey = g.DocenteKey
-        AND s.AreaKey = g.AreaKey AND s.SeccionKey = g.SeccionKey
-    LEFT JOIN #MaterialesMes AS m ON m.TramoKey = g.TramoKey
-        AND m.DocenteKey = g.DocenteKey
-        AND m.AreaKey = g.AreaKey AND m.SeccionKey = g.SeccionKey;
+        AND s.AreaKey = g.AreaKey AND s.SeccionKey = g.SeccionKey;
+
+    DELETE FROM dm_preparacion.FacEntregaMaterial;
+    INSERT INTO dm_preparacion.FacEntregaMaterial
+        (FechaProgramadaKey, DocenteKey, AreaKey, SeccionKey,
+         MaterialesProgramados, MaterialesEntregadosATiempo)
+    SELECT FechaProgramadaKey, DocenteKey, AreaKey, SeccionKey,
+           MaterialesPorEntregar, MaterialesEntregadosATiempo
+    FROM #MaterialesMes;
 
     COMMIT TRANSACTION;
 END TRY
@@ -591,35 +552,52 @@ SELECT COUNT(*) AS SesionesOrigen,
            AS SinAsignacion
 FROM #SesionNormalizada;
 
-SELECT AnioEscolar, COUNT(*) AS Filas,
-       SUM(SesionesProgramadas) AS SesionesProgramadas,
-       SUM(SesionesDictadasHorario) AS DictadasEnHorario,
-       CAST(100.0 * SUM(SesionesDictadasHorario)
-            / NULLIF(SUM(SesionesProgramadas), 0) AS DECIMAL(6,2))
+SELECT t.Anio AS AnioEscolar, COUNT(*) AS Filas,
+       SUM(f.SesionesProgramadas) AS SesionesProgramadas,
+       SUM(f.SesionesDictadasHorario) AS DictadasEnHorario,
+       CAST(100.0 * SUM(f.SesionesDictadasHorario)
+            / NULLIF(SUM(f.SesionesProgramadas), 0) AS DECIMAL(6,2))
            AS PctCumplimientoHorario,
-       SUM(RegistrosMaterial) AS RegistrosMaterial,
-       SUM(MaterialesPorEntregar) AS MaterialesProgramados,
-       SUM(MaterialesEntregadosATiempo) AS MaterialesATiempo,
-       SUM(MaterialesEntregadosTarde) AS MaterialesTarde,
-       SUM(MaterialesNoEntregados) AS MaterialesNoEntregados,
-       CAST(100.0 * SUM(MaterialesEntregadosATiempo)
-            / NULLIF(SUM(MaterialesPorEntregar), 0) AS DECIMAL(6,2))
-           AS PctEntregaOportuna,
-       SUM(RegistrosRecibidos14Dias) AS EntregasRecibidas14Dias,
-       SUM(RegistrosCantidadCorregida) AS CantidadesRecuperadas,
-       SUM(RegistrosDocenteCorregido) AS DocentesCorregidos
-FROM dm_preparacion.FacPreparacion
-GROUP BY AnioEscolar ORDER BY AnioEscolar;
-
-SELECT f.AnioEscolar, f.MesEscolar, t.Bimestre, t.NombreBimestre,
-       COUNT(*) AS Filas,
-       SUM(f.SesionesProgramadas) AS Sesiones,
-       SUM(f.MaterialesPorEntregar) AS EjemplaresPorEntregar,
-       SUM(f.MaterialesEntregadosATiempo) AS EjemplaresATiempo
+       SUM(f.MinutosRetraso) AS MinutosRetraso,
+       SUM(f.IncidenciasProgramacion) AS IncidenciasProgramacion
 FROM dm_preparacion.FacPreparacion AS f
 JOIN dw.DimTiempo AS t ON t.TiempoKey = f.TramoTiempoKey
-GROUP BY f.AnioEscolar, f.MesEscolar, t.Bimestre, t.NombreBimestre
-ORDER BY f.AnioEscolar, f.MesEscolar, t.Bimestre;
+GROUP BY t.Anio ORDER BY t.Anio;
+
+SELECT t.Anio AS AnioEscolar, MIN(t.Fecha) AS FechaProgramada, COUNT(*) AS Asignaciones,
+       SUM(e.MaterialesProgramados) AS MaterialesProgramados,
+       SUM(e.MaterialesEntregadosATiempo) AS MaterialesATiempo,
+       CAST(100.0 * SUM(e.MaterialesEntregadosATiempo)
+            / NULLIF(SUM(e.MaterialesProgramados), 0) AS DECIMAL(6,2))
+           AS PctEntregaOportuna
+FROM dm_preparacion.FacEntregaMaterial AS e
+JOIN dw.DimTiempo AS t ON t.TiempoKey = e.FechaProgramadaKey
+GROUP BY t.Anio ORDER BY t.Anio;
+
+/* Controles de calidad del lote (calculados aqui, no guardados en el hecho). */
+SELECT s.AnioEscolar,
+       SUM(s.SesionesNoDictadas) AS NoDictadas,
+       SUM(s.SesionesEstadoDesconocido) AS EstadoDesconocido,
+       SUM(s.SesionesRetrasoInvalido) AS RetrasoInvalido,
+       SUM(s.SesionesRecursosInvalidos) AS RecursosInvalidos
+FROM #SesionesMes AS s GROUP BY s.AnioEscolar ORDER BY s.AnioEscolar;
+
+SELECT m.AnioEscolar,
+       SUM(m.RegistrosMaterial) AS RegistrosMaterial,
+       SUM(m.MaterialesEntregadosTarde) AS MaterialesTarde,
+       SUM(m.MaterialesNoEntregados) AS MaterialesNoEntregados,
+       SUM(m.RegistrosRecibidos14Dias) AS EntregasRecibidas14Dias,
+       SUM(m.RegistrosCantidadCorregida) AS CantidadesRecuperadas,
+       SUM(m.RegistrosDocenteCorregido) AS DocentesCorregidos
+FROM #MaterialesMes AS m GROUP BY m.AnioEscolar ORDER BY m.AnioEscolar;
+
+SELECT t.Anio AS AnioEscolar, t.Mes, t.Bimestre, t.NombreBimestre,
+       COUNT(*) AS Filas,
+       SUM(f.SesionesProgramadas) AS Sesiones
+FROM dm_preparacion.FacPreparacion AS f
+JOIN dw.DimTiempo AS t ON t.TiempoKey = f.TramoTiempoKey
+GROUP BY t.Anio, t.Mes, t.Bimestre, t.NombreBimestre
+ORDER BY t.Anio, t.Mes, t.Bimestre;
 
 /* Metrica 'incidencias de programacion': el origen no ofrece cruces de horario
    ni historial de cambios. SesionesReprogramadas es un dato disponible,

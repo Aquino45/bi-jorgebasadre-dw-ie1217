@@ -2,7 +2,7 @@
 
 **Curso:** Business Intelligence · Ingeniería de Sistemas · UPeU
 **Cliente:** I.E.P. N° 1217 "Jorge Basadre Grohmann" · Chaclacayo · UGEL 06
-**Versión vigente del ETL:** v6.1 (20/10/2026): dimensiones según la matriz v2.1 corregida por el equipo (Tiempo sin año escolar, Cursos = curso + competencia + tipo, sin nivel de logro ni motivo de rechazo) y preparación por mes + bimestre; cifras verificadas sin cambio. v6.0 y v5.2 quedan como etiquetas anteriores.
+**Versión vigente del ETL:** v6.2 (20/10/2026): dimensiones y hechos según la matriz v2.1 corregida por el equipo; los hechos guardan solo las medidas «Script SQL» y hay cinco hechos, uno por grano (se agregan FacCupoSeccion y FacEntregaMaterial); cifras verificadas sin cambio. v6.1, v6.0 y v5.2 quedan como etiquetas anteriores.
 **Última actualización de esta bitácora:** 20/10/2026
 **Carga verificada en SQL Server:** 24/09/2026
 
@@ -326,6 +326,14 @@ Flujo en una línea: **copiar → revisar → hacer catálogos → llenar los tr
   - 0 fechas de cierre distintas del oficial · 0 FK entre dimensiones.
 - **Advertencias:** las sesiones solo cubren mar–jun 2025 y mar–may 2026, así que el cruce preparación × notas por bimestre solo tiene ambos lados en 2025-I, 2025-II y 2026-I. El Excel v2.1 aún debe corregirse: fila 6 («Se analiza por motivo de rechazo»), Actividad → Tipo de competencia, marcar Bimestre (y Año en aprendizajes), grano de preparación «Mes y bimestre», y las hojas Matriz bus y Mapeo origen-DW.
 
+
+### 6.16 ETL v6.2: hechos solo con las medidas de la matriz y un grano por hecho (20/10/2026) — D29
+- **Criterio del equipo:** igual que en las dimensiones, el hecho guarda solo lo que responde las preguntas. Regla aplicada: medida marcada «Script SQL» en la V2 → columna del hecho con el nombre del Excel; marcada «Power BI» → se calcula en el modelo.
+- **Contraste con Kimball** (video de la sesión): los hechos reflejan prioridades del negocio, «no agregar todo por agregarlo»; un hecho tiene claves y valores numéricos; los porcentajes no se guardan (no son aditivos): se guardan numerador y denominador. Las marcas de calidad no son medidas del negocio: quedan en los controles del ETL y en staging. Matiz: si mañana se pide una medida recortada (p. ej. horas pedagógicas), hay que tocar el ETL; el CSV completo sigue en staging.
+- **Granos separados** («stay true to the grain»): cupo y vacantes ocupadas (sección + año) pasan de FacMatricula a **FacCupoSeccion**; los materiales (anuales) pasan de FacPreparacion a **FacEntregaMaterial**. Desaparece el MAX por aula y la fila de marzo con material.
+- **Columnas:** FacMatricula 22 → 13 · FacCupoSeccion 5 · FacPreparacion 42 → 9 · FacEntregaMaterial 7 · FacLogroCompetencia 17 → 8.
+- **Verificación:** respaldo `DW_IE1217_pre_v6_2_20261020.bak`; se ejecutaron 04, 05 y 06; 0 diferencias fila por fila contra la v6.1 en las cinco tablas. 600 matrículas (579 / 21) · ocupación 96,33 % / 96,67 % · 879 filas de sesiones · 100 asignaciones con material (61,97 % / 70,28 % a tiempo) · 44 815 notas + 581 · 379 sin evidencia.
+- **Pendientes del Excel:** «Incidencias de programación» dice = reprogramadas (228), pero P16 acordó reprogramadas + no dictadas (557): elegir. «Vacantes ocupadas» (fila 11) debe ir con grano sección + año y sin las dimensiones de estudiante. Agregar FacCupoSeccion y FacEntregaMaterial a la matriz bus.
 ---
 
 ## 7. Decisiones tomadas (con su porqué)
@@ -356,6 +364,7 @@ Flujo en una línea: **copiar → revisar → hacer catálogos → llenar los tr
 | D22 | **Versionado con Git** (repositorio privado en GitHub): nombres de archivo fijos y sin número de versión; cada versión es una etiqueta (`v5.1`, `v5.2`); commits con formato `tipo(área): descripción`; los datos del colegio nunca se suben | Evitar archivos con número de versión, reenvíos y versiones mezcladas (D20); saber qué versión corrió cada quien | ✅ Publicado el 13/10/2026 en GitHub (`Aquino45/bi-jorgebasadre-dw-ie1217`, etiquetas `v5.1` y `v5.2`) |
 | D23 | La matriz de métricas y dimensiones es un documento **previo al ETL**: dimensiones y atributos rotulados por concepto (nombre técnico solo como comentario), fórmulas en palabras, estado de definición (Acordada / Propuesta / Pendiente / Parcial / No medible) y sin cifras de la carga. Se excluyen las 5 métricas que agregó el ETL (días hasta SIAGIE, TIC, recursos, niveles de logro, competencias aprobadas) y los procesos 3.0 y 5.0. El mapeo origen → DW sí usa nombres reales | Pedido del equipo para la sustentación | ✅ Aplicado en v2.0 (13/10/2026) |
 | D24 | Dos versiones de Métricas y Dimensiones: **interna** (Git, con anotaciones) y **pública** (Drive, solo lo esencial). Grano **por medida** como granularidad (una palabra + nivel de jerarquía). En la pública, Estado binario: **Script SQL** / **Power BI** | Pedido del profesor (granularidad) y del equipo (versión limpia para presentar) | ✅ Aplicado en v2.1 (13/10/2026) |
+| D29 | ETL **v6.2**: los hechos guardan solo las medidas «Script SQL» de la matriz, con sus nombres; cinco hechos, uno por grano (FacCupoSeccion y FacEntregaMaterial nuevos) | Pedido del equipo (20/10/2026) y regla de Kimball de no mezclar granos | ✅ Verificado (20/10/2026) |
 | D28 | ETL **v6.1** según la matriz v2.1 corregida: Tiempo = fecha, año, mes, bimestre; Competencia = curso + tipo + competencia (sin nivel de logro); sin Motivo de rechazo; preparación por mes + bimestre | Cambios del equipo en la matriz (20/10/2026); el origen no trae nivel ni actividades; cruce por bimestre | ✅ Verificado (20/10/2026) |
 | D27 | ETL **v6.0** según la matriz v2.1 visible: menos atributos por dimensión, Competencia × Nivel de logro en una sola dimensión, bimestre oficial dentro de Tiempo, Motivo de rechazo solo con la categoría | Decisión del equipo (20/10/2026): el DW solo guarda lo que responde las preguntas; el profesor observó dimensiones con un solo atributo y Tiempo/Periodo duplicados | ✅ Verificado (20/10/2026) |
 | D26 | Matriz BI **V.4** reconstruida desde la propia fila: cada medida sale de la pregunta, la comparación o la respuesta BI, y de un campo real de CSV (columnas Origen y Sustento). Definiciones acordadas: P2, P4, P5, P13, P14, P15 y P16 | Observación del profesor y regla «nada inventado»; base de la fase 2 (matriz bus) | ✅ Aplicado (19/10/2026) |
@@ -571,7 +580,7 @@ EXEC msdb.dbo.sp_update_job @job_name = N'ETL_IE1217_Carga', @enabled = 0;  -- p
 
 | Archivo | Estado |
 |---|---|
-| `01`–`06` | ✅ v6.1 (D28): verificada el 20/10/2026 (cambian 03, 04, 05 y 06; 01 solo un comentario; 02 y 07 sin cambios) |
+| `01`–`06` | ✅ v6.2 (D29): verificada el 20/10/2026 (v6.2 cambia 04, 05 y 06; v6.1 cambió 03–06; 02 y 07 sin cambios) |
 | Versiones anteriores | Etiqueta `v5.1` en Git. Copia en `D:\BI_IE1217_respaldo\v5.1_scripts\` (fuera del repo, verificada contra el tag). No usar archivos sueltos con número de versión |
 | `Guia_ETL_3_datamarts_IE1217_v5_1.docx` | ✅ Vigente (sustituye al PDF v5) |
 | `Guia_ETL_3_datamarts_IE1217_v5.pdf` | Histórico |

@@ -1,5 +1,20 @@
 # Changelog
 
+## v6.3 — 23/10/2026 (verificado)
+
+Una tabla de hechos por proceso (decisión del equipo): se deshace la separación de granos de la v6.2. Las medidas siguen siendo solo las «Script SQL» de la matriz.
+
+### Cambiado
+- `FacMatricula` (15 columnas): vuelven `CupoMaximoAula` y `VacantesOcupadas`. El cupo se repite en cada matrícula del aula: MAX por año + sección antes de sumar.
+- `FacPreparacion` (11 columnas): vuelven `MaterialesProgramados` y `MaterialesEntregadosATiempo`, en la fila de marzo (inicio de clases); NULL en los demás meses.
+
+### Eliminado
+- `dm_matricula.FacCupoSeccion` y `dm_preparacion.FacEntregaMaterial` (el 04 y el 05 los borran si existen).
+
+### Verificado el 23/10/2026 (respaldo previo `DW_IE1217_pre_v6_3_20261023.bak`)
+- 0 diferencias fila por fila contra la v6.2 en matrícula, cupo, sesiones, material y notas.
+- 600 matrículas (579 / 21), ocupación 96,33 % / 96,67 %; 879 filas de preparación (6 352 sesiones, 83,38 % / 83,41 % en horario; material a tiempo 61,97 % / 70,28 %); 44 815 notas + 581 en bitácora; 379 sin evidencia.
+
 ## v6.2 — 20/10/2026 (verificado)
 
 Hechos según la matriz v2.1: cada hecho guarda solo las medidas marcadas «Script SQL», con los nombres del Excel; los % y promedios («Power BI») se calculan en el modelo. Se separan los dos granos que estaban mezclados (Kimball: un grano por hecho).

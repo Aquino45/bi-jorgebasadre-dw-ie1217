@@ -1,5 +1,9 @@
 ﻿/* ============================================================================
    06_fac_aprendizajes.sql
+   CAMBIOS v6.5 (25/10/2026): la competencia se busca en dw.DimCurso (fila de
+   la competencia, con su curso) y la seccion en dw.DimNivelAcademico.
+   CompetenciaKey pasa a CursoKey. El curso de la fila se valida contra la
+   fila «Todo el curso» de DimCurso.
    CAMBIOS v6.4 (25/10/2026): la matriz cambia «Competencias sin evidencia»
    por «Notas con evidencia» (base del rendimiento promedio = suma de notas /
    notas con evidencia). CompetenciasSinEvidencia pasa a NotasConEvidencia
@@ -85,7 +89,7 @@ SET NOCOUNT ON;
 SET XACT_ABORT ON;
 
 IF OBJECT_ID(N'stg.NotaCompetencia', N'U') IS NULL
-   OR OBJECT_ID(N'dw.DimCompetencia', N'U') IS NULL
+   OR OBJECT_ID(N'dw.DimCurso', N'U') IS NULL
    OR OBJECT_ID(N'dw.DimTiempo', N'U') IS NULL
    OR OBJECT_ID(N'dm_matricula.FacMatricula', N'U') IS NULL
     THROW 51060, N'Faltan staging, dimensiones o el hecho de matricula (scripts 01, 03 y 04).', 1;
@@ -98,6 +102,7 @@ GO
 /* v6.2: si el hecho tiene la estructura anterior, se elimina y se crea de
    nuevo; se recarga completo mas abajo. */
 IF COL_LENGTH(N'dm_aprendizajes.FacLogroCompetencia', N'EvaluadaConEvidencia') IS NOT NULL
+   OR COL_LENGTH(N'dm_aprendizajes.FacLogroCompetencia', N'CompetenciaKey') IS NOT NULL
    OR COL_LENGTH(N'dm_aprendizajes.FacLogroCompetencia', N'CompetenciasSinEvidencia') IS NOT NULL
     DROP TABLE dm_aprendizajes.FacLogroCompetencia;
 
@@ -107,25 +112,25 @@ BEGIN
         LogroKey                 BIGINT IDENTITY(1,1) NOT NULL,
         FechaCierreKey           INT NOT NULL,   -- cierre oficial del bimestre
         EstudianteKey            INT NOT NULL,
-        SeccionKey               INT NOT NULL,
+        NivelAcademicoKey               INT NOT NULL,
         DocenteKey               INT NOT NULL,
-        CompetenciaKey           INT NOT NULL,   -- competencia evaluada (con su curso)
+        CursoKey                 INT NOT NULL,   -- fila de la competencia evaluada en DimCurso
         /* Medidas de la matriz v2.1 marcadas «Script SQL». */
         NotaVigesimal            DECIMAL(5,2) NULL,  -- 0 a 20; NULL = sin evidencia, nunca 0
         NotasConEvidencia        TINYINT NOT NULL,   -- 1 si la competencia tiene nota (0 = sin evidencia)
         CONSTRAINT PK_FacLogroCompetencia PRIMARY KEY CLUSTERED (LogroKey),
         CONSTRAINT UQ_FacLogroCompetencia_Grano UNIQUE
-            (FechaCierreKey, EstudianteKey, CompetenciaKey),
+            (FechaCierreKey, EstudianteKey, CursoKey),
         CONSTRAINT FK_FacLogro_Fecha FOREIGN KEY (FechaCierreKey)
             REFERENCES dw.DimTiempo(TiempoKey),
         CONSTRAINT FK_FacLogro_Estudiante FOREIGN KEY (EstudianteKey)
             REFERENCES dw.DimEstudiante(EstudianteKey),
-        CONSTRAINT FK_FacLogro_Seccion FOREIGN KEY (SeccionKey)
-            REFERENCES dw.DimSeccion(SeccionKey),
+        CONSTRAINT FK_FacLogro_Nivel FOREIGN KEY (NivelAcademicoKey)
+            REFERENCES dw.DimNivelAcademico(NivelAcademicoKey),
         CONSTRAINT FK_FacLogro_Docente FOREIGN KEY (DocenteKey)
             REFERENCES dw.DimDocente(DocenteKey),
-        CONSTRAINT FK_FacLogro_Competencia FOREIGN KEY (CompetenciaKey)
-            REFERENCES dw.DimCompetencia(CompetenciaKey),
+        CONSTRAINT FK_FacLogro_Curso FOREIGN KEY (CursoKey)
+            REFERENCES dw.DimCurso(CursoKey),
         CONSTRAINT CK_FacLogro_Consistencia CHECK (
             (NotasConEvidencia = 0 AND NotaVigesimal IS NULL)
             OR (NotasConEvidencia = 1 AND NotaVigesimal BETWEEN 0 AND 20)
@@ -223,8 +228,8 @@ SELECT o.*,
        t.Bimestre AS BimestreReal,
        fb.FechaCierreKey,
        t.TiempoKey AS FechaInformadaKey,
-       e.EstudianteKey, s.SeccionKey, a.AreaKey, a.AreaID AS AreaIDDeArea,
-       c.CompetenciaKey, c.AreaID AS AreaIDDeCompetencia,
+       e.EstudianteKey, s.NivelAcademicoKey, a.CursoKey AS AreaKey, a.CursoID AS AreaIDDeArea,
+       c.CursoKey, c.CursoID AS AreaIDDeCompetencia,
        d.DocenteKey, asg.DocenteID AS DocenteAsignado,
        m.MatriculaKey,
        TRY_CONVERT(DECIMAL(6,3), REPLACE(o.NotaTexto, N',', N'.')) AS NotaNumerica,
@@ -253,12 +258,14 @@ LEFT JOIN dw.DimEstudiante AS e
 LEFT JOIN stg.Seccion AS sec
     ON TRY_CONVERT(SMALLINT, sec.Anio) = o.AnioEscolar
        AND UPPER(LTRIM(RTRIM(sec.SeccionID))) = o.SeccionIDLimpia
-LEFT JOIN dw.DimSeccion AS s
+LEFT JOIN dw.DimNivelAcademico AS s
     ON s.CodigoCorto = CONVERT(NVARCHAR(3), TRY_CONVERT(TINYINT, sec.Grado))
                      + UPPER(LTRIM(RTRIM(sec.Seccion)))
-LEFT JOIN dw.DimArea AS a ON a.AreaID = o.AreaIDLimpia AND a.AreaKey <> -1
-LEFT JOIN dw.DimCompetencia AS c
-    ON c.CompetenciaID = o.CompetenciaIDLimpia AND c.CompetenciaKey <> -1
+LEFT JOIN dw.DimCurso AS a
+    ON a.CursoID = o.AreaIDLimpia AND a.CompetenciaID = N'N/A' AND a.CursoKey <> -1
+LEFT JOIN dw.DimCurso AS c
+    ON c.CompetenciaID = o.CompetenciaIDLimpia AND c.CompetenciaID <> N'N/A'
+   AND c.CursoKey <> -1
 LEFT JOIN #Asignacion AS asg
     ON asg.AnioEscolar = o.AnioEscolar AND asg.SeccionID = o.SeccionIDLimpia
        AND asg.AreaID = o.AreaIDLimpia
@@ -268,7 +275,7 @@ LEFT JOIN #Escala AS el
     ON el.NivelLogro = o.NotaTexto
 LEFT JOIN dm_matricula.FacMatricula AS m
     ON m.AnioEscolar = o.AnioEscolar AND m.EstudianteKey = e.EstudianteKey
-       AND m.SeccionKey = s.SeccionKey AND m.MatriculasValidadas = 1;
+       AND m.NivelAcademicoKey = s.NivelAcademicoKey AND m.MatriculasValidadas = 1;
 
 /* Decimales -> entero por regla documentada; letra -> punto medio del
    intervalo vigente. Las notas fuera de escala siguen fuera, sin recorte. */
@@ -289,9 +296,9 @@ SELECT x.*,
                       OR x.AnioEscolar IS NULL
                       THEN N'Periodo o fecha de cierre desconocidos'
             WHEN x.EstudianteKey IS NULL THEN N'Estudiante fuera del padron'
-            WHEN x.SeccionKey IS NULL THEN N'Seccion anual desconocida'
+            WHEN x.NivelAcademicoKey IS NULL THEN N'Seccion anual desconocida'
             WHEN x.AreaKey IS NULL THEN N'Area desconocida'
-            WHEN x.CompetenciaKey IS NULL THEN N'Competencia desconocida'
+            WHEN x.CursoKey IS NULL THEN N'Competencia desconocida'
             WHEN x.AreaIDDeCompetencia COLLATE Latin1_General_BIN
                  <> x.AreaIDDeArea COLLATE Latin1_General_BIN
                  THEN N'Competencia incompatible con area'
@@ -312,27 +319,27 @@ IF (SELECT COUNT(*) FROM #Clasificada) <> (SELECT COUNT(*) FROM stg.NotaCompeten
 ;WITH r AS (
     SELECT c.*,
            DENSE_RANK() OVER (
-               PARTITION BY FechaCierreKey, EstudianteKey, CompetenciaKey
+               PARTITION BY FechaCierreKey, EstudianteKey, CursoKey
                ORDER BY PrioridadCompetencia DESC, PrioridadBimestre DESC,
                         FechaCarga DESC) AS Prioridad
     FROM #Clasificada AS c WHERE MotivoRechazo IS NULL
 )
-SELECT FechaCierreKey, EstudianteKey, CompetenciaKey,
+SELECT FechaCierreKey, EstudianteKey, CursoKey,
        COUNT(DISTINCT ISNULL(CONVERT(NVARCHAR(30), NotaFinal), N'S/E')) AS NotasDistintas
 INTO #Conflictos
 FROM r WHERE Prioridad = 1
-GROUP BY FechaCierreKey, EstudianteKey, CompetenciaKey
+GROUP BY FechaCierreKey, EstudianteKey, CursoKey
 HAVING COUNT(DISTINCT ISNULL(CONVERT(NVARCHAR(30), NotaFinal), N'S/E')) > 1;
 
 IF EXISTS (SELECT 1 FROM #Conflictos)
 BEGIN
-    SELECT * FROM #Conflictos ORDER BY FechaCierreKey, EstudianteKey, CompetenciaKey;
+    SELECT * FROM #Conflictos ORDER BY FechaCierreKey, EstudianteKey, CursoKey;
     THROW 51065, N'Notas distintas con igual prioridad; revisar duplicados antes de cargar.', 1;
 END;
 
 SELECT c.*,
        ROW_NUMBER() OVER (
-           PARTITION BY FechaCierreKey, EstudianteKey, CompetenciaKey
+           PARTITION BY FechaCierreKey, EstudianteKey, CursoKey
            ORDER BY PrioridadCompetencia DESC, PrioridadBimestre DESC,
                     FechaCarga DESC, NotaTexto DESC, AreaID DESC) AS rn
 INTO #Ordenadas
@@ -359,9 +366,9 @@ BEGIN TRY
     FROM #Ordenadas WHERE rn > 1;
 
     INSERT INTO dm_aprendizajes.FacLogroCompetencia
-        (FechaCierreKey, EstudianteKey, SeccionKey, DocenteKey, CompetenciaKey,
+        (FechaCierreKey, EstudianteKey, NivelAcademicoKey, DocenteKey, CursoKey,
          NotaVigesimal, NotasConEvidencia)
-    SELECT FechaCierreKey, EstudianteKey, SeccionKey, DocenteKey, CompetenciaKey,
+    SELECT FechaCierreKey, EstudianteKey, NivelAcademicoKey, DocenteKey, CursoKey,
            NotaFinal, 1 - EsSinEvidencia
     FROM #Ordenadas WHERE rn = 1;
 

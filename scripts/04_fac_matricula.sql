@@ -21,6 +21,7 @@
    por seccion de la v6.2 se elimina. El cupo es un dato del aula repetido en
    cada matricula: en consultas y en Power BI se toma MAX por anio + seccion
    antes de sumar.
+   v6.5: la seccion se busca en dw.DimNivelAcademico (antes DimSeccion).
    Ejecutar DESPUES de 01_staging, 02_diagnostico y 03_dimensiones.
    Base: DW_IE1217 | SQL Server 2017 o posterior.
 
@@ -50,6 +51,7 @@ GO
    no pide), se elimina y se crea de nuevo; se recarga completo mas abajo. */
 DROP TABLE IF EXISTS dm_matricula.FacCupoSeccion;   -- hecho separado de la v6.2
 IF COL_LENGTH(N'dm_matricula.FacMatricula', N'SolicitudesVacante') IS NOT NULL
+   OR COL_LENGTH(N'dm_matricula.FacMatricula', N'SeccionKey') IS NOT NULL
    OR (OBJECT_ID(N'dm_matricula.FacMatricula', N'U') IS NOT NULL
        AND COL_LENGTH(N'dm_matricula.FacMatricula', N'CupoMaximoAula') IS NULL)
     DROP TABLE dm_matricula.FacMatricula;
@@ -61,7 +63,7 @@ BEGIN
         MatriculaID           NVARCHAR(30) NOT NULL, -- identificador del origen (dimension degenerada)
         AnioEscolar           SMALLINT NOT NULL,     -- anio de la matricula, no de sus fechas
         EstudianteKey         INT NOT NULL,
-        SeccionKey            INT NOT NULL,
+        NivelAcademicoKey            INT NOT NULL,
         TipoMatriculaKey      INT NOT NULL,
         FechaSolicitudKey     INT NOT NULL,          -- rol: solicitud
         FechaRevisionKey      INT NOT NULL,          -- rol: revision (dia de las rechazadas)
@@ -79,8 +81,8 @@ BEGIN
         CONSTRAINT UQ_FacMatricula_ID UNIQUE (MatriculaID),
         CONSTRAINT FK_FacMatricula_Estudiante FOREIGN KEY (EstudianteKey)
             REFERENCES dw.DimEstudiante(EstudianteKey),
-        CONSTRAINT FK_FacMatricula_Seccion FOREIGN KEY (SeccionKey)
-            REFERENCES dw.DimSeccion(SeccionKey),
+        CONSTRAINT FK_FacMatricula_Nivel FOREIGN KEY (NivelAcademicoKey)
+            REFERENCES dw.DimNivelAcademico(NivelAcademicoKey),
         CONSTRAINT FK_FacMatricula_Tipo FOREIGN KEY (TipoMatriculaKey)
             REFERENCES dw.DimTipoMatricula(TipoMatriculaKey),
         CONSTRAINT FK_FacMatricula_Solicitud FOREIGN KEY (FechaSolicitudKey)
@@ -233,7 +235,7 @@ SELECT
     b.FechaSolicitudRaw, b.FechaRevisionRaw, b.FechaAsignacionRaw,
     b.FechaSiagieRaw, b.FechaSolicitud, b.FechaRevision,
     b.FechaAsignacion, b.FechaSiagie,
-    e.EstudianteKey, ds.SeccionKey, dtm.TipoMatriculaKey, ss.Aforo,
+    e.EstudianteKey, ds.NivelAcademicoKey, dtm.TipoMatriculaKey, ss.Aforo,
     CASE WHEN b.ViaCanonica = N'Ratificacion de continuidad' THEN -1
          WHEN b.FechaSolicitud IS NULL THEN -2
          ELSE CONVERT(INT, CONVERT(CHAR(8), b.FechaSolicitud, 112))
@@ -266,7 +268,7 @@ FROM #MatriculaNormalizada AS b
 JOIN dw.DimEstudiante AS e ON e.CodigoEstudiante = b.CodigoEstudiante
 LEFT JOIN #SeccionAnual AS ss
     ON ss.SeccionID = b.SeccionID AND ss.AnioEscolar = b.AnioEscolar
-LEFT JOIN dw.DimSeccion AS ds
+LEFT JOIN dw.DimNivelAcademico AS ds
     ON ds.CodigoCorto = CONVERT(NVARCHAR(3), ss.Grado) + ss.Seccion
 LEFT JOIN dw.DimTipoMatricula AS dtm
     ON dtm.TipoMatricula = b.Tipo AND dtm.ViaMatricula = b.ViaCanonica
@@ -309,7 +311,7 @@ IF EXISTS (
     LEFT JOIN dw.DimTiempo AS t2 ON t2.TiempoKey = p.FechaRevisionKey
     LEFT JOIN dw.DimTiempo AS t4 ON t4.TiempoKey = p.FechaSiagieKey
     WHERE p.AnioEscolar IS NULL OR p.MatriculaID IS NULL OR p.MatriculaID = N''
-       OR p.SeccionKey IS NULL OR p.TipoMatriculaKey IS NULL
+       OR p.NivelAcademicoKey IS NULL OR p.TipoMatriculaKey IS NULL
        OR p.Aforo IS NULL OR p.Aforo <= 0
        OR t1.TiempoKey IS NULL OR t2.TiempoKey IS NULL
        OR t4.TiempoKey IS NULL
@@ -317,7 +319,7 @@ IF EXISTS (
 )
 BEGIN
     SELECT p.MatriculaID, p.AnioEscolar, p.SeccionID, p.Tipo,
-           p.ViaCanonica, p.Estado, p.SeccionKey, p.TipoMatriculaKey,
+           p.ViaCanonica, p.Estado, p.NivelAcademicoKey, p.TipoMatriculaKey,
            p.Aforo, p.FechaSolicitudKey,
            p.FechaRevisionKey, p.FechaSiagieKey
     FROM #MatriculaPreparada AS p
@@ -325,7 +327,7 @@ BEGIN
     LEFT JOIN dw.DimTiempo AS t2 ON t2.TiempoKey = p.FechaRevisionKey
     LEFT JOIN dw.DimTiempo AS t4 ON t4.TiempoKey = p.FechaSiagieKey
     WHERE p.AnioEscolar IS NULL OR p.MatriculaID IS NULL OR p.MatriculaID = N''
-       OR p.SeccionKey IS NULL OR p.TipoMatriculaKey IS NULL
+       OR p.NivelAcademicoKey IS NULL OR p.TipoMatriculaKey IS NULL
        OR p.Aforo IS NULL OR p.Aforo <= 0
        OR t1.TiempoKey IS NULL OR t2.TiempoKey IS NULL
        OR t4.TiempoKey IS NULL
@@ -347,13 +349,13 @@ BEGIN TRY
     DELETE FROM dm_matricula.FacMatricula;
 
     INSERT INTO dm_matricula.FacMatricula (
-        MatriculaID, AnioEscolar, EstudianteKey, SeccionKey, TipoMatriculaKey,
+        MatriculaID, AnioEscolar, EstudianteKey, NivelAcademicoKey, TipoMatriculaKey,
         FechaSolicitudKey, FechaRevisionKey, FechaSiagieKey,
         MatriculasSolicitadas, MatriculasValidadas, MatriculasRechazadas,
         DiasValidacion, CupoMaximoAula, VacantesOcupadas
     )
     SELECT
-        p.MatriculaID, p.AnioEscolar, p.EstudianteKey, p.SeccionKey,
+        p.MatriculaID, p.AnioEscolar, p.EstudianteKey, p.NivelAcademicoKey,
         p.TipoMatriculaKey, p.FechaSolicitudKey, p.FechaRevisionKey,
         p.FechaSiagieKey,
         1,
@@ -401,11 +403,11 @@ FROM #MatriculaPreparada GROUP BY AnioEscolar ORDER BY AnioEscolar;
 /* El cupo esta repetido en cada matricula del aula: JAMAS SUMAR la columna
    directamente. Agrupar por anio + seccion y tomar MAX antes de sumar. */
 ;WITH Aulas AS (
-    SELECT AnioEscolar, SeccionKey,
+    SELECT AnioEscolar, NivelAcademicoKey,
            MAX(CupoMaximoAula) AS Cupo,
            SUM(VacantesOcupadas) AS Ocupadas
     FROM dm_matricula.FacMatricula
-    GROUP BY AnioEscolar, SeccionKey
+    GROUP BY AnioEscolar, NivelAcademicoKey
 )
 SELECT AnioEscolar, COUNT(*) AS Aulas, SUM(Cupo) AS CupoTotal,
        SUM(Ocupadas) AS VacantesOcupadas,

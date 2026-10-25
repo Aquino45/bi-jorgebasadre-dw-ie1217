@@ -1,5 +1,18 @@
 # Changelog
 
+## v6.5 — 25/10/2026 (verificado)
+
+Dimensiones con los nombres y grupos de la matriz de métricas y dimensiones v2.2 (canon del equipo).
+
+### Cambiado
+- **`dw.DimCurso`** reemplaza a `DimArea` y `DimCompetencia` (grupo «Cursos»: Curso, Tipo de competencia, Competencia). Una fila por competencia (28) y una fila «Todo el curso» por curso (11), más la fila −1. `Curso` = `NombreArea` de areas_curriculares.csv; `CursoID` = `AreaID`. FacSesion y FacEntregaMaterial apuntan a la fila «Todo el curso»; FacLogroCompetencia, a la de su competencia. Un solo filtro de curso corta los tres hechos, sin relaciones entre dimensiones.
+- **`dw.DimNivelAcademico`** reemplaza a `DimSeccion` (ciclo, grado y sección; sale `NombreGrado`).
+- En los hechos: `SeccionKey` → `NivelAcademicoKey`; `AreaKey` y `CompetenciaKey` → `CursoKey`.
+
+### Verificado el 25/10/2026 (respaldo previo `DW_IE1217_pre_v6_5_20261025.bak`)
+- Comparación por claves naturales contra la v6.4: 0 diferencias en matrícula, sesiones, material y notas.
+- DimCurso 40 filas (26 específicas, 2 transversales, 11 «No aplica», −1); DimNivelAcademico 11; 0 FK entre dimensiones; bitácora de notas 581.
+
 ## v6.4 — 25/10/2026 (verificado)
 
 Preparación curricular se divide en dos hechos (sesiones y materiales), con las medidas que acordó el equipo; el DW sigue la matriz de métricas y dimensiones v2.2. Quedan cuatro hechos.

@@ -13,6 +13,9 @@
    dia del mes DENTRO de su bimestre. Con eso Preparacion y Aprendizajes se
    cruzan por bimestre sin descuadre (resuelve la decision pendiente 1).
 
+   CAMBIOS v6.5 (25/10/2026): el curso se busca en dw.DimCurso, en su fila
+   «Todo el curso» (las sesiones y entregas no registran competencia), y la
+   seccion en dw.DimNivelAcademico. AreaKey pasa a CursoKey.
    CAMBIOS v6.4 (25/10/2026): el proceso se divide en DOS hechos, uno por
    grano, con las medidas que acordo el equipo:
    - dm_preparacion.FacSesion (antes FacPreparacion): docente + area +
@@ -48,6 +51,10 @@ GO
    anterior (FacPreparacion) y una FacEntregaMaterial de la v6.2 (con
    MaterialesProgramados); ambas se recargan completas mas abajo. */
 DROP TABLE IF EXISTS dm_preparacion.FacPreparacion;
+IF COL_LENGTH(N'dm_preparacion.FacSesion', N'AreaKey') IS NOT NULL
+    DROP TABLE dm_preparacion.FacSesion;
+IF COL_LENGTH(N'dm_preparacion.FacEntregaMaterial', N'AreaKey') IS NOT NULL
+    DROP TABLE dm_preparacion.FacEntregaMaterial;
 IF COL_LENGTH(N'dm_preparacion.FacEntregaMaterial', N'MaterialesProgramados') IS NOT NULL
     DROP TABLE dm_preparacion.FacEntregaMaterial;
 
@@ -57,23 +64,23 @@ BEGIN
         SesionMesKey             INT IDENTITY(1,1) NOT NULL,
         TramoTiempoKey           INT NOT NULL, -- primer dia del mes dentro de su bimestre
         DocenteKey               INT NOT NULL,
-        AreaKey                  INT NOT NULL,
-        SeccionKey               INT NOT NULL,
+        CursoKey                  INT NOT NULL,
+        NivelAcademicoKey               INT NOT NULL,
         SesionesProgramadas      INT NOT NULL,
         SesionesDictadasHorario  INT NOT NULL, -- dictadas sin retraso
         SesionesDictadasRetraso  INT NOT NULL, -- dictadas con retraso
         IncidenciasProgramacion  INT NOT NULL, -- reprogramadas + no dictadas (P16)
         CONSTRAINT PK_FacSesion PRIMARY KEY CLUSTERED (SesionMesKey),
         CONSTRAINT UQ_FacSesion_Grano UNIQUE
-            (TramoTiempoKey, DocenteKey, AreaKey, SeccionKey),
+            (TramoTiempoKey, DocenteKey, CursoKey, NivelAcademicoKey),
         CONSTRAINT FK_FacSesion_Tiempo FOREIGN KEY (TramoTiempoKey)
             REFERENCES dw.DimTiempo(TiempoKey),
         CONSTRAINT FK_FacSesion_Docente FOREIGN KEY (DocenteKey)
             REFERENCES dw.DimDocente(DocenteKey),
-        CONSTRAINT FK_FacSesion_Area FOREIGN KEY (AreaKey)
-            REFERENCES dw.DimArea(AreaKey),
-        CONSTRAINT FK_FacSesion_Seccion FOREIGN KEY (SeccionKey)
-            REFERENCES dw.DimSeccion(SeccionKey),
+        CONSTRAINT FK_FacSesion_Curso FOREIGN KEY (CursoKey)
+            REFERENCES dw.DimCurso(CursoKey),
+        CONSTRAINT FK_FacSesion_Nivel FOREIGN KEY (NivelAcademicoKey)
+            REFERENCES dw.DimNivelAcademico(NivelAcademicoKey),
         CONSTRAINT CK_FacSesion_Cantidades CHECK (
             SesionesProgramadas >= 0 AND SesionesDictadasHorario >= 0
             AND SesionesDictadasRetraso >= 0 AND IncidenciasProgramacion >= 0
@@ -92,21 +99,21 @@ BEGIN
         EntregaKey                  INT IDENTITY(1,1) NOT NULL,
         FechaProgramadaKey          INT NOT NULL, -- inicio de clases del anio
         DocenteKey                  INT NOT NULL,
-        AreaKey                     INT NOT NULL,
-        SeccionKey                  INT NOT NULL,
+        CursoKey                     INT NOT NULL,
+        NivelAcademicoKey                  INT NOT NULL,
         MaterialesPorEntregar       INT NOT NULL, -- ejemplares por entregar
         MaterialesEntregadosATiempo INT NOT NULL, -- fuera de plazo = por entregar - a tiempo
         CONSTRAINT PK_FacEntregaMaterial PRIMARY KEY CLUSTERED (EntregaKey),
         CONSTRAINT UQ_FacEntregaMaterial_Grano UNIQUE
-            (FechaProgramadaKey, DocenteKey, AreaKey, SeccionKey),
+            (FechaProgramadaKey, DocenteKey, CursoKey, NivelAcademicoKey),
         CONSTRAINT FK_FacEntrega_Tiempo FOREIGN KEY (FechaProgramadaKey)
             REFERENCES dw.DimTiempo(TiempoKey),
         CONSTRAINT FK_FacEntrega_Docente FOREIGN KEY (DocenteKey)
             REFERENCES dw.DimDocente(DocenteKey),
-        CONSTRAINT FK_FacEntrega_Area FOREIGN KEY (AreaKey)
-            REFERENCES dw.DimArea(AreaKey),
-        CONSTRAINT FK_FacEntrega_Seccion FOREIGN KEY (SeccionKey)
-            REFERENCES dw.DimSeccion(SeccionKey),
+        CONSTRAINT FK_FacEntrega_Curso FOREIGN KEY (CursoKey)
+            REFERENCES dw.DimCurso(CursoKey),
+        CONSTRAINT FK_FacEntrega_Nivel FOREIGN KEY (NivelAcademicoKey)
+            REFERENCES dw.DimNivelAcademico(NivelAcademicoKey),
         CONSTRAINT CK_FacEntrega CHECK (
             MaterialesPorEntregar >= 0
             AND MaterialesEntregadosATiempo BETWEEN 0 AND MaterialesPorEntregar)
@@ -177,21 +184,21 @@ SELECT AnioEscolar, SeccionID, Grado, Seccion INTO #SeccionAnual
 FROM s WHERE rn = 1;
 
 SELECT a.AnioEscolar, a.DocenteID, a.AreaID, a.SeccionID,
-       d.DocenteKey, ar.AreaKey, sc.SeccionKey, sa.Grado
+       d.DocenteKey, ar.CursoKey, sc.NivelAcademicoKey, sa.Grado
 INTO #Asignacion
 FROM #CargaLimpia AS a
 LEFT JOIN #SeccionAnual AS sa
     ON sa.AnioEscolar = a.AnioEscolar AND sa.SeccionID = a.SeccionID
 LEFT JOIN dw.DimDocente AS d ON d.DocenteID = a.DocenteID
-LEFT JOIN dw.DimArea AS ar ON ar.AreaID = a.AreaID
-LEFT JOIN dw.DimSeccion AS sc
+LEFT JOIN dw.DimCurso AS ar ON ar.CursoID = a.AreaID AND ar.CompetenciaID = N'N/A'
+LEFT JOIN dw.DimNivelAcademico AS sc
     ON sc.CodigoCorto = CONVERT(NVARCHAR(3), sa.Grado) + sa.Seccion;
 
 IF EXISTS (SELECT 1 FROM #Asignacion
-           WHERE DocenteKey IS NULL OR AreaKey IS NULL OR SeccionKey IS NULL)
+           WHERE DocenteKey IS NULL OR CursoKey IS NULL OR NivelAcademicoKey IS NULL)
 BEGIN
     SELECT * FROM #Asignacion
-    WHERE DocenteKey IS NULL OR AreaKey IS NULL OR SeccionKey IS NULL;
+    WHERE DocenteKey IS NULL OR CursoKey IS NULL OR NivelAcademicoKey IS NULL;
     THROW 51054, N'Asignacion sin docente, area o seccion en 03_dimensiones.', 1;
 END;
 
@@ -219,7 +226,7 @@ END;
     FROM stg.Sesion
 ), n AS (
     SELECT l.*, a.DocenteID AS DocenteAsignado,
-           a.DocenteKey, a.AreaKey, a.SeccionKey,
+           a.DocenteKey, a.CursoKey, a.NivelAcademicoKey,
            CASE WHEN EstadoRaw LIKE N'NO%DICT%' THEN N'No dictada'
                 WHEN EstadoRaw LIKE N'REPRO%' THEN N'Reprogramada'
                 WHEN EstadoRaw LIKE N'DICT%RETRAS%' THEN N'Dictada con retraso'
@@ -265,13 +272,13 @@ IF EXISTS (
     SELECT 1 FROM #SesionNormalizada
     WHERE rn = 1 AND DocenteKey IS NOT NULL AND FechaSesion IS NOT NULL
       AND YEAR(FechaSesion) = AnioEscolar
-    GROUP BY AnioEscolar, FechaSesion, DocenteKey, AreaKey, SeccionKey
+    GROUP BY AnioEscolar, FechaSesion, DocenteKey, CursoKey, NivelAcademicoKey
     HAVING COUNT(*) > 1
 )
     THROW 51050, N'Dos sesiones validas comparten docente, fecha, area y seccion.', 1;
 
 SELECT AnioEscolar, MONTH(FechaSesion) AS MesEscolar, TramoKey,
-       DocenteKey, AreaKey, SeccionKey,
+       DocenteKey, CursoKey, NivelAcademicoKey,
        COUNT(*) AS SesionesProgramadas,
        SUM(CASE WHEN Estado IN (N'Dictada', N'Dictada con retraso')
                 THEN 1 ELSE 0 END) AS SesionesDictadas,
@@ -312,7 +319,7 @@ FROM (SELECT sn.*, tr.TramoKey
         ON tr.Anio = t.Anio AND tr.Mes = t.Mes AND tr.Bimestre = t.Bimestre) AS x
 WHERE rn = 1 AND DocenteKey IS NOT NULL AND FechaSesion IS NOT NULL
   AND YEAR(FechaSesion) = AnioEscolar
-GROUP BY AnioEscolar, MONTH(FechaSesion), TramoKey, DocenteKey, AreaKey, SeccionKey;
+GROUP BY AnioEscolar, MONTH(FechaSesion), TramoKey, DocenteKey, CursoKey, NivelAcademicoKey;
 
 /* 3. Entregas: el catalogo MaterialID decide si es texto o cuaderno; no
    confiar en TipoMaterial escrito libremente. La cantidad 'a tiempo' se
@@ -383,8 +390,8 @@ IF NOT EXISTS (SELECT 1 FROM #MaterialFechas)
 SELECT AnioEscolar, ProgramadaOriginal AS InicioClases
 INTO #InicioClases FROM priorizada WHERE rn = 1;
 
-SELECT f.*, a.DocenteID AS DocenteAsignado, a.DocenteKey, a.AreaKey,
-       a.SeccionKey, a.Grado, i.InicioClases,
+SELECT f.*, a.DocenteID AS DocenteAsignado, a.DocenteKey, a.CursoKey,
+       a.NivelAcademicoKey, a.Grado, i.InicioClases,
        m.MaterialID AS MaterialCatalogo,
        CASE WHEN UPPER(LTRIM(RTRIM(m.TipoMaterial))) LIKE N'TEXTO%'
                  THEN N'Texto escolar'
@@ -447,7 +454,7 @@ IF EXISTS (SELECT 1 FROM #MaterialPreparado
 
 SELECT AnioEscolar, MONTH(InicioClases) AS MesEscolar, TramoKey,
        MIN(CONVERT(INT, CONVERT(CHAR(8), InicioClases, 112))) AS FechaProgramadaKey,
-       DocenteKey, AreaKey, SeccionKey,
+       DocenteKey, CursoKey, NivelAcademicoKey,
        COUNT(*) AS RegistrosMaterial,
        SUM(Recibidos) AS MaterialesRecibidosIE,
        SUM(PorEntregar) AS MaterialesPorEntregar,
@@ -486,12 +493,12 @@ FROM (SELECT mp.*, tr.TramoKey
       LEFT JOIN dw.DimTiempo AS t ON t.Fecha = mp.InicioClases
       LEFT JOIN #Tramo AS tr
         ON tr.Anio = t.Anio AND tr.Mes = t.Mes AND tr.Bimestre = t.Bimestre) AS x
-GROUP BY AnioEscolar, MONTH(InicioClases), TramoKey, DocenteKey, AreaKey, SeccionKey;
+GROUP BY AnioEscolar, MONTH(InicioClases), TramoKey, DocenteKey, CursoKey, NivelAcademicoKey;
 
 /* 4. Cada hecho con su propio grano: sesiones por mes + bimestre en
    FacSesion; material por anio en FacEntregaMaterial. Nunca se unen
    sesiones con entregas (1:N), porque multiplicaria los ejemplares. */
-SELECT AnioEscolar, MesEscolar, TramoKey, DocenteKey, AreaKey, SeccionKey
+SELECT AnioEscolar, MesEscolar, TramoKey, DocenteKey, CursoKey, NivelAcademicoKey
 INTO #GranoPreparacion
 FROM #SesionesMes;
 
@@ -508,11 +515,11 @@ BEGIN TRY
     DELETE FROM dm_preparacion.FacSesion;
 
     INSERT INTO dm_preparacion.FacSesion (
-        TramoTiempoKey, DocenteKey, AreaKey, SeccionKey,
+        TramoTiempoKey, DocenteKey, CursoKey, NivelAcademicoKey,
         SesionesProgramadas, SesionesDictadasHorario, SesionesDictadasRetraso,
         IncidenciasProgramacion
     )
-    SELECT g.TramoKey, g.DocenteKey, g.AreaKey, g.SeccionKey,
+    SELECT g.TramoKey, g.DocenteKey, g.CursoKey, g.NivelAcademicoKey,
            ISNULL(s.SesionesProgramadas, 0),
            ISNULL(s.SesionesDictadasHorario, 0),
            ISNULL(s.SesionesDictadasRetraso, 0),
@@ -520,13 +527,13 @@ BEGIN TRY
     FROM #GranoPreparacion AS g
     LEFT JOIN #SesionesMes AS s ON s.TramoKey = g.TramoKey
         AND s.DocenteKey = g.DocenteKey
-        AND s.AreaKey = g.AreaKey AND s.SeccionKey = g.SeccionKey;
+        AND s.CursoKey = g.CursoKey AND s.NivelAcademicoKey = g.NivelAcademicoKey;
 
     DELETE FROM dm_preparacion.FacEntregaMaterial;
     INSERT INTO dm_preparacion.FacEntregaMaterial
-        (FechaProgramadaKey, DocenteKey, AreaKey, SeccionKey,
+        (FechaProgramadaKey, DocenteKey, CursoKey, NivelAcademicoKey,
          MaterialesPorEntregar, MaterialesEntregadosATiempo)
-    SELECT FechaProgramadaKey, DocenteKey, AreaKey, SeccionKey,
+    SELECT FechaProgramadaKey, DocenteKey, CursoKey, NivelAcademicoKey,
            MaterialesPorEntregar, MaterialesEntregadosATiempo
     FROM #MaterialesMes;
 

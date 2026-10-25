@@ -2,7 +2,7 @@
 
 **Curso:** Business Intelligence · Ingeniería de Sistemas · UPeU
 **Cliente:** I.E.P. N° 1217 "Jorge Basadre Grohmann" · Chaclacayo · UGEL 06
-**Versión vigente del ETL:** v6.4 (25/10/2026): dimensiones y hechos según la matriz v2.1; cuatro hechos: FacMatricula, FacSesion, FacEntregaMaterial y FacLogroCompetencia (preparación dividida en sesiones y materiales); cifras verificadas sin cambio. v6.3 y anteriores quedan como etiquetas.
+**Versión vigente del ETL:** v6.5 (25/10/2026): dimensiones y hechos según la matriz de métricas y dimensiones v2.2 (canon): DimCurso (curso + tipo + competencia, con fila «Todo el curso»), DimNivelAcademico y cuatro hechos (FacMatricula, FacSesion, FacEntregaMaterial, FacLogroCompetencia); cifras verificadas sin cambio. v6.4 y anteriores quedan como etiquetas.
 **Última actualización de esta bitácora:** 25/10/2026
 **Carga verificada en SQL Server:** 24/09/2026
 
@@ -351,6 +351,12 @@ Flujo en una línea: **copiar → revisar → hacer catálogos → llenar los tr
 - **07:** el control de filas usa FacSesion y cuenta FacEntregaMaterial; el job debe recrearse ejecutando el 07 cuando se use el Agent.
 - **Matriz de métricas y dimensiones v2.2** (sobre la v2.1 que modificó el equipo el 25/10): el hecho de preparación se divide en «Sesiones» y «Entrega de material»; se ajustan las «x» según el grano de cada medida (matrícula sin bimestre; cupo y vacantes solo con sección y año; sesiones con docente, sección, curso y año/bimestre/mes; material con docente, sección, curso y año; aprendizajes con año y bimestre); los % y conteos de personas pasan a «Power BI» y las métricas base a «Script SQL»; las observaciones se realinean con su medida (se quitan «motivo de rechazo» y «regla por confirmar»); la matriz bus queda con 4 hechos y las dimensiones actuales. La fila «Suma de notas obtenidas» sigue oculta, como la dejó el equipo, pero la usa el rendimiento promedio. La hoja «Mapeo origen-DW» sigue desactualizada (describe la v5.2).
 - **06:** «Competencias sin evidencia» sale de la matriz y entra «Notas con evidencia»: `CompetenciasSinEvidencia` pasa a `NotasConEvidencia`. 0 diferencias contra la v6.3; 44 436 con evidencia, 379 sin evidencia; rendimiento promedio 13,618.
+
+### 6.19 ETL v6.5: dimensiones con los grupos de la matriz v2.2 (25/10/2026) — D32
+- **Observación del equipo:** el DW tenía DimArea y DimCompetencia, pero el canon (matriz v2.2) tiene un solo grupo «Cursos» (Curso, Tipo de competencia, Competencia), y «Nivel académico» en lugar de «Sección».
+- **Contraste con Kimball:** la respuesta de libro para hechos de grano distinto es una dimensión conformada con su versión reducida (*shrunken rollup*): eso eran DimCompetencia + DimArea. Pero en Power BI un solo filtro de curso no cortaba sesiones y notas a la vez sin relacionar dimensiones entre sí (prohibido por D21). Se elige **una sola DimCurso** con dos niveles de fila: competencia (para notas) y «Todo el curso» (para sesiones y material). Sigue siendo estrella, coincide con el canon y un filtro de curso sirve para los tres hechos. Filtrar sesiones por competencia da vacío: correcto, la sesión no registra competencia.
+- **Cambios:** DimCurso (CursoKey, CursoID = AreaID, Curso = NombreArea, TipoCompetencia, CompetenciaID, Competencia; 40 filas); DimNivelAcademico (Ciclo, Grado, Sección; sale NombreGrado; 11 filas). En los hechos: NivelAcademicoKey y CursoKey.
+- **Verificación:** respaldo `DW_IE1217_pre_v6_5_20261025.bak`; se ejecutaron 03–06; comparación por claves naturales contra la v6.4: 0 diferencias en los cuatro hechos; 0 FK entre dimensiones.
 ---
 
 ## 7. Decisiones tomadas (con su porqué)
@@ -381,6 +387,7 @@ Flujo en una línea: **copiar → revisar → hacer catálogos → llenar los tr
 | D22 | **Versionado con Git** (repositorio privado en GitHub): nombres de archivo fijos y sin número de versión; cada versión es una etiqueta (`v5.1`, `v5.2`); commits con formato `tipo(área): descripción`; los datos del colegio nunca se suben | Evitar archivos con número de versión, reenvíos y versiones mezcladas (D20); saber qué versión corrió cada quien | ✅ Publicado el 13/10/2026 en GitHub (`Aquino45/bi-jorgebasadre-dw-ie1217`, etiquetas `v5.1` y `v5.2`) |
 | D23 | La matriz de métricas y dimensiones es un documento **previo al ETL**: dimensiones y atributos rotulados por concepto (nombre técnico solo como comentario), fórmulas en palabras, estado de definición (Acordada / Propuesta / Pendiente / Parcial / No medible) y sin cifras de la carga. Se excluyen las 5 métricas que agregó el ETL (días hasta SIAGIE, TIC, recursos, niveles de logro, competencias aprobadas) y los procesos 3.0 y 5.0. El mapeo origen → DW sí usa nombres reales | Pedido del equipo para la sustentación | ✅ Aplicado en v2.0 (13/10/2026) |
 | D24 | Dos versiones de Métricas y Dimensiones: **interna** (Git, con anotaciones) y **pública** (Drive, solo lo esencial). Grano **por medida** como granularidad (una palabra + nivel de jerarquía). En la pública, Estado binario: **Script SQL** / **Power BI** | Pedido del profesor (granularidad) y del equipo (versión limpia para presentar) | ✅ Aplicado en v2.1 (13/10/2026) |
+| D32 | ETL **v6.5**: DimCurso única (curso + tipo + competencia, con fila «Todo el curso») y DimNivelAcademico, según el canon v2.2 | La matriz v2.2 es el canon; un solo filtro de curso para los tres hechos sin relacionar dimensiones | ✅ Verificado (25/10/2026) |
 | D31 | ETL **v6.4**: preparación en dos hechos (FacSesion por mes + bimestre; FacEntregaMaterial por año) con las medidas acordadas; % y conteos de docentes en Power BI | Decisión del equipo (25/10/2026): sesiones y materiales tienen naturaleza y grano distintos | ✅ Verificado (25/10/2026) |
 | D30 | ETL **v6.3**: una tabla de hechos por proceso; cupo y vacantes en FacMatricula, materiales en FacPreparacion | Decisión del equipo (23/10/2026); se acepta el grano mezclado con reglas de suma (MAX por aula; material solo donde no es NULL) | ✅ Verificado (23/10/2026) |
 | D29 | ETL **v6.2**: los hechos guardan solo las medidas «Script SQL» de la matriz, con sus nombres; cinco hechos, uno por grano (FacCupoSeccion y FacEntregaMaterial nuevos) | Pedido del equipo (20/10/2026) y regla de Kimball de no mezclar granos | ✅ Verificado (20/10/2026) |
@@ -599,7 +606,7 @@ EXEC msdb.dbo.sp_update_job @job_name = N'ETL_IE1217_Carga', @enabled = 0;  -- p
 
 | Archivo | Estado |
 |---|---|
-| `01`–`07` | ✅ v6.4 (D31): verificada el 25/10/2026 (v6.4 cambia 05, 06 y el control de filas del 07; v6.3 cambió 04 y 05; 02 sin cambios) |
+| `01`–`07` | ✅ v6.5 (D32): verificada el 25/10/2026 (v6.5 cambia 03–06; v6.4 cambió 05, 06 y 07; 02 sin cambios) |
 | Versiones anteriores | Etiqueta `v5.1` en Git. Copia en `D:\BI_IE1217_respaldo\v5.1_scripts\` (fuera del repo, verificada contra el tag). No usar archivos sueltos con número de versión |
 | `Guia_ETL_3_datamarts_IE1217_v5_1.docx` | ✅ Vigente (sustituye al PDF v5) |
 | `Guia_ETL_3_datamarts_IE1217_v5.pdf` | Histórico |

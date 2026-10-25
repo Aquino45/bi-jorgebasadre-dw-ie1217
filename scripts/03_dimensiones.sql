@@ -1,5 +1,15 @@
 ﻿/* ============================================================================
    03_dimensiones.sql
+   CAMBIOS v6.5 (25/10/2026) — matriz v2.2 (canon del equipo):
+   - DimCurso reemplaza a DimArea y DimCompetencia: el grupo «Cursos» de la
+     matriz (Curso, Tipo de competencia, Competencia) es UNA dimension. Hay
+     una fila por competencia y una fila «Todo el curso» por curso, para los
+     hechos que solo conocen el curso (sesiones y entregas de material).
+     Curso = NombreArea de areas_curriculares.csv; CursoID = AreaID.
+   - DimNivelAcademico reemplaza a DimSeccion: ciclo, grado y seccion (sale
+     NombreGrado, que la matriz no pide). CodigoCorto queda como clave natural.
+   ============================================================================ */
+/* ============================================================================
    CAMBIOS v6.1 (20/10/2026) — matriz v2.1 corregida por el equipo:
    - DimTiempo: Fecha (dia), Anio, Mes y Bimestre. Salen AnioEscolar (era igual
      al anio), EsCierreBimestre (control interno del 06) y EsFilaEspecial (las
@@ -100,16 +110,23 @@ IF OBJECT_ID(N'dw.DimPeriodoAcademico', N'U') IS NOT NULL
    OR COL_LENGTH(N'dw.DimTiempo', N'AnioEscolar') IS NOT NULL      -- base v6.0
    OR COL_LENGTH(N'dw.DimCompetencia', N'NivelLogro') IS NOT NULL
    OR OBJECT_ID(N'dw.DimMotivoRechazo', N'U') IS NOT NULL
+   OR OBJECT_ID(N'dw.DimArea', N'U') IS NOT NULL                    -- base v6.4
+   OR OBJECT_ID(N'dw.DimSeccion', N'U') IS NOT NULL
 BEGIN
-    PRINT 'Migracion v6.1: se recrean los hechos y las dimensiones.';
+    PRINT 'Migracion v6.5: se recrean los hechos y las dimensiones.';
     DROP TABLE IF EXISTS dm_aprendizajes.FacLogroCompetencia;
     DROP TABLE IF EXISTS dm_preparacion.FacPreparacion;
+    DROP TABLE IF EXISTS dm_preparacion.FacSesion;
+    DROP TABLE IF EXISTS dm_preparacion.FacEntregaMaterial;
+    DROP TABLE IF EXISTS dm_matricula.FacCupoSeccion;
     DROP TABLE IF EXISTS dm_matricula.FacMatricula;
     DROP TABLE IF EXISTS dw.DimEscalaLogro;
     DROP TABLE IF EXISTS dw.DimPeriodoAcademico;
     DROP TABLE IF EXISTS dw.DimCompetencia;
     DROP TABLE IF EXISTS dw.DimArea;
     DROP TABLE IF EXISTS dw.DimSeccion;
+    DROP TABLE IF EXISTS dw.DimCurso;
+    DROP TABLE IF EXISTS dw.DimNivelAcademico;
     DROP TABLE IF EXISTS dw.DimDocente;
     DROP TABLE IF EXISTS dw.DimEstudiante;
     DROP TABLE IF EXISTS dw.DimTipoMatricula;
@@ -377,40 +394,35 @@ WHEN NOT MATCHED BY TARGET THEN
 GO
 
 /* ============================================================================
-   4. DimSeccion
+   4. DimNivelAcademico  (grupo «Nivel academico» de la matriz)
    ----------------------------------------------------------------------------
-   DECISION: la dimension NO lleva el anio. Son 10 filas (1A a 5B), no 20.
-   El SeccionID del origen si lo lleva (SEC-2025-1A), asi que se parte el
-   codigo y se reutiliza la seccion entre periodos. El AnioEscolar debe ir
-   explicito en cada hecho: una solicitud de diciembre de 2024 puede ser
-   matricula del anio escolar 2025.
-
-   El tutor NO entra aqui: cambia todos los anios y convertiria la dimension en
-   una SCD sin necesidad.
+   Ciclo, grado y seccion. DECISION: la dimension NO lleva el anio. Son 10
+   filas (1A a 5B), no 20: el SeccionID del origen si lo lleva
+   (SEC-2025-1A), asi que se parte el codigo y se reutiliza la seccion entre
+   anios. El anio escolar va explicito en cada hecho.
+   El tutor y el aforo NO entran: cambian cada anio (el aforo vive en
+   FacMatricula como cupo maximo por aula).
    ============================================================================ */
-IF OBJECT_ID('dw.DimSeccion', 'U') IS NULL
+IF OBJECT_ID('dw.DimNivelAcademico', 'U') IS NULL
 BEGIN
-CREATE TABLE dw.DimSeccion (
-    SeccionKey   INT IDENTITY(1,1) NOT NULL,
-    CodigoCorto  NVARCHAR(10)  NOT NULL,     -- '1A'
-    Ciclo        NVARCHAR(20)  NULL,
-    Grado        TINYINT       NULL,
-    Seccion      NVARCHAR(5)   NULL,
-    NombreGrado  NVARCHAR(30)  NULL,
-    CONSTRAINT PK_DimSeccion PRIMARY KEY CLUSTERED (SeccionKey),
-    CONSTRAINT UQ_DimSeccion UNIQUE (CodigoCorto)
+CREATE TABLE dw.DimNivelAcademico (
+    NivelAcademicoKey INT IDENTITY(1,1) NOT NULL,
+    CodigoCorto       NVARCHAR(10)  NOT NULL,     -- clave natural: '1A'
+    Ciclo             NVARCHAR(20)  NULL,
+    Grado             TINYINT       NULL,
+    Seccion           NVARCHAR(5)   NULL,
+    CONSTRAINT PK_DimNivelAcademico PRIMARY KEY CLUSTERED (NivelAcademicoKey),
+    CONSTRAINT UQ_DimNivelAcademico UNIQUE (CodigoCorto)
 );
 END;
 GO
-SET IDENTITY_INSERT dw.DimSeccion ON;
-INSERT INTO dw.DimSeccion (SeccionKey, CodigoCorto, Ciclo, Grado, Seccion, NombreGrado)
-SELECT -1, N'N/D', N'No definido', 0, N'X', N'No definido'
-WHERE NOT EXISTS (SELECT 1 FROM dw.DimSeccion WHERE SeccionKey = -1);
-SET IDENTITY_INSERT dw.DimSeccion OFF;
+SET IDENTITY_INSERT dw.DimNivelAcademico ON;
+INSERT INTO dw.DimNivelAcademico (NivelAcademicoKey, CodigoCorto, Ciclo, Grado, Seccion)
+SELECT -1, N'N/D', N'No definido', 0, N'X'
+WHERE NOT EXISTS (SELECT 1 FROM dw.DimNivelAcademico WHERE NivelAcademicoKey = -1);
+SET IDENTITY_INSERT dw.DimNivelAcademico OFF;
 GO
 
-/* El aforo NO va en la dimension: cambia por anio y el 04 lo toma de la
-   seccion del anio de cada matricula. */
 ;WITH s AS (
     SELECT TRY_CONVERT(TINYINT, LTRIM(RTRIM(Grado))) AS Grado,
            UPPER(LTRIM(RTRIM(Seccion))) AS Seccion,
@@ -421,99 +433,79 @@ GO
            ) AS rn
     FROM stg.Seccion
 )
-MERGE dw.DimSeccion AS d
+MERGE dw.DimNivelAcademico AS d
 USING (
-    SELECT CAST(Grado AS NVARCHAR(3)) + Seccion AS CodigoCorto,
-           Grado, Seccion, Ciclo,
-           CASE Grado WHEN 1 THEN N'Primero de secundaria' WHEN 2 THEN N'Segundo de secundaria'
-                      WHEN 3 THEN N'Tercero de secundaria' WHEN 4 THEN N'Cuarto de secundaria'
-                      ELSE N'Quinto de secundaria' END AS NombreGrado
+    SELECT CAST(Grado AS NVARCHAR(3)) + Seccion AS CodigoCorto, Grado, Seccion, Ciclo
     FROM s WHERE rn = 1 AND Grado BETWEEN 1 AND 5 AND Seccion IS NOT NULL AND Seccion <> N''
 ) AS o ON d.CodigoCorto = o.CodigoCorto
 WHEN MATCHED THEN UPDATE SET
-    d.Grado = o.Grado, d.Seccion = o.Seccion, d.Ciclo = o.Ciclo, d.NombreGrado = o.NombreGrado
+    d.Grado = o.Grado, d.Seccion = o.Seccion, d.Ciclo = o.Ciclo
 WHEN NOT MATCHED BY TARGET THEN
-    INSERT (CodigoCorto, Grado, Seccion, Ciclo, NombreGrado)
-    VALUES (o.CodigoCorto, o.Grado, o.Seccion, o.Ciclo, o.NombreGrado);
+    INSERT (CodigoCorto, Grado, Seccion, Ciclo)
+    VALUES (o.CodigoCorto, o.Grado, o.Seccion, o.Ciclo);
 GO
 
 /* ============================================================================
-   5. DimArea y DimCompetencia
+   5. DimCurso  (grupo «Cursos» de la matriz: Curso, Tipo de competencia,
+                 Competencia)
    ----------------------------------------------------------------------------
-   DimArea (el «curso» de la matriz) la usa preparacion: las sesiones y las
-   entregas son por area, sin competencia. DimCompetencia la usan las notas:
-   una fila por competencia, con su curso y su tipo (Especifica/Transversal)
-   copiados en la misma fila. Es la version reducida de la jerarquia
-   curso -> competencia, sin relacion entre dimensiones (estrella).
-   El origen no tiene un nivel mas fino que la competencia: no hay
-   actividades ni tareas, y la nota se registra por competencia y bimestre.
+   UNA dimension para los tres hechos que usan el curso. El grano mas fino es
+   la competencia (las notas se registran por competencia). Las sesiones y
+   las entregas de material solo conocen el CURSO: para ellas hay una fila
+   «Todo el curso» por curso (CompetenciaID = 'N/A', tipo «No aplica»).
+     - FacLogroCompetencia apunta a la fila de su competencia.
+     - FacSesion y FacEntregaMaterial apuntan a la fila «Todo el curso».
+   Asi un solo filtro de Curso en Power BI corta los tres hechos, sin
+   relacionar dimensiones entre si (estrella). Filtrar Sesiones por una
+   competencia devuelve vacio: es correcto, la sesion no la registra.
+   Curso = NombreArea de areas_curriculares.csv (renombrado); CursoID = AreaID.
    ============================================================================ */
-IF OBJECT_ID('dw.DimArea', 'U') IS NULL
+IF OBJECT_ID('dw.DimCurso', 'U') IS NULL
 BEGIN
-CREATE TABLE dw.DimArea (
-    AreaKey        INT IDENTITY(1,1) NOT NULL,
-    AreaID         NVARCHAR(20)  NOT NULL,
-    NombreArea     NVARCHAR(100) NULL,
-    CONSTRAINT PK_DimArea PRIMARY KEY CLUSTERED (AreaKey),
-    CONSTRAINT UQ_DimArea UNIQUE (AreaID)
+CREATE TABLE dw.DimCurso (
+    CursoKey          INT IDENTITY(1,1) NOT NULL,
+    CursoID           NVARCHAR(20)  NOT NULL,   -- AreaID del origen
+    Curso             NVARCHAR(100) NULL,       -- NombreArea del origen
+    TipoCompetencia   NVARCHAR(30)  NULL,       -- Especifica / Transversal / No aplica
+    CompetenciaID     NVARCHAR(20)  NOT NULL,   -- 'N/A' en la fila «Todo el curso»
+    Competencia       NVARCHAR(200) NULL,
+    CONSTRAINT PK_DimCurso PRIMARY KEY CLUSTERED (CursoKey),
+    CONSTRAINT UQ_DimCurso UNIQUE (CursoID, CompetenciaID)
 );
 END;
 GO
-SET IDENTITY_INSERT dw.DimArea ON;
-INSERT INTO dw.DimArea (AreaKey, AreaID, NombreArea)
-SELECT -1, N'N/D', N'No definida'
-WHERE NOT EXISTS (SELECT 1 FROM dw.DimArea WHERE AreaKey = -1);
-SET IDENTITY_INSERT dw.DimArea OFF;
+SET IDENTITY_INSERT dw.DimCurso ON;
+INSERT INTO dw.DimCurso (CursoKey, CursoID, Curso, TipoCompetencia, CompetenciaID, Competencia)
+SELECT -1, N'N/D', N'No definido', N'No definido', N'N/D', N'No definida'
+WHERE NOT EXISTS (SELECT 1 FROM dw.DimCurso WHERE CursoKey = -1);
+SET IDENTITY_INSERT dw.DimCurso OFF;
+GO
 
-MERGE dw.DimArea AS d
-USING (
-    SELECT LTRIM(RTRIM(AreaID)) AS AreaID, LTRIM(RTRIM(NombreArea)) AS NombreArea
+;WITH Cursos AS (
+    SELECT LTRIM(RTRIM(AreaID)) AS CursoID, LTRIM(RTRIM(NombreArea)) AS Curso
     FROM stg.AreaCurricular
     WHERE NULLIF(LTRIM(RTRIM(AreaID)), N'') IS NOT NULL
-) AS o ON d.AreaID = o.AreaID
-WHEN MATCHED THEN UPDATE SET d.NombreArea = o.NombreArea
-WHEN NOT MATCHED BY TARGET THEN
-    INSERT (AreaID, NombreArea) VALUES (o.AreaID, o.NombreArea);
-GO
-
-IF OBJECT_ID('dw.DimCompetencia', 'U') IS NULL
-BEGIN
-CREATE TABLE dw.DimCompetencia (
-    CompetenciaKey    INT IDENTITY(1,1) NOT NULL,
-    AreaID            NVARCHAR(20)  NULL,       -- desnormalizado (sin FK a DimArea)
-    NombreArea        NVARCHAR(100) NULL,
-    TipoCompetencia   NVARCHAR(30)  NULL,       -- Especifica / Transversal
-    CompetenciaID     NVARCHAR(20)  NOT NULL,
-    NombreCompetencia NVARCHAR(200) NULL,
-    CONSTRAINT PK_DimCompetencia PRIMARY KEY CLUSTERED (CompetenciaKey),
-    CONSTRAINT UQ_DimCompetencia UNIQUE (CompetenciaID)
-);
-END;
-GO
-SET IDENTITY_INSERT dw.DimCompetencia ON;
-INSERT INTO dw.DimCompetencia (CompetenciaKey, AreaID, NombreArea, TipoCompetencia,
-       CompetenciaID, NombreCompetencia)
-SELECT -1, N'N/D', N'No definida', N'No definida', N'N/D', N'No definida'
-WHERE NOT EXISTS (SELECT 1 FROM dw.DimCompetencia WHERE CompetenciaKey = -1);
-SET IDENTITY_INSERT dw.DimCompetencia OFF;
-
-MERGE dw.DimCompetencia AS d
-USING (
-    SELECT ISNULL(a.AreaID, N'N/D') AS AreaID,
-           ISNULL(a.NombreArea, N'No definida') AS NombreArea,
-           LTRIM(RTRIM(c.TipoCompetencia)) AS TipoCompetencia,
-           LTRIM(RTRIM(c.CompetenciaID)) AS CompetenciaID,
-           LTRIM(RTRIM(c.NombreCompetencia)) AS NombreCompetencia
+), Filas AS (
+    /* fila «Todo el curso» por cada curso */
+    SELECT CursoID, Curso, N'No aplica' AS TipoCompetencia,
+           N'N/A' AS CompetenciaID, N'Todo el curso' AS Competencia
+    FROM Cursos
+    UNION ALL
+    /* una fila por competencia, con su curso copiado en la misma fila */
+    SELECT ISNULL(cu.CursoID, N'N/D'), ISNULL(cu.Curso, N'No definido'),
+           LTRIM(RTRIM(c.TipoCompetencia)), LTRIM(RTRIM(c.CompetenciaID)),
+           LTRIM(RTRIM(c.NombreCompetencia))
     FROM stg.Competencia AS c
-    LEFT JOIN dw.DimArea AS a ON a.AreaID = LTRIM(RTRIM(c.AreaID))
+    LEFT JOIN Cursos AS cu ON cu.CursoID = LTRIM(RTRIM(c.AreaID))
     WHERE NULLIF(LTRIM(RTRIM(c.CompetenciaID)), N'') IS NOT NULL
-) AS o ON d.CompetenciaID = o.CompetenciaID
+)
+MERGE dw.DimCurso AS d
+USING Filas AS o ON d.CursoID = o.CursoID AND d.CompetenciaID = o.CompetenciaID
 WHEN MATCHED THEN UPDATE SET
-    d.AreaID = o.AreaID, d.NombreArea = o.NombreArea, d.TipoCompetencia = o.TipoCompetencia,
-    d.NombreCompetencia = o.NombreCompetencia
+    d.Curso = o.Curso, d.TipoCompetencia = o.TipoCompetencia, d.Competencia = o.Competencia
 WHEN NOT MATCHED BY TARGET THEN
-    INSERT (AreaID, NombreArea, TipoCompetencia, CompetenciaID, NombreCompetencia)
-    VALUES (o.AreaID, o.NombreArea, o.TipoCompetencia, o.CompetenciaID, o.NombreCompetencia);
+    INSERT (CursoID, Curso, TipoCompetencia, CompetenciaID, Competencia)
+    VALUES (o.CursoID, o.Curso, o.TipoCompetencia, o.CompetenciaID, o.Competencia);
 GO
 
 /* ============================================================================
@@ -592,26 +584,25 @@ SELECT 'dw.DimTiempo' AS Dimension, COUNT(*) AS Filas,
        SUM(CASE WHEN TiempoKey < 0 THEN 1 ELSE 0 END) AS MiembrosEspeciales FROM dw.DimTiempo
 UNION ALL SELECT 'dw.DimEstudiante',       COUNT(*), SUM(CASE WHEN EstudianteKey  < 0 THEN 1 ELSE 0 END) FROM dw.DimEstudiante
 UNION ALL SELECT 'dw.DimDocente',          COUNT(*), SUM(CASE WHEN DocenteKey     < 0 THEN 1 ELSE 0 END) FROM dw.DimDocente
-UNION ALL SELECT 'dw.DimSeccion',          COUNT(*), SUM(CASE WHEN SeccionKey     < 0 THEN 1 ELSE 0 END) FROM dw.DimSeccion
-UNION ALL SELECT 'dw.DimArea',             COUNT(*), SUM(CASE WHEN AreaKey        < 0 THEN 1 ELSE 0 END) FROM dw.DimArea
-UNION ALL SELECT 'dw.DimCompetencia',      COUNT(*), SUM(CASE WHEN CompetenciaKey < 0 THEN 1 ELSE 0 END) FROM dw.DimCompetencia
+UNION ALL SELECT 'dw.DimNivelAcademico',  COUNT(*), SUM(CASE WHEN NivelAcademicoKey < 0 THEN 1 ELSE 0 END) FROM dw.DimNivelAcademico
+UNION ALL SELECT 'dw.DimCurso',            COUNT(*), SUM(CASE WHEN CursoKey       < 0 THEN 1 ELSE 0 END) FROM dw.DimCurso
 UNION ALL SELECT 'dw.DimTipoMatricula',    COUNT(*), SUM(CASE WHEN TipoMatriculaKey < 0 THEN 1 ELSE 0 END) FROM dw.DimTipoMatricula;
 
 /* Conteos esperados (sin contar miembros especiales):
-   DimEstudiante 373 | DimDocente 15 | DimSeccion 10 | DimArea 11
-   DimCompetencia 28
+   DimEstudiante 373 | DimDocente 15 | DimNivelAcademico 10
+   DimCurso 39 (11 filas «Todo el curso» + 28 competencias)
    DimTipoMatricula: pocas decenas
 
    Si DimEstudiante trae MAS de 373, la deduplicacion no funciono.
    Si trae MENOS, se perdieron filas: revisar el filtro de codigo vacio.      */
 
-/* Sin FK, la integridad area-competencia se verifica aqui.
-   Cada competencia debe apuntar a un AreaID existente en DimArea. Esperado: 0. */
-SELECT 'Competencias con AreaID inexistente en DimArea (esperado 0)' AS Prueba,
+/* Cada competencia debe pertenecer a un curso del catalogo. Esperado: 0. */
+SELECT 'Competencias sin curso en areas_curriculares (esperado 0)' AS Prueba,
        COUNT(*) AS Filas
-FROM dw.DimCompetencia AS c
-WHERE c.CompetenciaKey <> -1
-  AND NOT EXISTS (SELECT 1 FROM dw.DimArea AS a WHERE a.AreaID = c.AreaID);
+FROM dw.DimCurso AS c
+WHERE c.CursoKey <> -1 AND c.CompetenciaID <> N'N/A'
+  AND NOT EXISTS (SELECT 1 FROM dw.DimCurso AS t
+                  WHERE t.CursoID = c.CursoID AND t.CompetenciaID = N'N/A');
 
 /* Bimestre academico por anio: primer y ultimo dia de cada bimestre. */
 SELECT Anio, Bimestre, NombreBimestre, MIN(Fecha) AS Desde, MAX(Fecha) AS Hasta

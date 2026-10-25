@@ -2,8 +2,8 @@
 
 **Curso:** Business Intelligence · Ingeniería de Sistemas · UPeU
 **Cliente:** I.E.P. N° 1217 "Jorge Basadre Grohmann" · Chaclacayo · UGEL 06
-**Versión vigente del ETL:** v6.3 (23/10/2026): dimensiones y hechos según la matriz v2.1 corregida por el equipo; los hechos guardan solo las medidas «Script SQL»; tres hechos, uno por proceso (se deshace la separación de la v6.2); cifras verificadas sin cambio. v6.2, v6.1, v6.0 y v5.2 quedan como etiquetas anteriores.
-**Última actualización de esta bitácora:** 23/10/2026
+**Versión vigente del ETL:** v6.4 (25/10/2026): dimensiones y hechos según la matriz v2.1; cuatro hechos: FacMatricula, FacSesion, FacEntregaMaterial y FacLogroCompetencia (preparación dividida en sesiones y materiales); cifras verificadas sin cambio. v6.3 y anteriores quedan como etiquetas.
+**Última actualización de esta bitácora:** 25/10/2026
 **Carga verificada en SQL Server:** 24/09/2026
 
 > **Para qué sirve este documento.** Retomar el proyecto en cualquier momento (personas o Claude) sin reconstruir la historia: qué existe, qué se verificó, qué se decidió y por qué, qué cambió entre versiones y qué falta decidir.
@@ -341,6 +341,16 @@ Flujo en una línea: **copiar → revisar → hacer catálogos → llenar los tr
 - **Columnas:** FacMatricula 15 · FacPreparacion 11 · FacLogroCompetencia 8.
 - **Verificación:** respaldo `DW_IE1217_pre_v6_3_20261023.bak`; se ejecutaron 04, 05 y 06; 0 diferencias fila por fila contra la v6.2 (matrícula, cupo, sesiones, material y notas). Cifras: 600 (579 / 21) · ocupación 96,33 % / 96,67 % · 879 filas de preparación · material a tiempo 61,97 % / 70,28 % · 44 815 notas + 581 · 379 sin evidencia.
 - **Operación:** el 23/10 el servicio de SQL Server estaba detenido tras reiniciar el equipo; se inicia con `Start-Service MSSQLSERVER` (PowerShell como administrador).
+
+### 6.18 ETL v6.4: preparación en dos hechos, sesiones y materiales (25/10/2026) — D31
+- **Decisión del equipo:** el proceso 2.0 se divide en dos hechos por su naturaleza y grano distintos. Medidas acordadas: % de docentes con retraso en horarios, % de docentes con retraso en la entrega de material, % de cumplimiento de horarios, % de materiales entregados a tiempo, sesiones programadas, sesiones dictadas en horario, sesiones dictadas con retraso, incidencias de programación, docentes con sesiones programadas, docentes con retraso en horarios, materiales por entregar, materiales entregados a tiempo, docentes con material por entregar y docentes con entregas fuera de plazo.
+- **Hechos:** `FacSesion` (antes FacPreparacion; asignación + mes + bimestre) y `FacEntregaMaterial` (asignación + año; fecha = inicio de clases). Guardan solo los conteos aditivos; los % y los conteos de docentes (DISTINCTCOUNT de DocenteKey) van en Power BI.
+- **Definiciones aplicadas:** incidencias = reprogramadas + no dictadas (P16); docente con retraso en horarios = menos del 80 % de sus sesiones del mes en horario (P4); docente con entregas fuera de plazo = al menos un ejemplar tarde o no entregado en el año (P14), calculado como por entregar − a tiempo > 0. Sale `MinutosRetraso` (no está en la lista acordada).
+- **Verificación:** respaldo `DW_IE1217_pre_v6_4_20261025.bak`; se ejecutó el 05; 0 diferencias contra la v6.3. 879 filas de sesiones · 100 de material · en horario 83,38 % / 83,41 % · con retraso 266 / 198 · incidencias 329 / 228 · docentes con retraso por mes 2–6 de 15 (13 % a 40 %) · material a tiempo 61,97 % / 70,28 %.
+- **⚠️ Observación:** con P14, los 9 docentes con material tienen al menos un ejemplar fuera de plazo en ambos años: el % de docentes con retraso en la entrega sale 100 % siempre y no distingue a nadie. Conviene un umbral (p. ej. menos del 80 % de sus ejemplares a tiempo), igual que en horarios. ⏳ Pendiente del equipo.
+- **07:** el control de filas usa FacSesion y cuenta FacEntregaMaterial; el job debe recrearse ejecutando el 07 cuando se use el Agent.
+- **Matriz de métricas y dimensiones v2.2** (sobre la v2.1 que modificó el equipo el 25/10): el hecho de preparación se divide en «Sesiones» y «Entrega de material»; se ajustan las «x» según el grano de cada medida (matrícula sin bimestre; cupo y vacantes solo con sección y año; sesiones con docente, sección, curso y año/bimestre/mes; material con docente, sección, curso y año; aprendizajes con año y bimestre); los % y conteos de personas pasan a «Power BI» y las métricas base a «Script SQL»; las observaciones se realinean con su medida (se quitan «motivo de rechazo» y «regla por confirmar»); la matriz bus queda con 4 hechos y las dimensiones actuales. La fila «Suma de notas obtenidas» sigue oculta, como la dejó el equipo, pero la usa el rendimiento promedio. La hoja «Mapeo origen-DW» sigue desactualizada (describe la v5.2).
+- **06:** «Competencias sin evidencia» sale de la matriz y entra «Notas con evidencia»: `CompetenciasSinEvidencia` pasa a `NotasConEvidencia`. 0 diferencias contra la v6.3; 44 436 con evidencia, 379 sin evidencia; rendimiento promedio 13,618.
 ---
 
 ## 7. Decisiones tomadas (con su porqué)
@@ -371,6 +381,7 @@ Flujo en una línea: **copiar → revisar → hacer catálogos → llenar los tr
 | D22 | **Versionado con Git** (repositorio privado en GitHub): nombres de archivo fijos y sin número de versión; cada versión es una etiqueta (`v5.1`, `v5.2`); commits con formato `tipo(área): descripción`; los datos del colegio nunca se suben | Evitar archivos con número de versión, reenvíos y versiones mezcladas (D20); saber qué versión corrió cada quien | ✅ Publicado el 13/10/2026 en GitHub (`Aquino45/bi-jorgebasadre-dw-ie1217`, etiquetas `v5.1` y `v5.2`) |
 | D23 | La matriz de métricas y dimensiones es un documento **previo al ETL**: dimensiones y atributos rotulados por concepto (nombre técnico solo como comentario), fórmulas en palabras, estado de definición (Acordada / Propuesta / Pendiente / Parcial / No medible) y sin cifras de la carga. Se excluyen las 5 métricas que agregó el ETL (días hasta SIAGIE, TIC, recursos, niveles de logro, competencias aprobadas) y los procesos 3.0 y 5.0. El mapeo origen → DW sí usa nombres reales | Pedido del equipo para la sustentación | ✅ Aplicado en v2.0 (13/10/2026) |
 | D24 | Dos versiones de Métricas y Dimensiones: **interna** (Git, con anotaciones) y **pública** (Drive, solo lo esencial). Grano **por medida** como granularidad (una palabra + nivel de jerarquía). En la pública, Estado binario: **Script SQL** / **Power BI** | Pedido del profesor (granularidad) y del equipo (versión limpia para presentar) | ✅ Aplicado en v2.1 (13/10/2026) |
+| D31 | ETL **v6.4**: preparación en dos hechos (FacSesion por mes + bimestre; FacEntregaMaterial por año) con las medidas acordadas; % y conteos de docentes en Power BI | Decisión del equipo (25/10/2026): sesiones y materiales tienen naturaleza y grano distintos | ✅ Verificado (25/10/2026) |
 | D30 | ETL **v6.3**: una tabla de hechos por proceso; cupo y vacantes en FacMatricula, materiales en FacPreparacion | Decisión del equipo (23/10/2026); se acepta el grano mezclado con reglas de suma (MAX por aula; material solo donde no es NULL) | ✅ Verificado (23/10/2026) |
 | D29 | ETL **v6.2**: los hechos guardan solo las medidas «Script SQL» de la matriz, con sus nombres; cinco hechos, uno por grano (FacCupoSeccion y FacEntregaMaterial nuevos) | Pedido del equipo (20/10/2026) y regla de Kimball de no mezclar granos | ✅ Verificado (20/10/2026) |
 | D28 | ETL **v6.1** según la matriz v2.1 corregida: Tiempo = fecha, año, mes, bimestre; Competencia = curso + tipo + competencia (sin nivel de logro); sin Motivo de rechazo; preparación por mes + bimestre | Cambios del equipo en la matriz (20/10/2026); el origen no trae nivel ni actividades; cruce por bimestre | ✅ Verificado (20/10/2026) |
@@ -588,7 +599,7 @@ EXEC msdb.dbo.sp_update_job @job_name = N'ETL_IE1217_Carga', @enabled = 0;  -- p
 
 | Archivo | Estado |
 |---|---|
-| `01`–`06` | ✅ v6.3 (D30): verificada el 23/10/2026 (v6.3 cambia 04 y 05; v6.2 cambió 04–06; v6.1 cambió 03–06; 02 y 07 sin cambios) |
+| `01`–`07` | ✅ v6.4 (D31): verificada el 25/10/2026 (v6.4 cambia 05, 06 y el control de filas del 07; v6.3 cambió 04 y 05; 02 sin cambios) |
 | Versiones anteriores | Etiqueta `v5.1` en Git. Copia en `D:\BI_IE1217_respaldo\v5.1_scripts\` (fuera del repo, verificada contra el tag). No usar archivos sueltos con número de versión |
 | `Guia_ETL_3_datamarts_IE1217_v5_1.docx` | ✅ Vigente (sustituye al PDF v5) |
 | `Guia_ETL_3_datamarts_IE1217_v5.pdf` | Histórico |

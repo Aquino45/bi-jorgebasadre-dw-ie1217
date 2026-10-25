@@ -13,30 +13,26 @@
    dia del mes DENTRO de su bimestre. Con eso Preparacion y Aprendizajes se
    cruzan por bimestre sin descuadre (resuelve la decision pendiente 1).
 
-   CAMBIOS v6.2: el hecho guarda SOLO las medidas que la matriz v2.1 marca
-   «Script SQL», con sus nombres: sesiones programadas, dictadas en horario,
-   minutos de retraso, incidencias de programacion (= reprogramadas, como
-   dice la matriz), materiales programados y entregados a tiempo. Los demas
-   conteos (horas, recursos, TIC, textos/cuadernos, contadores de calidad)
-   se siguen calculando aqui como CONTROL y se muestran al final, pero no se
-   guardan. Anio y mes salen de DimTiempo por TramoTiempoKey.
-   v6.3: UNA tabla de hechos por proceso (decision del equipo). Los
-   materiales vuelven a FacPreparacion, en la fila del mes de inicio de
-   clases (marzo); el hecho de entregas de la v6.2 se elimina. En los demas
-   meses las columnas de material quedan en NULL (no 0).
+   CAMBIOS v6.4 (25/10/2026): el proceso se divide en DOS hechos, uno por
+   grano, con las medidas que acordo el equipo:
+   - dm_preparacion.FacSesion (antes FacPreparacion): docente + area +
+     seccion + mes + bimestre. Sesiones programadas, dictadas en horario,
+     dictadas con retraso e incidencias de programacion
+     (= reprogramadas + no dictadas, acuerdo P16).
+   - dm_preparacion.FacEntregaMaterial: docente + area + seccion + anio, con
+     la fecha programada (inicio de clases) como clave de tiempo. Materiales
+     por entregar y entregados a tiempo. Fuera de plazo = por entregar -
+     a tiempo (tarde + no entregados), sin columna propia.
+   Los porcentajes y los conteos de DOCENTES (con sesiones, con retraso en
+   horarios: menos del 80 % en horario en el mes; con material; con entregas
+   fuera de plazo) se calculan en Power BI con DISTINCTCOUNT sobre DocenteKey.
+   Los demas conteos (horas, recursos, TIC, minutos de retraso, textos/
+   cuadernos, controles de calidad) se calculan aqui como CONTROL y se
+   muestran al final, pero no se guardan.
 
-   UNA tabla de hechos: docente + area + seccion + anio escolar + mes + bimestre.
-   Las sesiones se cuentan por mes de clase; la dotacion de material pertenece
-   al mes en que debio entregarse (marzo para el lote 2025-2026), aunque
-   alguna entrega efectiva se haya producido despues.
-
-   MaterialesProgramados = ejemplares POR ENTREGAR a estudiantes, no unidades
-   didacticas ni recursos usados en una clase. Un mismo ejemplar no se suma
-   otra vez en abril al consultar tendencias mensuales.
-
-   El material individual (titulo, fechas y observaciones) permanece completo
-   en stg.EntregaMaterial. Este hecho guarda solo los ejemplares programados
-   y entregados a tiempo; su grano mensual no admite el detalle individual.
+   MaterialesPorEntregar = ejemplares POR ENTREGAR a estudiantes, no unidades
+   didacticas ni recursos usados en una clase. El material individual
+   (titulo, fechas y observaciones) permanece completo en stg.EntregaMaterial.
 
    Se usan las asignaciones de stg.CargaHoraria para identificar al docente
    responsable tanto de sesiones como de entregas. Las discrepancias del CSV
@@ -48,52 +44,75 @@ GO
 IF SCHEMA_ID(N'dm_preparacion') IS NULL EXEC(N'CREATE SCHEMA dm_preparacion');
 GO
 
-/* v6.2: si el hecho tiene la estructura anterior, se elimina y se crea de
-   nuevo; se recarga completo mas abajo. */
-DROP TABLE IF EXISTS dm_preparacion.FacEntregaMaterial;   -- hecho separado de la v6.2
-IF COL_LENGTH(N'dm_preparacion.FacPreparacion', N'HorasPedagogicasProgramadas') IS NOT NULL
-   OR (OBJECT_ID(N'dm_preparacion.FacPreparacion', N'U') IS NOT NULL
-       AND COL_LENGTH(N'dm_preparacion.FacPreparacion', N'MaterialesProgramados') IS NULL)
-    DROP TABLE dm_preparacion.FacPreparacion;
+/* v6.4: el hecho de sesiones se llama FacSesion. Se eliminan la tabla
+   anterior (FacPreparacion) y una FacEntregaMaterial de la v6.2 (con
+   MaterialesProgramados); ambas se recargan completas mas abajo. */
+DROP TABLE IF EXISTS dm_preparacion.FacPreparacion;
+IF COL_LENGTH(N'dm_preparacion.FacEntregaMaterial', N'MaterialesProgramados') IS NOT NULL
+    DROP TABLE dm_preparacion.FacEntregaMaterial;
 
-IF OBJECT_ID(N'dm_preparacion.FacPreparacion', N'U') IS NULL
+IF OBJECT_ID(N'dm_preparacion.FacSesion', N'U') IS NULL
 BEGIN
-    CREATE TABLE dm_preparacion.FacPreparacion (
-        PreparacionKey              INT IDENTITY(1,1) NOT NULL,
-        TramoTiempoKey              INT NOT NULL, -- primer dia del mes dentro de su bimestre
-        DocenteKey                  INT NOT NULL,
-        AreaKey                     INT NOT NULL,
-        SeccionKey                  INT NOT NULL,
-        /* Medidas de la matriz v2.1 marcadas «Script SQL». */
-        SesionesProgramadas         INT NOT NULL,
-        SesionesDictadasHorario     INT NOT NULL, -- dictadas sin retraso
-        MinutosRetraso              INT NOT NULL, -- suma de minutos de retraso
-        IncidenciasProgramacion     INT NOT NULL, -- aproximacion: sesiones reprogramadas
-        MaterialesProgramados       INT NULL,     -- ejemplares por entregar (NULL = mes sin material)
-        MaterialesEntregadosATiempo INT NULL,
-        CONSTRAINT PK_FacPreparacion PRIMARY KEY CLUSTERED (PreparacionKey),
-        CONSTRAINT UQ_FacPreparacion_Grano UNIQUE
+    CREATE TABLE dm_preparacion.FacSesion (
+        SesionMesKey             INT IDENTITY(1,1) NOT NULL,
+        TramoTiempoKey           INT NOT NULL, -- primer dia del mes dentro de su bimestre
+        DocenteKey               INT NOT NULL,
+        AreaKey                  INT NOT NULL,
+        SeccionKey               INT NOT NULL,
+        SesionesProgramadas      INT NOT NULL,
+        SesionesDictadasHorario  INT NOT NULL, -- dictadas sin retraso
+        SesionesDictadasRetraso  INT NOT NULL, -- dictadas con retraso
+        IncidenciasProgramacion  INT NOT NULL, -- reprogramadas + no dictadas (P16)
+        CONSTRAINT PK_FacSesion PRIMARY KEY CLUSTERED (SesionMesKey),
+        CONSTRAINT UQ_FacSesion_Grano UNIQUE
             (TramoTiempoKey, DocenteKey, AreaKey, SeccionKey),
-        CONSTRAINT FK_FacPreparacion_Tiempo FOREIGN KEY (TramoTiempoKey)
+        CONSTRAINT FK_FacSesion_Tiempo FOREIGN KEY (TramoTiempoKey)
             REFERENCES dw.DimTiempo(TiempoKey),
-        CONSTRAINT FK_FacPreparacion_Docente FOREIGN KEY (DocenteKey)
+        CONSTRAINT FK_FacSesion_Docente FOREIGN KEY (DocenteKey)
             REFERENCES dw.DimDocente(DocenteKey),
-        CONSTRAINT FK_FacPreparacion_Area FOREIGN KEY (AreaKey)
+        CONSTRAINT FK_FacSesion_Area FOREIGN KEY (AreaKey)
             REFERENCES dw.DimArea(AreaKey),
-        CONSTRAINT FK_FacPreparacion_Seccion FOREIGN KEY (SeccionKey)
+        CONSTRAINT FK_FacSesion_Seccion FOREIGN KEY (SeccionKey)
             REFERENCES dw.DimSeccion(SeccionKey),
-        CONSTRAINT CK_FacPreparacion_Cantidades CHECK (
+        CONSTRAINT CK_FacSesion_Cantidades CHECK (
             SesionesProgramadas >= 0 AND SesionesDictadasHorario >= 0
-            AND IncidenciasProgramacion >= 0 AND MinutosRetraso >= 0
-            AND SesionesDictadasHorario + IncidenciasProgramacion <= SesionesProgramadas
-            AND ((MaterialesProgramados IS NULL AND MaterialesEntregadosATiempo IS NULL)
-                 OR (MaterialesProgramados >= 0
-                     AND MaterialesEntregadosATiempo BETWEEN 0 AND MaterialesProgramados))
+            AND SesionesDictadasRetraso >= 0 AND IncidenciasProgramacion >= 0
+            AND SesionesDictadasHorario + SesionesDictadasRetraso
+                + IncidenciasProgramacion <= SesionesProgramadas
         )
     );
 END;
 GO
 
+/* Segundo hecho del datamart: dotacion anual de material por asignacion.
+   Grano: docente + area + seccion + anio escolar. */
+IF OBJECT_ID(N'dm_preparacion.FacEntregaMaterial', N'U') IS NULL
+BEGIN
+    CREATE TABLE dm_preparacion.FacEntregaMaterial (
+        EntregaKey                  INT IDENTITY(1,1) NOT NULL,
+        FechaProgramadaKey          INT NOT NULL, -- inicio de clases del anio
+        DocenteKey                  INT NOT NULL,
+        AreaKey                     INT NOT NULL,
+        SeccionKey                  INT NOT NULL,
+        MaterialesPorEntregar       INT NOT NULL, -- ejemplares por entregar
+        MaterialesEntregadosATiempo INT NOT NULL, -- fuera de plazo = por entregar - a tiempo
+        CONSTRAINT PK_FacEntregaMaterial PRIMARY KEY CLUSTERED (EntregaKey),
+        CONSTRAINT UQ_FacEntregaMaterial_Grano UNIQUE
+            (FechaProgramadaKey, DocenteKey, AreaKey, SeccionKey),
+        CONSTRAINT FK_FacEntrega_Tiempo FOREIGN KEY (FechaProgramadaKey)
+            REFERENCES dw.DimTiempo(TiempoKey),
+        CONSTRAINT FK_FacEntrega_Docente FOREIGN KEY (DocenteKey)
+            REFERENCES dw.DimDocente(DocenteKey),
+        CONSTRAINT FK_FacEntrega_Area FOREIGN KEY (AreaKey)
+            REFERENCES dw.DimArea(AreaKey),
+        CONSTRAINT FK_FacEntrega_Seccion FOREIGN KEY (SeccionKey)
+            REFERENCES dw.DimSeccion(SeccionKey),
+        CONSTRAINT CK_FacEntrega CHECK (
+            MaterialesPorEntregar >= 0
+            AND MaterialesEntregadosATiempo BETWEEN 0 AND MaterialesPorEntregar)
+    );
+END;
+GO
 
 /* 0. Las tablas #temporales viven mientras la ventana de SSMS siga abierta. */
 DROP TABLE IF EXISTS #CargaLimpia;
@@ -427,6 +446,7 @@ IF EXISTS (SELECT 1 FROM #MaterialPreparado
     THROW 51059, N'Entrega duplicada del mismo material a una seccion y anio.', 1;
 
 SELECT AnioEscolar, MONTH(InicioClases) AS MesEscolar, TramoKey,
+       MIN(CONVERT(INT, CONVERT(CHAR(8), InicioClases, 112))) AS FechaProgramadaKey,
        DocenteKey, AreaKey, SeccionKey,
        COUNT(*) AS RegistrosMaterial,
        SUM(Recibidos) AS MaterialesRecibidosIE,
@@ -468,46 +488,47 @@ FROM (SELECT mp.*, tr.TramoKey
         ON tr.Anio = t.Anio AND tr.Mes = t.Mes AND tr.Bimestre = t.Bimestre) AS x
 GROUP BY AnioEscolar, MONTH(InicioClases), TramoKey, DocenteKey, AreaKey, SeccionKey;
 
-/* 4. UNION DE GRANOS ya agregados: nunca unir sesiones directamente con
-   entregas (1:N), porque multiplicaria la cantidad de ejemplares. */
+/* 4. Cada hecho con su propio grano: sesiones por mes + bimestre en
+   FacSesion; material por anio en FacEntregaMaterial. Nunca se unen
+   sesiones con entregas (1:N), porque multiplicaria los ejemplares. */
 SELECT AnioEscolar, MesEscolar, TramoKey, DocenteKey, AreaKey, SeccionKey
 INTO #GranoPreparacion
-FROM #SesionesMes
-UNION
-SELECT AnioEscolar, MesEscolar, TramoKey, DocenteKey, AreaKey, SeccionKey
-FROM #MaterialesMes;
+FROM #SesionesMes;
 
 /* Toda fila necesita su tramo en DimTiempo, y el material debe caer dentro
    del periodo escolar (bimestre > 0): se programa al inicio de clases. */
 IF EXISTS (SELECT 1 FROM #GranoPreparacion WHERE TramoKey IS NULL)
    OR EXISTS (SELECT 1 FROM #MaterialesMes AS m
-              JOIN dw.DimTiempo AS t ON t.TiempoKey = m.TramoKey
-              WHERE t.Bimestre = 0)
+              LEFT JOIN dw.DimTiempo AS t ON t.TiempoKey = m.FechaProgramadaKey
+              WHERE t.TiempoKey IS NULL OR t.Bimestre = 0)
     THROW 51049, N'Fecha fuera de DimTiempo o material fuera del periodo escolar: revisar el calendario del 03.', 1;
 
 BEGIN TRY
     BEGIN TRANSACTION;
-    DELETE FROM dm_preparacion.FacPreparacion;
+    DELETE FROM dm_preparacion.FacSesion;
 
-    INSERT INTO dm_preparacion.FacPreparacion (
+    INSERT INTO dm_preparacion.FacSesion (
         TramoTiempoKey, DocenteKey, AreaKey, SeccionKey,
-        SesionesProgramadas, SesionesDictadasHorario, MinutosRetraso,
-        IncidenciasProgramacion, MaterialesProgramados, MaterialesEntregadosATiempo
+        SesionesProgramadas, SesionesDictadasHorario, SesionesDictadasRetraso,
+        IncidenciasProgramacion
     )
     SELECT g.TramoKey, g.DocenteKey, g.AreaKey, g.SeccionKey,
            ISNULL(s.SesionesProgramadas, 0),
            ISNULL(s.SesionesDictadasHorario, 0),
-           ISNULL(s.MinutosRetraso, 0),
-           ISNULL(s.SesionesReprogramadas, 0),
-           m.MaterialesPorEntregar,
-           m.MaterialesEntregadosATiempo
+           ISNULL(s.SesionesDictadasRetraso, 0),
+           ISNULL(s.SesionesReprogramadas, 0) + ISNULL(s.SesionesNoDictadas, 0)
     FROM #GranoPreparacion AS g
     LEFT JOIN #SesionesMes AS s ON s.TramoKey = g.TramoKey
         AND s.DocenteKey = g.DocenteKey
-        AND s.AreaKey = g.AreaKey AND s.SeccionKey = g.SeccionKey
-    LEFT JOIN #MaterialesMes AS m ON m.TramoKey = g.TramoKey
-        AND m.DocenteKey = g.DocenteKey
-        AND m.AreaKey = g.AreaKey AND m.SeccionKey = g.SeccionKey;
+        AND s.AreaKey = g.AreaKey AND s.SeccionKey = g.SeccionKey;
+
+    DELETE FROM dm_preparacion.FacEntregaMaterial;
+    INSERT INTO dm_preparacion.FacEntregaMaterial
+        (FechaProgramadaKey, DocenteKey, AreaKey, SeccionKey,
+         MaterialesPorEntregar, MaterialesEntregadosATiempo)
+    SELECT FechaProgramadaKey, DocenteKey, AreaKey, SeccionKey,
+           MaterialesPorEntregar, MaterialesEntregadosATiempo
+    FROM #MaterialesMes;
 
     COMMIT TRANSACTION;
 END TRY
@@ -530,24 +551,44 @@ FROM #SesionNormalizada;
 SELECT t.Anio AS AnioEscolar, COUNT(*) AS Filas,
        SUM(f.SesionesProgramadas) AS SesionesProgramadas,
        SUM(f.SesionesDictadasHorario) AS DictadasEnHorario,
+       SUM(f.SesionesDictadasRetraso) AS DictadasConRetraso,
+       SUM(f.IncidenciasProgramacion) AS IncidenciasProgramacion,
        CAST(100.0 * SUM(f.SesionesDictadasHorario)
             / NULLIF(SUM(f.SesionesProgramadas), 0) AS DECIMAL(6,2))
            AS PctCumplimientoHorario,
-       SUM(f.MinutosRetraso) AS MinutosRetraso,
-       SUM(f.IncidenciasProgramacion) AS IncidenciasProgramacion
-FROM dm_preparacion.FacPreparacion AS f
+       COUNT(DISTINCT f.DocenteKey) AS DocentesConSesiones
+FROM dm_preparacion.FacSesion AS f
 JOIN dw.DimTiempo AS t ON t.TiempoKey = f.TramoTiempoKey
 GROUP BY t.Anio ORDER BY t.Anio;
 
-SELECT t.Anio AS AnioEscolar, COUNT(*) AS FilasConMaterial,
-       SUM(f.MaterialesProgramados) AS MaterialesProgramados,
-       SUM(f.MaterialesEntregadosATiempo) AS MaterialesATiempo,
-       CAST(100.0 * SUM(f.MaterialesEntregadosATiempo)
-            / NULLIF(SUM(f.MaterialesProgramados), 0) AS DECIMAL(6,2))
-           AS PctEntregaOportuna
-FROM dm_preparacion.FacPreparacion AS f
-JOIN dw.DimTiempo AS t ON t.TiempoKey = f.TramoTiempoKey
-WHERE f.MaterialesProgramados IS NOT NULL
+/* Docentes con retraso en horarios: menos del 80 % de sus sesiones del mes
+   dictadas en horario (mismo calculo que la medida de Power BI). */
+;WITH d AS (
+    SELECT t.Anio, t.Mes, f.DocenteKey,
+           SUM(f.SesionesDictadasHorario) AS Horario,
+           SUM(f.SesionesProgramadas) AS Programadas
+    FROM dm_preparacion.FacSesion AS f
+    JOIN dw.DimTiempo AS t ON t.TiempoKey = f.TramoTiempoKey
+    GROUP BY t.Anio, t.Mes, f.DocenteKey
+)
+SELECT Anio AS AnioEscolar, Mes, COUNT(*) AS DocentesConSesiones,
+       SUM(CASE WHEN 1.0 * Horario / NULLIF(Programadas, 0) < 0.80 THEN 1 ELSE 0 END)
+           AS DocentesConRetraso,
+       CAST(100.0 * SUM(CASE WHEN 1.0 * Horario / NULLIF(Programadas, 0) < 0.80 THEN 1 ELSE 0 END)
+            / COUNT(*) AS DECIMAL(6,2)) AS PctDocentesConRetraso
+FROM d GROUP BY Anio, Mes ORDER BY Anio, Mes;
+
+SELECT t.Anio AS AnioEscolar, MIN(t.Fecha) AS FechaProgramada, COUNT(*) AS Asignaciones,
+       SUM(e.MaterialesPorEntregar) AS MaterialesPorEntregar,
+       SUM(e.MaterialesEntregadosATiempo) AS MaterialesATiempo,
+       CAST(100.0 * SUM(e.MaterialesEntregadosATiempo)
+            / NULLIF(SUM(e.MaterialesPorEntregar), 0) AS DECIMAL(6,2))
+           AS PctEntregaOportuna,
+       COUNT(DISTINCT e.DocenteKey) AS DocentesConMaterial,
+       COUNT(DISTINCT CASE WHEN e.MaterialesPorEntregar > e.MaterialesEntregadosATiempo
+                           THEN e.DocenteKey END) AS DocentesFueraDePlazo
+FROM dm_preparacion.FacEntregaMaterial AS e
+JOIN dw.DimTiempo AS t ON t.TiempoKey = e.FechaProgramadaKey
 GROUP BY t.Anio ORDER BY t.Anio;
 
 /* Controles de calidad del lote (calculados aqui, no guardados en el hecho). */
@@ -570,12 +611,12 @@ FROM #MaterialesMes AS m GROUP BY m.AnioEscolar ORDER BY m.AnioEscolar;
 SELECT t.Anio AS AnioEscolar, t.Mes, t.Bimestre, t.NombreBimestre,
        COUNT(*) AS Filas,
        SUM(f.SesionesProgramadas) AS Sesiones
-FROM dm_preparacion.FacPreparacion AS f
+FROM dm_preparacion.FacSesion AS f
 JOIN dw.DimTiempo AS t ON t.TiempoKey = f.TramoTiempoKey
 GROUP BY t.Anio, t.Mes, t.Bimestre, t.NombreBimestre
 ORDER BY t.Anio, t.Mes, t.Bimestre;
 
 /* Metrica 'incidencias de programacion': el origen no ofrece cruces de horario
-   ni historial de cambios. SesionesReprogramadas es un dato disponible,
-   pero NO representa todos los cruces o incidencias de la matriz BI. */
+   ni historial de cambios. Se aproxima con sesiones reprogramadas + no
+   dictadas (P16); NO representa todos los cruces o incidencias posibles. */
 GO

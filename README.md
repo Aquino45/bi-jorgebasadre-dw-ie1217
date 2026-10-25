@@ -4,7 +4,7 @@ Proyecto del curso de Business Intelligence (UPeU). Carga tres datamarts (matrí
 
 ## Versión vigente
 
-**v6.3** (dimensiones y hechos según la matriz de métricas y dimensiones v2.1; tres hechos, uno por proceso; etiqueta `v6.3`). El historial de cambios está en [CHANGELOG.md](CHANGELOG.md).
+**v6.4** (dimensiones y hechos según la matriz de métricas y dimensiones v2.1; cuatro hechos: matrícula, sesiones, entrega de material y logro por competencia; etiqueta `v6.4`). El historial de cambios está en [CHANGELOG.md](CHANGELOG.md).
 Para ver todas las versiones: `git tag`.
 
 ## Estructura

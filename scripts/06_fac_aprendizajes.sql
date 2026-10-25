@@ -1,5 +1,10 @@
 ﻿/* ============================================================================
    06_fac_aprendizajes.sql
+   CAMBIOS v6.4 (25/10/2026): la matriz cambia «Competencias sin evidencia»
+   por «Notas con evidencia» (base del rendimiento promedio = suma de notas /
+   notas con evidencia). CompetenciasSinEvidencia pasa a NotasConEvidencia
+   (1 si la competencia tiene nota). Una competencia sin evidencia sigue en
+   el hecho con nota NULL y 0 en NotasConEvidencia: nunca cuenta como nota 0.
    CAMBIOS v6.2 (20/10/2026): el hecho guarda SOLO las medidas que la matriz
    v2.1 marca «Script SQL»: la nota (su suma es la «suma de notas obtenidas»)
    y CompetenciasSinEvidencia. Salen los contadores de competencias
@@ -62,7 +67,7 @@
    * Los decimales validos se redondean al entero superior desde .5
      (ROUND de SQL Server). Nunca se redondea una nota fuera de 0..20.
    * Las competencias realmente sin evidencia SI entran: nota NULL,
-     CompetenciasSinEvidencia = 1 (nunca 0).
+     NotasConEvidencia = 0 (nunca nota 0).
    * Nota invalida, competencia/area incompatibles o referencias ausentes:
      no se les asigna artificialmente un nivel; quedan en stg.BitacoraNota.
    * Ante copias, se prefiere el CodigoCompetencia literal de catalogo,
@@ -93,6 +98,7 @@ GO
 /* v6.2: si el hecho tiene la estructura anterior, se elimina y se crea de
    nuevo; se recarga completo mas abajo. */
 IF COL_LENGTH(N'dm_aprendizajes.FacLogroCompetencia', N'EvaluadaConEvidencia') IS NOT NULL
+   OR COL_LENGTH(N'dm_aprendizajes.FacLogroCompetencia', N'CompetenciasSinEvidencia') IS NOT NULL
     DROP TABLE dm_aprendizajes.FacLogroCompetencia;
 
 IF OBJECT_ID(N'dm_aprendizajes.FacLogroCompetencia', N'U') IS NULL
@@ -106,7 +112,7 @@ BEGIN
         CompetenciaKey           INT NOT NULL,   -- competencia evaluada (con su curso)
         /* Medidas de la matriz v2.1 marcadas «Script SQL». */
         NotaVigesimal            DECIMAL(5,2) NULL,  -- 0 a 20; NULL = sin evidencia, nunca 0
-        CompetenciasSinEvidencia TINYINT NOT NULL,   -- 1 si la competencia se registro sin nota
+        NotasConEvidencia        TINYINT NOT NULL,   -- 1 si la competencia tiene nota (0 = sin evidencia)
         CONSTRAINT PK_FacLogroCompetencia PRIMARY KEY CLUSTERED (LogroKey),
         CONSTRAINT UQ_FacLogroCompetencia_Grano UNIQUE
             (FechaCierreKey, EstudianteKey, CompetenciaKey),
@@ -121,8 +127,8 @@ BEGIN
         CONSTRAINT FK_FacLogro_Competencia FOREIGN KEY (CompetenciaKey)
             REFERENCES dw.DimCompetencia(CompetenciaKey),
         CONSTRAINT CK_FacLogro_Consistencia CHECK (
-            (CompetenciasSinEvidencia = 1 AND NotaVigesimal IS NULL)
-            OR (CompetenciasSinEvidencia = 0 AND NotaVigesimal BETWEEN 0 AND 20)
+            (NotasConEvidencia = 0 AND NotaVigesimal IS NULL)
+            OR (NotasConEvidencia = 1 AND NotaVigesimal BETWEEN 0 AND 20)
         )
     );
 END;
@@ -354,9 +360,9 @@ BEGIN TRY
 
     INSERT INTO dm_aprendizajes.FacLogroCompetencia
         (FechaCierreKey, EstudianteKey, SeccionKey, DocenteKey, CompetenciaKey,
-         NotaVigesimal, CompetenciasSinEvidencia)
+         NotaVigesimal, NotasConEvidencia)
     SELECT FechaCierreKey, EstudianteKey, SeccionKey, DocenteKey, CompetenciaKey,
-           NotaFinal, EsSinEvidencia
+           NotaFinal, 1 - EsSinEvidencia
     FROM #Ordenadas WHERE rn = 1;
 
     IF (SELECT COUNT(*) FROM stg.NotaCompetencia) <>
@@ -389,7 +395,8 @@ WHERE MotivoRechazo IS NULL AND FechaInformadaKey <> FechaCierreKey;
 
 SELECT t.Anio AS AnioEscolar, t.Bimestre, COUNT(*) AS CompetenciasRegistradas,
        COUNT(f.NotaVigesimal) AS ConNota,               -- COUNT ignora NULL
-       SUM(f.CompetenciasSinEvidencia) AS SinEvidencia,
+       SUM(f.NotasConEvidencia) AS NotasConEvidencia,
+       COUNT(*) - SUM(f.NotasConEvidencia) AS SinEvidencia,
        SUM(f.NotaVigesimal) AS SumaNotas,
        AVG(f.NotaVigesimal) AS RendimientoPromedio      -- AVG ignora NULL
 FROM dm_aprendizajes.FacLogroCompetencia AS f

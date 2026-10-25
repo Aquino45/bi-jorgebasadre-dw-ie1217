@@ -1,5 +1,27 @@
 # Changelog
 
+## v6.4 — 25/10/2026 (verificado)
+
+Preparación curricular se divide en dos hechos (sesiones y materiales), con las medidas que acordó el equipo; el DW sigue la matriz de métricas y dimensiones v2.2. Quedan cuatro hechos.
+
+### Cambiado
+- `dm_preparacion.FacPreparacion` pasa a llamarse **`FacSesion`** (asignación + mes + bimestre, 879 filas): `SesionesProgramadas`, `SesionesDictadasHorario`, `SesionesDictadasRetraso`, `IncidenciasProgramacion` (= reprogramadas + no dictadas, P16). Sale `MinutosRetraso` (no está en la lista) y el material.
+- 07: el control de filas del job usa `FacSesion` y cuenta también `FacEntregaMaterial`.
+- `FacLogroCompetencia`: `CompetenciasSinEvidencia` pasa a **`NotasConEvidencia`** (1 si la competencia tiene nota), como pide la matriz v2.2 («Notas con evidencia», base del rendimiento promedio). La competencia sin evidencia sigue con nota NULL, nunca 0.
+
+### Agregado
+- **`dm_preparacion.FacEntregaMaterial`** (asignación + año, 100 filas; `FechaProgramadaKey` = inicio de clases): `MaterialesPorEntregar`, `MaterialesEntregadosATiempo`. Fuera de plazo = por entregar − a tiempo, sin columna propia.
+
+### En Power BI (no se guardan)
+- % de cumplimiento de horarios y % de materiales a tiempo.
+- Docentes con sesiones programadas, con retraso en horarios (menos del 80 % en horario en el mes, P4), con material por entregar y con entregas fuera de plazo (al menos un ejemplar tarde o no entregado, P14), y sus %.
+
+### Verificado el 25/10/2026 (respaldo previo `DW_IE1217_pre_v6_4_20261025.bak`)
+- 0 diferencias contra la v6.3 en sesiones programadas, en horario y material.
+- 6 352 sesiones: en horario 3 110 / 2 187 (83,38 % / 83,41 %), con retraso 266 / 198, incidencias 329 / 228 (2025 / 2026). Docentes con retraso por mes: 2 a 6 de 15.
+- Material: 2 890 / 2 900 ejemplares por entregar, 61,97 % / 70,28 % a tiempo; 9 docentes con material, los 9 con entregas fuera de plazo.
+- Notas: 0 diferencias contra la v6.3; 44 815 notas, 44 436 con evidencia, 379 sin evidencia; rendimiento promedio 13,618.
+
 ## v6.3 — 23/10/2026 (verificado)
 
 Una tabla de hechos por proceso (decisión del equipo): se deshace la separación de granos de la v6.2. Las medidas siguen siendo solo las «Script SQL» de la matriz.

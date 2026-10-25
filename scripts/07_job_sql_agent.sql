@@ -222,7 +222,7 @@ BEGIN
         THROW 51073, N'No hay lote en curso para cerrar.', 1;
 
     DECLARE @Matricula   BIGINT = (SELECT COUNT_BIG(*) FROM dm_matricula.FacMatricula),
-            @Preparacion BIGINT = (SELECT COUNT_BIG(*) FROM dm_preparacion.FacPreparacion),
+            @Preparacion BIGINT = (SELECT COUNT_BIG(*) FROM dm_preparacion.FacSesion),
             @Logro       BIGINT = (SELECT COUNT_BIG(*) FROM dm_aprendizajes.FacLogroCompetencia),
             @Bitacora    BIGINT = (SELECT COUNT_BIG(*) FROM stg.BitacoraNota),
             @NotasOrigen BIGINT = (SELECT COUNT_BIG(*) FROM stg.NotaCompetencia),
@@ -294,7 +294,8 @@ AS
 SELECT l.LoteID, l.Origen, l.Inicio, l.Fin, l.DuracionSeg, l.Estado,
        l.PasoFallido,
        MAX(CASE WHEN c.Objeto = N'dm_matricula.FacMatricula'           THEN c.Filas END) AS FacMatricula,
-       MAX(CASE WHEN c.Objeto = N'dm_preparacion.FacPreparacion'       THEN c.Filas END) AS FacPreparacion,
+       MAX(CASE WHEN c.Objeto = N'dm_preparacion.FacSesion'            THEN c.Filas END) AS FacSesion,
+       MAX(CASE WHEN c.Objeto = N'dm_preparacion.FacEntregaMaterial'   THEN c.Filas END) AS FacEntregaMaterial,
        MAX(CASE WHEN c.Objeto = N'dm_aprendizajes.FacLogroCompetencia' THEN c.Filas END) AS FacLogroCompetencia,
        MAX(CASE WHEN c.Objeto = N'stg.BitacoraNota'                    THEN c.Filas END) AS BitacoraNota,
        l.Mensaje

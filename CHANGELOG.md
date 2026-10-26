@@ -1,5 +1,22 @@
 # Changelog
 
+## v6.5.1 — 25/10/2026 (por verificar en SQL Server)
+
+Correcciones de la auditoría general del 25/10/2026. No cambia ninguna tabla ni ninguna cifra de los hechos: solo una consulta de control, un control nuevo y el cierre del lote.
+
+### Cambiado
+- 06: la consulta de control de bajo rendimiento usa la regla acordada P5 (promedio por área; bajo rendimiento = alguna área < 11; aprobado = todas ≥ 11). La v6.5 contaba por competencia. Agrega `EvaluadosConAreaSinEvidencia` (casos de P19).
+- 07: `usp_CerrarLote` también detiene el lote si `dm_preparacion.FacEntregaMaterial` queda vacío; textos sin «v5.1». Hay que recrear el job.
+- 04: control nuevo de rechazadas por vía y sin ninguna fecha real (P13b); comentario de DimSeccion corregido.
+
+### Documentos (para revisión, sin reemplazar los vigentes)
+- `docs/insumos/Matriz_BI_Gestion_de_ProcesosV.4_2.xlsx`: notas de la auditoría (M1–M12) y propuestas P13b, P14b, P17, P18, P19.
+- `docs/insumos/Metricas_y_Dimensiones_v2.3.xlsx`: Mapeo origen-DW reescrito para v6.5 (43 filas); observaciones de la V2; matriz bus con «Una fila representa».
+
+### Esperado al ejecutar
+- 04, control P13b: 2025 = 11 rechazadas (3 con revisión, 8 sin ninguna fecha); 2026 = 10 (2 y 8).
+- 06: hecho y bitácora sin cambios (44 815 + 581).
+
 ## v6.5 — 25/10/2026 (verificado)
 
 Dimensiones con los nombres y grupos de la matriz de métricas y dimensiones v2.2 (canon del equipo).

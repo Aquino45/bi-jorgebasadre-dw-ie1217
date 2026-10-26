@@ -1,5 +1,8 @@
 ﻿/* =============================================================================
    07_job_sql_agent.sql — AUTOMATIZACION DEL ETL CON SQL SERVER AGENT
+   CAMBIOS v6.5.1 (25/10/2026, auditoria): el cierre del lote tambien exige
+   que dm_preparacion.FacEntregaMaterial no quede vacio, y los textos ya no
+   dicen v5.1. Recrear el job ejecutando este script.
    Base: DW_IE1217 | SQL Server 2017 o posterior (no Express: no trae Agente)
 
    QUE HACE
@@ -32,7 +35,7 @@
    ANTES DE EJECUTAR ESTE SCRIPT (una sola vez)
      a) Haber corrido 01 a 06 a mano y validado los resultados.
      b) Carpetas:  C:\BI_IE1217\data     (los 17 CSV, ya existe)
-                   C:\BI_IE1217\scripts  (copiar aqui 01 a 06 v5_1)
+                   C:\BI_IE1217\scripts  (copiar aqui 01 a 06 de la version vigente)
                    C:\BI_IE1217\logs     (crearla vacia)
      c) Iniciar el Agente: SQL Server Configuration Manager -> Servicios de
         SQL Server -> SQL Server Agent -> Iniciar, y Modo de inicio: Automatico.
@@ -223,12 +226,13 @@ BEGIN
 
     DECLARE @Matricula   BIGINT = (SELECT COUNT_BIG(*) FROM dm_matricula.FacMatricula),
             @Preparacion BIGINT = (SELECT COUNT_BIG(*) FROM dm_preparacion.FacSesion),
+            @Material    BIGINT = (SELECT COUNT_BIG(*) FROM dm_preparacion.FacEntregaMaterial),
             @Logro       BIGINT = (SELECT COUNT_BIG(*) FROM dm_aprendizajes.FacLogroCompetencia),
             @Bitacora    BIGINT = (SELECT COUNT_BIG(*) FROM stg.BitacoraNota),
             @NotasOrigen BIGINT = (SELECT COUNT_BIG(*) FROM stg.NotaCompetencia),
             @Msg         NVARCHAR(2048);
 
-    IF @Matricula = 0 OR @Preparacion = 0 OR @Logro = 0
+    IF @Matricula = 0 OR @Preparacion = 0 OR @Material = 0 OR @Logro = 0
         THROW 51074, N'Un hecho quedo vacio: revisar el log de su paso.', 1;
 
     IF @NotasOrigen <> @Logro + @Bitacora
@@ -257,7 +261,7 @@ BEGIN
 
     UPDATE ctl.LoteETL
     SET Estado = N'Exitoso', Fin = SYSDATETIME(),
-        Mensaje = CONCAT(N'Matricula ', @Matricula, N' | Preparacion ', @Preparacion,
+        Mensaje = CONCAT(N'Matricula ', @Matricula, N' | Sesiones ', @Preparacion, N' | Material ', @Material,
                          N' | Aprendizajes ', @Logro, N' + bitacora ', @Bitacora)
     WHERE LoteID = @Lote;
 
@@ -362,7 +366,7 @@ BEGIN TRY
     EXEC msdb.dbo.sp_add_job
         @job_name              = @Job,
         @enabled               = 1,
-        @description           = N'ETL I.E. 1217: staging, diagnostico, dimensiones y tres datamarts (scripts 01-06 v5.1) con control de lotes en DW_IE1217.ctl.',
+        @description           = N'ETL I.E. 1217: staging, diagnostico, dimensiones y tres datamarts (scripts 01-06, version vigente) con control de lotes en DW_IE1217.ctl.',
         @owner_login_name      = N'sa',
         @notify_level_eventlog = 2,          -- escribe en el visor de eventos si falla
         @job_id                = @JobId OUTPUT;

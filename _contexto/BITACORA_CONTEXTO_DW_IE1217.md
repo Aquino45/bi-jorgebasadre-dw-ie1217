@@ -2,7 +2,7 @@
 
 **Curso:** Business Intelligence · Ingeniería de Sistemas · UPeU
 **Cliente:** I.E.P. N° 1217 "Jorge Basadre Grohmann" · Chaclacayo · UGEL 06
-**Versión vigente del ETL:** v6.5 (25/10/2026): dimensiones y hechos según la matriz de métricas y dimensiones v2.2 (canon): DimCurso (curso + tipo + competencia, con fila «Todo el curso»), DimNivelAcademico y cuatro hechos (FacMatricula, FacSesion, FacEntregaMaterial, FacLogroCompetencia); cifras verificadas sin cambio. v6.4 y anteriores quedan como etiquetas.
+**Versión vigente del ETL:** v6.5 (25/10/2026): dimensiones y hechos según la matriz de métricas y dimensiones v2.2 (canon): DimCurso (curso + tipo + competencia, con fila «Todo el curso»), DimNivelAcademico y cuatro hechos (FacMatricula, FacSesion, FacEntregaMaterial, FacLogroCompetencia); cifras verificadas sin cambio. v6.4 y anteriores quedan como etiquetas. **v6.5.1** (25/10/2026, auditoría): solo controles del 04 y 06 y cierre del lote del 07; sin cambio de tablas ni cifras; 🟦 por ejecutar en SQL Server.
 **Última actualización de esta bitácora:** 25/10/2026
 **Carga verificada en SQL Server:** 24/09/2026
 
@@ -29,7 +29,8 @@
 | Catálogo métricas → indicadores → KPI (`Metricas_KPI_DW_IE1217.xlsx`) | ✅ Entregado (42 filas: 22 métricas cargadas en los scripts, 20 indicadores/KPI planificados para Power BI) |
 | Capa de KPI en Power BI (DAX) | 🟨 Siguiente fase; criterio aprobado por el ingeniero |
 | Matriz bus, V2 y mapeo (`docs/insumos/Metricas_y_Dimensiones.xlsx`) | ✅ v2.0 del 13/10/2026: matriz previa al ETL rotulada por concepto + mapeo origen → DW con nombres reales (D23) |
-| Definiciones de KPI ambiguas (validada, pendientes, docente con retraso, estudiante aprobado) | ⏳ Pendientes de acuerdo |
+| Definiciones de KPI ambiguas (validada, pendientes, docente con retraso, estudiante aprobado) | ✅ Acordadas el 19/10/2026 (P2, P4, P5, P13–P16) |
+| Auditoría general (Matriz BI → bus → dimensiones → hechos → mapeo) | ✅ 25/10/2026, nota 7,5/10 · [documento](https://claude.ai/artifact/RTpFYbkU61qkqM4someL1d) · correcciones sin cambio de modelo en v6.5.1 (6.20) · 5 definiciones nuevas ⏳ (P13b, P14b, P17–P19) |
 
 **Idea central para la sustentación:** el DW entrega **métricas atómicas y verificadas**; los **indicadores y KPI** se construyen en el modelo semántico de Power BI. Si el colegio redefine un KPI, se ajusta una medida DAX sin recargar datos.
 
@@ -39,10 +40,10 @@
 
 ### 2.1 Dentro del alcance
 
-| N° | Proceso del mapa | Datamart | Hecho |
+| N° | Proceso del mapa | Datamart | Hecho(s) |
 |---|---|---|---|
 | 1.0 | Gestionar la matrícula (y vacantes) | `dm_matricula` | `FacMatricula` |
-| 2.0 | Preparar las condiciones para la gestión de los aprendizajes (sesiones + materiales) | `dm_preparacion` | `FacPreparacion` |
+| 2.0 | Preparar las condiciones para la gestión de los aprendizajes (sesiones + materiales) | `dm_preparacion` | `FacSesion`, `FacEntregaMaterial` (D31) |
 | 4.0 | Gestionar los aprendizajes | `dm_aprendizajes` | `FacLogroCompetencia` |
 
 ### 2.2 Fuera del alcance
@@ -70,20 +71,22 @@
 
 ---
 
-## 4. Arquitectura del modelo (v5.1)
+## 4. Arquitectura del modelo (v6.5)
+
+> Actualizada el 25/10/2026 (auditoría). La descripción de la v5.1 queda en la etiqueta Git `v5.1` y en la sección 6.
 
 ### 4.1 Capas y esquemas
 
 | Esquema | Rol | Contenido |
 |---|---|---|
 | `stg` | Aterrizaje: el dato tal como llegó, para auditar | 17 tablas crudas (casi todo `NVARCHAR`) + `stg.BitacoraNota` (la crea el 06) |
-| `dw` | Dimensiones **conformadas** compartidas | 10 dimensiones |
+| `dw` | Dimensiones **conformadas** compartidas | 6 dimensiones |
 | `dm_matricula` | Datamart 1.0 | `FacMatricula` |
-| `dm_preparacion` | Datamart 2.0 | `FacPreparacion` |
+| `dm_preparacion` | Datamart 2.0 | `FacSesion`, `FacEntregaMaterial` |
 | `dm_aprendizajes` | Datamart 4.0 | `FacLogroCompetencia` |
 | `ctl` | Control de lotes del job (script 07) | `LoteETL`, `ConteoLote`, `vw_HistorialLotes`, procedimientos |
 
-**Por qué un solo DW con esquemas y no tres bases:** arquitectura en bus de Kimball. Los datamarts comparten dimensiones conformadas; «el estudiante 60» es la misma fila en matrícula y en aprendizajes. Tres copias de `DimEstudiante` podrían desincronizarse. Si se pide que cada datamart sea autocontenido, se pueden crear **vistas** por esquema (`dm_matricula.DimEstudiante` → `dw.DimEstudiante`) sin duplicar datos. 🟨 (opcional, no implementado)
+**Por qué un solo DW con esquemas y no tres bases:** arquitectura en bus de Kimball. Los datamarts comparten dimensiones conformadas; «el estudiante 60» es la misma fila en matrícula y en aprendizajes. Si se pide que cada datamart sea autocontenido, se pueden crear **vistas** por esquema sin duplicar datos. 🟨 (opcional, no implementado)
 
 ### 4.2 Scripts y orden de ejecución
 
@@ -91,38 +94,33 @@
 |---|---|---|---|
 | 01 | `01_staging.sql` | Crea `DW_IE1217` (si no existe) y `stg`; borra y recarga las 17 tablas con BULK INSERT (`;`, UTF-8, LF) | Recarga total de staging |
 | 02 | `02_diagnostico.sql` | Perfila la suciedad del origen. **No corrige nada.** | Libre |
-| 03 | `03_dimensiones.sql` | Crea y carga las 10 dimensiones con MERGE / INSERT condicional (v5.2: `DimCompetencia` sin `AreaKey`, D21) | No borra dimensiones; actualiza |
+| 03 | `03_dimensiones.sql` | Crea y carga las 6 dimensiones con MERGE / INSERT condicional; migra una base v5.x/v6.x una sola vez | No borra dimensiones; actualiza |
 | 04 | `04_fac_matricula.sql` | Carga `FacMatricula` (DELETE + INSERT en transacción) | Recarga total del hecho |
-| 05 | `05_fac_preparacion.sql` | Carga `FacPreparacion` | Recarga total del hecho |
-| 06 | `06_fac_aprendizajes.sql` | Carga `FacLogroCompetencia` y `stg.BitacoraNota` (v5.2: compara área por `AreaID`) | Recarga total del hecho y la bitácora |
-| 07 | `07_job_sql_agent.sql` | Control de lotes (`ctl`) + job `ETL_IE1217_Carga` (apunta a 03 y 06 v5.2) | Idempotente (borra y recrea el job) |
-
-Flujo en una línea: **copiar → revisar → hacer catálogos → llenar los tres archivadores**. La parte común (01, 02, 03) se hace una vez y luego hay **un script por hecho**; los tres hechos son independientes entre sí y solo comparten las dimensiones.
+| 05 | `05_fac_preparacion.sql` | Carga `FacSesion` y `FacEntregaMaterial` | Recarga total de los dos hechos |
+| 06 | `06_fac_aprendizajes.sql` | Carga `FacLogroCompetencia` y `stg.BitacoraNota` | Recarga total del hecho y la bitácora |
+| 07 | `07_job_sql_agent.sql` | Control de lotes (`ctl`) + job `ETL_IE1217_Carga` | Idempotente (borra y recrea el job) |
 
 ### 4.3 Dimensiones (`dw`)
 
-| Dimensión | Nota de diseño |
-|---|---|
-| `DimTiempo` | Calendario 2024–2027 + filas especiales **-1 = no aplica** y **-2 = no registrado**. Su columna `Bimestre` se **aproxima por mes** (ver decisión pendiente P1). |
-| `DimEstudiante` | **SCD tipo 1** (reemplaza atributos, sin historial). 373 alumnos + fila -1. Guarda `FechaNacimiento`; la edad se deriva. |
-| `DimDocente` | Códigos limpios. No carga `FechaNacimiento` aunque `stg.Docente` la trae. |
-| `DimSeccion` | 1A … 5B, **sin año** en su identidad (10 + fila -1 = 11 filas). El aforo anual se guarda en el hecho. |
-| `DimArea` | Equivale a «Curso» en la matriz. |
-| `DimCompetencia` | Competencias por área. **Sin FK a `DimArea` desde v5.2 (D21):** el área va desnormalizada en `AreaID` y `NombreArea`. |
-| `DimPeriodoAcademico` | Año-bimestre con **fechas oficiales de cierre**: 2025 → 23/05, 01/08, 24/10, 19/12; 2026 → 22/05, 31/07; 2026-III sin fecha (abierto al corte 15/09/2026). |
-| `DimEscalaLogro` | Vigesimal → letra: C 0–10, B 11–13, A 14–17, AD 18–20; fila -1 = sin evidencia. |
-| `DimTipoMatricula` | Dimensión **chatarra**: tipo + vía + fase + estado. Desde v5.1 usa la **vía corregida**. |
-| `DimMotivoRechazo` | Motivo y categoría del rechazo. |
+| Dimensión | Atributos | Nota de diseño |
+|---|---|---|
+| `DimTiempo` | Fecha, Año, Mes, NombreMes, Bimestre, NombreBimestre | Calendario 2024–2027 + filas **-1 = no aplica** y **-2 = no registrado**. Bimestre desde los cierres oficiales y el inicio de clases (P1 resuelto). |
+| `DimEstudiante` | Código, NombreCompleto, Sexo, FechaNacimiento | **SCD 1**. 373 + fila -1. La edad se calcula en Power BI. |
+| `DimDocente` | Código, NombreCompleto, Sexo, CondicionLaboral | 15 + fila -1. |
+| `DimNivelAcademico` | CodigoCorto, Ciclo, Grado, Sección | Sin año (1A … 5B): 10 + fila -1. El aforo vive en el hecho. |
+| `DimCurso` | CursoID, Curso, TipoCompetencia, CompetenciaID, Competencia | Una fila por competencia (28) y una «Todo el curso» por curso (11) + fila -1 = 40 (D32). |
+| `DimTipoMatricula` | Tipo, Vía, Fase, Estado | Dimensión **basura** con la vía corregida por tipo. |
 
 ### 4.4 Hechos y granos
 
-| Hecho | Grano | Medidas principales |
+| Hecho | Una fila representa | Medidas (columnas) |
 |---|---|---|
-| `FacMatricula` | **Estudiante + año escolar** (con sección del año). 4 roles de fecha contra `DimTiempo`: solicitud, revisión, asignación, SIAGIE. | `MatriculasRegistradas`, `SolicitudesVacante`, `MatriculasAprobadas`, `MatriculasRechazadas`, `VacantesOcupadas`, `DiasValidacion`, `CasosConValidacion`, `DiasHastaSiagie`, `CasosConDiasHastaSiagie`, `AforoSeccionSnapshot`, `ViaCorregida` |
-| `FacPreparacion` | **Docente + área + sección + año + mes** | Sesiones programadas / dictadas / en horario, minutos de retraso, reprogramadas, recursos, TIC; materiales por entregar / a tiempo / tarde / no entregados, textos, cuadernos, registros, recibidos 14 días antes, recepción sin fecha |
-| `FacLogroCompetencia` | **Estudiante + competencia + bimestre** | `NotaVigesimal` (NULL si sin evidencia), `EscalaKey`, `CompetenciasRegistradas`, `EvaluadaConEvidencia`, `SinEvidencia`, `EnInicioC`, `EnProcesoB`, `LogroEsperadoA`, `LogroDestacadoAD`, `CompetenciaAprobada` (a nivel competencia), `NotaDesdeLetra`, `NotaRedondeada`, `BimestreCorregido`, `CompetenciaCorregida`, `DocenteCorregido` |
+| `FacMatricula` | Una matrícula de un estudiante en un año escolar; 3 roles de fecha (solicitud, revisión, SIAGIE) | `MatriculasSolicitadas`, `MatriculasValidadas`, `MatriculasRechazadas`, `DiasValidacion`, `CupoMaximoAula` (MAX por año + sección, D30/D33), `VacantesOcupadas`; `MatriculaID` y `AnioEscolar` como columnas degeneradas |
+| `FacSesion` | Docente + curso + sección en un tramo (mes dentro de un bimestre) | `SesionesProgramadas`, `SesionesDictadasHorario`, `SesionesDictadasRetraso`, `IncidenciasProgramacion` |
+| `FacEntregaMaterial` | Docente + curso + sección en un año escolar (fecha = inicio de clases) | `MaterialesPorEntregar`, `MaterialesEntregadosATiempo` |
+| `FacLogroCompetencia` | Una competencia de un estudiante en un bimestre | `NotaVigesimal` (NULL si sin evidencia), `NotasConEvidencia` |
 
-**Regla de oro de conteo:** personas con `DISTINCTCOUNT(EstudianteKey)`, nunca filas de competencia; aforo con `MAX` por año + sección antes de sumar; nunca mezclar NULL con 0.
+**Regla de oro de conteo:** personas con `DISTINCTCOUNT(EstudianteKey)` y el promedio por área antes de contar (P5); cupo con `MAX` por año + sección antes de sumar; los KPI anuales de matrícula por `AnioEscolar`, no por el año de DimTiempo (P13b); nunca mezclar NULL con 0.
 
 ---
 
@@ -357,6 +355,23 @@ Flujo en una línea: **copiar → revisar → hacer catálogos → llenar los tr
 - **Contraste con Kimball:** la respuesta de libro para hechos de grano distinto es una dimensión conformada con su versión reducida (*shrunken rollup*): eso eran DimCompetencia + DimArea. Pero en Power BI un solo filtro de curso no cortaba sesiones y notas a la vez sin relacionar dimensiones entre sí (prohibido por D21). Se elige **una sola DimCurso** con dos niveles de fila: competencia (para notas) y «Todo el curso» (para sesiones y material). Sigue siendo estrella, coincide con el canon y un filtro de curso sirve para los tres hechos. Filtrar sesiones por competencia da vacío: correcto, la sesión no registra competencia.
 - **Cambios:** DimCurso (CursoKey, CursoID = AreaID, Curso = NombreArea, TipoCompetencia, CompetenciaID, Competencia; 40 filas); DimNivelAcademico (Ciclo, Grado, Sección; sale NombreGrado; 11 filas). En los hechos: NivelAcademicoKey y CursoKey.
 - **Verificación:** respaldo `DW_IE1217_pre_v6_5_20261025.bak`; se ejecutaron 03–06; comparación por claves naturales contra la v6.4: 0 diferencias en los cuatro hechos; 0 FK entre dimensiones.
+### 6.20 Auditoría general y v6.5.1 (25/10/2026)
+- **Auditoría** de punta a punta (Matriz BI V.4_1 → V2 y matriz bus v2.2 → dimensiones → hechos → mapeo), contrastada con Kimball: [documento de auditoría](https://claude.ai/artifact/RTpFYbkU61qkqM4someL1d). Nota 7,5/10. La cadena cumple: 33 medidas iguales en Matriz BI y V2; las 14 «Script SQL» están en los hechos con su nombre; las 6 dimensiones tienen exactamente los atributos de la V2; 0 relaciones entre dimensiones.
+- **Hallazgos verificados en los CSV:**
+  - 16 de las 21 rechazadas no tienen ninguna fecha real (15 ratificaciones con -1 y el traslado MAT-2026-0393 con -2): P13 «rechazadas por fecha de revisión» solo vale para 5. Si el año se filtra con DimTiempo, el % de validadas sube a 100 %.
+  - Con P14, el % de docentes con retraso en material da 100 % en 2025 y 2026. Con umbral de 80 % de ejemplares a tiempo: 8 de 9 (2025) y 5 de 9 (2026).
+  - 34 sesiones «Dictada» con minutos de retraso negativos (25 + 9) no caen en horario, retraso ni incidencia.
+- **Otros hallazgos:** cupo con grano distinto dentro de FacMatricula (se mantiene, D33); FacSesion agregado y no atómico (P20); hoja Mapeo origen-DW en v5.2 (34 de 43 filas); Matriz BI V.4_1 con «Vacantes ocupadas» duplicada, sustento huérfano y columnas N–Q ocultas; consulta de control del 06 con la opción A de P5.
+- **Hecho en v6.5.1** (sin cambio de tablas ni cifras; 🟦 por ejecutar):
+  - 06: control de bajo rendimiento con la regla acordada P5 + columna de casos P19.
+  - 04: control de rechazadas por vía y sin fecha (esperado 2025: 11 = 3 + 8; 2026: 10 = 2 + 8).
+  - 07: el cierre del lote exige `FacEntregaMaterial` no vacío; textos sin «v5.1». Recrear el job.
+  - `Matriz_BI_Gestion_de_ProcesosV.4_2.xlsx` y `Metricas_y_Dimensiones_v2.3.xlsx` en `docs/insumos/`, **en revisión** (protocolo de versiones: falta el visto bueno para mover las anteriores a «versiones antiguas»).
+- **Grano y granularidad (25/10/2026, v2.3):** el **grano** es lo que representa una fila del hecho (uno por hecho, columna «Grano (una fila representa)» de la matriz bus). La **granularidad de la medida** es el nivel al que se lee cada medida: entidad + tiempo (columnas «Entidad» y «Tiempo» de la V2; columna «Granularidad» de la matriz bus). Puede ser más gruesa que el grano, nunca más fina (p. ej. % de docentes con retraso: hecho por asignación + tramo, medida por docente + mes).
+- **Nombres de la BD entre paréntesis (25/10/2026, D34):** en la V2 y la matriz bus, cada grupo, atributo, hecho y medida «Script SQL» lleva entre paréntesis su tabla o columna del DW (p. ej. «Código (CodigoEstudiante)», «Edad (FechaNacimiento; se calcula)», «Matrícula (dm_matricula.FacMatricula)»); las medidas «Power BI» llevan «(medida DAX)». Así la matriz y el diagrama dicen lo mismo, como pide el profesor. Falta fijar la fecha de referencia de la edad.
+- **Aprobación y Git (25/10/2026):** Cristhian aprobó la V.4_2 y la v2.3 y pidió el push. Pasan a «versiones antiguas» `Matriz_BI_Gestion_de_ProcesosV.4.xlsx` y `Metricas_y_Dimensiones.xlsx` (como `Metricas_y_Dimensiones_v2.1_interna.xlsx`). Commit con etiqueta `v6.5.1` y push a GitHub junto con los commits v6.2–v6.5 que no se habían subido. Falta subir la V.4_2 y la v2.3 a Drive.
+- **Decisiones del 25/10/2026:** el cupo se mantiene en FacMatricula (D33); FacSesion atómico se deja para después (P20); las definiciones nuevas quedan como propuestas (P13b, P14b, P17, P18, P19).
+
 ---
 
 ## 7. Decisiones tomadas (con su porqué)
@@ -387,6 +402,8 @@ Flujo en una línea: **copiar → revisar → hacer catálogos → llenar los tr
 | D22 | **Versionado con Git** (repositorio privado en GitHub): nombres de archivo fijos y sin número de versión; cada versión es una etiqueta (`v5.1`, `v5.2`); commits con formato `tipo(área): descripción`; los datos del colegio nunca se suben | Evitar archivos con número de versión, reenvíos y versiones mezcladas (D20); saber qué versión corrió cada quien | ✅ Publicado el 13/10/2026 en GitHub (`Aquino45/bi-jorgebasadre-dw-ie1217`, etiquetas `v5.1` y `v5.2`) |
 | D23 | La matriz de métricas y dimensiones es un documento **previo al ETL**: dimensiones y atributos rotulados por concepto (nombre técnico solo como comentario), fórmulas en palabras, estado de definición (Acordada / Propuesta / Pendiente / Parcial / No medible) y sin cifras de la carga. Se excluyen las 5 métricas que agregó el ETL (días hasta SIAGIE, TIC, recursos, niveles de logro, competencias aprobadas) y los procesos 3.0 y 5.0. El mapeo origen → DW sí usa nombres reales | Pedido del equipo para la sustentación | ✅ Aplicado en v2.0 (13/10/2026) |
 | D24 | Dos versiones de Métricas y Dimensiones: **interna** (Git, con anotaciones) y **pública** (Drive, solo lo esencial). Grano **por medida** como granularidad (una palabra + nivel de jerarquía). En la pública, Estado binario: **Script SQL** / **Power BI** | Pedido del profesor (granularidad) y del equipo (versión limpia para presentar) | ✅ Aplicado en v2.1 (13/10/2026) |
+| D34 | En la matriz de métricas × dimensiones (V2 y bus), el **nombre de la BD entre paréntesis** junto a cada grupo, atributo, hecho y medida «Script SQL»; «(medida DAX)» en las de Power BI. Reemplaza el criterio de D23 (nombre técnico solo como comentario) | El profesor quiere ver los mismos nombres en la matriz y en el diagrama | ✅ v2.3 (25/10/2026) |
+| D33 | El cupo por aula **se mantiene en FacMatricula** (ratifica D30 tras la auditoría): MAX por año + sección y, en Power BI, sin filtros de estudiante ni de tipo de matrícula | Decisión del equipo (25/10/2026); la separación en FacCupoSeccion queda como mejora posible | ✅ |
 | D32 | ETL **v6.5**: DimCurso única (curso + tipo + competencia, con fila «Todo el curso») y DimNivelAcademico, según el canon v2.2 | La matriz v2.2 es el canon; un solo filtro de curso para los tres hechos sin relacionar dimensiones | ✅ Verificado (25/10/2026) |
 | D31 | ETL **v6.4**: preparación en dos hechos (FacSesion por mes + bimestre; FacEntregaMaterial por año) con las medidas acordadas; % y conteos de docentes en Power BI | Decisión del equipo (25/10/2026): sesiones y materiales tienen naturaleza y grano distintos | ✅ Verificado (25/10/2026) |
 | D30 | ETL **v6.3**: una tabla de hechos por proceso; cupo y vacantes en FacMatricula, materiales en FacPreparacion | Decisión del equipo (23/10/2026); se acepta el grano mezclado con reglas de suma (MAX por aula; material solo donde no es NULL) | ✅ Verificado (23/10/2026) |
@@ -418,6 +435,13 @@ Flujo en una línea: **copiar → revisar → hacer catálogos → llenar los tr
 | P14 | **Docente con retraso en la entrega de material** | ✅ Acordado el 19/10/2026 (D26): al menos un ejemplar a destiempo o no entregado en el año. | Matriz BI, Power BI |
 | P15 | **Denominador del retraso promedio** | ✅ Acordado el 19/10/2026 (D26): sesiones dictadas con retraso. | Matriz BI, Power BI |
 | P16 | **Incidencias de programación** | ✅ Acordado el 19/10/2026 (D26): sesiones reprogramadas + no dictadas, según `EstadoSesion` (230 + 332 en la fuente; 520 con motivo). | Matriz BI, ETL |
+| P13b | **Rechazadas sin ninguna fecha** | 🟨 Propuesta (25/10/2026): cuentan en el total del año escolar y se rotulan «sin fecha» en la vista por día; los KPI anuales filtran por `AnioEscolar`. 16 de 21 rechazadas no tienen fecha. | Matriz BI, V2, Power BI |
+| P14b | **Umbral del retraso en material** | 🟨 Propuesta: menos del 80 % de sus ejemplares a tiempo en el año (como P4). Con P14 el KPI da 100 %; con el umbral, 8/9 (2025) y 5/9 (2026). | Matriz BI, Power BI |
+| P17 | **Docente con retraso en periodos mayores al mes** | 🟨 Propuesta: proporción de pares docente-mes con retraso (A); alternativa: docentes con al menos un mes con retraso (B). | Power BI |
+| P18 | **Tiempo de validación con rechazadas** | 🟨 Propuesta: solo aprobadas (como el 04), escrito en la fórmula; 5 rechazadas tienen ambas fechas. Incluirlas obliga a cambiar el 04. | Matriz BI, (04) |
+| P19 | **Aprobado con un área sin evidencia** | 🟨 Propuesta: se evalúa con las áreas que tienen promedio (aprobados + bajo = 100 %). El 06 v6.5.1 cuenta los casos. | Power BI |
+| P20 | **FacSesion a grano atómico** | 🟨 Propuesta de la auditoría (una fila por sesión, 6 352 filas, `FechaSesionKey` real). Se deja para después (25/10/2026). | 05, V2 |
+| P21 | **Calendario escolar único** | 🟨 Propuesta: una tabla con inicio de clases y cierres para el 03 y el 05 (hoy el 03 los fija en el código y el 05 recalcula el inicio). Encaja con el 08. | 03, 05, 08 |
 
 ---
 
@@ -445,38 +469,25 @@ Frase para la sustentación: *«Cada datamart se carga en la ventana en que su p
 
 ## 10. Alineación con la Matriz BI y la matriz bus
 
-### 10.1 Cobertura de KPI y métricas (procesos 1.0, 2.0 y 4.0)
+### 10.1 Cobertura de KPI y métricas (v6.5, revisada en la auditoría del 25/10/2026)
 
-| Proceso | Indicador | Cálculo | Estado |
+| Proceso | Medida de la matriz | Dónde | Estado |
 |---|---|---|---|
-| 1.0 | Matrículas solicitadas | `SUM(MatriculasRegistradas)` | ✅ (con P2) |
-| 1.0 | Matrículas validadas | `SUM(MatriculasAprobadas)` | ✅ (con P2) |
-| 1.0 | % de matrículas validadas | aprobadas / registradas | ✅ (con P2) |
-| 1.0 | Días de validación | `SUM(DiasValidacion)` | ✅ |
-| 1.0 | Tiempo promedio de validación | días / `CasosConValidacion` | ✅ |
-| 1.0 | Cupo máximo por aula | `MAX(AforoSeccionSnapshot)` por año + sección | ✅ |
-| 1.0 | Matrículas pendientes | — | ⛔ (P3) |
-| 2.0 | Sesiones programadas | `SUM(SesionesProgramadas)` | ✅ |
-| 2.0 | Sesiones dictadas en horario | `SUM(SesionesDictadasHorario)` | ✅ |
-| 2.0 | % de cumplimiento de horarios | en horario / programadas | ✅ |
-| 2.0 | Minutos de retraso acumulados | `SUM(MinutosRetraso)` | ✅ |
-| 2.0 | Materiales programados | `SUM(MaterialesPorEntregar)` (ejemplares) | ✅ |
-| 2.0 | Materiales entregados a tiempo | `SUM(MaterialesEntregadosATiempo)` | ✅ |
-| 2.0 | % de materiales entregados | a tiempo / programados | ✅ |
-| 2.0 | Incidencias de programación | `SesionesReprogramadas` como aproximación | ◐ Parcial: no hay cruces ni cambios de horario |
-| 4.0 | Rendimiento promedio | `AVERAGE(NotaVigesimal)` | ✅ |
-| 4.0 | Suma de notas obtenidas | `SUM(NotaVigesimal)` | ✅ |
-| 4.0 | Total de estudiantes evaluados | `DISTINCTCOUNT(EstudianteKey)` con evidencia | ✅ |
-| 4.0 | Estudiantes con nota < 11 | depende de la regla | ⏳ (P5) |
-| 4.0 | Estudiantes con nota ≥ 11 | depende de la regla | ⏳ (P5) |
-| 4.0 | % de bajo rendimiento | depende de la regla | ⏳ (P5) |
-| 4.0 | % de aprobados | depende de la regla | ⏳ (P5) |
+| 1.0 | Matrículas solicitadas / validadas / rechazadas | `FacMatricula` (SUM, por `AnioEscolar`) | ✅ |
+| 1.0 | % de matrículas validadas | Power BI | ✅ con P13b (filtrar por año escolar) |
+| 1.0 | Días de validación / Tiempo promedio de validación | `DiasValidacion` / COUNT de no nulos | ✅ (P18: solo aprobadas) |
+| 1.0 | Cupo máximo por aula, vacantes ocupadas, disponibles, % de ocupación | `CupoMaximoAula` (MAX por año + sección), `VacantesOcupadas` | ✅ con la medida DAX de la auditoría |
+| 2.0 | Sesiones programadas / en horario / con retraso / incidencias | `FacSesion` | ✅ (incidencias = aproximación P16; 34 sesiones sin clasificar) |
+| 2.0 | % de cumplimiento de horarios | Power BI | ✅ |
+| 2.0 | Docentes con sesiones / con retraso y su % | Power BI, por docente y mes (P4) | ⏳ P17 para periodos mayores |
+| 2.0 | Materiales por entregar / a tiempo y su % | `FacEntregaMaterial` | ✅ |
+| 2.0 | Docentes con material / fuera de plazo y su % | Power BI | ⏳ P14b (con P14 da 100 %) |
+| 4.0 | Suma de notas, notas con evidencia, rendimiento promedio, variación | `FacLogroCompetencia` | ✅ (variación con orden continuo de bimestres) |
+| 4.0 | Estudiantes evaluados, < 11, ≥ 11 y sus % | Power BI, promedio por área (P5) | ✅ con P19 por confirmar |
 
-**Balance:** 16 listos · 4 dependen de una sola definición · 1 parcial · 1 no medible.
+Las medidas DAX de referencia están en la sección «Riesgos para Power BI» del [documento de auditoría](https://claude.ai/artifact/RTpFYbkU61qkqM4someL1d).
 
-**Niveles según la leyenda de la Matriz BI:** Métrica (trabajador) → en el datamart · Indicador (rango medio) → medida DAX que combina métricas · KPI (gerencia) → medida DAX con meta y semáforo.
-
-### 10.1b Catálogo por capa (fuente: `Metricas_KPI_DW_IE1217.xlsx`)
+### 10.1b Catálogo por capa (histórico, 13/10/2026) (fuente: `Metricas_KPI_DW_IE1217.xlsx`)
 
 | Capa | Dónde | Filas | Estado |
 |---|---|---|---|
@@ -487,7 +498,7 @@ KPI nuevos propuestos que no estaban en la matriz: **% de ocupación de vacantes
 
 **Lo que Power BI no puede resolver:** datos que no existen en la fuente (pendientes, cruces de horario) y el bimestre oficial en preparación (P1), porque la fila mensual ya viene sumada.
 
-### 10.2 Ajustes necesarios en los documentos del Excel
+### 10.2 Ajustes necesarios en los documentos del Excel (histórico: resueltos en la v2.0 a v2.3 y en la Matriz BI V.3 a V.4_2)
 - **Hoja V1 (matriz bus):**
   - Marcar 3.0 y 5.0 como fuera de alcance.
   - Corregir los granos (aprendizajes: competencia + bimestre; preparación: docente + área + sección + bimestre + mes).
@@ -594,11 +605,13 @@ EXEC msdb.dbo.sp_update_job @job_name = N'ETL_IE1217_Carga', @enabled = 0;  -- p
 ---
 
 ## 13. Advertencias para Power BI
-- `FacMatricula` tiene **4 fechas** contra `DimTiempo`: una sola relación activa; las otras tres inactivas con `USERELATIONSHIP`.
-- Personas con `DISTINCTCOUNT(EstudianteKey)`; aforo con `MAX` por año + sección y luego sumar.
-- NULL ≠ 0: material de abril en adelante es NULL (no hubo programa); las notas sin evidencia son NULL.
-- Meses incompletos: junio 2025 y mayo 2026.
-- Filas especiales -1 / -2 en las dimensiones: decidir si se ocultan o se rotulan.
+- `FacMatricula` tiene **3 fechas** contra `DimTiempo` (solicitud, revisión, SIAGIE). Propuesta de la auditoría: las tres relaciones **inactivas**; los KPI anuales pasan el año con `TREATAS(VALUES(DimTiempo[Anio]), FacMatricula[AnioEscolar])` y la vista por día usa `USERELATIONSHIP` (SIAGIE para validadas, revisión para rechazadas). Con una relación activa directa, las rechazadas (-2 en SIAGIE) desaparecen del año.
+- Cupo: `MAX` por año + sección y luego sumar, con `REMOVEFILTERS` de DimEstudiante y DimTipoMatricula.
+- Personas con `DISTINCTCOUNT(EstudianteKey)` por bimestre y promedio por área antes de contar (P5). Docentes con retraso: por docente y mes (P4).
+- NULL ≠ 0: las notas sin evidencia son NULL; el rendimiento promedio divide entre `NotasConEvidencia`.
+- DimCurso: elegir una competencia deja vacíos sesiones y material (correcto); el filtro muestra «Todo el curso» y «No aplica».
+- Filas -1 / -2 de DimTiempo: salen «(En blanco)» en los filtros; decidir si se ocultan o se rotulan.
+- Meses incompletos en sesiones: junio 2025 y mayo 2026. «Variación del rendimiento» necesita un orden continuo de bimestres (columna calculada).
 
 ---
 
@@ -606,12 +619,15 @@ EXEC msdb.dbo.sp_update_job @job_name = N'ETL_IE1217_Carga', @enabled = 0;  -- p
 
 | Archivo | Estado |
 |---|---|
-| `01`–`07` | ✅ v6.5 (D32): verificada el 25/10/2026 (v6.5 cambia 03–06; v6.4 cambió 05, 06 y 07; 02 sin cambios) |
+| `01`–`07` | 🟦 v6.5.1 (25/10/2026): controles del 04 y 06 y cierre del 07, por ejecutar · ✅ v6.5 (D32): verificada el 25/10/2026 (v6.5 cambia 03–06; v6.4 cambió 05, 06 y 07; 02 sin cambios) |
 | Versiones anteriores | Etiqueta `v5.1` en Git. Copia en `D:\BI_IE1217_respaldo\v5.1_scripts\` (fuera del repo, verificada contra el tag). No usar archivos sueltos con número de versión |
 | `Guia_ETL_3_datamarts_IE1217_v5_1.docx` | ✅ Vigente (sustituye al PDF v5) |
 | `Guia_ETL_3_datamarts_IE1217_v5.pdf` | Histórico |
-| `docs/insumos/Matriz_BI_Gestion_de_ProcesosV.4.xlsx` | ✅ Vigente (D26, 19/10/2026). V.2 y V.3 en `docs/insumos/versiones antiguas/`. Falta subirla a Drive (Chrome no estaba disponible); en Drive sigue la V.3 hasta entonces |
-| `Metricas_y_Dimensiones.xlsx` v2.1 interna (Matriz bus, V2, Mapeo origen-DW, Control de versiones) | ✅ Vigente (13/10/2026). V1 y v2.0 en `docs/insumos/versiones antiguas/`; versión pública en Drive (D24) |
+| `docs/insumos/Matriz_BI_Gestion_de_ProcesosV.4_2.xlsx` | ✅ Vigente (aprobada el 25/10/2026): correcciones de la auditoría (M1–M12) y propuestas P13b, P14b, P17–P19. Base: V.4_1 del equipo. Falta subirla a Drive |
+| `docs/insumos/Metricas_y_Dimensiones_v2.3.xlsx` | ✅ Vigente (aprobada el 25/10/2026): Mapeo origen-DW reescrito para v6.5 (43 filas, destinos comprobados contra los scripts), granularidad de la medida (entidad + tiempo), grano en la matriz bus y nombres de la BD entre paréntesis (D34). Base: v2.2 pública. Falta subirla a Drive |
+| [Auditoría general del BI](https://claude.ai/artifact/RTpFYbkU61qkqM4someL1d) | ✅ 25/10/2026 (documento en claude.ai) |
+| `docs/insumos/Matriz_BI_Gestion_de_ProcesosV.4.xlsx` | Histórica: movida a `docs/insumos/versiones antiguas/` el 25/10/2026 (la reemplaza la V.4_2) |
+| `Metricas_y_Dimensiones.xlsx` v2.1 interna | Histórica: movida a `versiones antiguas/` como `Metricas_y_Dimensiones_v2.1_interna.xlsx` el 25/10/2026 (la reemplaza la v2.3) |
 | `docs/guias_detalles/Guia_Exposicion_DW_IE1217.docx` | ✅ Guía de exposición v2 (13/10/2026; v1 en `versiones antiguas/`): orden de la sustentación, Matriz BI, matriz bus, arquitectura, scripts, automatización, Power BI, pendientes, preguntas probables y glosario |
 | `Metricas_KPI_DW_IE1217.xlsx` | ✅ Catálogo de métricas → KPI (13/10/2026) |
 | `BITACORA_CONTEXTO_DW_IE1217.md` | Este documento |
@@ -619,6 +635,7 @@ EXEC msdb.dbo.sp_update_job @job_name = N'ETL_IE1217_Carga', @enabled = 0;  -- p
 ---
 
 ## 15. Próximos pasos sugeridos (en orden)
+0. **Auditoría (25/10/2026):** ejecutar 04, 06 y 07 v6.5.1 y comparar con lo esperado (6.20); subir la V.4_2 y la v2.3 a Drive y mover allí las anteriores a «versiones antiguas»; acordar P13b, P14b, P17, P18 y P19.
 1. ✅ Hecho el 13/10/2026: job recreado y lote 4 «Exitoso». Falta decidir si el job queda cada 15 minutos (demostración) o diario (`@Frecuencia = N'DIARIO'` en el 07).
 2. Rediseño en 6 fases (6.13): ✅ fase 1 (Matriz BI V.4). Siguen la fase 2 (matriz bus con niveles), la 3 (grano; resuelve P1 y los granos mezclados de preparación), la 4 (fichas de dimensión), la 5 (hechos y mapeo) y la 6 (scripts).
 3. ✅ P1 resuelto en la v6.1 (preparación por mes + bimestre). Falta corregir el Excel v2.1 (ver 6.15) y la guía de exposición, que aún menciona Periodo académico y Escala de logro.

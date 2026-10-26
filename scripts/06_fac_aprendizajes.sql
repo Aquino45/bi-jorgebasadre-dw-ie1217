@@ -1,5 +1,10 @@
 ﻿/* ============================================================================
    06_fac_aprendizajes.sql
+   CAMBIOS v6.5.1 (25/10/2026, auditoria): la consulta de control de bajo
+   rendimiento usa la regla ACORDADA P5 (promedio por area de las competencias
+   con evidencia; bajo rendimiento = alguna area < 11; aprobado = todas >= 11).
+   La v6.5 contaba por competencia (opcion A, descartada). Sin cambio en el
+   hecho ni en la bitacora.
    CAMBIOS v6.5 (25/10/2026): la competencia se busca en dw.DimCurso (fila de
    la competencia, con su curso) y la seccion en dw.DimNivelAcademico.
    CompetenciaKey pasa a CursoKey. El curso de la fila se valida contra la
@@ -419,17 +424,36 @@ SELECT SUM(CASE WHEN LetraCapturada IS NOT NULL THEN 1 ELSE 0 END) AS LetrasConv
        SUM(CASE WHEN DocenteAsignado <> DocenteIDLimpio THEN 1 ELSE 0 END) AS DocentesCorregidos
 FROM #Ordenadas WHERE rn = 1;
 
-/* Ejemplo del KPI de personas: DISTINCTCOUNT, NO suma de filas de competencias.
-   Aqui 'estudiante con bajo rendimiento' = al menos una competencia con nota
-   menor a 11 en el periodo; el filtro de area/seccion puede aplicarse igual. */
-SELECT t.Anio AS AnioEscolar, t.Bimestre,
-       COUNT(DISTINCT CASE WHEN f.NotaVigesimal IS NOT NULL
-                           THEN f.EstudianteKey END) AS EstudiantesEvaluados,
-       COUNT(DISTINCT CASE WHEN f.NotaVigesimal < 11
-                           THEN f.EstudianteKey END) AS EstudiantesConAlMenosUnaBaja
-FROM dm_aprendizajes.FacLogroCompetencia AS f
-JOIN dw.DimTiempo AS t ON t.TiempoKey = f.FechaCierreKey
-GROUP BY t.Anio, t.Bimestre ORDER BY t.Anio, t.Bimestre;
+/* KPI de personas con la regla acordada P5 (v6.5.1): primero el promedio de
+   cada AREA del estudiante con sus competencias con evidencia (AVG ignora
+   NULL), despues el estudiante. Bajo rendimiento = alguna area < 11;
+   aprobado = todas sus areas con promedio >= 11 (P19, propuesta: un area sin
+   ninguna nota con evidencia no se exige). Aprobados + bajo = evaluados. */
+;WITH Area AS (
+    SELECT t.Anio, t.Bimestre, f.EstudianteKey, c.CursoID,
+           AVG(f.NotaVigesimal) AS PromedioArea
+    FROM dm_aprendizajes.FacLogroCompetencia AS f
+    JOIN dw.DimTiempo AS t ON t.TiempoKey = f.FechaCierreKey
+    JOIN dw.DimCurso  AS c ON c.CursoKey  = f.CursoKey
+    GROUP BY t.Anio, t.Bimestre, f.EstudianteKey, c.CursoID
+), Est AS (
+    SELECT Anio, Bimestre, EstudianteKey,
+           MIN(PromedioArea)   AS PeorArea,
+           COUNT(PromedioArea) AS AreasConPromedio,
+           COUNT(*)            AS AreasRegistradas
+    FROM Area
+    GROUP BY Anio, Bimestre, EstudianteKey
+)
+SELECT Anio AS AnioEscolar, Bimestre,
+       SUM(CASE WHEN AreasConPromedio > 0 THEN 1 ELSE 0 END)  AS EstudiantesEvaluados,
+       SUM(CASE WHEN PeorArea <  11 THEN 1 ELSE 0 END)        AS EstudiantesBajoRendimiento,
+       SUM(CASE WHEN PeorArea >= 11 THEN 1 ELSE 0 END)        AS EstudiantesAprobados,
+       SUM(CASE WHEN AreasConPromedio > 0
+                 AND AreasConPromedio < AreasRegistradas
+                THEN 1 ELSE 0 END)                            AS EvaluadosConAreaSinEvidencia -- casos de P19
+FROM Est
+GROUP BY Anio, Bimestre
+ORDER BY Anio, Bimestre;
 GO
 
 SELECT CompetenciaID, Bimestre, NotaVigesimal

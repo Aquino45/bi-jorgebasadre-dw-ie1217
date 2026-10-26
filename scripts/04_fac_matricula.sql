@@ -22,6 +22,9 @@
    cada matricula: en consultas y en Power BI se toma MAX por anio + seccion
    antes de sumar.
    v6.5: la seccion se busca en dw.DimNivelAcademico (antes DimSeccion).
+   v6.5.1 (auditoria): solo comentarios. Control nuevo al final: rechazadas
+   por via y cuantas no tienen ninguna fecha real (P13b, propuesta). Los KPI
+   anuales se filtran por AnioEscolar, no por el anio de DimTiempo.
    Ejecutar DESPUES de 01_staging, 02_diagnostico y 03_dimensiones.
    Base: DW_IE1217 | SQL Server 2017 o posterior.
 
@@ -206,8 +209,8 @@ LEFT JOIN dw.DimEstudiante AS e ON e.CodigoEstudiante = b.CodigoEstudiante
 WHERE b.rn = 1 AND e.EstudianteKey IS NULL
 ORDER BY Incidencia, MatriculaID;
 
-/* Seccion del anio de origen: conserva su AFORO historico (la dimension
-   DimSeccion, al ser de tipo 1, muestra el aforo mas reciente). */
+/* Seccion del anio de origen: conserva su AFORO de ese anio. DimNivelAcademico
+   no tiene anio ni aforo, por eso el aforo se toma aqui de stg.Seccion. */
 ;WITH s AS (
     SELECT
         LTRIM(RTRIM(REPLACE(REPLACE(REPLACE(SeccionID,
@@ -435,3 +438,20 @@ JOIN stg.Matricula AS m
   ON LTRIM(RTRIM(REPLACE(m.MatriculaID, NCHAR(160), N''))) = f.MatriculaID
 WHERE f.FechaSolicitudKey = -2
 ORDER BY f.AnioEscolar, f.MatriculaID;
+
+/* v6.5.1 Control P13b: las rechazadas por via. Las ratificaciones no tienen
+   solicitud ni revision (-1) y ninguna rechazada llega a SIAGIE (-2), asi
+   que muchas no tienen NINGUNA fecha real: cuentan en el anio escolar, pero
+   no se pueden ubicar en un dia. Referencia del lote: 2025 = 11 (3 con
+   revision, 8 sin fecha); 2026 = 10 (2 con revision, 8 sin fecha). */
+SELECT f.AnioEscolar, tm.ViaMatricula,
+       COUNT(*) AS Rechazadas,
+       SUM(CASE WHEN f.FechaRevisionKey > 0 THEN 1 ELSE 0 END) AS ConFechaRevision,
+       SUM(CASE WHEN f.FechaSolicitudKey < 0 AND f.FechaRevisionKey < 0
+                 AND f.FechaSiagieKey < 0 THEN 1 ELSE 0 END) AS SinNingunaFecha
+FROM dm_matricula.FacMatricula AS f
+JOIN dw.DimTipoMatricula AS tm ON tm.TipoMatriculaKey = f.TipoMatriculaKey
+WHERE f.MatriculasRechazadas = 1
+GROUP BY f.AnioEscolar, tm.ViaMatricula
+ORDER BY f.AnioEscolar, tm.ViaMatricula;
+GO

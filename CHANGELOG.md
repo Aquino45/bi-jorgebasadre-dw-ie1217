@@ -1,5 +1,16 @@
 # Changelog
 
+## v6.5.3 — 27/10/2026 (verificado)
+
+Instalador para el equipo. No cambia ningún script del ETL ni ninguna cifra.
+
+### Agregado
+- `instalar_o_actualizar.ps1` y `.cmd` (doble clic): comprueba versión, CSV y requisitos; respalda `DW_IE1217`; ejecuta 01 a 06; compara las cifras verificadas. Opciones `-ConJob` (actualiza las copias de `C:\BI_IE1217\scripts` y recrea el job), `-UsuarioSql`, `-SoloVerificar`, `-SinRespaldo`.
+- README: sección «Instalar o actualizar (cada integrante)» y aviso del job; `.gitattributes` con CRLF para `.ps1` y `.cmd`.
+
+### Verificado el 27/10/2026
+- `-SoloVerificar`: 9 cifras OK. Ejecución completa (respaldo `DW_IE1217_pre_v6.5.2_20261027_1345.bak`, 01 a 06): 9 cifras OK, 17 tablas de staging sin «REVISAR» y huella por columnas idéntica a la de antes de v6.5.2 en los cuatro hechos y la bitácora.
+
 ## v6.5.2 — 27/10/2026 (verificado)
 
 Correcciones de una revisión de código. No cambia ninguna tabla ni ninguna cifra del lote actual.

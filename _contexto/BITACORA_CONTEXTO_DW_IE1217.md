@@ -384,6 +384,11 @@
   - Control P5 (06), bajo rendimiento / aprobados: 2025 B1 121 / 168, B2 117 / 172, B3 106 / 183, B4 93 / 196; 2026 B1 111 / 179, B2 101 / 189. Casos P19: 2 a 5 por bimestre.
   - 02 con NULL: rúbricas 7 (antes 6), tipo de material 8, asistencia 757 (antes 716). El CHANGELOG del commit v6.5.1 quedó con dos líneas antiguas (el archivo se sobrescribió antes del `git add`); se corrigen en v6.5.2.
 
+### 6.22 Instalador para el equipo (27/10/2026, v6.5.3)
+- `instalar_o_actualizar.ps1` / `.cmd` en la raíz del repositorio: versión, 17 CSV, respaldo verificado, 01 a 06 con logs en `C:\BI_IE1217\logs`, comparación de 9 cifras; `-ConJob` actualiza las copias de `C:\BI_IE1217\scripts` (las anteriores a «versiones antiguas») y recrea el job; `-UsuarioSql`, `-SoloVerificar`, `-SinRespaldo`.
+- Probado en la PC de Cristhian: `-SoloVerificar` y ejecución completa con 9 cifras OK; huella por columnas idéntica en los cuatro hechos y la bitácora. README actualizado («Instalar o actualizar»).
+- Cada integrante tiene su propia instancia, base y `C:\BI_IE1217`: cada uno debe correr el instalador (y `-ConJob` si usa el Agente).
+
 ---
 
 ## 7. Decisiones tomadas (con su porqué)
@@ -572,7 +577,7 @@ GO
 - Si sale el error 4060 al conectar, poner `master` como base en la ventana de conexión.
 
 ### 12.4 Requisitos del job (07)
-0. **Con cada versión nueva:** copiar `D:\bi-claudio\scripts\01`–`06` a `C:\BI_IE1217\scripts` (las anteriores a `C:\BI_IE1217\scripts\versiones antiguas\`) y volver a ejecutar el 07. El job no lee el repositorio.
+0. **Con cada versión nueva:** ejecutar `instalar_o_actualizar.cmd -ConJob` (v6.5.3) o, a mano, copiar `D:\bi-claudio\scripts\01`–`06` a `C:\BI_IE1217\scripts` (las anteriores a `C:\BI_IE1217\scripts\versiones antiguas\`) y volver a ejecutar el 07. El job no lee el repositorio.
 1. Iniciar **SQL Server Agent** en modo Automático (Configuration Manager).
 2. Copiar 01–06 v5_1 a `C:\BI_IE1217\scripts` y crear `C:\BI_IE1217\logs`.
 3. Permisos (CMD como administrador):
@@ -633,7 +638,7 @@ EXEC msdb.dbo.sp_update_job @job_name = N'ETL_IE1217_Carga', @enabled = 0;  -- p
 
 | Archivo | Estado |
 |---|---|
-| `01`–`07` | ✅ v6.5.2 (27/10/2026): verificada; copias del job actualizadas en `C:\BI_IE1217\scripts` · v6.5.1 (25/10/2026): controles del 04 y 06 y cierre del 07 · ✅ v6.5 (D32): verificada el 25/10/2026 (v6.5 cambia 03–06; v6.4 cambió 05, 06 y 07; 02 sin cambios) |
+| `01`–`07` | ✅ v6.5.3 (27/10/2026): instalador `instalar_o_actualizar` · v6.5.2 (27/10/2026): verificada; copias del job actualizadas en `C:\BI_IE1217\scripts` · v6.5.1 (25/10/2026): controles del 04 y 06 y cierre del 07 · ✅ v6.5 (D32): verificada el 25/10/2026 (v6.5 cambia 03–06; v6.4 cambió 05, 06 y 07; 02 sin cambios) |
 | Versiones anteriores | Etiqueta `v5.1` en Git. Copia en `D:\BI_IE1217_respaldo\v5.1_scripts\` (fuera del repo, verificada contra el tag). No usar archivos sueltos con número de versión |
 | `Guia_ETL_3_datamarts_IE1217_v5_1.docx` | ✅ Vigente (sustituye al PDF v5) |
 | `Guia_ETL_3_datamarts_IE1217_v5.pdf` | Histórico |

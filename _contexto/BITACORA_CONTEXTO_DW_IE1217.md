@@ -2,7 +2,7 @@
 
 **Curso:** Business Intelligence · Ingeniería de Sistemas · UPeU
 **Cliente:** I.E.P. N° 1217 "Jorge Basadre Grohmann" · Chaclacayo · UGEL 06
-**Versión vigente del ETL:** v6.5 (25/10/2026): dimensiones y hechos según la matriz de métricas y dimensiones v2.2 (canon): DimCurso (curso + tipo + competencia, con fila «Todo el curso»), DimNivelAcademico y cuatro hechos (FacMatricula, FacSesion, FacEntregaMaterial, FacLogroCompetencia); cifras verificadas sin cambio. v6.4 y anteriores quedan como etiquetas. **v6.5.1** (25/10/2026, auditoría): solo controles del 04 y 06 y cierre del lote del 07; sin cambio de tablas ni cifras; 🟦 por ejecutar en SQL Server.
+**Versión vigente del ETL:** v6.5 (25/10/2026): dimensiones y hechos según la matriz de métricas y dimensiones v2.2 (canon): DimCurso (curso + tipo + competencia, con fila «Todo el curso»), DimNivelAcademico y cuatro hechos (FacMatricula, FacSesion, FacEntregaMaterial, FacLogroCompetencia); cifras verificadas sin cambio. v6.4 y anteriores quedan como etiquetas. **v6.5.1** (25/10/2026, auditoría): solo controles del 04 y 06 y cierre del lote del 07; sin cambio de tablas ni cifras; ✅ ejecutado el 27/10/2026. **v6.5.2** (27/10/2026, revisión de código): validaciones del 06 antes de borrar, NULL en reglas del 02 y aviso del 07; ✅ verificadas el 27/10/2026 (6.21).
 **Última actualización de esta bitácora:** 25/10/2026
 **Carga verificada en SQL Server:** 24/09/2026
 
@@ -372,6 +372,18 @@
 - **Aprobación y Git (25/10/2026):** Cristhian aprobó la V.4_2 y la v2.3 y pidió el push. Pasan a «versiones antiguas» `Matriz_BI_Gestion_de_ProcesosV.4.xlsx` y `Metricas_y_Dimensiones.xlsx` (como `Metricas_y_Dimensiones_v2.1_interna.xlsx`). Commit con etiqueta `v6.5.1` y push a GitHub junto con los commits v6.2–v6.5 que no se habían subido. Falta subir la V.4_2 y la v2.3 a Drive.
 - **Decisiones del 25/10/2026:** el cupo se mantiene en FacMatricula (D33); FacSesion atómico se deja para después (P20); las definiciones nuevas quedan como propuestas (P13b, P14b, P17, P18, P19).
 
+### 6.21 Revisión de código y v6.5.2 (27/10/2026)
+- **Origen:** revisión de código con cinco observaciones; las cinco se confirmaron en los archivos y en la instancia.
+- **Job con scripts viejos (operativo, el más serio):** `C:\BI_IE1217\scripts` tenía las copias del 13/10/2026 (v5.2, con `FacPreparacion` y `DimEscalaLogro`). El Agente está detenido (inicio manual) y las corridas 14–21 del 20/10/2026 fallaron en «02 Diagnóstico», antes del 03: las dimensiones y hechos v6.5 no se tocaron. Falta actualizar las copias y recrear el job (12.4).
+- **06 podía vaciar el hecho:** la reconciliación cuadra aunque todas las notas vayan a la bitácora. v6.5.2 valida antes de borrar: 0 aceptadas → 51067; más del 10 % a la bitácora → 51068 (lote verificado: 1,28 %).
+- **Bimestres sin cierre:** con los cierres escritos en el 03, una nota del IV de 2026 caería en «III (sin cierre)». v6.5.2 la manda a la bitácora con su motivo; la solución de fondo sigue siendo P21.
+- **NULL en reglas del 02:** rúbricas, tipo de material y estado de asistencia vacíos o no numéricos se escapaban de `NOT BETWEEN` / `NOT IN`. Corregido.
+- **Cargas de distintas corridas:** cada script confirma su transacción; si falla el 05 o el 06, matrícula queda nueva y el resto viejo. Queda como propuesta P22 (cambio de diseño del 04–07).
+- **Ejecución y verificación (27/10/2026):** respaldo `DW_IE1217_pre_v6_5_2_20261027.bak` (verificado). Copias viejas del job a `C:\BI_IE1217\scripts\versiones antiguas\v5.2_2026-10-13`, 01–07 vigentes copiados y job recreado (10 pasos; Agente detenido). Se ejecutaron 02–06: huella por columnas idéntica en los cuatro hechos y la bitácora (600 · 879 / 6 352 · 100 · 44 815 + 581).
+  - Control P13b (04): 2025 = 11 (3 con revisión, 8 sin fecha); 2026 = 10 (2 y 8).
+  - Control P5 (06), bajo rendimiento / aprobados: 2025 B1 121 / 168, B2 117 / 172, B3 106 / 183, B4 93 / 196; 2026 B1 111 / 179, B2 101 / 189. Casos P19: 2 a 5 por bimestre.
+  - 02 con NULL: rúbricas 7 (antes 6), tipo de material 8, asistencia 757 (antes 716). El CHANGELOG del commit v6.5.1 quedó con dos líneas antiguas (el archivo se sobrescribió antes del `git add`); se corrigen en v6.5.2.
+
 ---
 
 ## 7. Decisiones tomadas (con su porqué)
@@ -442,6 +454,7 @@
 | P19 | **Aprobado con un área sin evidencia** | 🟨 Propuesta: se evalúa con las áreas que tienen promedio (aprobados + bajo = 100 %). El 06 v6.5.1 cuenta los casos. | Power BI |
 | P20 | **FacSesion a grano atómico** | 🟨 Propuesta de la auditoría (una fila por sesión, 6 352 filas, `FechaSesionKey` real). Se deja para después (25/10/2026). | 05, V2 |
 | P21 | **Calendario escolar único** | 🟨 Propuesta: una tabla con inicio de clases y cierres para el 03 y el 05 (hoy el 03 los fija en el código y el 05 recalcula el inicio). Encaja con el 08. | 03, 05, 08 |
+| P22 | **Publicación atómica de los hechos** | 🟨 Propuesta (27/10/2026): el 04, el 05 y el 06 cargan en tablas de trabajo y un paso final del job publica las cuatro juntas en una sola transacción (p. ej. `ALTER SCHEMA ... TRANSFER` o `sp_rename`). Hoy una falla en el 05 o el 06 deja matrícula de una corrida y el resto de otra. | 04–07 |
 
 ---
 
@@ -559,6 +572,7 @@ GO
 - Si sale el error 4060 al conectar, poner `master` como base en la ventana de conexión.
 
 ### 12.4 Requisitos del job (07)
+0. **Con cada versión nueva:** copiar `D:\bi-claudio\scripts\01`–`06` a `C:\BI_IE1217\scripts` (las anteriores a `C:\BI_IE1217\scripts\versiones antiguas\`) y volver a ejecutar el 07. El job no lee el repositorio.
 1. Iniciar **SQL Server Agent** en modo Automático (Configuration Manager).
 2. Copiar 01–06 v5_1 a `C:\BI_IE1217\scripts` y crear `C:\BI_IE1217\logs`.
 3. Permisos (CMD como administrador):
@@ -600,7 +614,7 @@ EXEC msdb.dbo.sp_update_job @job_name = N'ETL_IE1217_Carga', @enabled = 0;  -- p
 | THROW 51070–51075 | Control de lotes (07) | Ver `ctl.vw_HistorialLotes` y el log del paso |
 
 ### 12.7 Códigos de error por script
-- **04:** 5100x · **05:** 51049–51059 · **06:** 51060–51066 · **07 (`ctl`):** 51070–51075.
+- **04:** 5100x · **05:** 51049–51059 · **06:** 51060–51068 (51067: ninguna nota aceptada; 51068: más del 10 % a la bitácora) · **07 (`ctl`):** 51070–51075.
 
 ---
 
@@ -619,7 +633,7 @@ EXEC msdb.dbo.sp_update_job @job_name = N'ETL_IE1217_Carga', @enabled = 0;  -- p
 
 | Archivo | Estado |
 |---|---|
-| `01`–`07` | 🟦 v6.5.1 (25/10/2026): controles del 04 y 06 y cierre del 07, por ejecutar · ✅ v6.5 (D32): verificada el 25/10/2026 (v6.5 cambia 03–06; v6.4 cambió 05, 06 y 07; 02 sin cambios) |
+| `01`–`07` | ✅ v6.5.2 (27/10/2026): verificada; copias del job actualizadas en `C:\BI_IE1217\scripts` · v6.5.1 (25/10/2026): controles del 04 y 06 y cierre del 07 · ✅ v6.5 (D32): verificada el 25/10/2026 (v6.5 cambia 03–06; v6.4 cambió 05, 06 y 07; 02 sin cambios) |
 | Versiones anteriores | Etiqueta `v5.1` en Git. Copia en `D:\BI_IE1217_respaldo\v5.1_scripts\` (fuera del repo, verificada contra el tag). No usar archivos sueltos con número de versión |
 | `Guia_ETL_3_datamarts_IE1217_v5_1.docx` | ✅ Vigente (sustituye al PDF v5) |
 | `Guia_ETL_3_datamarts_IE1217_v5.pdf` | Histórico |
@@ -635,7 +649,7 @@ EXEC msdb.dbo.sp_update_job @job_name = N'ETL_IE1217_Carga', @enabled = 0;  -- p
 ---
 
 ## 15. Próximos pasos sugeridos (en orden)
-0. **Auditoría (25/10/2026):** ejecutar 04, 06 y 07 v6.5.1 y comparar con lo esperado (6.20); subir la V.4_2 y la v2.3 a Drive y mover allí las anteriores a «versiones antiguas»; acordar P13b, P14b, P17, P18 y P19.
+0. **Auditoría (25/10/2026):** ✅ 04, 06 y 07 ejecutados y verificados el 27/10/2026 (6.21); subir la V.4_2 y la v2.3 a Drive y mover allí las anteriores a «versiones antiguas»; acordar P13b, P14b, P17, P18 y P19.
 1. ✅ Hecho el 13/10/2026: job recreado y lote 4 «Exitoso». Falta decidir si el job queda cada 15 minutos (demostración) o diario (`@Frecuencia = N'DIARIO'` en el 07).
 2. Rediseño en 6 fases (6.13): ✅ fase 1 (Matriz BI V.4). Siguen la fase 2 (matriz bus con niveles), la 3 (grano; resuelve P1 y los granos mezclados de preparación), la 4 (fichas de dimensión), la 5 (hechos y mapeo) y la 6 (scripts).
 3. ✅ P1 resuelto en la v6.1 (preparación por mes + bimestre). Falta corregir el Excel v2.1 (ver 6.15) y la guía de exposición, que aún menciona Periodo académico y Escala de logro.

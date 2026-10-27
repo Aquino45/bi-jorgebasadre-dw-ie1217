@@ -1,5 +1,8 @@
 ﻿/* ============================================================================
    ARCHIVO   : 02_diagnostico.sql
+   CAMBIOS v6.5.2: las reglas de rango y catalogo cuentan tambien el valor
+                 vacio o no numerico (TRY_CONVERT devuelve NULL y NULL NOT
+                 BETWEEN / NOT IN no es verdadero: antes se escapaba).
    CAMBIOS v5.1: el conteo de espacios al final usa DATALENGTH (con <> SQL
                  Server ignora el espacio final y el conteo salia en cero);
                  se corrige la nota del bloque 4 sobre espacios y JOIN.
@@ -200,13 +203,13 @@ WHERE TRY_CONVERT(INT, PuntajeTotal) <> (TRY_CONVERT(INT, Rubrica1_Involucra)
      + TRY_CONVERT(INT, Rubrica2_Razonamiento) + TRY_CONVERT(INT, Rubrica3_Evalua)
      + TRY_CONVERT(INT, Rubrica4_Respeto)      + TRY_CONVERT(INT, Rubrica5_Comportamiento))
 UNION ALL
-SELECT 'Rubrica fuera de la escala I a IV', COUNT(*)
+SELECT 'Rubrica fuera de la escala I a IV, vacia o no numerica', COUNT(*)
 FROM stg.MonitoreoDocente
-WHERE TRY_CONVERT(INT, Rubrica1_Involucra)      NOT BETWEEN 1 AND 4
-   OR TRY_CONVERT(INT, Rubrica2_Razonamiento)   NOT BETWEEN 1 AND 4
-   OR TRY_CONVERT(INT, Rubrica3_Evalua)         NOT BETWEEN 1 AND 4
-   OR TRY_CONVERT(INT, Rubrica4_Respeto)        NOT BETWEEN 1 AND 4
-   OR TRY_CONVERT(INT, Rubrica5_Comportamiento) NOT BETWEEN 1 AND 4
+WHERE TRY_CONVERT(INT, Rubrica1_Involucra)      IS NULL OR TRY_CONVERT(INT, Rubrica1_Involucra)      NOT BETWEEN 1 AND 4
+   OR TRY_CONVERT(INT, Rubrica2_Razonamiento)   IS NULL OR TRY_CONVERT(INT, Rubrica2_Razonamiento)   NOT BETWEEN 1 AND 4
+   OR TRY_CONVERT(INT, Rubrica3_Evalua)         IS NULL OR TRY_CONVERT(INT, Rubrica3_Evalua)         NOT BETWEEN 1 AND 4
+   OR TRY_CONVERT(INT, Rubrica4_Respeto)        IS NULL OR TRY_CONVERT(INT, Rubrica4_Respeto)        NOT BETWEEN 1 AND 4
+   OR TRY_CONVERT(INT, Rubrica5_Comportamiento) IS NULL OR TRY_CONVERT(INT, Rubrica5_Comportamiento) NOT BETWEEN 1 AND 4
 UNION ALL
 SELECT 'Caso atendido sin fecha de atencion', COUNT(*)
 FROM stg.Convivencia
@@ -333,9 +336,10 @@ FROM stg.EntregaMaterial
 WHERE TRY_CONVERT(INT, CantidadNoEntregada) > 0
   AND NULLIF(LTRIM(RTRIM(Observacion)), N'') IS NULL
 UNION ALL
-SELECT 'TipoMaterial fuera del catalogo', COUNT(*)
+SELECT 'TipoMaterial fuera del catalogo o vacio', COUNT(*)
 FROM stg.EntregaMaterial
-WHERE UPPER(LTRIM(RTRIM(TipoMaterial))) NOT IN (N'TEXTO ESCOLAR', N'CUADERNO DE TRABAJO');
+WHERE NULLIF(LTRIM(RTRIM(TipoMaterial)), N'') IS NULL
+   OR UPPER(LTRIM(RTRIM(TipoMaterial))) NOT IN (N'TEXTO ESCOLAR', N'CUADERNO DE TRABAJO');
 
 /* El requisito de recibir la dotacion 14 dias antes del inicio se comprueba
    por fecha de entrega PROGRAMADA. El resultado es un hallazgo de calidad:
@@ -410,9 +414,10 @@ SELECT 'Bimestre fuera del rango 1 a 4', COUNT(*)
 FROM stg.NotaCompetencia
 WHERE TRY_CONVERT(INT, Bimestre) NOT BETWEEN 1 AND 4 OR TRY_CONVERT(INT, Bimestre) IS NULL
 UNION ALL
-SELECT 'EstadoAsistencia fuera de catalogo', COUNT(*)
+SELECT 'EstadoAsistencia fuera de catalogo o vacio', COUNT(*)
 FROM stg.Asistencia
-WHERE UPPER(LTRIM(RTRIM(EstadoAsistencia))) NOT IN
+WHERE NULLIF(LTRIM(RTRIM(EstadoAsistencia)), N'') IS NULL
+   OR UPPER(LTRIM(RTRIM(EstadoAsistencia))) NOT IN
       (N'ASISTIO', N'TARDANZA', N'FALTA JUSTIFICADA', N'FALTA INJUSTIFICADA',
        N'A', N'T', N'FJ', N'FI')
 UNION ALL

@@ -1,5 +1,13 @@
 ﻿/* ============================================================================
    06_fac_aprendizajes.sql
+   CAMBIOS v6.5.2 (27/10/2026, revision de codigo):
+   - Antes de borrar lo publicado: si ninguna nota es aceptada (THROW 51067)
+     o si mas del 10 % iria a la bitacora (THROW 51068), se detiene y el
+     hecho anterior se conserva. Lote verificado: 581 / 45 396 = 1,28 %.
+   - Una fecha de cierre que cae en un bimestre «(sin cierre)» de DimTiempo
+     ya no se carga en ese bimestre: va a la bitacora con su motivo, para
+     agregar el cierre oficial en el 03 (#Cierres) y volver a cargar.
+     En el lote actual no hay casos: las cifras no cambian.
    CAMBIOS v6.5.1 (25/10/2026, auditoria): la consulta de control de bajo
    rendimiento usa la regla ACORDADA P5 (promedio por area de las competencias
    con evidencia; bajo rendimiento = alguna area < 11; aprobado = todas >= 11).
@@ -251,7 +259,11 @@ SELECT o.*,
             THEN 1 ELSE 0 END AS PrioridadCompetencia,
        CASE WHEN TRY_CONVERT(TINYINT, NULLIF(LTRIM(RTRIM(o.Bimestre)), N''))
                            = t.Bimestre
-            THEN 1 ELSE 0 END AS PrioridadBimestre
+            THEN 1 ELSE 0 END AS PrioridadBimestre,
+       /* v6.5.2: bimestre que DimTiempo aun no cierra (falta su fecha oficial
+          en #Cierres del 03): la nota no se asigna a ciegas a ese bimestre. */
+       CASE WHEN t.NombreBimestre LIKE N'%(sin cierre)%' THEN 1 ELSE 0 END
+           AS BimestreSinCierre
 INTO #Vinculada
 FROM #OrigenNormalizado AS o
 LEFT JOIN dw.DimTiempo AS t
@@ -300,6 +312,8 @@ SELECT x.*,
        CASE WHEN x.FechaCierreKey IS NULL
                       OR x.AnioEscolar IS NULL
                       THEN N'Periodo o fecha de cierre desconocidos'
+            WHEN x.BimestreSinCierre = 1
+                 THEN N'Bimestre sin cierre oficial en DimTiempo (agregarlo en el 03)'
             WHEN x.EstudianteKey IS NULL THEN N'Estudiante fuera del padron'
             WHEN x.NivelAcademicoKey IS NULL THEN N'Seccion anual desconocida'
             WHEN x.AreaKey IS NULL THEN N'Area desconocida'
@@ -349,6 +363,24 @@ SELECT c.*,
                     FechaCarga DESC, NotaTexto DESC, AreaID DESC) AS rn
 INTO #Ordenadas
 FROM #Clasificada AS c WHERE MotivoRechazo IS NULL;
+
+/* v6.5.2: no reemplazar lo publicado con una carga que no sirve. La
+   reconciliacion de abajo cuadra aunque TODAS las notas vayan a la
+   bitacora, asi que se valida ANTES de borrar el hecho. */
+DECLARE @NotasOrigen    INT = (SELECT COUNT(*) FROM stg.NotaCompetencia),
+        @NotasAceptadas INT = (SELECT COUNT(*) FROM #Ordenadas WHERE rn = 1),
+        @MaxPctBitacora DECIMAL(5,2) = 10.00;  -- ajustable; lote verificado: 1,28 %
+
+IF @NotasAceptadas = 0
+    THROW 51067, N'Ninguna nota fue aceptada: se conserva el hecho publicado. Revisar staging y catalogos.', 1;
+
+IF 100.0 * (@NotasOrigen - @NotasAceptadas) / NULLIF(@NotasOrigen, 0) > @MaxPctBitacora
+BEGIN
+    SELECT MotivoRechazo, COUNT(*) AS Filas
+    FROM #Clasificada WHERE MotivoRechazo IS NOT NULL
+    GROUP BY MotivoRechazo ORDER BY Filas DESC;
+    THROW 51068, N'Mas del 10 % de las notas iria a la bitacora: se conserva el hecho publicado.', 1;
+END;
 
 BEGIN TRY
     BEGIN TRANSACTION;

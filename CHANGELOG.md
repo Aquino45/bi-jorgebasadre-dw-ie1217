@@ -1,6 +1,26 @@
 # Changelog
 
-## v6.5.1 — 25/10/2026 (por verificar en SQL Server)
+## v6.5.2 — 27/10/2026 (verificado)
+
+Correcciones de una revisión de código. No cambia ninguna tabla ni ninguna cifra del lote actual.
+
+### Cambiado
+- 06: antes de borrar el hecho publicado, se detiene si ninguna nota es aceptada (THROW 51067) o si más del 10 % iría a la bitácora (THROW 51068). La reconciliación final cuadraba aunque todas las notas fueran a la bitácora.
+- 06: una fecha de cierre que cae en un bimestre «(sin cierre)» de DimTiempo va a la bitácora con el motivo «Bimestre sin cierre oficial en DimTiempo», en vez de cargarse en ese bimestre. En el lote actual no hay casos.
+- 02: las reglas de rango y catálogo (rúbricas, tipo de material, estado de asistencia) cuentan también el valor vacío o no numérico; antes se escapaba porque `NULL NOT BETWEEN` / `NOT IN` no es verdadero.
+- 07: aviso en el encabezado: el job ejecuta las copias de `C:\BI_IE1217\scripts`, que deben actualizarse con cada versión.
+
+### Verificado el 27/10/2026 (respaldo previo `DW_IE1217_pre_v6_5_2_20261027.bak`, `RESTORE VERIFYONLY` válido)
+- Las copias de `C:\BI_IE1217\scripts` eran del 13/10 (v5.2); pasaron a `versiones antiguas\v5.2_2026-10-13` y se copiaron 01–07 vigentes. Job recreado con el 07 (10 pasos, cada 15 minutos); el Agente sigue detenido. Las corridas del 20/10 habían fallado en «02 Diagnóstico», antes de tocar dimensiones y hechos.
+- Se ejecutaron 02 a 06 (v6.5.2, incluye lo de v6.5.1): huella por columnas idéntica antes y después en los cuatro hechos y en `stg.BitacoraNota`. 600 (579 / 21) · 879 filas de sesiones (6 352) · 100 de material · 44 815 + 581 (264 / 198 / 87 / 32) · 379 sin evidencia.
+- Control P13b del 04: 2025 = 11 rechazadas (3 con revisión, 8 sin fecha); 2026 = 10 (2 y 8), como se esperaba.
+- Control P5 del 06 (bajo rendimiento / aprobados de 289–290 evaluados): 2025 B1 121 / 168, B2 117 / 172, B3 106 / 183, B4 93 / 196; 2026 B1 111 / 179, B2 101 / 189. Casos P19 (evaluados con un área sin evidencia): 2 a 5 por bimestre.
+- 02, reglas con NULL: rúbricas 7 (antes 6), tipo de material 8 (igual), estado de asistencia 757 (antes 716).
+
+### Pendiente (propuesta)
+- Publicación atómica de los cuatro hechos (P22): hoy cada script confirma su propia transacción y una falla en el 05 o el 06 deja matrícula de una corrida y el resto de otra.
+
+## v6.5.1 — 25/10/2026 (verificado el 27/10/2026 junto con v6.5.2)
 
 Correcciones de la auditoría general del 25/10/2026. No cambia ninguna tabla ni ninguna cifra de los hechos: solo una consulta de control, un control nuevo y el cierre del lote.
 
@@ -9,9 +29,9 @@ Correcciones de la auditoría general del 25/10/2026. No cambia ninguna tabla ni
 - 07: `usp_CerrarLote` también detiene el lote si `dm_preparacion.FacEntregaMaterial` queda vacío; textos sin «v5.1». Hay que recrear el job.
 - 04: control nuevo de rechazadas por vía y sin ninguna fecha real (P13b); comentario de DimSeccion corregido.
 
-### Documentos (para revisión, sin reemplazar los vigentes)
+### Documentos (aprobados el 25/10/2026; las versiones anteriores pasan a «versiones antiguas»)
 - `docs/insumos/Matriz_BI_Gestion_de_ProcesosV.4_2.xlsx`: notas de la auditoría (M1–M12) y propuestas P13b, P14b, P17, P18, P19.
-- `docs/insumos/Metricas_y_Dimensiones_v2.3.xlsx`: Mapeo origen-DW reescrito para v6.5 (43 filas); observaciones de la V2; matriz bus con «Una fila representa».
+- `docs/insumos/Metricas_y_Dimensiones_v2.3.xlsx`: Mapeo origen-DW reescrito para v6.5 (43 filas); granularidad de la medida (entidad + tiempo) en la V2 y grano («una fila representa») en la matriz bus; nombre de la BD entre paréntesis en grupos, atributos, hechos y medidas (D34).
 
 ### Esperado al ejecutar
 - 04, control P13b: 2025 = 11 rechazadas (3 con revisión, 8 sin ninguna fecha); 2026 = 10 (2 y 8).

@@ -1,5 +1,10 @@
 ﻿/* =============================================================================
    07_job_sql_agent.sql — AUTOMATIZACION DEL ETL CON SQL SERVER AGENT
+   CAMBIOS v6.5.2 (27/10/2026): solo este aviso.
+   !! El job ejecuta las COPIAS de C:\BI_IE1217\scripts, no los archivos del
+   !! repositorio. Cada vez que cambie la version: copiar ahi 01 a 06 (mover
+   !! las anteriores a «versiones antiguas») y volver a ejecutar este script.
+   !! El 20/10/2026 el job corrio copias v5.2 sobre una base v6.x y fallo.
    CAMBIOS v6.5.1 (25/10/2026, auditoria): el cierre del lote tambien exige
    que dm_preparacion.FacEntregaMaterial no quede vacio, y los textos ya no
    dicen v5.1. Recrear el job ejecutando este script.

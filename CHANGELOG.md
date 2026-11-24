@@ -1,5 +1,18 @@
 # Changelog
 
+## v6.5.4 — 03/11/2026 (verificado)
+
+Instalador: busca solo el SQL Server de la PC. No cambia ningún script del ETL ni ninguna cifra.
+
+### Cambiado
+- `instalar_o_actualizar.ps1`: sin `-Servidor`, detecta las instancias instaladas (`MSSQLSERVER` o `MSSQL$NOMBRE`); si hay una iniciada la usa, si hay varias (o con `-Elegir`) muestra una lista para elegir. Si una instancia está detenida, la inicia cuando se ejecuta como administrador o explica el comando. Muestra el nombre que hay que poner en el parámetro Servidor de Power BI.
+- Los errores de conexión de `sqlcmd` salen con un mensaje claro en lugar de cortar el script (PowerShell 5.1).
+- `-ConJob` da los permisos a la cuenta del Agente de la instancia elegida (`NT SERVICE\SQLAgent$NOMBRE` en instancias con nombre).
+- `.gitignore`: la caché de Power BI (`.pbi/cache.abf`, guarda datos del colegio) y los `.pbix` no se suben.
+
+### Verificado el 03/11/2026
+- `-SoloVerificar` sin parámetros: encuentra `localhost` y las 9 cifras salen OK. Con `-Elegir`: lista y elección. Con `-Servidor localhost\NOEXISTE`: mensaje claro y salida sin cargar nada.
+
 ## v6.5.3 — 27/10/2026 (verificado)
 
 Instalador para el equipo. No cambia ningún script del ETL ni ninguna cifra.

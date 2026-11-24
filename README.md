@@ -33,6 +33,8 @@ Opciones (desde una consola en la carpeta del repositorio):
 
 | Comando | Para qué |
 | --- | --- |
+| `.\instalar_o_actualizar.cmd -Elegir` | Muestra las instancias de SQL Server iniciadas en tu PC y te deja elegir (sin opciones, el instalador usa la única que encuentre) |
+| `.\instalar_o_actualizar.cmd -Servidor localhost\SQLEXPRESS` | Usa una instancia concreta (con nombre o remota) |
 | `.\instalar_o_actualizar.cmd -UsuarioSql sa` | Usar un login SQL en vez de Windows (pide la clave) |
 | `.\instalar_o_actualizar.cmd -ConJob` | Además actualiza el job del Agente (ver abajo). La primera vez, en una consola de administrador |
 | `.\instalar_o_actualizar.cmd -SoloVerificar` | No carga nada: solo compara las cifras |

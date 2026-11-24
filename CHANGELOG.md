@@ -1,5 +1,24 @@
 # Changelog
 
+## Sin etiqueta — 24/11/2026 (verificado en una PC; falta probar en las del equipo)
+
+Centro de control del ETL, preparación de `C:\BI_IE1217` desde el repositorio y CSV sintéticos versionados. No cambia ningún script del ETL (01 a 07) ni ninguna cifra.
+
+### Agregado
+- `data_sinte/`: los 17 CSV de origen (datos sintéticos generados con IA) y su diccionario. `datos_base.sha256` guarda sus huellas.
+- `centro_control/demo.cmd` (+ `demo.ps1`): estado, lotes de demostración con resumen previo, registro manual de matrícula y sesión, lanzamiento y seguimiento del job, calidad (descartes, bitácora, alertas), pausa del horario y vuelta al estado base. Toma el servidor de `instalado.json`; funciona con instancia predeterminada o con nombre, y sin Agente usa el modo directo (los mismos pasos con `sqlcmd`).
+- `centro_control/gen_lotes.ps1`: genera cuatro lotes a partir de los CSV base: sesiones del 11 al 29 de mayo de 2026, cinco matrículas por traslado, archivo incompleto y un lote integral (1 de junio de 2026: 109 sesiones, 8 traslados, 156 notas del II bimestre y la dotación de Inglés) que mueve los tres datamarts.
+- `centro_control/probar.ps1`: 23 casos de prueba de los flujos de la demostración y del manejo del job; deja todo en el estado base.
+- `instalar_o_actualizar.ps1`: prepara `C:\BI_IE1217` (`data`, `scripts`, `lotes`, `logs`), comprueba los CSV contra las huellas, sincroniza las copias de los scripts en cada corrida, genera los lotes y escribe `instalado.json`. Opciones nuevas: `-SoloPreparar`, `-RestaurarDatos`, `-ActualizarHuellas`.
+
+### Cambiado
+- Los CSV ya no se piden aparte: vienen en `data_sinte/` y el instalador los copia a `C:\BI_IE1217\data`. Si `data\` tiene un lote aplicado, avisa y no lo pisa salvo con `-RestaurarDatos`.
+- Las copias de `C:\BI_IE1217\scripts` ya no dependen de `-ConJob`.
+
+### Verificado el 24/11/2026
+- `probar.ps1`: 23 de 23 casos en SQL Server Developer con el Agente iniciado (instancia `localhost`). Con los lotes 1, 2 y 4: 613 matrículas, 7 442 sesiones, 44 971 notas; al volver a base, 600 / 6 352 / 44 815 y dimensiones sin residuos.
+- Sin probar: instancia con nombre, Express, login SQL, una PC sin `C:\BI_IE1217` previo y el instalador completo (respaldo + recarga) con estos cambios.
+
 ## v6.5.4 — 03/11/2026 (verificado)
 
 Instalador: busca solo el SQL Server de la PC. No cambia ningún script del ETL ni ninguna cifra.

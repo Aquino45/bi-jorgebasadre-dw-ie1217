@@ -13,21 +13,27 @@ Para ver todas las versiones: `git tag`.
 
 - `scripts/`: ETL en orden. 01 staging · 02 diagnóstico (solo lectura) · 03 dimensiones · 04 matrícula · 05 preparación · 06 aprendizajes · 07 job de SQL Server Agent.
 - `docs/`: guías e insumos (matriz BI, métricas).
-- `data_sinte/`: los 17 CSV de origen (sintéticos) y su diccionario de datos.
 - `_contexto/`: bitácora del proyecto. Es la fuente de verdad del estado, las decisiones (D) y los pendientes (P).
-- `instalar_o_actualizar.ps1` (y `.cmd`): instala o actualiza la base en tu PC y compara las cifras.
+- `instalar_o_actualizar.ps1` (y `.cmd`): prepara `C:\BI_IE1217`, instala o actualiza la base en tu PC y compara las cifras.
+- `centro_control/`: `demo.cmd`, el centro de control del ETL (lotes de demostración, registro manual, lanzamiento y seguimiento del job). Trabaja sobre `C:\BI_IE1217`.
+- `data_sinte/`: los 17 CSV de origen (sintéticos) y su diccionario de datos.
+- `datos_base.sha256`: huellas SHA-256 de esos 17 CSV; el instalador comprueba con ellas que nadie cargue archivos modificados.
 
 ## Instalar o actualizar (cada integrante)
 
 Cada uno tiene su propio SQL Server, su propia base `DW_IE1217` y su propio `C:\BI_IE1217`: nada se comparte entre PCs.
 
 1. `git pull` (todos en la misma versión: no mezclar versiones).
-2. Los CSV están en `data_sinte\` (datos sintéticos). Copia los 17 a `C:\BI_IE1217\data`, con permiso de lectura para `NT Service\MSSQLSERVER`.
+2. Los CSV vienen en el repositorio, en `data_sinte\` (datos sintéticos): no hay que pedirlos ni copiarlos a mano.
 3. Doble clic en `instalar_o_actualizar.cmd`. El script:
-   - muestra la versión del repositorio y comprueba los 17 CSV;
+   - muestra la versión del repositorio y comprueba que tus 17 CSV sean los del equipo (`datos_base.sha256`);
+   - prepara `C:\BI_IE1217`: `data\` (los CSV que lee el ETL), `scripts\` (copias de `scripts/01` a `07`, las que ejecuta el job), `lotes\` (estado base y lotes de demostración) y `logs\`. Lo que reemplaza pasa a una carpeta `versiones antiguas`; no borra nada;
    - respalda `DW_IE1217` si ya existe (y verifica el respaldo);
    - ejecuta `scripts/01` a `06` en orden y se detiene en el primer error (logs en `C:\BI_IE1217\logs`);
-   - compara las cifras con las verificadas (600 matrículas, 6 352 sesiones, 44 815 notas + 581 en la bitácora…). Si alguna sale distinta, revisa tus CSV o tu versión.
+   - compara las cifras con las verificadas (600 matrículas, 6 352 sesiones, 44 815 notas + 581 en la bitácora…). Si alguna sale distinta, revisa tus CSV o tu versión;
+   - anota en `C:\BI_IE1217\instalado.json` la versión instalada, el servidor y las huellas.
+
+`C:\BI_IE1217` es la misma ruta en todas las PC porque el script 01 y el job la usan; el repositorio puede estar en cualquier carpeta. En `C:\BI_IE1217` no se edita nada a mano.
 
 Opciones (desde una consola en la carpeta del repositorio):
 
@@ -39,10 +45,26 @@ Opciones (desde una consola en la carpeta del repositorio):
 | `.\instalar_o_actualizar.cmd -ConJob` | Además actualiza el job del Agente (ver abajo). La primera vez, en una consola de administrador |
 | `.\instalar_o_actualizar.cmd -SoloVerificar` | No carga nada: solo compara las cifras |
 | `.\instalar_o_actualizar.cmd -SinRespaldo` | Omite el respaldo |
+| `.\instalar_o_actualizar.cmd -SoloPreparar` | Prepara `C:\BI_IE1217` sin recargar la base |
+| `.\instalar_o_actualizar.cmd -RestaurarDatos` | Devuelve `data\` a los CSV base (por ejemplo, después de un lote de demostración) |
+| `.\instalar_o_actualizar.cmd -ActualizarHuellas` | Solo quien cambia los CSV del equipo: regenera `datos_base.sha256` desde `data_sinte\` |
 
 ### Job de SQL Server Agent (opcional)
 
-El job `ETL_IE1217_Carga` (script 07) **no lee el repositorio**: ejecuta las copias de `C:\BI_IE1217\scripts`. Con cada versión nueva hay que actualizarlas y recrear el job; `-ConJob` lo hace (mueve las copias anteriores a `C:\BI_IE1217\scripts\versiones antiguas\`). La edición Express no trae Agente.
+El job `ETL_IE1217_Carga` (script 07) **no lee el repositorio**: ejecuta las copias de `C:\BI_IE1217\scripts`. El instalador las actualiza en cada corrida (las anteriores pasan a `C:\BI_IE1217\scripts\versiones antiguas\`); `-ConJob` además da los permisos al Agente y recrea el job. La edición Express no trae Agente.
+
+### Centro de control del ETL (demostración)
+
+`centro_control\demo.cmd`, después de haber corrido el instalador una vez. Usa el servidor que anotó el instalador (o `demo.cmd -Servidor NOMBRE`).
+
+- Estado: servidor, versión instalada, si los scripts de `C:\BI_IE1217\scripts` son los del repositorio, Agente, job, filas de los CSV y conteos publicados.
+- Lotes de demostración (sesiones nuevas, matrículas nuevas, archivo incompleto y un lote integral que mueve los tres datamarts) con resumen previo de cuántos registros son nuevos; registro manual de una matrícula o una sesión. Todo entra por los CSV de `data\` y pasa por el ETL completo.
+- Lanzar y seguir: arranca el job del Agente y muestra cada paso. Si la PC no tiene Agente (Express) o está detenido, ofrece el **modo directo**: los mismos pasos con `sqlcmd` desde la ventana.
+- Volver al estado base: restaura los CSV y, tras la recarga, retira de las dimensiones los estudiantes y tipos de matrícula que agregaron los lotes (es la única escritura directa del centro de control sobre el DW; el ETL nunca borra miembros de dimensiones).
+
+Los lotes cambian las cifras verificadas mientras están aplicados: antes de comparar cifras o de sustentar, volver al estado base.
+
+Para comprobar que todo funciona en tu PC: `powershell -ExecutionPolicy Bypass -File centro_control\probar.ps1` ejecuta 23 casos de prueba (unos 3 minutos) y deja todo en el estado base.
 
 ## Ejecución manual
 

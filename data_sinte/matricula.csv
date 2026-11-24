@@ -1,0 +1,616 @@
+MatriculaID;Anio;CodigoEstudiante;SeccionID;Grado;Seccion;TipoMatricula;ViaMatricula;FaseProceso;FechaSolicitud;FechaRevision;FechaAsignacionVacante;FechaRegistroSiagie;EstadoMatricula;Observacion;TipoVacante;NumeroConstanciaTraslado;ResponsableMatriculaID
+MAT-2025-0001;2025;12172025000010;SEC-2025-1A;1;A;Ingresante;Solicitud de vacante;Regular;2024-12-26;2025-01-11;2025-01-23;2025-01-31;APROBADO;;Regular;;PER-007
+MAT-2025-0002;2025;12172025000020;SEC-2025-1A;1;A;Ingresante;Solicitud de vacante;Regular;01/01/25;11/01/25;28/01/25;01/02/25;Aprobado;;Regular;;PER-007
+MAT-2025-0003;2025;12172025000030;SEC-2025-1A;1;A;Ingresante;Solicitud de vacante;Regular;2024-12-23;2025-01-13;2025-01-23;2025-02-04;Aprobado;;Regular;;PER-007
+MAT-2025-0004;2025;12172025000040 ;SEC-2025-1A;1;A;Ingresante;Solicitud de vacante;Regular;2024-12-19;2025-01-15;2025-01-20;2025-02-07;Aprobado;;Regular;;PER-007
+MAT-2025-0005;2025;12172025000050;SEC-2025-1A;1;A;Ingresante;Solicitud de vacante;Regular;2024-12-23;2025-01-07;2025-01-20;2025-02-07;Aprobado;;Regular;;PER-007
+MAT-2025-0006;2025;12172025000060;SEC-2025-1A;1;A;Ingresante;Solicitud de vacante;Regular;19/12/2024;11/01/2025;23/01/2025;06/02/2025;Aprobado;;Regular;;PER-007
+MAT-2025-0007;2025;12172025000070;SEC-2025-1A;1;A;Ingresante;Solicitud de vacante;Regular;03/01/2025;08/01/2025;21/01/2025;31/01/2025;Aprobado;;Regular;;PER-007
+MAT-2025-0008;2025;12172025000080;SEC-2025-1A;1;A;Ingresante;Solicitud de vacante;Regular;2024-11-20;13-01-2025;22-01-2025;10-02-2025;Aprobado;;Regular;;PER-007
+MAT-2025-0009;2025;12172025000090;SEC-2025-1A;1;A;Ingresante;Solicitud de vacante;Regular;2025-01-01;2025-01-08;2025-01-20;2025-02-03;Aprobado;;Regular;;PER-007
+MAT-2025-0010;2025;12172025000100;SEC-2025-1A;1;A;Ingresante;Solicitud de vacante;Regular;23/12/2024;15/01/2025;22/01/2025;10/02/2025;Aprobado;;Regular;;PER-007
+MAT-2025-0011;2025;12172025000110;SEC-2025-1A;1;A;Ingresante;Solicitud de vacante;Regular;2024-12-21;2025-01-14;2025-01-23;2025-02-06;Aprobado;;Regular;;PER-007
+MAT-2025-0012;2025;12172025000120;SEC-2025-1A;1;A;Repitiente;Solicitud de vacante;Regular;2024-12-19;2025-01-10;2025-01-23;2025-02-07;Aprobado;;Regular;;PER-007
+MAT-2025-0013;2025;12172025000130;SEC-2025-1A;1;A;Ingresante;Solicitud de vacante;Regular;2024-12-19;2025-01-16;2025-01-28;2025-01-29;Aprobada;;Regular;;PER-007
+MAT-2025-0014;2025;12172025000140;SEC-2025-1A;1;A;Ingresante;Solicitud de vacante;Regular;30-12-2024;15-01-2025;27-01-2025;05-02-2025;Aprobado;;Regular;;PER-007
+MAT-2025-0015;2025;12172025000150;SEC-2025-1A;1;A;Ingresante;Solicitud de vacante;Regular;2025-01-02;2025-01-07;2025-01-22;2025-02-04;Aprobado;;Regular;;PER-007
+MAT-2025-0016;2025;12172025000160;SEC-2025-1A;1;A;Ingresante;Solicitud de vacante;Regular;2024-12-17;2025-01-13;2025-01-28;2025-01-29;Aprobado;;Regular;;PER-007
+MAT-2025-0017;2025;12172025000170;SEC-2025-1A;1;A;continuador;Solicitud de vacante;Regular;2024-12-18;2025-01-07;2025-01-27;2025-02-08;APROBADO ;;Regular;;PER-007
+MAT-2025-0018;2025;12172025000180;SEC-2025-1A;1;A;Ingresante;Solicitud de vacante;Regular;2024-12-23;2025-01-07;2025-01-20;2025-02-06;Aprobado;;Regular;;PER-007
+MAT-2025-0019;2025;12172025000190;SEC-2025-1A;1;A;Ingresante;Solicitud de vacante;Regular;2024-12-28;2025-01-08;2025-01-28;2025-02-07;Aprobado;;Regular;;PER-007
+MAT-2025-0020;2025;12172025000200;SEC-2025-1A;1;A;Ingresante;Solicitud de vacante;Regular;20/12/2024;14/01/2025;21/01/2025;08/02/2025;APROBADO;;Regular;;PER-007
+MAT-2025-0021;2025;12172025000210;SEC-2025-1A;1;A;Ingresante;Solicitud de vacante;Regular;2024-11-20;2025-01-06;2025-01-25;2025-01-29;Aprobado;;Regular;;PER-007
+MAT-2025-0022;2025;12172025000220;SEC-2025-1A;1;A;Ingresante;Solicitud de vacante;Regular;2025-01-03;2025-01-09;2025-01-23;2025-02-08;aprobado;;Regular;;PER-007
+MAT-2025-0023;2025;12172025000230;SEC-2025-1A;1;A;Ingresante;Solicitud de vacante;Regular;2024-12-31;2025-01-10;2025-01-28;2025-01-31;Aprobado;;Regular;;PER-007
+MAT-2025-0024;2025;12172025000240;SEC-2025-1A;1;A;Ingresante;Solicitud de vacante;Regular;2025-01-01;2025-01-11;2025-01-27;2025-02-07;Aprobado;;Regular;;PER-007
+MAT-2025-0025;2025;12172025000250;SEC-2025-1A;1;A;Ingresante;Solicitud de vacante;Regular;2025-01-03;2025-01-16;2025-01-28;2025-01-31;Aprobado;;Regular;;PER-007
+MAT-2025-0026;2025;12172025000260;SEC-2025-1A;1;A;Ingresante;Solicitud de vacante;Regular;2024-12-20;2025-01-13;2025-01-25;;Rechazado;Falta certificado de estudios de la IE de procedencia;Regular;;PER-007
+MAT-2025-0027;2025;12172025000270;SEC-2025-1A;1;A;Ingresante;Solicitud de vacante;Regular;2024-12-24;2025-01-15;2025-01-23;2025-02-03;APROBADO;;Regular;;PER-007
+MAT-2025-0028;2025;12172025000280;SEC-2025-1A;1;A;Ingresante;Solicitud de vacante;Regular;2024-12-20;2025-01-11;2025-01-20;2025-02-01;Aprobado;;Regular;;PER-007
+MAT-2025-0029;2025;12172025000290;SEC-2025-1A;1;A;Ingresante;Solicitud de vacante;Regular;2024-12-19;2025-01-15;2025-01-25;2025-02-10;Aprobado;;Regular;;PER-007
+MAT-2025-0030;2025;12172025000300;SEC-2025-1A;1;A;Ingresante;Solicitud de vacante;Regular;25-12-2024;16-01-2025;23-01-2025;06-02-2025;Aprobado;;Regular;;PER-007
+MAT-2025-0031;2025;12172025000310;SEC-2025-1B;1;B;Ingresante;Solicitud de vacante;Regular;25-12-2024;15-01-2025;21-01-2025;07-02-2025;Aprobado;;Regular;;PER-007
+MAT-2025-0032;2025;12172025000320;SEC-2025-1B;1;B;Ingresente;Solicitud de vacante;Regular;2024-12-19;2025-01-09;2025-01-21;2024-10-15;Aprobado;;Regular;;PER-007
+MAT-2025-0033;2025;12172025000330;SEC-2025-1B;1;B;Ingresante;Solicitud de vacante;Regular;2024-12-27;2025-01-11;2025-01-24;2025-01-29;Aprobado;;Regular;;PER-007
+MAT-2025-0034;2025;12172025000340;SEC-2025-1B;1;B;Ingresante;Solicitud de vacante;Regular;03-01-2025;15-01-2025;28-01-2025;31-01-2025;Aprobado;;Regular;;PER-007
+MAT-2025-0035;2025;12172025000350;SEC-2025-1B;1;B;Ingresante;Solicitud de vacante;Regular;24//2//1;25//2//0;25//2//0;25//2//0;Aprobado;;Regular;;PER-007
+MAT-2025-0036;2025;12172025000360;SEC-2025-1B;1;B;Ingresante;Solicitud de vacante;Regular;03/01/25;11/01/25;24/01/25;29/01/25;Aprobado;;Regular;;PER-007
+MAT-2025-0037;2025;12172025000370;SEC-2025-1B;1;B;Ingresante;Solicitud de vacante;Regular;2024-12-28;2025-01-06;2025-01-20;2025-01-29;Aprobado;;Regular;;PER-007
+MAT-2025-0038;2025;12172025000380;SEC-2025-1B;1;B;Ingresante;Solicitud de vacante;Regular;2024-12-16;2025-01-16;2025-01-25;2024-10-15;APROBADO ;;Regular;;PER-007
+MAT-2025-0039;2025;12172025000390;SEC-2025-1B;1;B;Ingresante;Solicitud de vacante;Regular;2024-12-16;2025-01-11;2025-01-22;2025-01-31;Aprobado;;Regular;;PER-007
+MAT-2025-0040;2025;12172025000400;SEC-2025-1B;1;B;Ingresante;Solicitud de vacante;Regular;2025-01-01;2025-01-17;2025-01-21;2025-02-11;Aprobado;;Regular;;PER-007
+MAT-2025-0041;2025;12172025000410;SEC-2025-1B;1;B;Ingresante;Solicitud de vacante;Regular;2024-11-20;2025-01-13;2025-01-27;2025-02-07;Aprobado;;Regular;;PER-007
+MAT-2025-0042;2025;12172025000420;SEC-2025-1B;1;B;Ingresante;Solicitud de vacante;Regular;2024-12-21;2025-01-11;2025-01-24;2025-02-10;Aprobado;;Regular;;PER-007
+MAT-2025-0043;2025;12172025000430;SEC-2025-1B;1;B;Ingresante;Solicitud de vacante;Regular;2025-01-02;2025-01-16;2025-01-24;2025-02-01;Aprobado;sin observaciones;Regular;;PER-007
+MAT-2025-0044;2025;12172025000440;SEC-2025-1B;1;B;Ingresante;Solicitud de vacante;Regular;2024-12-31;2025-01-17;2025-01-25;2025-01-31;Aprobado;;Regular;;PER-007
+MAT-2025-0045;2025;12172025000450;SEC-2025-1B;1;B;Ingresante;Solicitud de vacante;Regular;2025-01-02;2025-01-08;2025-01-28;2025-01-30;Aprobado;;Regular;;PER-007
+MAT-2025-0046;2025;12172025000460;SEC-2025-1B;1;B;Ingresante;Solicitud de vacante;Regular;2024-12-28;2025-01-09;2025-01-22;2025-02-06;Aprobado;;Regular;;PER-007
+MAT-2025-0047;2025;12172025000470;SEC-2025-1B;1;B;Traslado ;Solicitud de vacante;Regular;2024-12-17;2025-01-09;2025-01-22;2025-01-30;Aprobado;ninguna;Regular;;PER-007
+MAT-2025-0048;2025;12172025000480;SEC-2025-1B;1;B;Ingresante;Solicitud de vacante;Complementaria;2025-02-20;2025-02-26;2025-02-27;2025-03-04;Aprobado;;Regular;;PER-007
+MAT-2025-0049;2025;12172025000490;SEC-2025-1B;1;B;Ingresante;Solicitud de vacante;Regular;24/12/2024;06/01/2025;28/01/2025;;Rechazado;Apoderado no acredito representacion legal del estudiante;Regular;;PER-007
+MAT-2025-0050;2025;12172025000500;SEC-2025-1B;1;B;Ingresante;Solicitud de vacante;Regular;2024-12-16;2025-01-08;2025-01-22;2025-02-07;Aprobado;;Regular;;PER-007
+MAT-2025-0051;2025;12172025000510;SEC-2025-1B;1;B;Ingresante;Solicitud de vacante;Regular;2024-12-28;2025-01-09;2025-01-28;2025-02-12;Aprobado;;Regular;;PER-007
+MAT-2025-0052;2025;12172025000520;SEC-2025-1B;1;B;Ingresante;Solicitud de vacante;Regular;2024-12-18;2025-01-15;2025-01-21;2025-02-12;Aprobado;;Regular;;PER-007
+MAT-2025-0053;2025;12172025000530;SEC-2025-1B;1;B;Ingresante;Solicitud de vacante;Regular;27/12/2024;07/01/2025;27/01/2025;06/02/2025;Aprobado;;Regular;;PER-007
+MAT-2025-0054;2025;12172025000540;SEC-2025-1B;1;B;Ingresante;Solicitud de vacante;Regular;2024-12-16;2025-01-07;2025-01-27;2025-02-01;Aprobado;;Regular;;PER-007
+MAT-2025-0055;2025;12172025000550;SEC-2025-1B;1;B;Ingresante;Solicitud de vacante;Regular;2024-12-31;2025-01-10;2025-01-25;2025-02-12;Aprobado;;Regular;;PER-007
+MAT-2025-0056;2025;12172025000560;SEC-2025-1B;1;B;Ingresante;Solicitud de vacante;Regular;01/01/25;06/01/25;23/01/25;11/02/25;Aprobado;;Regular;;PER-007
+MAT-2025-0057;2025;12172025000570;SEC-2025-1B;1;B;Ingresante;Solicitud de vacante;Regular;2024-12-23;2025-01-15;2025-01-24;2025-02-03;Aprobado;;Regular;;PER-007
+MAT-2025-0058;2025;12172025000580;SEC-2025-1B;1;B;Ingresante;Solicitud de vacante;Regular;2024-12-31;2025-01-07;2025-01-24;2024-10-15;APROBADO ;;Regular;;PER-007
+MAT-2025-0059;2025;12172025000590;SEC-2025-1B;1;B;Ingresante;Solicitud de vacante;Regular;2025-01-01;2025-01-14;2025-01-28;2025-01-29;Aprobado;;Regular;;PER-007
+MAT-2025-0060;2025;12172025000600;SEC-2025-1B;1;B;Ingresante;Solicitud de vacante;Regular;2024-12-19;2025-01-06;2025-01-20;2025-01-31;Aprobado;;Regular;;PER-007
+MAT-2025-0061;2025;12172024000610;SEC-2025-2A;2;A;Traslado;Solicitud de vacante;Regular;2024-12-30;2025-01-15;2025-01-23;2025-02-10;Aprobado;sin observaciones;Traslado;CT-2025-0061;PER-007
+MAT-2025-0062;2025;12172024000620;SEC-2025-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-03;Aprobado;;Regular;;PER-007
+MAT-2025-0063;2025;12172024000630;SEC-2025-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;10-02-2025;Aprobado;;Regular;;PER-007
+MAT-2025-0064;2025;12172024000640 ;SEC-2025-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-29;Aprobado;;Regular;;PER-007
+MAT-2025-0065;2025;12172024000650;SEC-2025-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-31;Aprobado;;Regular;;PER-007
+MAT-2025-0066;2025;12172024000660;SEC-2025-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;30/01/2025;Aprobado;;Regular;;PER-007
+MAT-2025-0067;2025;12172024000670;SEC-2025-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-30;Aprobado;;Regular;;PER-007
+MAT-2025-0068;2025;12172024000680;SEC-2025-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-29;Aprobado;;Regular;;PER-007
+MAT-2025-0069;2025;12172024000690 ;SEC-2025-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-29;Aprobado;;Regular;;PER-007
+MAT-2025-0070;2025;12172024000700;SEC-2025-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;11/02/2025;Aprobado;;Regular;;PER-007
+MAT-2025-0071;2025;12172024000710;SEC-2025-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;03/02/2025;Aprobado;;Regular;;PER-007
+MAT-2025-0072;2025;12172024000720;SEC-2025-2A;2;A;Repitente;Ratificacion de continuidad;Regular;;;;2025-02-03;Aprobado;;Regular;;PER-007
+MAT-2025-0073;2025;12172024000730;SEC-2025-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-08;Aprobado;;Regular;;PER-007
+MAT-2025-0074;2025;12172024000740;SEC-2025-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-12;Aprobado;;Regular;;PER-007
+MAT-2025-0075;2025;12172024000750;SEC-2025-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-29;Aprobado;;Regular;;PER-007
+MAT-2025-0076;2025;12172024000760;SEC-2025-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-03;Aprobado;;Regular;;PER-007
+MAT-2025-0077;2025;12172024000770;SEC-2025-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-31;Aprobado;;Regular;;PER-007
+MAT-2025-0078;2025;12172024000780;SEC-2025-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-04;Aprobado;;Regular;;PER-007
+MAT-2025-0079;2025;12172024000790;SEC-2025-2A;2;A;Repitente;Ratificacion de continuidad;Regular;;;;2025-02-07;Aprobado;;Regular;;PER-007
+MAT-2025-0080;2025;12172024000800;SEC-2025-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-11;Aprobado;;Regular;;PER-007
+MAT-2025-0081;2025;12172024000810;SEC-2025-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;05/02/2025;Aprobado;;Regular;;PER-007
+MAT-2025-0082;2025;12172024000820;SEC-2025-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-29;Aprobado;;Regular;;PER-007
+MAT-2025-0083;2025;12172024000830;SEC-2025-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-07;Aprobado;;Regular;;PER-007
+MAT-2025-0084;2025;12172024000840;SEC-2025-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-08;Aprobado;;Regular;;PER-007
+MAT-2025-0085;2025;12172024000850;SEC-2025-2A;2;A;Repitente;Ratificacion de continuidad;Regular;;;;2025-02-06;Aprobado;;Regular;;PER-007
+MAT-2025-0086;2025;12172024000860;SEC-2025-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-07;Aprobado;;Regular;;PER-007
+MAT-2025-0087;2025;12172024000870;SEC-2025-2A;2;A;Repitente;Ratificacion de continuidad;Regular;;;;2025-02-08;Aprobado;;Regular;;PER-007
+MAT-2025-0088;2025;12172024000880;SEC-2025-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;29/01/2025;Aprobado;;Regular;;PER-007
+MAT-2025-0089;2025;12172024000890;SEC-2025-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-05;Aprobado;;Regular;;PER-007
+MAT-2025-0090;2025;12172024000900;SEC-2025-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-30;Aprobado;;Regular;;PER-007
+MAT-2025-0091;2025;12172024000910;SEC-2025-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;;Rechazado;Falta certificado de estudios de la IE de procedencia;Regular;;PER-007
+MAT-2025-0092;2025;12172024000920;SEC-2025-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;04/02/2025;Aprobado;;Regular;;PER-007
+MAT-2025-0093;2025;12172024000930;SEC-2025-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-04;Aprobado;;Regular;;PER-007
+MAT-2025-0094;2025;12172024000940;SEC-2025-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-05;Aprobada;;Regular;;PER-007
+MAT-2025-0095;2025;12172024000950;SEC-2025-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-11;Aprobado;;Regular;;PER-007
+MAT-2025-0096;2025;12172024000960;SEC-2025-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;11/02/2025;Aprobado;;Regular;;PER-007
+MAT-2025-0097;2025;12172024000970;SEC-2025-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-12;Aprobado;;Regular;;PER-007
+MAT-2025-0098;2025;12172024000980;SEC-2025-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-29;Aprobado;;Regular;;PER-007
+MAT-2025-0099;2025;12172024000990;SEC-2025-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-08;Aprobado;;Regular;;PER-007
+MAT-2025-0100;2025;12172024001000;SEC-2025-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-12;aprobado;;Regular;;PER-007
+MAT-2025-0101;2025;12172024001010;SEC-2025-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;30/01/2025;Aprobado;;Regular;;PER-007
+MAT-2025-0102;2025;12172024001020;SEC-2025-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-29;Aprobado;;Regular;;PER-007
+MAT-2025-0103;2025;12172024001030;SEC-2025-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-30;Aprobado;;Regular;;PER-007
+MAT-2025-0104;2025;12172024001040;SEC-2025-2B;2;B;continuador;Ratificacion de continuidad;Regular;;;;2025-02-10;Aprobado;;Regular;;PER-007
+MAT-2025-0105;2025;12172024001050;SEC-2025-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-05;Aprobado;;Regular;;PER-007
+MAT-2025-0106;2025;12172024001060;SEC-2025-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-12;Aprobado;;Regular;;PER-007
+MAT-2025-0107;2025;12172024001070;SEC-2025-2B;2;B;Traslado;Solicitud de vacante;Regular;2024-12-24;2025-01-08;2025-01-22;2025-01-31;Aprobado;;Traslado;CT-2025-0107;PER-007
+MAT-2025-0108;2025;12172024001080;SEC-2025-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-30;Aprobado;;Regular;;PER-007
+MAT-2025-0109;2025;12172024001090;SEC-2025-2B;2;B;Traslado ;Ratificacion de continuidad;Regular;;;;07/02/2025;Aprobado;;Regular;;PER-007
+MAT-2025-0110;2025;12172024001100;SEC-2025-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-29;Aprobado;;Regular;;PER-007
+MAT-2025-0111;2025;12172024001110;SEC-2025-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-08;Aprobado;;Regular;;PER-007
+MAT-2025-0112;2025;12172024001120;SEC-2025-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-11;Aprobado;;Regular;;PER-007
+MAT-2025-0113;2025;12172024001130;SEC-2025-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-01;Aprobado;;Regular;;PER-007
+MAT-2025-0114;2025;12172024001140;SEC-2025-2B;2;B;Continuadorr;Ratificacion de continuidad;Regular;;;;2025-02-03;Aprobado;;Regular;;PER-007
+MAT-2025-0115;2025;12172024001150;SEC-2025-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-01;Aprobado;;Regular;;PER-007
+MAT-2025-0116;2025;12172024001160;SEC-2025-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-01;Aprobado;;Regular;;PER-007
+MAT-2025-0117;2025;12172024001170;SEC-2025-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;;Rechazado;Estudiante ya matriculado en otra IE (duplicidad en SIAGIE);Regular;;PER-007
+MAT-2025-0118;2025;12172024001180;SEC-2025-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-07;Aprobado;;Regular;;PER-007
+MAT-2025-0119;2025;12172024001190;SEC-2025-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-05;Aprobado;;Regular;;PER-007
+MAT-2025-0120;2025;12172024001200;SEC-2025-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-30;Aprobado;;Regular;;PER-007
+MAT-2025-0121;2025;12172023001210;SEC-2025-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;10/02/2025;Aprobado;;Regular;;PER-007
+MAT-2025-0122;2025;12172023001220;SEC-2025-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-10;Aprobado;;Regular;;PER-007
+MAT-2025-0123;2025;12172023001230;SEC-2025-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-07;Aprobado;;Regular;;PER-007
+MAT-2025-0124;2025;12172023001240;SEC-2025-3A;3;A;continuador;Ratificacion de continuidad;Regular;;;;2025-02-05;Aprobado;;Regular;;PER-007
+MAT-2025-0125;2025;12172023001250;SEC-2025-3A;3;A;Traslado ;Ratificacion de continuidad;Regular;;;;12/02/2025;Aprobado;;Regular;;PER-007
+MAT-2025-0126;2025;12172023001260;SEC-2025-3A;3;A;Traslado;Solicitud de vacante;Regular;31/12/2024;11/01/2025;25/01/2025;;Rechazado;DNI no valida en RENIEC;Traslado;CT-2025-0126;PER-007
+MAT-2025-0127;2025;12172023001270;SEC-2025-3A;3;A;Continuadorr;Ratificacion de continuidad;Regular;;;;2025-01-31;Aprobado;;Regular;;PER-007
+MAT-2025-0128;2025;12172023001280;SEC-2025-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-30;Aprobado;;Regular;;PER-007
+MAT-2025-0129;2025;12172023001290;SEC-2025-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;12/02/2025;Aprobado;;Regular;;PER-007
+MAT-2025-0130;2025;12172023001300;SEC-2025-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;01/02/2025;Aprobado;;Regular;;PER-007
+MAT-2025-0131;2025;12172023001310;SEC-2025-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-30;Aprobado;;Regular;;PER-007
+MAT-2025-0132;2025;12172023001320;SEC-2025-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;;Rechazado;No se presento a la entrega de documentos en el plazo;Regular;;PER-007
+MAT-2025-0133;2025;12172023001330;SEC-2025-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-01;Aprobado;;Regular;;PER-007
+MAT-2025-0134;2025;12172023001340;SEC-2025-3A;3;A;Traslado ;Ratificacion de continuidad;Regular;;;;2025-02-08;Aprobado;-;Regular;;PER-007
+MAT-2025-0135;2025;12172023001350;SEC-2025-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-29;Aprobado;;Regular;;PER-007
+MAT-2025-0136;2025;12172023001360;SEC-2025-3A;3;A;Continuador;Ratificacion de continuidad;Regular;2025-02-12;;;2025-02-12;Aprobado;;Regular;;PER-007
+MAT-2025-0137;2025;12172023001370;SEC-2025-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-05;Aprobado;;Regular;;PER-007
+MAT-2025-0138;2025;12172023001380;SEC-2025-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-03;Aprobado;;Regular;;PER-007
+MAT-2025-0139;2025;12172023001390;SEC-2025-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-30;Aprobado;;Regular;;PER-007
+MAT-2025-0140;2025;12172023001400;SEC-2025-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-08;Aprobada;;Regular;;PER-007
+MAT-2025-0141;2025;12172023001410;SEC-2025-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;05/02/2025;APROBADO;;Regular;;PER-007
+MAT-2025-0142;2025;12172023001420;SEC-2025-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-30;Aprobado;;Regular;;PER-007
+MAT-2025-0143;2025;12172023001430 ;SEC-2025-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-30;Aprobado;;Regular;;PER-007
+MAT-2025-0144;2025;12172023001440;SEC-2025-3A;3;A;Ingresente;Ratificacion de continuidad;Regular;;;;31/01/25;Aprobado;;Regular;;PER-007
+MAT-2025-0145;2025;12172023001450;SEC-2025-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-04;Aprobado;;Regular;;PER-007
+MAT-2025-0146;2025;12172023001460;SEC-2025-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-04;APROBADO ;;Regular;;PER-007
+MAT-2025-0147;2025;12172023001470;SEC-2025-3A;3;A;Ingresente;Ratificacion de continuidad;Regular;;;;2025-02-01;Aprobado;;Regular;;PER-007
+MAT-2025-0148;2025;12172023001480;SEC-2025-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-06;Aprobado;;Regular;;PER-007
+MAT-2025-0149;2025;12172023001490;SEC-2025-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-31;Aprobado;;Regular;;PER-007
+MAT-2025-0150;2025;12172023001500;SEC-2025-3A;3;A;Repitiente;Ratificacion de continuidad;Regular;;;;2025-02-04;Aprobado;;Regular;;PER-007
+MAT-2025-0151;2025;12172023001510;SEC-2025-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-12;Aprobado;;Regular;;PER-007
+MAT-2025-0152;2025;12172023001520;SEC-2025-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-04;Aprobado;;Regular;;PER-007
+MAT-2025-0153;2025;12172023001530;SEC-2025-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-04;Aprobado;;Regular;;PER-007
+MAT-2025-0154;2025;12172023001540;SEC-2025-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;10/02/2025;Aprobado;;Regular;;PER-007
+MAT-2025-0155;2025;12172023001550;SEC-2025-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-30;Aprobado;;Regular;;PER-007
+MAT-2025-0156;2025;12172023001560;SEC-2025-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-01;Aprobado;;Regular;;PER-007
+MAT-2025-0157;2025;12172023001570;SEC-2025-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;;Rechazado;Falta certificado de estudios de la IE de procedencia;Regular;;PER-007
+MAT-2025-0158;2025;12172023001580;SEC-2025-3B;3;B;Repitente;Ratificacion de continuidad;Regular;;;;2025-02-04;Aprobado;;Regular;;PER-007
+MAT-2025-0159;2025;12172023001590;SEC-2025-3B;3;B;Traslado;Solicitud de vacante;Regular;2024-12-20;2025-01-08;2025-01-25;2025-02-11;Aprobado;;Traslado;CT-2025-0159;PER-007
+MAT-2025-0160;2025;12172023001600;SEC-2025-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-03;Aprobado;-;Regular;;PER-007
+MAT-2025-0161;2025;12172023001610;SEC-2025-3B;3;B;Traslado;Solicitud de vacante;Regular;2024-12-16;2025-01-16;2025-01-21;2025-02-05;Aprobado;;Traslado;CT-2025-0161;PER-007
+MAT-2025-0162;2025;12172023001620;SEC-2025-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-29;Aprobado;;Regular;;PER-007
+MAT-2025-0163;2025;12172023001630;SEC-2025-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;25//2//0;Aprobado;;Regular;;PER-007
+MAT-2025-0164;2025;12172023001640;SEC-2025-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-08;Aprobado;;Regular;;PER-007
+MAT-2025-0165;2025;12172023001650;SEC-2025-3B;3;B;Ingresente;Ratificacion de continuidad;Regular;;;;2025-01-31;Aprobado;;Regular;;PER-007
+MAT-2025-0166;2025;12172023001660;SEC-2025-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;06-02-2025;Aprobado;;Regular;;PER-007
+MAT-2025-0167;2025;12172023001670;SEC-2025-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;12/02/2025;Aprobado;;Regular;;PER-007
+MAT-2025-0168;2025;12172023001680;SEC-2025-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-04;Aprobado;;Regular;;PER-007
+MAT-2025-0169;2025;12172023001690;SEC-2025-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-04;Aprobado;;Regular;;PER-007
+MAT-2025-0170;2025;12172023001700;SEC-2025-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-12;Aprobado;;Regular;;PER-007
+MAT-2025-0171;2025;12172023001710;SEC-2025-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-07;Aprobado;;Regular;;PER-007
+MAT-2025-0172;2025;12172023001720;SEC-2025-3B;3;B;continuador;Ratificacion de continuidad;Regular;;;;2025-02-05;Aprobado;;Regular;;PER-007
+MAT-2025-0173;2025;12172023001730;SEC-2025-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;10-02-2025;Aprobado;;Regular;;PER-007
+MAT-2025-0174;2025;12172023001740;SEC-2025-3B;3;B;Traslado ;Ratificacion de continuidad;Regular;;;;2025-01-29;Aprobado;;Regular;;PER-007
+MAT-2025-0175;2025;12172023001750;SEC-2025-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-31;aprobado;;Regular;;PER-007
+MAT-2025-0176;2025;12172023001760;SEC-2025-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-05;Aprobado;;Regular;;PER-007
+MAT-2025-0177;2025;12172023001770;SEC-2025-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-03;Aprobado;;Regular;;PER-007
+MAT-2025-0178;2025;12172023001780;SEC-2025-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;;Rechazado;Apoderado no acredito representacion legal del estudiante;Regular;;PER-007
+MAT-2025-0179;2025;12172023001790;SEC-2025-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-29;Aprobado;;Regular;;PER-007
+MAT-2025-0180;2025;12172023001800;SEC-2025-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-10;Aprobado;;Regular;;PER-007
+MAT-2025-0181;2025;12172022001810;SEC-2025-4A;4;A;Repitente;Ratificacion de continuidad;Regular;;;;2025-02-05;Aprobado;;Regular;;PER-007
+MAT-2025-0182;2025;12172022001820;SEC-2025-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;06-02-2025;APROBADO;;Regular;;PER-007
+MAT-2025-0183;2025;12172022001830;SEC-2025-4A;4;A;Continuador;Ratificacion de continuidad;Regular;2025-02-04;;;2025-02-04;Aprobado;;Regular;;PER-007
+MAT-2025-0184;2025;12172022001840;SEC-2025-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-01;Aprobado;;Regular;;PER-007
+MAT-2025-0185;2025;12172022001850;SEC-2025-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-06;Aprobado;;Regular;;PER-007
+MAT-2025-0186;2025;12172022001860;SEC-2025-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-30;Aprobado;;Regular;;PER-007
+MAT-2025-0187;2025;12172022001870;SEC-2025-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-30;Aprobado;;Regular;;PER-007
+MAT-2025-0188;2025;12172022001880;SEC-2025-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;11/02/25;Aprobado;;Regular;;PER-007
+MAT-2025-0189;2025;12172022001890;SEC-2025-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-04;Aprobado;;Regular;;PER-007
+MAT-2025-0190;2025;12172022001900;SEC-2025-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-31;Aprobado;sin observaciones;Regular;;PER-007
+MAT-2025-0191;2025;12172022001910;SEC-2025-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-07;Aprobado;;Regular;;PER-007
+MAT-2025-0192;2025;12172022001920;SEC-2025-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-30;Aprobado;;Regular;;PER-007
+MAT-2025-0193;2025;12172022001930;SEC-2025-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-07;Aprobado;;Regular;;PER-007
+MAT-2025-0194;2025;12172022001940;SEC-2025-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;03/02/2025;Aprobado;;Regular;;PER-007
+MAT-2025-0195;2025;12172022001950;SEC-2025-4A;4;A;Continuadorr;Ratificacion de continuidad;Regular;;;;2025-01-30;Aprobado;;Regular;;PER-007
+MAT-2025-0196;2025;12172022001960;SEC-2025-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-05;Aprobado;;Regular;;PER-007
+MAT-2025-0197;2025;12172022001970;SEC-2025-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-12;Aprobado;;Regular;;PER-007
+MAT-2025-0198;2025;12172022001980;SEC-2025-4A;4;A;continuador;Ratificacion de continuidad;Regular;;;;12-02-2025;Aprobado;;Regular;;PER-007
+MAT-2025-0199;2025;12172022001990;SEC-2025-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-30;Aprobado;;Regular;;PER-007
+MAT-2025-0200;2025;12172022002000;SEC-2025-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-03;Aprobado;;Regular;;PER-007
+MAT-2025-0201;2025;12172022002010;SEC-2025-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-10;Aprobado;;Regular;;PER-007
+MAT-2025-0202;2025;12172022002020;SEC-2025-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-29;Aprobado;;Regular;;PER-007
+MAT-2025-0203;2025;12172022002030;SEC-2025-4A;4;A;Repitiente;Ratificacion de continuidad;Regular;;;;2025-02-08;Aprobado;;Regular;;PER-007
+MAT-2025-0204;2025;12172022002040;SEC-2025-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-04;Aprobado;;Regular;;PER-007
+MAT-2025-0205;2025;12172022002050;SEC-2025-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-03;aprobado;;Regular;;PER-007
+MAT-2025-0206;2025;12172022002060;SEC-2025-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;03/02/2025;Aprobado;;Regular;;PER-007
+MAT-2025-0207;2025;12172022002070;SEC-2025-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-03;Aprobado;;Regular;;PER-007
+MAT-2025-0208;2025;12172022002080;SEC-2025-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-31;Aprobado;;Regular;;PER-007
+MAT-2025-0209;2025;12172022002090;SEC-2025-4A;4;A;continuador;Ratificacion de continuidad;Regular;;;;2025-02-04;Aprobado;;Regular;;PER-007
+MAT-2025-0210;2025;12172022002100;SEC-2025-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;;Rechazado;Estudiante ya matriculado en otra IE (duplicidad en SIAGIE);Regular;;PER-007
+MAT-2025-0211;2025;12172022002110;SEC-2025-4B;4;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-01;Aprobado;;Regular;;PER-007
+MAT-2025-0212;2025;12172022002120;SEC-2025-4B;4;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-10;Aprobado;;Regular;;PER-007
+MAT-2025-0213;2025;12172022002130;SEC-2025-4B;4;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-07;Aprobado;;Regular;;PER-007
+MAT-2025-0214;2025;12172022002140;SEC-2025-4B;4;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-01;APROBADO ;;Regular;;PER-007
+MAT-2025-0215;2025;12172022002150;SEC-2025-4B;4;B;Continuador;Ratificacion de continuidad;Regular;;;;06/02/2025;Aprobado;;Regular;;PER-007
+MAT-2025-0216;2025;12172022002160;SEC-2025-4B;4;B;Repitente;Ratificacion de continuidad;Regular;;;;2025-02-10;Aprobado;;Regular;;PER-007
+MAT-2025-0217;2025;12172022002170;SEC-2025-4B;4;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-03;Aprobado;;Regular;;PER-007
+MAT-2025-0218;2025;12172022002180;SEC-2025-4B;4;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-06;Aprobado;;Regular;;PER-007
+MAT-2025-0219;2025;12172022002190;SEC-2025-4B;4;B;Repitente;Ratificacion de continuidad;Regular;;;;2025-02-01;Aprobado;;Regular;;PER-007
+MAT-2025-0220;2025;12172022002200;SEC-2025-4B;4;B;Repitente;Ratificacion de continuidad;Regular;;;;2025-01-29;Aprobado;;Regular;;PER-007
+MAT-2025-0221;2025;12172022002210;SEC-2025-4B;4;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-29;Aprobado;;Regular;;PER-007
+MAT-2025-0222;2025;12172022002220;SEC-2025-4B;4;B;continuador;Ratificacion de continuidad;Regular;;;;2025-02-06;Aprobado;;Regular;;PER-007
+MAT-2025-0223;2025;12172022002230;SEC-2025-4B;4;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-12;Aprobado;;Regular;;PER-007
+MAT-2025-0224;2025;12172022002240;SEC-2025-4B;4;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-30;Aprobado;;Regular;;PER-007
+MAT-2025-0225;2025;12172022002250;SEC-2025-4B;4;B;Traslado;Solicitud de vacante;Regular;2024-12-27;2025-01-06;2025-01-25;2025-02-05;aprobado;;Traslado;CT-2025-0225;PER-007
+MAT-2025-0226;2025;12172022002260;SEC-2025-4B;4;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-06;Aprobado;;Regular;;PER-007
+MAT-2025-0227;2025;12172022002270;SEC-2025-4B;4;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-08;Aprobado;;Regular;;PER-007
+MAT-2025-0228;2025;12172022002280;SEC-2025-4B;4;B;Continuador;Ratificacion de continuidad;Regular;;;;06/02/2025;Aprobado;;Regular;;PER-007
+MAT-2025-0229;2025;12172022002290;SEC-2025-4B;4;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-07;Aprobado;;Regular;;PER-007
+MAT-2025-0230;2025;12172022002300;SEC-2025-4B;4;B;Continuador;Ratificacion de continuidad;Regular;;;;05/02/2025;Aprobado;;Regular;;PER-007
+MAT-2025-0231;2025;12172022002310;SEC-2025-4B;4;B;Ingresente;Ratificacion de continuidad;Regular;;;;2025-02-04;Aprobado;;Regular;;PER-007
+MAT-2025-0232;2025;12172022002320;SEC-2025-4B;4;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-29;Aprobado;;Regular;;PER-007
+MAT-2025-0233;2025;12172022002330;SEC-2025-4B;4;B;Continuador;Ratificacion de continuidad;Regular;;;;08/02/2025;Aprobado;;Regular;;PER-007
+MAT-2025-0234;2025;12172022002340;SEC-2025-4B;4;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-03;Aprobado;;Regular;;PER-007
+MAT-2025-0235;2025;12172022002350;SEC-2025-4B;4;B;Repitente;Ratificacion de continuidad;Regular;;;;2025-02-04;aprobado;;Regular;;PER-007
+MAT-2025-0236;2025;12172022002360;SEC-2025-4B;4;B;Continuadorr;Ratificacion de continuidad;Regular;;;;2025-02-01;Aprobado;;Regular;;PER-007
+MAT-2025-0237;2025;12172022002370;SEC-2025-4B;4;B;Continuador;Ratificacion de continuidad;Regular;;;;30-01-2025;Aprobado;;Regular;;PER-007
+MAT-2025-0238;2025;12172022002380;SEC-2025-4B;4;B;Traslado ;Ratificacion de continuidad;Regular;;;;2025-02-08;Aprobado;;Regular;;PER-007
+MAT-2025-0239;2025;12172022002390;SEC-2025-4B;4;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-12;Aprobado;;Regular;;PER-007
+MAT-2025-0240;2025;12172022002400;SEC-2025-4B;4;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-31;Aprobado;;Regular;;PER-007
+MAT-2025-0241;2025;12172021002410;SEC-2025-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-01;APROBADO;;Regular;;PER-007
+MAT-2025-0242;2025;12172021002420;SEC-2025-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-11;Aprobado;;Regular;;PER-007
+MAT-2025-0243;2025;12172021002430;SEC-2025-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;07/02/2025;Aprobado;;Regular;;PER-007
+MAT-2025-0244;2025;12172021002440;SEC-2025-5A;5;A;Traslado ;Ratificacion de continuidad;Regular;;;;2025-02-12;Aprobado;;Regular;;PER-007
+MAT-2025-0245;2025;12172021002450;SEC-2025-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-04;Aprovado;;Regular;;PER-007
+MAT-2025-0246;2025;12172021002460;SEC-2025-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-03;Aprobado;;Regular;;PER-007
+MAT-2025-0247;2025;12172021002470;SEC-2025-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-12;Aprobado;;Regular;;PER-007
+MAT-2025-0248;2025;12172021002480;SEC-2025-5A;5;A;Continuador;Ratificacion de continuidad;Regular;2025-02-06;;;2025-02-06;Aprobado;;Regular;;PER-007
+MAT-2025-0249;2025;12172021002490;SEC-2025-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;12/02/2025;APROBADO ;;Regular;;PER-007
+MAT-2025-0250;2025;12172021002500;SEC-2025-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;04-02-2025;Aprobado;;Regular;;PER-007
+MAT-2025-0251;2025;12172021002510;SEC-2025-5A;5;A;Repitente;Ratificacion de continuidad;Regular;;;;2025-02-01;APROBADO ;;Regular;;PER-007
+MAT-2025-0252;2025;12172021002520;SEC-2025-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;25-/2-31/0;Aprobado;;Regular;;PER-007
+MAT-2025-0253;2025;12172021002530;SEC-2025-5A;5;A;Repitente;Ratificacion de continuidad;Regular;;;;2025-02-12;Aprobado;;Regular;;PER-007
+MAT-2025-0254;2025;12172021002540;SEC-2025-5A;5;A;Repitente;Ratificacion de continuidad;Regular;;;;2025-01-31;Aprobado;;Regular;;PER-007
+MAT-2025-0255;2025;12172021002550;SEC-2025-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-10;Aprobado;;Regular;;PER-007
+MAT-2025-0256;2025;12172021002560;SEC-2025-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-10;Aprobado;;Regular;;PER-007
+MAT-2025-0257;2025;12172021002570;SEC-2025-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-01;Aprobado;;Regular;;PER-007
+MAT-2025-0258;2025;12172021002580;SEC-2025-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-06;Aprobado;;Regular;;PER-007
+MAT-2025-0259;2025;12172021002590;SEC-2025-5A;5;A;Continuadorr;Solicitud de vacante;Regular;2024-12-16;2025-01-15;2025-01-24;2025-02-11;Aprobado;;Traslado;CT-2025-0259;PER-007
+MAT-2025-0260;2025;12172021002600;SEC-2025-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-01;Aprobado;;Regular;;PER-007
+MAT-2025-0261;2025;12172021002610;SEC-2025-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-05;Aprobado;;Regular;;PER-007
+MAT-2025-0262;2025;12172021002620;SEC-2025-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;05-02-2025;Aprobado;;Regular;;PER-007
+MAT-2025-0263;2025;12172021002630;SEC-2025-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;07/02/2025;Aprobado;;Regular;;PER-007
+MAT-2025-0264;2025;12172021002640;SEC-2025-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-04;Aprobado;;Regular;;PER-007
+MAT-2025-0265;2025;12172021002650;SEC-2025-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;29-01-2025;Aprobado;;Regular;;PER-007
+MAT-2025-0266;2025;12172021002660;SEC-2025-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-07;Aprobado;;Regular;;PER-007
+MAT-2025-0267;2025;12172021002670;SEC-2025-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-12;Aprobado;;Regular;;PER-007
+MAT-2025-0268;2025;12172021002680;SEC-2025-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-07;APROBADO ;;Regular;;PER-007
+MAT-2025-0269;2025;12172021002690;SEC-2025-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;11/02/2025;Aprobado;;Regular;;PER-007
+MAT-2025-0270;2025;12172021002700;SEC-2025-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;;Rechazado;No se presento a la entrega de documentos en el plazo;Regular;;PER-007
+MAT-2025-0271;2025;12172021002710;SEC-2025-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-31;Aprobado;;Regular;;PER-007
+MAT-2025-0272;2025;12172021002720;SEC-2025-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-01;Aprobado;;Regular;;PER-007
+MAT-2025-0273;2025;12172021002730;SEC-2025-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;06/02/2025;APROBADO ;;Regular;;PER-007
+MAT-2025-0274;2025;12172021002740;SEC-2025-5B;5;B;Traslado ;Ratificacion de continuidad;Regular;;;;2025-02-10;Aprobado;;Regular;;PER-007
+MAT-2025-0275;2025;12172021002750;SEC-2025-5B;5;B;Repitente;Ratificacion de continuidad;Regular;;;;12/02/25;Aprobado;;Regular;;PER-007
+MAT-2025-0276;2025;12172021002760;SEC-2025-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-11;Aprobado;;Regular;;PER-007
+MAT-2025-0277;2025;12172021002770;SEC-2025-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;06/02/2025;Aprobado;;Regular;;PER-007
+MAT-2025-0278;2025;12172021002780 ;SEC-2025-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;07/02/2025;Aprobado;;Regular;;PER-007
+MAT-2025-0279;2025;12172021002790;SEC-2025-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-30;Aprobado;;Regular;;PER-007
+MAT-2025-0280;2025;12172021002800;SEC-2025-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-05;APROBADO ;;Regular;;PER-007
+MAT-2025-0281;2025;12172021002810;SEC-2025-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-30;Aprobado;;Regular;;PER-007
+MAT-2025-0282;2025;12172021002820;SEC-2025-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;;Rechazado;Falta certificado de estudios de la IE de procedencia;Regular;;PER-007
+MAT-2025-0283;2025;12172021002830;SEC-2025-5B;5;B;Repitente;Ratificacion de continuidad;Regular;;;;2025-01-31;Aprobado;;Regular;;PER-007
+MAT-2025-0284;2025;12172021002840;SEC-2025-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-11;Aprobado;;Regular;;PER-007
+MAT-2025-0285;2025;12172021002850;SEC-2025-5B;5;B;Continuadorr;Ratificacion de continuidad;Regular;;;;29-01-2025;aprobado;;Regular;;PER-007
+MAT-2025-0286;2025;12172021002860;SEC-2025-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-29;Aprobado;;Regular;;PER-007
+MAT-2025-0287;2025;12172021002870;SEC-2025-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-11;Aprobado;;Regular;;PER-007
+MAT-2025-0288;2025;12172021002880;SEC-2025-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-04;Aprobado;;Regular;;PER-007
+MAT-2025-0289;2025;12172021002890;SEC-2025-5B;5;B;Traslado ;Ratificacion de continuidad;Regular;;;;2025-02-04;Aprobado;;Regular;;PER-007
+MAT-2025-0290;2025;12172021002900 ;SEC-2025-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-07;Aprobado;;Regular;;PER-007
+MAT-2025-0291;2025;12172021002910;SEC-2025-5B;5;B;Repitente;Ratificacion de continuidad;Regular;;;;2025-01-30;Aprobado;;Regular;;PER-007
+MAT-2025-0292;2025;12172021002920;SEC-2025-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-01;Aprobado;;Regular;;PER-007
+MAT-2025-0293;2025;12172021002930;SEC-2025-5B;5;B;Repitente;Ratificacion de continuidad;Regular;;;;2025-02-01;Aprobado;;Regular;;PER-007
+MAT-2025-0294;2025;12172021002940;SEC-2025-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-06;Aprobado;;Regular;;PER-007
+MAT-2025-0295;2025;12172021002950;SEC-2025-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-04;Aprobado;;Regular;;PER-007
+MAT-2025-0296;2025;12172021002960;SEC-2025-5B;5;B;Repitente;Ratificacion de continuidad;Regular;;;;2025-02-03;Aprobado;;Regular;;PER-007
+MAT-2025-0297;2025;12172021002970;SEC-2025-5B;5;B;Continuadorr;Ratificacion de continuidad;Regular;;;;2025-02-07;Aprobado;;Regular;;PER-007
+MAT-2025-0298;2025;12172021002980;SEC-2025-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-11;Aprobado;;Regular;;PER-007
+MAT-2025-0299;2025;12172021002990;SEC-2025-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-06;Aprobado;;Regular;;PER-007
+MAT-2025-0300;2025;12172021003000;SEC-2025-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-12;Aprobado;;Regular;;PER-007
+MAT-2026-0301;2026;12172025000040;SEC-2026-1A;1;A;Repitente;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobada;;Regular;;PER-007
+MAT-2026-0302;2026;12172025000090;SEC-2026-1A;1;A;Continuadorr;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;-;Regular;;PER-007
+MAT-2026-0303;2026;12172025000100;SEC-2026-1A;1;A;Repitente;Ratificacion de continuidad;Regular;;;;2026-02-04;Aprobado;;Regular;;PER-007
+MAT-2026-0304;2026;12172025000180;SEC-2026-1A;1;A;Repitente;Ratificacion de continuidad;Regular;;;;2026-02-04;Aprobado;;Regular;;PER-007
+MAT-2026-0305;2026;12172025000300;SEC-2026-1A;1;A;Repitente;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0306;2026;12172025000370;SEC-2026-1A;1;A;Repitente;Ratificacion de continuidad;Regular;;;;2026-02-03;APROBADO ;;Regular;;PER-007
+MAT-2026-0307;2026;12172025000380;SEC-2026-1A;1;A;Repitente;Ratificacion de continuidad;Regular;;;;04-02-2026;Aprobado;;Regular;;PER-007
+MAT-2026-0308;2026;12172025000400;SEC-2026-1A;1;A;Traslado ;Ratificacion de continuidad;Regular;;;;04/02/2026;Aprobado;ninguna;Regular;;PER-007
+MAT-2026-0309;2026;12172025000510;SEC-2026-1A;1;A;Repitente;Ratificacion de continuidad;Regular;;;;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0310;2026;12172025000540;SEC-2026-1A;1;A;Repitente;Ratificacion de continuidad;Regular;;;;2026-02-04;Aprobado;;Regular;;PER-007
+MAT-2026-0311;2026;12172025000570;SEC-2026-1A;1;A;Repitente;Ratificacion de continuidad;Regular;;;;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0312;2026;12172025000010;SEC-2026-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0313;2026;12172025000020;SEC-2026-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0314;2026;12172025000030;SEC-2026-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-04;Aprobado;;Regular;;PER-007
+MAT-2026-0315;2026;12172025000050;SEC-2026-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;04/02/2026;Aprobado;;Regular;;PER-007
+MAT-2026-0316;2026;12172025000060;SEC-2026-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-04;Aprobado;;Regular;;PER-007
+MAT-2026-0317;2026;12172025000070;SEC-2026-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0318;2026;12172025000080;SEC-2026-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0319;2026;12172025000120;SEC-2026-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0320;2026;12172025000130;SEC-2026-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0321;2026;12172025000140;SEC-2026-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0322;2026;12172025000150;SEC-2026-2A;2;A;Continuador;Ratificacion de continuidad;Regular;2026-01-31;;;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0323;2026;12172025000160;SEC-2026-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0324;2026;12172025000170;SEC-2026-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-04;Aprobado;;Regular;;PER-007
+MAT-2026-0325;2026;12172025000190;SEC-2026-2A;2;A;Traslado ;Ratificacion de continuidad;Regular;;;;03/02/2026;Aprobado;;Regular;;PER-007
+MAT-2026-0326;2026;12172025000200;SEC-2026-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0327;2026;12172025000210;SEC-2026-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0328;2026;12172025000220;SEC-2026-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;31/01/2026;Aprobado;;Regular;;PER-007
+MAT-2026-0329;2026;12172025000240;SEC-2026-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0330;2026;12172025000250;SEC-2026-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0331;2026;12172025000270;SEC-2026-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0332;2026;12172025000280;SEC-2026-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0333;2026;12172025000290;SEC-2026-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0334;2026;12172025000310 ;SEC-2026-2A;2;A;Repitiente;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0335;2026;12172025000320 ;SEC-2026-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0336;2026;12172025000330;SEC-2026-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0337;2026;12172025000340;SEC-2026-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;02/02/2026;Aprobado;;Regular;;PER-007
+MAT-2026-0338;2026;12172025000350;SEC-2026-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;02/02/2026;Aprovado;;Regular;;PER-007
+MAT-2026-0339;2026;12172025000360;SEC-2026-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0340;2026;12172025000390;SEC-2026-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0341;2026;12172025000410;SEC-2026-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-04;Aprobado;;Regular;;PER-007
+MAT-2026-0342;2026;12172025000420;SEC-2026-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0343;2026;12172025000430;SEC-2026-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;03/02/2026;Aprobado;;Regular;;PER-007
+MAT-2026-0344;2026;12172025000440;SEC-2026-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0345;2026;12172025000450;SEC-2026-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;04/02/2026;Aprobado;;Regular;;PER-007
+MAT-2026-0346;2026;12172025000460;SEC-2026-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;02/02/2026;Aprobado;;Regular;;PER-007
+MAT-2026-0347;2026;12172025000470;SEC-2026-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0348;2026;12172025000480;SEC-2026-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0349;2026;12172025000500;SEC-2026-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-01-31;APROBADO;;Regular;;PER-007
+MAT-2026-0350;2026;12172025000520;SEC-2026-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0351;2026;12172025000530;SEC-2026-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;31-01-2026;Aprobado;;Regular;;PER-007
+MAT-2026-0352;2026;12172025000550;SEC-2026-2B;2;B;Continuador;Ratificacion de continuidad;Regular;2026-02-04;;;2026-02-04;Aprobado;;Regular;;PER-007
+MAT-2026-0353;2026;12172025000560;SEC-2026-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-04;Aprobado;;Regular;;PER-007
+MAT-2026-0354;2026;12172025000580;SEC-2026-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0355;2026;12172025000590;SEC-2026-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;31/01/26;Aprobado;;Regular;;PER-007
+MAT-2026-0356;2026;12172025000600;SEC-2026-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;26-/2-02/0;Aprobado;;Regular;;PER-007
+MAT-2026-0357;2026;12172024000640;SEC-2026-2B;2;B;Repitente;Ratificacion de continuidad;Regular;;;;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0358;2026;12172024000700;SEC-2026-2B;2;B;Repitente;Ratificacion de continuidad;Regular;;;;2026-02-04;Aprobado;;Regular;;PER-007
+MAT-2026-0359;2026;12172024001060;SEC-2026-2B;2;B;Repitente;Ratificacion de continuidad;Regular;;;;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0360;2026;12172024001080;SEC-2026-2B;2;B;Continuadorr;Ratificacion de continuidad;Regular;;;;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0361;2026;12172024000610;SEC-2026-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-04;Aprobado;;Regular;;PER-007
+MAT-2026-0362;2026;12172024000620;SEC-2026-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0363;2026;12172024000630;SEC-2026-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-04;Aprobado;;Regular;;PER-007
+MAT-2026-0364;2026;12172024000650;SEC-2026-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0365;2026;12172024000660;SEC-2026-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0366;2026;12172024000670;SEC-2026-3A;3;A;Ingresente;Ratificacion de continuidad;Regular;2026-02-04;;;2026-02-04;Aprobado;;Regular;;PER-007
+MAT-2026-0367;2026;12172024000680;SEC-2026-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;02/02/2026;Aprobado;;Regular;;PER-007
+MAT-2026-0368;2026;12172024000690;SEC-2026-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0369;2026;12172024000710;SEC-2026-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;03-02-2026;Aprobado;;Regular;;PER-007
+MAT-2026-0370;2026;12172024000720;SEC-2026-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-04;Aprobado;;Regular;;PER-007
+MAT-2026-0371;2026;12172024000730;SEC-2026-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-01-31;aprobado;;Regular;;PER-007
+MAT-2026-0372;2026;12172024000740;SEC-2026-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;03/02/2026;Aprobado;;Regular;;PER-007
+MAT-2026-0373;2026;12172024000750;SEC-2026-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;04/02/2026;Aprobado;;Regular;;PER-007
+MAT-2026-0374;2026;12172024000760;SEC-2026-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-04;Aprovado;;Regular;;PER-007
+MAT-2026-0375;2026;12172024000770;SEC-2026-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0376;2026;12172024000780;SEC-2026-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0377;2026;12172024000790;SEC-2026-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;26-/2-31/0;Aprobado;;Regular;;PER-007
+MAT-2026-0378;2026;12172024000800;SEC-2026-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;;Rechazado;No se presento a la entrega de documentos en el plazo;Regular;;PER-007
+MAT-2026-0379;2026;12172024000810;SEC-2026-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0380;2026;12172024000820;SEC-2026-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;31/01/26;Aprobado;;Regular;;PER-007
+MAT-2026-0381;2026;12172024000830;SEC-2026-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0382;2026;12172024000840;SEC-2026-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0383;2026;12172024000850;SEC-2026-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0384;2026;12172024000860;SEC-2026-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0385;2026;12172024000870;SEC-2026-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0386;2026;12172024000880;SEC-2026-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;04/02/2026;APROBADO;;Regular;;PER-007
+MAT-2026-0387;2026;12172024000890;SEC-2026-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0388;2026;12172024000900;SEC-2026-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0389;2026;12172024000920;SEC-2026-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;;Rechazado;Apoderado no acredito representacion legal del estudiante;Regular;;PER-007
+MAT-2026-0390;2026;12172024000930;SEC-2026-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-04;aprobado;;Regular;;PER-007
+MAT-2026-0391;2026;12172024000940;SEC-2026-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0392;2026;12172024000950;SEC-2026-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-02;Aprovado;;Regular;;PER-007
+MAT-2026-0393;2026;12172024000960;SEC-2026-3B;3;B;Traslado ;Ratificacion de continuidad;Regular;;;;;Rechazado;Ficha unica de matricula sin firma del apoderado;Regular;;PER-007
+MAT-2026-0394;2026;12172024000970;SEC-2026-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0395;2026;12172024000980;SEC-2026-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;;Rechazado;Apoderado no acredito representacion legal del estudiante;Regular;;PER-007
+MAT-2026-0396;2026;12172024000990;SEC-2026-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;;Rechazado;Ficha unica de matricula sin firma del apoderado;Regular;;PER-007
+MAT-2026-0397;2026;12172024001000;SEC-2026-3B;3;B;continuador;Ratificacion de continuidad;Regular;;;;26/-2/-0;Aprobado;;Regular;;PER-007
+MAT-2026-0398;2026;12172024001010;SEC-2026-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-02;aprobado;;Regular;;PER-007
+MAT-2026-0399;2026;12172024001020;SEC-2026-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0400;2026;12172024001030;SEC-2026-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0401;2026;12172024001040;SEC-2026-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;03/02/2026;Aprobado;;Regular;;PER-007
+MAT-2026-0402;2026;12172024001090;SEC-2026-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0403;2026;12172024001100;SEC-2026-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-04;APROBADO ;;Regular;;PER-007
+MAT-2026-0404;2026;12172024001110;SEC-2026-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0405;2026;12172024001120;SEC-2026-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-04;Aprobado;;Regular;;PER-007
+MAT-2026-0406;2026;12172024001130;SEC-2026-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-04;Aprobado;sin observaciones;Regular;;PER-007
+MAT-2026-0407;2026;12172024001140;SEC-2026-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;02-02-2026;Aprobado;;Regular;;PER-007
+MAT-2026-0408;2026;12172024001150;SEC-2026-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0409;2026;12172024001160;SEC-2026-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-04;Aprobado;;Regular;;PER-007
+MAT-2026-0410;2026;12172024001180;SEC-2026-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-04;Aprobado;;Regular;;PER-007
+MAT-2026-0411;2026;12172024001190;SEC-2026-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0412;2026;12172024001200;SEC-2026-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0413;2026;12172023001340;SEC-2026-3B;3;B;Repitente;Ratificacion de continuidad;Regular;;;;02/02/2026;Aprobado;;Regular;;PER-007
+MAT-2026-0414;2026;12172023001350;SEC-2026-3B;3;B;Repitente;Ratificacion de continuidad;Regular;;;;02-02-2026;Aprobado;;Regular;;PER-007
+MAT-2026-0415;2026;12172023001380;SEC-2026-3B;3;B;Repitente;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0416;2026;12172023001710;SEC-2026-3B;3;B;Repitente;Ratificacion de continuidad;Regular;;;;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0417;2026;12172023001770;SEC-2026-3B;3;B;Repitente;Ratificacion de continuidad;Regular;;;;03/02/26;Aprobado;;Regular;;PER-007
+MAT-2026-0418;2026;12172023001210;SEC-2026-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-04;Aprobado;;Regular;;PER-007
+MAT-2026-0419;2026;12172023001220;SEC-2026-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0420;2026;12172023001230;SEC-2026-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0421;2026;12172023001240;SEC-2026-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;31/01/2026;Aprobado;;Regular;;PER-007
+MAT-2026-0422;2026;12172023001250;SEC-2026-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;03/02/2026;Aprobado;;Regular;;PER-007
+MAT-2026-0423;2026;12172023001270;SEC-2026-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;04/02/26;Aprobado;;Regular;;PER-007
+MAT-2026-0424;2026;12172023001280;SEC-2026-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-04;Aprobado;;Regular;;PER-007
+MAT-2026-0425;2026;12172023001290;SEC-2026-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-02;APROBADO ;;Regular;;PER-007
+MAT-2026-0426;2026;12172023001300;SEC-2026-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0427;2026;12172023001310;SEC-2026-4A;4;A;Continuador;Ratificacion de continuidad;Regular;2026-02-02;;;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0428;2026;12172023001330;SEC-2026-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0429;2026;12172023001360;SEC-2026-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;04/02/2026;Aprobado;;Regular;;PER-007
+MAT-2026-0430;2026;12172023001370;SEC-2026-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-02;APROBADO;;Regular;;PER-007
+MAT-2026-0431;2026;12172023001390 ;SEC-2026-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-04;Aprobado;;Regular;;PER-007
+MAT-2026-0432;2026;12172023001400;SEC-2026-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;03/02/2026;Aprobado;;Regular;;PER-007
+MAT-2026-0433;2026;12172023001410;SEC-2026-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0434;2026;12172023001420;SEC-2026-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-04;Aprobado;;Regular;;PER-007
+MAT-2026-0435;2026;12172023001430;SEC-2026-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-04;Aprobado;;Regular;;PER-007
+MAT-2026-0436;2026;12172023001440;SEC-2026-4A;4;A;Continuador;Ratificacion de continuidad;Regular;2026-01-31;;;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0437;2026;12172023001450;SEC-2026-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-04;Aprobado;;Regular;;PER-007
+MAT-2026-0438;2026;12172023001460;SEC-2026-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;02/02/2026;aprobado;;Regular;;PER-007
+MAT-2026-0439;2026;12172023001470;SEC-2026-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0440;2026;12172023001480;SEC-2026-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;04/02/2026;Aprobado;;Regular;;PER-007
+MAT-2026-0441;2026;12172023001490;SEC-2026-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;03/02/2026;Aprobado;;Regular;;PER-007
+MAT-2026-0442;2026;12172023001500;SEC-2026-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0443;2026;12172023001510;SEC-2026-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0444;2026;12172023001520;SEC-2026-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0445;2026;12172023001530;SEC-2026-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;02/02/2026;Aprobado;;Regular;;PER-007
+MAT-2026-0446;2026;12172023001540;SEC-2026-4A;4;A;continuador;Ratificacion de continuidad;Regular;;;;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0447;2026;12172023001550;SEC-2026-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0448;2026;12172023001560;SEC-2026-4B;4;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0449;2026;12172023001580;SEC-2026-4B;4;B;Continuador;Ratificacion de continuidad;Regular;;;;26/-2/-0;APROBADO ;;Regular;;PER-007
+MAT-2026-0450;2026;12172023001590;SEC-2026-4B;4;B;continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;APROBADO;;Regular;;PER-007
+MAT-2026-0451;2026;12172023001600;SEC-2026-4B;4;B;continuador;Ratificacion de continuidad;Regular;;;;03/02/26;Aprobado;;Regular;;PER-007
+MAT-2026-0452;2026;12172023001610;SEC-2026-4B;4;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-04;Aprobado;;Regular;;PER-007
+MAT-2026-0453;2026;12172023001620;SEC-2026-4B;4;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0454;2026;12172023001630;SEC-2026-4B;4;B;Continuador;Ratificacion de continuidad;Regular;;;;02/02/2026;Aprobado;;Regular;;PER-007
+MAT-2026-0455;2026;12172023001640;SEC-2026-4B;4;B;Continuador;Ratificacion de continuidad;Regular;;;;04/02/2026;Aprobado;;Regular;;PER-007
+MAT-2026-0456;2026;12172023001650;SEC-2026-4B;4;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0457;2026;12172023001660;SEC-2026-4B;4;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-04;Aprobado;;Regular;;PER-007
+MAT-2026-0458;2026;12172023001670;SEC-2026-4B;4;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;APROBADO;;Regular;;PER-007
+MAT-2026-0459;2026;12172023001680;SEC-2026-4B;4;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0460;2026;12172023001690;SEC-2026-4B;4;B;Continuador;Ratificacion de continuidad;Regular;;;;04-02-2026;Aprobado;;Regular;;PER-007
+MAT-2026-0461;2026;12172023001700;SEC-2026-4B;4;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0462;2026;12172023001720 ;SEC-2026-4B;4;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0463;2026;12172023001730;SEC-2026-4B;4;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0464;2026;12172023001740;SEC-2026-4B;4;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;APROBADO ;;Regular;;PER-007
+MAT-2026-0465;2026;12172023001750;SEC-2026-4B;4;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0466;2026;12172023001760;SEC-2026-4B;4;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0467;2026;12172023001790;SEC-2026-4B;4;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0468;2026;12172023001800;SEC-2026-4B;4;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0469;2026;12172022001860;SEC-2026-4B;4;B;Repitente;Ratificacion de continuidad;Regular;;;;;Rechazado;Apoderado no acredito representacion legal del estudiante;Regular;;PER-007
+MAT-2026-0470;2026;12172022001880;SEC-2026-4B;4;B;Repitente;Ratificacion de continuidad;Regular;;;;2026-02-04;Aprobado;;Regular;;PER-007
+MAT-2026-0471;2026;12172022001910;SEC-2026-4B;4;B;Repitiente;Ratificacion de continuidad;Regular;;;;2026-02-04;Aprobado;;Regular;;PER-007
+MAT-2026-0472;2026;12172022001930;SEC-2026-4B;4;B;Repitente;Ratificacion de continuidad;Regular;;;;04/02/2026;Aprobado;;Regular;;PER-007
+MAT-2026-0473;2026;12172022001970;SEC-2026-4B;4;B;Repitente;Ratificacion de continuidad;Regular;;;;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0474;2026;12172022002050;SEC-2026-4B;4;B;Repitente;Ratificacion de continuidad;Regular;;;;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0475;2026;12172022002080;SEC-2026-4B;4;B;Repitiente;Ratificacion de continuidad;Regular;;;;04-02-2026;Aprobado;;Regular;;PER-007
+MAT-2026-0476;2026;12172022002120;SEC-2026-4B;4;B;Repitente;Ratificacion de continuidad;Regular;;;;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0477;2026;12172022001810;SEC-2026-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;03/02/2026;Aprobado;;Regular;;PER-007
+MAT-2026-0478;2026;12172022001820;SEC-2026-5A;5;A;Continuadorr;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0479;2026;12172022001830;SEC-2026-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0480;2026;12172022001840;SEC-2026-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0481;2026;12172022001850;SEC-2026-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-04;Aprobado;;Regular;;PER-007
+MAT-2026-0482;2026;12172022001870 ;SEC-2026-5A;5;A;Traslado ;Ratificacion de continuidad;Regular;;;;26-/2-31/0;Aprobado;;Regular;;PER-007
+MAT-2026-0483;2026;12172022001890;SEC-2026-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;;Rechazado;Solicitud presentada fuera del plazo del cronograma;Regular;;PER-007
+MAT-2026-0484;2026;12172022001900;SEC-2026-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0485;2026;12172022001920;SEC-2026-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;31/01/2026;Aprobado;;Regular;;PER-007
+MAT-2026-0486;2026;12172022001940 ;SEC-2026-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-02;APROBADO ;;Regular;;PER-007
+MAT-2026-0487;2026;12172022001950;SEC-2026-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0488;2026;12172022001960;SEC-2026-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0489;2026;12172022001980 ;SEC-2026-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0490;2026;12172022001990;SEC-2026-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;31-01-2026;Aprobado;;Regular;;PER-007
+MAT-2026-0491;2026;12172022002000;SEC-2026-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;;Rechazado;DNI no valida en RENIEC;Regular;;PER-007
+MAT-2026-0492;2026;12172022002010;SEC-2026-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0493;2026;12172022002020;SEC-2026-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0494;2026;12172022002030 ;SEC-2026-5A;5;A;Traslado ;Ratificacion de continuidad;Regular;;;;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0495;2026;12172022002040;SEC-2026-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-01-31;aprobado;;Regular;;PER-007
+MAT-2026-0496;2026;12172022002060;SEC-2026-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;03/02/26;Aprobado;;Regular;;PER-007
+MAT-2026-0497;2026;12172022002070;SEC-2026-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-01-31;APROBADO ;;Regular;;PER-007
+MAT-2026-0498;2026;12172022002090;SEC-2026-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0499;2026;12172022002110;SEC-2026-5A;5;A;Traslado ;Ratificacion de continuidad;Regular;;;;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0500;2026;12172022002130;SEC-2026-5A;5;A;Ingresente;Ratificacion de continuidad;Regular;;;;2026-02-02;Aprobada;;Regular;;PER-007
+MAT-2026-0501;2026;12172022002140;SEC-2026-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0502;2026;12172022002150;SEC-2026-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0503;2026;12172022002160;SEC-2026-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-04;Aprobado;;Regular;;PER-007
+MAT-2026-0504;2026;12172022002170;SEC-2026-5A;5;A;Repitiente;Ratificacion de continuidad;Regular;;;;2026-02-04;Aprobado;;Regular;;PER-007
+MAT-2026-0505;2026;12172022002180;SEC-2026-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0506;2026;12172022002190;SEC-2026-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0507;2026;12172022002200;SEC-2026-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-04;Aprobado;;Regular;;PER-007
+MAT-2026-0508;2026;12172022002210;SEC-2026-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-02;Aprovado;;Regular;;PER-007
+MAT-2026-0509;2026;12172022002220;SEC-2026-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;03/02/2026;Aprobado;;Regular;;PER-007
+MAT-2026-0510;2026;12172022002230;SEC-2026-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;31/01/2026;Aprobado;;Regular;;PER-007
+MAT-2026-0511;2026;12172022002240;SEC-2026-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0512;2026;12172022002250;SEC-2026-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;03/02/2026;Aprobado;;Regular;;PER-007
+MAT-2026-0513;2026;12172022002260;SEC-2026-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0514;2026;12172022002270;SEC-2026-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-04;Aprobado;;Regular;;PER-007
+MAT-2026-0515;2026;12172022002280;SEC-2026-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;04-02-2026;Aprobado;;Regular;;PER-007
+MAT-2026-0516;2026;12172022002290;SEC-2026-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0517;2026;12172022002300;SEC-2026-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0518;2026;12172022002310;SEC-2026-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0519;2026;12172022002320;SEC-2026-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0520;2026;12172022002330;SEC-2026-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0521;2026;12172022002340;SEC-2026-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0522;2026;12172022002350;SEC-2026-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0523;2026;12172022002360;SEC-2026-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0524;2026;12172022002370;SEC-2026-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-04;Aprobado;;Regular;;PER-007
+MAT-2026-0525;2026;12172022002380;SEC-2026-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;03/02/26;Aprobado;;Regular;;PER-007
+MAT-2026-0526;2026;12172022002390;SEC-2026-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0527;2026;12172022002400;SEC-2026-5B;5;B;Continuador;Ratificacion de continuidad;Regular;;;;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0528;2026;12172026003010;SEC-2026-1A;1;A;Ingresante;Solicitud de vacante;Regular;2026-01-05;2026-01-17;2026-01-22;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0529;2026;12172026003020;SEC-2026-1A;1;A;Ingresante;Solicitud de vacante;Regular;06/01/2026;13/01/2026;24/01/2026;03/02/2026;Aprovado;;Regular;;PER-007
+MAT-2026-0530;2026;12172026003030;SEC-2026-1A;1;A;Ingresante;Solicitud de vacante;Regular;02/01/2026;15/01/2026;23/01/2026;31/01/2026;Aprobado;;Regular;;PER-007
+MAT-2026-0531;2026;12172026003040;SEC-2026-1A;1;A;Ingresante;Solicitud de vacante;Complementaria;2026-02-09;2026-02-16;2026-02-25;2026-02-28;Aprobado;;Regular;;PER-007
+MAT-2026-0532;2026;12172026003050;SEC-2026-1A;1;A;Ingresante;Solicitud de vacante;Regular;2026-01-09;2026-01-13;2026-01-20;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0533;2026;12172026003060;SEC-2026-1A;1;A;Ingresante;Solicitud de vacante;Regular;2026-01-08;2026-01-15;2026-01-29;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0534;2026;12172026003070;SEC-2026-1A;1;A;Ingresante;Solicitud de vacante;Regular;2026-01-09;2026-01-15;2026-01-29;2024-10-15;Aprobado;;Regular;;PER-007
+MAT-2026-0535;2026;12172026003080;SEC-2026-1A;1;A;Ingresante;Solicitud de vacante;Regular;2026-01-10;2026-01-14;2026-01-27;2026-02-02;Aprobado;sin observaciones;Regular;;PER-007
+MAT-2026-0536;2026;12172026003090;SEC-2026-1A;1;A;Ingresante;Solicitud de vacante;Regular;2026-01-09;2026-01-16;2026-01-21;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0537;2026;12172026003100;SEC-2026-1A;1;A;Ingresante;Solicitud de vacante;Regular;08-01-2026;14-01-2026;30-01-2026;04-02-2026;Aprobado;;Regular;;PER-007
+MAT-2026-0538;2026;12172026003110;SEC-2026-1A;1;A;Ingresante;Solicitud de vacante;Regular;2026-01-07;2026-01-16;2026-01-21;;Rechazado;DNI no valida en RENIEC;Regular;;PER-007
+MAT-2026-0539;2026;12172026003120;SEC-2026-1A;1;A;Ingresante;Solicitud de vacante;Complementaria;2026-02-09;2026-02-19;2026-02-25;2026-03-02;Aprobado;;Regular;;PER-007
+MAT-2026-0540;2026;12172026003130;SEC-2026-1A;1;A;Ingresante;Solicitud de vacante;Regular;2026-01-07;2026-01-16;2026-01-27;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0541;2026;12172026003140;SEC-2026-1A;1;A;Ingresante;Solicitud de vacante;Regular;2026-01-06;2026-01-15;2026-01-30;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0542;2026;12172026003150;SEC-2026-1A;1;A;Ingresante;Solicitud de vacante;Regular;10/01/2026;12/01/2026;28/01/2026;02/02/2026;Aprobado;;Regular;;PER-007
+MAT-2026-0543;2026;12172026003160;SEC-2026-1A;1;A;Ingresante;Solicitud de vacante;Regular;2026-01-06;2026-01-14;2026-01-20;2026-02-04;Aprobado;;Regular;;PER-007
+MAT-2026-0544;2026;12172026003170;SEC-2026-1A;1;A;Ingresante;Solicitud de vacante;Regular;2026-01-03;2026-01-14;2026-01-27;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0545;2026;12172026003180;SEC-2026-1A;1;A;Ingresante;Solicitud de vacante;Complementaria;13/02/2026;20/02/2026;25/02/2026;04/03/2026;Aprobado;;Regular;;PER-007
+MAT-2026-0546;2026;12172026003190;SEC-2026-1A;1;A;Ingresante;Solicitud de vacante;Regular;2026-01-10;2026-01-13;2026-01-24;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0547;2026;12172026003200;SEC-2026-1B;1;B;Ingresante;Solicitud de vacante;Regular;02/01/2026;14/01/2026;23/01/2026;03/02/2026;Aprobado;;Regular;;PER-007
+MAT-2026-0548;2026;12172026003210;SEC-2026-1B;1;B;Ingresante;Solicitud de vacante;Regular;2025-11-20;2026-01-17;2026-01-22;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0549;2026;12172026003220;SEC-2026-1B;1;B;Ingresante;Solicitud de vacante;Regular;2026-01-06;2026-01-17;2026-01-24;2026-02-04;Aprobado;;Regular;;PER-007
+MAT-2026-0550;2026;12172026003230;SEC-2026-1B;1;B;Ingresante;Solicitud de vacante;Regular;2026-01-03;2026-01-15;2026-01-30;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0551;2026;12172026003240;SEC-2026-1B;1;B;Ingresante;Solicitud de vacante;Regular;2026-01-05;2026-01-17;2026-01-26;2026-02-04;Aprobado;;Regular;;PER-007
+MAT-2026-0552;2026;12172026003250;SEC-2026-1B;1;B;Ingresante;Solicitud de vacante;Regular;26-/2-10/0;26-/2-14/0;26-/2-30/0;26-/2-04/0;Aprobado;;Regular;;PER-007
+MAT-2026-0553;2026;12172026003260;SEC-2026-1B;1;B;Ingresante;Solicitud de vacante;Regular;2026-01-10;2026-01-14;2026-01-19;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0554;2026;12172026003270;SEC-2026-1B;1;B;Ingresante;Solicitud de vacante;Regular;2025-11-20;16/01/2026;21/01/2026;04/02/2026;Aprobado;;Regular;;PER-007
+MAT-2026-0555;2026;12172026003280;SEC-2026-1B;1;B;Continuadorr;Solicitud de vacante;Regular;2026-01-06;2026-01-13;2026-01-24;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0556;2026;12172026003290;SEC-2026-1B;1;B;Ingresante;Solicitud de vacante;Regular;2026-01-09;2026-01-12;2026-01-24;2026-02-03;aprobado;;Regular;;PER-007
+MAT-2026-0557;2026;12172026003300;SEC-2026-1B;1;B;Ingresante;Solicitud de vacante;Regular;10/01/2026;17/01/2026;26/01/2026;04/02/2026;Aprobado;;Regular;;PER-007
+MAT-2026-0558;2026;12172026003310;SEC-2026-1B;1;B;Ingresante;Solicitud de vacante;Regular;07/01/26;15/01/26;23/01/26;02/02/26;Aprobada;;Regular;;PER-007
+MAT-2026-0559;2026;12172026003320;SEC-2026-1B;1;B;Ingresante;Solicitud de vacante;Complementaria;2026-02-10;2026-02-17;2026-02-24;2026-03-02;Aprobado;;Regular;;PER-007
+MAT-2026-0560;2026;12172026003330;SEC-2026-1B;1;B;Ingresante;Solicitud de vacante;Regular;2026-01-02;2026-01-13;2026-01-21;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0561;2026;12172026003340;SEC-2026-1B;1;B;Continuadorr;Solicitud de vacante;Regular;2026-01-03;2026-01-17;2026-01-26;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0562;2026;12172026003350;SEC-2026-1B;1;B;Ingresante;Solicitud de vacante;Regular;03-01-2026;14-01-2026;29-01-2026;03-02-2026;Aprobado;;Regular;;PER-007
+MAT-2026-0563;2026;12172026003360;SEC-2026-1B;1;B;Ingresante;Solicitud de vacante;Regular;2026-01-02;2026-01-16;2026-01-24;2026-02-03;Aprovado;;Regular;;PER-007
+MAT-2026-0564;2026;12172026003370;SEC-2026-1B;1;B;Ingresante;Solicitud de vacante;Regular;2026-01-02;2026-01-13;2026-01-19;;Rechazado;Documentacion incompleta: falta partida de nacimiento;Regular;;PER-007
+MAT-2026-0565;2026;12172026003380;SEC-2026-1B;1;B;Ingresante;Solicitud de vacante;Regular;2026-01-08;2026-01-12;2026-01-26;2026-01-31;APROBADO;;Regular;;PER-007
+MAT-2026-0566;2026;12172026003390;SEC-2026-1B;1;B;Ingresante;Solicitud de vacante;Regular;05-01-2026;12-01-2026;26-01-2026;02-02-2026;Aprobado;;Regular;;PER-007
+MAT-2026-0567;2026;12172026003400;SEC-2026-1B;1;B;Ingresante;Solicitud de vacante;Regular;2026-01-08;2026-01-17;2026-01-26;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0568;2026;12172026003410;SEC-2026-1B;1;B;Ingresante;Solicitud de vacante;Complementaria;2026-02-14;2026-02-18;2026-02-25;2026-02-27;Aprobado;;Regular;;PER-007
+MAT-2026-0569;2026;12172026003420;SEC-2026-1B;1;B;Ingresante;Solicitud de vacante;Regular;2026-01-05;2026-01-17;2026-01-30;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0570;2026;12172026003430;SEC-2026-1B;1;B;Ingresante;Solicitud de vacante;Regular;2026-01-03;2026-01-17;2026-01-29;2026-01-31;APROBADO;;Regular;;PER-007
+MAT-2026-0571;2026;12172026003440;SEC-2026-1B;1;B;Ingresante;Solicitud de vacante;Regular;02/01/2026;12/01/2026;28/01/2026;04/02/2026;Aprobada;;Regular;;PER-007
+MAT-2026-0572;2026;12172026003450;SEC-2026-1B;1;B;Ingresante;Solicitud de vacante;Regular;2026-01-08;2026-01-16;2026-01-23;2026-02-03;Aprobado;sin observaciones;Regular;;PER-007
+MAT-2026-0573;2026;12172026003460 ;SEC-2026-1B;1;B;Ingresante;Solicitud de vacante;Regular;2026-01-02;2026-01-14;2026-01-30;2026-02-03;Aprobado;;Regular;;PER-007
+MAT-2026-0574;2026;12172026003470;SEC-2026-1B;1;B;Ingresante;Solicitud de vacante;Regular;2026-01-05;2026-01-12;2026-01-27;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0575;2026;12172026003480;SEC-2026-1B;1;B;Ingresante;Solicitud de vacante;Regular;2026-01-06;2026-01-14;2026-01-21;2026-02-04;Aprobado;;Regular;;PER-007
+MAT-2026-0576;2026;12172026003490;SEC-2026-1B;1;B;Ingresante;Solicitud de vacante;Regular;2026-01-07;2026-01-17;2026-01-19;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0577;2026;12172026003500;SEC-2026-2B;2;B;Traslado;Solicitud de vacante;Regular;2026-01-03;2026-01-15;2026-01-30;2026-02-02;Aprobado;;Traslado;CT-2026-0577;PER-007
+MAT-2026-0578;2026;12172026003510;SEC-2026-2B;2;B;Traslado;Solicitud de vacante;Regular;08/01/2026;13/01/2026;28/01/2026;02/02/2026;Aprobado;;Traslado;CT-2026-0578;PER-007
+MAT-2026-0579;2026;12172026003520;SEC-2026-2B;2;B;Traslado;Solicitud de vacante;Regular;2026-01-09;2026-01-12;2026-01-29;2026-02-03;Aprobado;;Traslado;CT-2026-0579;PER-007
+MAT-2026-0580;2026;12172026003530;SEC-2026-2B;2;B;Traslado;Solicitud de vacante;Regular;2026-01-07;2026-01-15;2026-01-21;2026-02-02;Aprobado;;Traslado;CT-2026-0580;PER-007
+MAT-2026-0581;2026;12172026003540 ;SEC-2026-2B;2;B;Repitiente;Solicitud de vacante;Regular;2026-01-10;2026-01-13;2026-01-21;2026-01-31;Aprobado;;Traslado;CT-2026-0581;PER-007
+MAT-2026-0582;2026;12172026003550;SEC-2026-2B;2;B;Traslado;Solicitud de vacante;Regular;2026-01-09;2026-01-17;2026-01-26;2026-01-31;Aprobado;;Traslado;CT-2026-0582;PER-007
+MAT-2026-0583;2026;12172026003560;SEC-2026-2B;2;B;Traslado;Solicitud de vacante;Regular;2026-01-09;2026-01-15;2026-01-22;2026-02-03;Aprobado;;Traslado;CT-2026-0583;PER-007
+MAT-2026-0584;2026;12172026003570;SEC-2026-2B;2;B;Traslado;Solicitud de vacante;Regular;2026-01-07;2026-01-17;2026-01-21;2026-02-02;Aprobado;;Traslado;CT-2026-0584;PER-007
+MAT-2026-0585;2026;12172026003580;SEC-2026-2B;2;B;Traslado;Solicitud de vacante;Regular;2026-01-02;2026-01-12;2026-01-20;2026-02-03;Aprobado;;Traslado;CT-2026-0585;PER-007
+MAT-2026-0586;2026;12172026003590;SEC-2026-2B;2;B;Traslado;Solicitud de vacante;Regular;02/01/2026;16/01/2026;22/01/2026;02/02/2026;Aprobado;;Traslado;CT-2026-0586;PER-007
+MAT-2026-0587;2026;12172026003600;SEC-2026-2B;2;B;Traslado;Solicitud de vacante;Regular;03/01/2026;13/01/2026;30/01/2026;02/02/2026;Aprobado;;Traslado;CT-2026-0587;PER-007
+MAT-2026-0588;2026;12172026003610;SEC-2026-3B;3;B;Traslado;Solicitud de vacante;Regular;2026-01-10;2026-01-15;2026-01-26;2026-02-02;Aprobado;;Traslado;CT-2026-0588;PER-007
+MAT-2026-0589;2026;12172026003620;SEC-2026-3B;3;B;Traslado;Solicitud de vacante;Regular;2026-01-03;2026-01-12;2026-01-21;2026-02-03;Aprobado;;Traslado;CT-2026-0589;PER-007
+MAT-2026-0590;2026;12172026003630;SEC-2026-3B;3;B;Traslado;Solicitud de vacante;Regular;2026-01-05;2026-01-14;2026-01-21;2026-02-02;Aprobado;;Traslado;CT-2026-0590;PER-007
+MAT-2026-0591;2026;12172026003640;SEC-2026-4B;4;B;Traslado;Solicitud de vacante;Regular;06/01/2026;13/01/2026;30/01/2026;03/02/2026;Aprobado;;Traslado;CT-2026-0591;PER-007
+MAT-2026-0592;2026;12172026003650;SEC-2026-5B;5;B;Traslado;Solicitud de vacante;Regular;2026-01-09;2026-01-15;2026-01-24;2026-02-04;aprobado;;Traslado;CT-2026-0592;PER-007
+MAT-2026-0593;2026;12172026003660;SEC-2026-5B;5;B;Traslado;Solicitud de vacante;Regular;2026-01-08;2026-01-14;2026-01-29;2026-02-04;Aprobado;;Traslado;CT-2026-0593;PER-007
+MAT-2026-0594;2026;12172026003670;SEC-2026-5B;5;B;Traslado;Solicitud de vacante;Regular;07/01/2026;17/01/2026;23/01/2026;03/02/2026;APROBADO ;;Traslado;CT-2026-0594;PER-007
+MAT-2026-0595;2026;12172026003680;SEC-2026-5B;5;B;Continuadorr;Solicitud de vacante;Regular;2026-01-06;2026-01-14;2026-01-26;2026-02-02;Aprobado;;Traslado;CT-2026-0595;PER-007
+MAT-2026-0596;2026;12172026003690;SEC-2026-5B;5;B;Traslado;Solicitud de vacante;Regular;02/01/2026;15/01/2026;21/01/2026;02/02/2026;Aprobado;;Traslado;CT-2026-0596;PER-007
+MAT-2026-0597;2026;12172026003700;SEC-2026-5B;5;B;Traslado;Solicitud de vacante;Complementaria;2025-11-20;2026-02-19;2026-02-25;2026-02-26;Aprobado;;Traslado;CT-2026-0597;PER-007
+MAT-2026-0598;2026;12172026003710;SEC-2026-5B;5;B;Traslado;Solicitud de vacante;Regular;2026-01-06;2026-01-13;2026-01-26;2026-01-31;Aprobado;ninguna;Traslado;CT-2026-0598;PER-007
+MAT-2026-0599;2026;12172026003720;SEC-2026-5B;5;B;Continuadorr;Solicitud de vacante;Regular;10/01/2026;12/01/2026;28/01/2026;31/01/2026;Aprobado;;Traslado;CT-2026-0599;PER-007
+MAT-2026-0600;2026;12172026003730;SEC-2026-5B;5;B;Traslado;Solicitud de vacante;Regular;2026-01-06;2026-01-12;2026-01-20;2026-01-31;Aprobado;;Traslado;CT-2026-0600;PER-007
+MAT-2025-0093-BIS;2025;12172024000930;SEC-2025-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-04;Aprobado;;Regular;;PER-007
+MAT-2025-0201-BIS;2025;12172022002010;SEC-2025-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-10;Aprobado;;Regular;;PER-007
+MAT-2025-0154-BIS;2025;12172023001540;SEC-2025-3B;3;B;Continuador;Ratificacion de continuidad;Regular;;;;10/02/2025;Aprobado;;Regular;;PER-007
+MAT-2026-0310-BIS;2026;12172025000540;SEC-2026-1A;1;A;Repitente;Ratificacion de continuidad;Regular;;;;2026-02-04;Aprobado;;Regular;;PER-007
+MAT-2025-0082-BIS;2025;12172024000820;SEC-2025-2A;2;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-01-29;Aprobado;;Regular;;PER-007
+MAT-2025-0189-BIS;2025;12172022001890;SEC-2025-4A;4;A;Continuador;Ratificacion de continuidad;Regular;;;;2025-02-04;Aprobado;;Regular;;PER-007
+MAT-2025-0091-BIS;2025;12172024000910;SEC-2025-2B;2;B;Continuador;Ratificacion de continuidad;Regular;;;;;Rechazado;Falta certificado de estudios de la IE de procedencia;Regular;;PER-007
+MAT-2026-0361-BIS;2026;12172024000610;SEC-2026-3A;3;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-04;Aprobado;;Regular;;PER-007
+MAT-2026-0484-BIS;2026;12172022001900;SEC-2026-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2026-0574-HUE;2026;999999999990;SEC-2026-1B;1;B;Ingresante;Solicitud de vacante;Regular;2026-01-05;2026-01-12;2026-01-27;2026-02-02;Aprobado;;Regular;;PER-007
+MAT-2025-0012-HUE;2025;999999999991;SEC-2025-1A;1;A;Repitiente;Solicitud de vacante;Regular;2024-12-19;2025-01-10;2025-01-23;2025-02-07;Aprobado;;Regular;;PER-007
+MAT-2026-0486-HUE;2026;999999999992;SEC-2026-5A;5;A;Continuador;Ratificacion de continuidad;Regular;;;;2026-02-02;APROBADO ;;Regular;;PER-007
+MAT-2026-0536-HUE;2026;999999999993;SEC-2026-1A;1;A;Ingresante;Solicitud de vacante;Regular;2026-01-09;2026-01-16;2026-01-21;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0309-HUE;2026;999999999994;SEC-2026-1A;1;A;Repitente;Ratificacion de continuidad;Regular;;;;2026-01-31;Aprobado;;Regular;;PER-007
+MAT-2026-0556-HUE;2026;999999999995;SEC-2026-1B;1;B;Ingresante;Solicitud de vacante;Regular;2026-01-09;2026-01-12;2026-01-24;2026-02-03;aprobado;;Regular;;PER-007

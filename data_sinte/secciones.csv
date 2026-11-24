@@ -1,0 +1,21 @@
+SeccionID;Anio;Grado;Seccion;Ciclo;Turno;Aforo;DocenteTutorID;Ambiente
+SEC-2025-1A;2025;1;A;VI;Manana;30;DOC-006;Aula 1A - Pabellon A
+SEC-2025-1B;2025;1;B;VI;Manana;30;DOC-008;Aula 1B - Pabellon A
+SEC-2025-2A;2025;2;A;VI;Manana;30;DOC-011;Aula 2A - Pabellon A
+SEC-2025-2B;2025;2;B;VI;Manana;30;DOC-002;Aula 2B - Pabellon A
+SEC-2025-3A;2025;3;A;VII;Manana;30;DOC-007;Aula 3A - Pabellon A
+SEC-2025-3B;2025;3;B;VII;Manana;30;DOC-004;Aula 3B - Pabellon A
+SEC-2025-4A;2025;4;A;VII;Manana;30;DOC-005;Aula 4A - Pabellon B
+SEC-2025-4B;2025;4;B;VII;Manana;30;DOC-014;Aula 4B - Pabellon B
+SEC-2025-5A;2025;5;A;VII;Manana;30;DOC-003;Aula 5A - Pabellon B
+SEC-2025-5B;2025;5;B;VII;Manana;30;DOC-001;Aula 5B - Pabellon B
+SEC-2026-1A;2026;1;A;VI;Manana;30;DOC-012;Aula 1A - Pabellon A
+SEC-2026-1B;2026;1;B;VI;Manana;30;DOC-010;Aula 1B - Pabellon A
+SEC-2026-2A;2026;2;A;VI;Manana;30;DOC-009;Aula 2A - Pabellon A
+SEC-2026-2B;2026;2;B;VI;Manana;30;DOC-013;Aula 2B - Pabellon A
+SEC-2026-3A;2026;3;A;VII;Manana;30;DOC-015;Aula 3A - Pabellon A
+SEC-2026-3B;2026;3;B;VII;Manana;30;DOC-006;Aula 3B - Pabellon A
+SEC-2026-4A;2026;4;A;VII;Manana;30;DOC-008;Aula 4A - Pabellon B
+SEC-2026-4B;2026;4;B;VII;Manana;30;DOC-011;Aula 4B - Pabellon B
+SEC-2026-5A;2026;5;A;VII;Manana;30;DOC-002;Aula 5A - Pabellon B
+SEC-2026-5B;2026;5;B;VII;Manana;30;DOC-007;Aula 5B - Pabellon B

@@ -1,5 +1,9 @@
-# Datos del colegio (DNI, nombres, notas): NUNCA se suben
-data_sinte/
+# Datos SINTETICOS generados con IA: de data_sinte/ solo se versionan los 17 CSV de origen y los .md
+data_sinte/*
+!data_sinte/*.csv
+!data_sinte/*.md
+data_sinte/_catalogo_defectos.csv
+# Copias de trabajo fuera del repositorio y paquetes
 data/
 *.rar
 *.zip
@@ -16,3 +20,8 @@ desktop.ini
 CLAUDE.md
 CLAUDE.local.md
 .mcp.json
+
+# Power BI: la cache local guarda DATOS del colegio y la configuracion es personal
+powerbi/**/.pbi/localSettings.json
+powerbi/**/.pbi/cache.abf
+*.pbix

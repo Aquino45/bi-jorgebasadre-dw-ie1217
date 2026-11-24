@@ -2,6 +2,8 @@
 
 Proyecto del curso de Business Intelligence (UPeU). Carga tres datamarts (matrícula, preparación curricular y aprendizajes) en SQL Server, base `DW_IE1217`.
 
+> **Datos sintéticos.** Los CSV de `data_sinte/` fueron generados con IA para este curso. Los DNI, códigos, nombres, direcciones, teléfonos, notas y registros son ficticios: no corresponden a estudiantes, apoderados, docentes ni personal reales de la institución. Cualquier coincidencia con una persona real es casual.
+
 ## Versión vigente
 
 **v6.5.2** (verificada el 27/10/2026): seis dimensiones (DimTiempo, DimEstudiante, DimDocente, DimNivelAcademico, DimCurso, DimTipoMatricula) y cuatro hechos (FacMatricula, FacSesion, FacEntregaMaterial, FacLogroCompetencia), según la matriz de métricas y dimensiones v2.3. El historial de cambios está en [CHANGELOG.md](CHANGELOG.md).
@@ -11,6 +13,7 @@ Para ver todas las versiones: `git tag`.
 
 - `scripts/`: ETL en orden. 01 staging · 02 diagnóstico (solo lectura) · 03 dimensiones · 04 matrícula · 05 preparación · 06 aprendizajes · 07 job de SQL Server Agent.
 - `docs/`: guías e insumos (matriz BI, métricas).
+- `data_sinte/`: los 17 CSV de origen (sintéticos) y su diccionario de datos.
 - `_contexto/`: bitácora del proyecto. Es la fuente de verdad del estado, las decisiones (D) y los pendientes (P).
 - `instalar_o_actualizar.ps1` (y `.cmd`): instala o actualiza la base en tu PC y compara las cifras.
 
@@ -19,7 +22,7 @@ Para ver todas las versiones: `git tag`.
 Cada uno tiene su propio SQL Server, su propia base `DW_IE1217` y su propio `C:\BI_IE1217`: nada se comparte entre PCs.
 
 1. `git pull` (todos en la misma versión: no mezclar versiones).
-2. Los CSV no están en el repositorio (datos del colegio). Van en `C:\BI_IE1217\data`, con permiso de lectura para `NT Service\MSSQLSERVER`.
+2. Los CSV están en `data_sinte\` (datos sintéticos). Copia los 17 a `C:\BI_IE1217\data`, con permiso de lectura para `NT Service\MSSQLSERVER`.
 3. Doble clic en `instalar_o_actualizar.cmd`. El script:
    - muestra la versión del repositorio y comprueba los 17 CSV;
    - respalda `DW_IE1217` si ya existe (y verifica el respaldo);
@@ -66,7 +69,8 @@ Formato: `tipo(área): descripción en imperativo`
 
 ## Qué no va al repositorio
 
-- `data_sinte/`, `data/` y `*.rar`: contienen datos de estudiantes (DNI, nombres, notas).
+- `data/`, `*.rar`, `*.zip` y los Excel de `data_sinte/`: copias de trabajo y paquetes. De `data_sinte/` solo se versionan los 17 CSV sintéticos y su diccionario.
+- `*.pbix` y la caché de Power BI (`.pbi/cache.abf`): guardan una copia de los datos cargados y configuración personal.
 - Temporales de Office (`~$*`).
 
 ## Reglas y decisiones

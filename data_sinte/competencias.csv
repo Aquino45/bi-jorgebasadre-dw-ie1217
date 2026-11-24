@@ -1,0 +1,29 @@
+CompetenciaID;AreaID;NombreCompetencia;TipoCompetencia
+CP-01;AR-MAT;Resuelve problemas de cantidad;Especifica
+CP-02;AR-MAT;Resuelve problemas de regularidad, equivalencia y cambio;Especifica
+CP-03;AR-MAT;Resuelve problemas de forma, movimiento y localizacion;Especifica
+CP-04;AR-MAT;Resuelve problemas de gestion de datos e incertidumbre;Especifica
+CP-05;AR-COM;Se comunica oralmente en su lengua materna;Especifica
+CP-06;AR-COM;Lee diversos tipos de textos escritos en su lengua materna;Especifica
+CP-07;AR-COM;Escribe diversos tipos de textos en su lengua materna;Especifica
+CP-08;AR-CYT;Indaga mediante metodos cientificos para construir conocimientos;Especifica
+CP-09;AR-CYT;Explica el mundo fisico basandose en conocimientos cientificos;Especifica
+CP-10;AR-CYT;Disena y construye soluciones tecnologicas;Especifica
+CP-11;AR-CCS;Construye interpretaciones historicas;Especifica
+CP-12;AR-CCS;Gestiona responsablemente el espacio y el ambiente;Especifica
+CP-13;AR-CCS;Gestiona responsablemente los recursos economicos;Especifica
+CP-14;AR-DPC;Construye su identidad;Especifica
+CP-15;AR-DPC;Convive y participa democraticamente en la busqueda del bien comun;Especifica
+CP-16;AR-EFI;Se desenvuelve de manera autonoma a traves de su motricidad;Especifica
+CP-17;AR-EFI;Asume una vida saludable;Especifica
+CP-18;AR-EFI;Interactua a traves de sus habilidades sociomotrices;Especifica
+CP-19;AR-ING;Se comunica oralmente en ingles como lengua extranjera;Especifica
+CP-20;AR-ING;Lee diversos tipos de textos en ingles como lengua extranjera;Especifica
+CP-21;AR-ING;Escribe diversos tipos de textos en ingles como lengua extranjera;Especifica
+CP-22;AR-ART;Aprecia de manera critica manifestaciones artistico-culturales;Especifica
+CP-23;AR-ART;Crea proyectos desde los lenguajes artisticos;Especifica
+CP-24;AR-EPT;Gestiona proyectos de emprendimiento economico o social;Especifica
+CP-25;AR-REL;Construye su identidad como persona humana, amada por Dios;Especifica
+CP-26;AR-REL;Asume la experiencia del encuentro personal y comunitario con Dios;Especifica
+CP-27;AR-TUT;Se desenvuelve en entornos virtuales generados por las TIC;Transversal
+CP-28;AR-TUT;Gestiona su aprendizaje de manera autonoma;Transversal

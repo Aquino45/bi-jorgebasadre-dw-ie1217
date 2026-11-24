@@ -1,0 +1,12 @@
+AreaID;NombreArea;Abreviatura;HorasSemanales;EsEvaluada
+AR-MAT;Matematica;MAT;5;1
+AR-COM;Comunicacion;COM;5;1
+AR-CYT;Ciencia y Tecnologia;CYT;5;1
+AR-CCS;Ciencias Sociales;CCS;3;1
+AR-DPC;Desarrollo Personal, Ciudadania y Civica;DPCC;2;1
+AR-EFI;Educacion Fisica;EF;3;1
+AR-ING;Ingles;ING;2;1
+AR-ART;Arte y Cultura;ART;2;1
+AR-EPT;Educacion para el Trabajo;EPT;2;1
+AR-REL;Educacion Religiosa;REL;2;1
+AR-TUT;Tutoria y Orientacion Educativa;TUT;2;0

@@ -1,0 +1,370 @@
+CodigoEstudiante;DNI;ApellidoPaterno;ApellidoMaterno;Nombres;Sexo;Parentesco;GradoInstruccion;Ocupacion;Telefono;EsApoderadoPrincipal;ViveConEstudiante
+12172025000010;44979558;Zapata;Vera;Antonella;F;Madre;Superior tecnica;Comerciante;950607830;1;1
+12172025000020;65052745;Flores;Ticona;Alejandra;F;Madre;Primaria completa;Independiente;957877955;1;1
+12172025000030;32422179;Gomez;Soto;Mateo;M;Abuelo;Secundaria incompleta;Docente;911098346;1;1
+12172025000040;12435291;Guerrero;Torres;Joaquin;M;Padre;Secundaria incompleta;Comerciante;974033887;1;1
+12172025000050;60937871;Ramos;Vargas;Nicole;F;Tia;Primaria incompleta;Docente;928594580;0;0
+12172025000060;18106353;Castillo;Mamani;Antonella;F;Madre;Secundaria incompleta;Ama de casa;921062437;1;1
+12172025000070;31059558;Antezana;Sanchez;Nicolas;M;Padre;Superior universitaria;Independiente;985386877;1;1
+12172025000080;67975837;Guerrero;Sanchez;Santiago;M;Abuelo;Superior tecnica;Comerciante;974915735;1;0
+12172025000090;71888082;Espinoza;Chambi;Nicole;F;Madre;Superior universitaria;Independiente;997584366;0;1
+12172025000100;53980794;Antezana;Mamani;Alonso;M;Padre;Superior tecnica;Chofer;928432336;1;1
+12172025000110;21621579;Ruiz;Rios;Dayana;F;Madre;Superior tecnica;Obrero;995136745;1;1
+12172025000120;63331669;Melendez;Cruz;Luciana;F;Abuela;Superior universitaria;Comerciante;989629637;1;1
+12172025000130;61175617;Ayala;Antezana;Jhoan;M;Padre;Secundaria incompleta;Tecnico;916732678;1;1
+12172025000140;75734866;Gomez;Espinoza;Gabriel;M;Padre;Superior tecnica;Tecnico;953150906;1;1
+12172025000150;31053653;Rojas;Rojas;Rosmery;F;Madre;Primaria incompleta;Agricultor;935025197;1;1
+12172025000160;68841577;Apaza;Sanchez;Maricielo;F;Madre;Secundaria completa;Docente;918315016;1;1
+12172025000180;40730964;Ticona;Rios;Jean Pierre;M;Padre;Secundaria incompleta;Ama de casa;925103183;0;1
+12172025000190;46348377;Luna;Paredes;Nicole;F;Madre;Secundaria completa;Empleado;980282522;1;1
+12172025000200;20682073;Espinoza;Ticona;Mia;F;Madre;Secundaria completa;Ama de casa;967922872;1;1
+12172025000210;13856383;Reyes;Luna;Rosmery;F;Madre;Superior tecnica;Chofer;996431632;1;1
+12172025000220;71898742;Bautista;Ramos;Joaquin;M;Padre;Superior universitaria;Docente;982284561;1;1
+12172025000230;25565209;Quispe;Arce;Renata;F;Madre;Secundaria completa;Agricultor;979181485;1;1
+12172025000240;39406760;Rojas;Chambi;Marcelo;M;Hermano mayor;Primaria incompleta;Empleado;955935864;1;1
+12172025000250;31707279;Tarazona;Paredes;Ximena;F;Madre;Secundaria incompleta;Chofer;963079346;1;1
+12172025000260;30447349;Arce;Gomez;Bruno;M;Padre;Superior tecnia;Independietne;958604729;1;1
+12172025000270;19455116;Ticona;Medina;Renata;F;Madre;Primaria completa;Independiente;945209674;0;1
+12172025000280;30738018;Rios;Bautista;Milagros;F;Madre;Secundaria incompleta;Chofer;961619546;1;1
+12172025000290;55554746;Ramos;Valdivia;Marcelo;M;Padre;Primaria completa;Agricultor;918766809;1;1
+12172025000300;28039694;Antezaana;Cruz;Cristhian;M;Padre;Secundaria completa;Agricultor;939224982;0;1
+12172025000310;65045323;Soto;Cuya;Alejandra;F;Tia;Sec. completa;Tecnico;980605663;1;0
+12172025000320;50561689;Soto;Soto;Ana Lucia;F;Abuela;Superior tecnica;Independiente;941864970;1;0
+12172025000330;61492011;Arce;Chambi;Nicolas;M;Padre;Superior universitaria;Chofer;917580325;1;1
+12172025000340;44922709;Reyes;Cuya;Fabian;M;Padre;Superior tecnica;Chofer;927199982;1;1
+12172025000350;12826120;Castillo;Gomez;Cristhian;M;Padre;Primaria completa;Comerciante;930943700;1;1
+12172025000360;67951560;Sanchez;Antezana;Adrian;M;Padre;Secundaria incompleta;Empleado;931697143;1;1
+12172025000370;40153866;Chambi  ;Leon;Antonella;F;Madre;Secundaria completa;Obrero;917908886;1;1
+12172025000380;17657454;Luna;Reyes;Ximena;F;Abuela;Primaria completa;Docente;965127864;1;1
+12172025000390;63684646;Paredes;Arce;Daana;F;Madre;Secundaria incompleta;Agricultor;915551704;1;1
+12172025000400;76879301;Roajs;Cardenas;Briguitte;F;Madre;Secundaria completa;Agricultor;923216967;1;1
+12172025000410;23835238;Cuya;Leon;Milagros;F;Madre;Superior tecnica;Empleado;930927400;1;1
+12172025000420;67502572;Castillo;Ayala;Yaneth;F;Madre;Secundaria completa;Tecnico;932147254;1;1
+12172025000430;38224220;Cruz;Torres;Jazmin;F;Madre;Secundaria completa;Agricultor;928156506;0;1
+12172025000440;19978349;Espinoza;Cardenas;Milagros;F;Madre;Superior tecnica;Ama de casa;954088964;1;1
+12172025000450;39003298;Ris;Medina;Nicole;F;Madre;Secundaria incompleta;Docente;997473418;1;1
+12172025000460;54533004;Guerrero;Nolasco;Katherine;F;Madre;Superior universitaria;Obrero;936494683;1;1
+12172025000470;47813821;Antezana;Cuya;Mia;F;Madre;Primaria incompleta;Docente;951031838;1;1
+12172025000480;35435087;Quispe;Cuya;Marcelo;M;Padre;Primaria completa;Empleado;963014488;0;1
+12172025000490;15108493;Ticona;Ayala;Jhoan;M;Padre;Secundaria completa;Ama de casa;968383208;1;1
+12172025000500;66315954;Arce;Torres;Luciana;F;Madre;Secundaria completa;Agricultor;959305331;0;1
+12172025000510;76423860;Vargas;Cruz;Milagros;F;Tia;Secundaria completa;Chofer;977757149;1;1
+12172025000520;51376239;Valdivia;Rojas;Anthony;M;Padre;Secundaria completa;Ama de casa;984753205;1;1
+12172025000530;33581811;Huaman;Mamani;Antonella;F;Madre;Primaria completa;Empleado;983544204;1;1
+12172025000540;25685528;Quispe;Torres;Bruno;M;Padre;Secundaria completa;Independiente;955282611;1;1
+12172025000550;69380649;Gomez;Ccopa;Cristhian;M;Padre;Superior tecnica;Ama de casa;961638644;0;1
+12172025000560;41567390;Bautista;Luna;Jhoan;M;Hermano mayor;Primaria incompleta;Agricultor;968175592;1;1
+12172025000570;61969691;Ruiz;Ramos;Luciana;F;Madre;Superior tecnica;Desempleado;964787671;0;1
+12172025000580;58923543;Apaza;Sucari;Maricielo;F;Madre;Superior universitaria;Comerciante;919715153;1;1
+12172025000590;72796141;Rios;Guerrero;Valeria;F;Madre;Secundaria completa;Agricultor;911840836;1;1
+12172025000600;46925100;Rojas;Apaza;Alonso;M;Padre;Superior tecnia;Independiente;935841147;0;1
+12172024000610;16473174;Nolasco;Arce;Ximena;F;Madre;Primaria incompleta;Desempleado;929527194;1;1
+12172024000620;71933146;Cardenas;Ticona;Mia;F;Madre;Secundaria incompleta;Obrero;971139516;1;1
+12172024000630;61225125;Cuya;Bautista;Camila;F;Madre;Secundaria incompleta;Agricultor;951652669;0;1
+12172024000640;61329149;Flores;Luna;Fabiana;F;Abuela;Secundaria incompleta;Docente;915933698;1;0
+12172024000650;37972683;Soto;Quispe;Briguitte;F;Madre;Primaria completa;Empleado;931397026;1;1
+12172024000670;57535437;Espinoza;Sucari;Rodrigo;M;Padre;Secundaria completa;Agricultor;913278535;0;1
+12172024000680;20585588;Cardenas;Cuya;Luciana;F;Madre;Superior tecnica;Obrero;999977594;1;1
+12172024000690;33902778;Espinoza;Chambi;Nicole;F;Madre;Superior tecnica;Tecnico;940013395;0;1
+12172024000700;63578827;Medina;Cardenas;Alejandra;F;Tia;Primaria completa;Docente;988841504;1;1
+12172024000710;71115734;Mamani;Valdivia;Yaneth;F;Madre;Secundaria completa;Independiente;955601797;1;1
+12172024000720;30313043;Torres;Ccopa;Diego;M;Padre;Primaria incompleta;Chofer;977632105;1;1
+12172024000730;42858881;Nolasco;Ccopa;Fabian;M;Padre;Secundaria completa;Obrero;939337529;1;1
+12172024000740;28574222;Gomez;Ruiz;Jazmin;F;Madre;Secundaria completa;Tecnico;924756207;1;1
+12172024000750;45724697;Antezana;Ramos;Briguitte;F;Abuela;Secundaria completa;Desempleado;964909170;1;0
+12172024000760;49912414;Flores;Castillo;Briguitte;F;Madre;Primaria completa;Tecnico;955577169;1;1
+12172024000770;20806774;Antezana;Mamani;Flor;F;Madre;secundaria completa;Desempleado;958536497;1;1
+12172024000780;33330932;Tarazona;Castillo;Nicole;F;Madre;Secundaria incompleta;Desempleado;985772288;1;1
+12172024000790;60255062;Leon;Antezana;Valeria;F;Abuela;Superior tecnica;Tecnico;972053493;1;1
+12172024000800;52044459;Zapata;Medina;Luciana;F;Madre;Secundaria incompleta;Tecnico;982174656;1;1
+12172024000810;13188744;Espinoza;Bautista;Yaneth;F;Madre;Superior universitaria;Obrero;995754433;0;1
+12172024000820;29462761;Bautista;Flores;Briguitte;F;Madre;Secundaria completa;Agricultor  ;913012480;1;1
+12172024000830;44902229;Ticona;Ccopa;Antonella;F;Madre;Secundaria incompleta;Desempleado;957908757;1;1
+12172024000840;55240868;Rojas;Chambi;Camila;F;Madre;Secundaria incompleta;Obrero;956674420;1;1
+12172024000850;51569116;Rojas;Cardenas;Yaneth;F;Madre;Secundaria incompleta;Obrero;933325594;1;1
+12172024000860;67338524;Ayala;Reyes;Bruno;M;Hermano mayor;Secundaria completa;Ama de casa;991974928;1;1
+12172024000870;75559196;Guerrero;Rojas;Fabian;M;Abuelo;Secundaria completa;Obrero;922462159;1;1
+12172024000880;48656920;Guerrero;Luna;Antonella;F;Madre;Superior tecnica;Empleado;;1;1
+12172024000890;67688263;Cruz  ;Vargas;Piero;M;Padre;Primaria completa;Agricultor;977305014;1;1
+12172024000900;10853765;Bautista;Nolasco;Yaneth;F;Madre;Superior tecnica;Docente;957165419;1;1
+12172024000910;36919385;Chambi;Flores;Nicole;F;Madre;Secundaria completa;Obrero;926507719;1;1
+12172024000920;46924285;Flores;Reyes;Mateo;M;Padre;Secundaria completa;Tecnico;984777364;1;1
+12172024000930;62422263;Reyes;Ticona;Katherine;F;Abuela;Primaria incompleta;Agricultor;921551361;1;1
+12172024000940;68815052;Castillo;Nolasco;Fabiana;F;Abuela;Primaria completa;Ama de casa;986185660;1;0
+12172024000950;60465565;Huaman;Medina;Ana Lucia;F;Madre;Secundaria completa;Empleado;987952430;1;1
+12172024000960;69211406;Cruz;Antezana;Alejandra;F;Madre;Superior tecnica;Agricultor;932267243;1;1
+12172024000970;62261003;Gomez;Ccopa;Ana Lucia;F;Abuela;Secundaria completa;Comerciante;937795166;1;0
+12172024000980;33143075;Castillo;Huaman;Maricielo;F;Madre;Secundaria completa;Ama de casa;931171232;1;1
+12172024000990;74418756;Huaman;Paredes;Maricielo;F;Madre;Secundaria incompleta;Obrero;912940062;1;1
+12172024001000;76712488;Bautista;Arce;Andre;M;Hermano mayor;Secundaria incompleta;Tecnico;995780233;1;1
+12172024001010;72972759;Ayala;Soto;Antonella;F;Madre;Superior tecnica;Desempleado;992902586;1;1
+12172024001020;60719876;Melendez;Quispe;Fabiana;F;Abuela;Secundaria incompleta;Empleado;978448714;1;1
+12172024001030;78765715;Ruiz;Nolasco;Flor;F;Madre;Superior tecnica;Desempleado;975324149;1;1
+12172024001040;24753431;Nolasco;Reyes;Valeria;F;Madre;Superior tecnica;Docente;931096091;1;1
+12172024001050;78465724;Ordonez;Luna;Anthony;M;Padre;Primaria completa;Comerciante;954799037;1;1
+12172024001070;20205132;Leon;Espinoza;Maricielo;F;Madre;Superior universitaria;Ama de casa;957113489;1;1
+12172024001080;39659534;Soto;Torres;Valeria;F;Tia;Superior tecnica;Docente;993207157;1;0
+12172024001090;44106369;Ayala;Melendez;Rosmery;F;Madre;Secundaria completa;Desempleado;937307299;1;1
+12172024001100;12053254;Rojas;Arce;Jean iPerre;M;Hermano mayor;Superior universitaria;Ama de casa;946603448;1;0
+12172024001110;26175301;Reyes;Guerrero;Jazmin;F;Madre;Primaria completa;Docente;931634145;1;1
+12172024001120;34925013;Ruiz;Antezana;Bruno;M;Padre;Superior tecnica;Ama de casa;917239556;1;1
+12172024001130;45666382;Castillo;Ccopa;Ana Lucia;F;Madre;Primaria completa;Comerciante;949533874;1;1
+12172024001140;19016692;Bautista;Antezana;Bruno;M;Padre;Secundaria completa;Chofer;920284948;1;1
+12172024001150;23905867;Espinoza;Vera;Nicole;F;Madre;Secundaria completa;Obrero;973465313;1;1
+12172024001160;26596253;Paredes;Espinoza;Ana Lucia;F;Madre;Secundaria incompleta;Tecnico;967937585;1;1
+12172024001170;23824174;Melendez;Nolasco;Thiago;M;Padre;Secundaria completa;Orbero;971341802;0;1
+12172024001180;59165666;Ruiz;Leon;Ximena;F;Madre;Primaria completa;Independiente;911766204;1;1
+12172024001190;77571730;Valdivia;Vera;Rosmery;F;Madre;Secundaria incompleta;Chofer;916564856;1;1
+12172024001200;35089083;Leon;Zapata;Renata;F;Madre;Secundaria incompleta;Desempleado;928673569;1;1
+12172023001210;48127364;Guerrero;Cardenas;Mia;F;Madre;Secundaria incompleta;Independiente;967098051;1;1
+12172023001220;47640822;Bautista;Leon;Marcelo;M;Padre;Secundaria completa;Tecnico;;0;1
+12172023001230;52628963;Sucari;Paredes;Fabiana;F;Madre;Superior tecnica;Ama de casa;943412271;1;1
+12172023001240;39083113;Reyes;Melendez;Alejandra;F;Madre;Secundaria incompleta;Tecnico;994408275;1;1
+12172023001250;71367334;Sucari;Guerrero;Katherine;F;Madre;Primaria completa;Independiente;920424025;1;1
+12172023001270;33913413;Arce;Ticona;Gabriel;M;Padre;Primaria completa;Comerciante;942745849;0;1
+12172023001280;56038568;Zapata;Paredes;Luciana;F;Madre;Superior tecnica;Desempleado;993930533;1;1
+12172023001290;11571719;Flores;Melendez;Ximena;F;Madre;Secundaria completa;Desempleado;919134609;1;1
+12172023001300;44921242;Ayala;Paredes;Nicolas;M;Hermano mayor;Primaria completa;Empleado;910150082;1;0
+12172023001310;14214460;Paredes;Ordonez;Rosmery;F;Madre;Secundaria completa;Obrero;925894232;1;1
+12172023001320;70325508;Leon;Soto;Jean Pierre;M;Padre;Superior universitaria;Docente;987769654;1;1
+12172023001330;76757184;Antezana;Melendez;Milagros;F;Tia;Superior tecnica;Empleado;941577969;1;1
+12172023001340;77879466;Ayala;Tarazona;Gabriel;M;Padre;Primaria completa;Obrero;969229249;1;1
+12172023001350;16187895;Cardenas;Cardenas;Camila;F;Tia;Secundaria completa;Independiente;923047235;1;1
+12172023001360;16993117;Nolasco;Castillo;Antonella;F;Tia;Secundaria completa;Independiente;988283896;1;0
+12172023001370;39585794;Antezana;Huaman;Maricielo;F;Madre;Primaria completa;Obrero;991321390;1;1
+12172023001380;61651951;Vargas;Torres;Briguitte;F;Madre;Superior universitaria;Comerciante;981989273;1;1
+12172023001390;42927234;Ticona;Vera;Piero;M;Padre;Secundaria completa;Agricultor;919404862;0;1
+12172023001400;37924573;Torres;Arce;Valeria;F;Madre;Superior tecnica;Empleado;910244346;1;1
+12172023001410;26670721;Antezana;Apaza;Jazmin;F;Madre;Secundaria completa;Tecnico;944132740;1;1
+12172023001420;18299318;Ordonez;Sucari;Fabian;M;Padre;Superior tecnica;Docente;953095162;1;1
+12172023001430;33012289;Quispe;Soto;Katherine;F;Madre;Secundaria completa;Comerciante;972183874;0;1
+12172023001440;63759600;Leon;Leon;Ximena;F;Madre;Secundaria incompleta;Empleado;939298243;1;1
+12172023001460;68918715;Ordonez;Antezana;Briguitte;F;Madre;Secundaria completa;Obrero;913704045;0;1
+12172023001470;59889661;Castillo;Chambi;Yaneth;F;Abuela;Secundaria completa;Comerciante;919289566;1;0
+12172023001480;42569857;Medina;Valdivia;Luciana;F;Madre;Primaria completa;Obrero;915226032;1;1
+12172023001490;54700025;Vargas;Ccopa;Yaneth;F;Madre;Secundaria completa;Chofer;939819344;0;1
+12172023001500;60421242;Apaza;Ruiz;Camila;F;Madre;Secundaria completa;Tecnico;955958207;1;1
+12172023001510;17249488;Vargas;Castillo;Anthony;M;Abuelo;Superior tecnica;Docente;+51987654321;1;1
+12172023001520;49800638;Ayala;Cruz;Valeria;F;Madre;Superior tecnica;Docente;990598135;1;1
+12172023001530;32607415;Reyes;Flores;Briguitte;F;Madre;Primaria completa;Obrero;976625871;1;1
+12172023001540;60984426;Rios;Ordonez;Santiago;M;Padre;Superior tecnica;Obrero;930275391;1;1
+12172023001550;70560159;Guerrero;Melendez;Luciana;F;Tia;Secundaria completa;Chofer;969148152;1;0
+12172023001560;41603156;Luna;Leon;Dayana;F;Madre;Superior tecnica;Chofer;959324587;1;1
+12172023001570;49589163;Vargas;Vargas;Dayana;F;Tia;Secundaria incompleta;Obrero;958950221;1;1
+12172023001580;18203617;Flores;Tarazona;Maricielo;F;Madre;Superior tecnica;Tecnico;951249045;1;1
+12172023001590;18923965;Cruz;Zapata;Katherine;F;Madre;Primaria completa;Desempleado;962651011;0;1
+12172023001600;28694060;Gomez;Tarazona;Cristhian;M;Padre;Secundaria incompleta;Chofer;910091201;1;1
+12172023001610;43409579;Cruz;Zapata;Dayana;F;Madre;Primaria incompleta;Ama de casa;956463396;1;1
+12172023001620;35288586;Ruiz;Ayala;Bruno;M;Hermano mayor;Secundaria completa;Obrero;934461884;1;1
+12172023001630;24476635;Ticona;Gomez;Rodrigo;M;Abuelo;Secundaria incompleta;Empleado;951229937;1;0
+12172023001640;34457783;Quispe;Sanchez;Milagros;F;Madre;Primaria completa;Independiente;956954155;0;1
+12172023001650;20818676;Cuya;Ramos;Nicole;F;Abuela;Secundaria incompleta;Chofer  ;921595341;1;0
+12172023001660;47225083;Soto;Sucari;Milagros;F;Madre;Secundaria completa;Chofer;982492228;1;1
+12172023001670;67722335;Nolasco;Chambi;Santiago;M;Padre;Secundaria incompleta;Empleado;984821177;1;1
+12172023001680;32901224;Ramos;Vargas;Fabiana;F;Madre;Superior tecnica;Independiente;911881732;1;1
+12172023001690;34138885;Ramos;Antezana;Rosmery;F;Madre;Secundaria incompleta;Empleado;916934598;1;1
+12172023001700;41521034;Ruiz;Ruiz;Jhoan;M;Padre;Superior tecnica;Comerciante;915143772;1;1
+12172023001710;71918661;Rojas;Ramos;Nicolas;M;Padre;Secundaria incompleta;Comerciante;912565700;1;1
+12172023001720;68613674;Vargas;Cardenas;Maricielo;F;Madre;Superior universitaria;Empleado;917243870;1;1
+12172023001730;72493243;Chambi;Ruiz;Ana Lucia;F;Madre;Secundaria completa;Empleado;935141092;1;1
+12172023001740;70199110;Guerrero;Torres;Fabian;M;Padre;Primaria completa;Independiente;971255714;1;1
+12172023001750;31117931;Ramos;Castillo;Antonella;F;Tia;Secundaria completa;Empleado;949036267;1;0
+12172023001760;56083776;Reyes;Sucari;Yaneth;F;Madre;Secundaria completa;Desempleado;;1;1
+12172023001770;43993488;Reyyes;Bautista;Dayana;F;Madre;Secundaria completa;Independiente;912053395;1;1
+12172023001780;10693238;Mamani;Guerrero;Jazmin;F;Madre;Secundaria incompleta;Chofer;963872861;0;1
+12172023001800;41367279;Medina;Sucari;Andre;M;Abuelo;Primaria completa;Docente;913729570;1;1
+12172022001810;54337899;Ramos;Vargas;Camila;F;Madre;Secundaria incompleta;Ama de casa;936989864;1;1
+12172022001820;24615692;Torres;Tarazona;Fabiana;F;Madre;Superior tecnica;Tecnico;912760561;0;1
+12172022001830;35332214;Ticona;Sanchez;Camila;F;Abuela;Superior tecnica;Chofer;914322541;1;1
+12172022001840;41669832;Bautista;Chambi;Renata;F;Madre;Primaria completa;Desempleado;960713743;1;1
+12172022001850;11629454;Antezana;Cardenas;Andre;M;Padre;Primaria incompleta;Comerciante;930046272;1;1
+12172022001860;46457144;Luna;Melendez;Fabian;M;Padre;Secundaria incompleta;Desempleado;926819506;1;1
+12172022001870;23249535;Ramos;Tarazona;Valeria;F;Madre;Secundaria completa;Tecnico;964348558;0;1
+12172022001880;57149886;Sucari;Espinoza;Antonella;F;Madre;Superior universitaria;Tecnico;976471752;1;1
+12172022001890;38968878;Melendez;Rojas;Ximena;F;Madre;Superior tecnica;Agricultor;958672065;1;1
+12172022001900;32771708;Gomez;Cuya;Flor;F;Madre;Superior tecnica;Independietne;961883333;1;1
+12172022001910;18797408;Melendez;Flores;Alejandra;F;Tia;Primaria completa;Comerciante;959682029;1;1
+12172022001920;64527079;Cuya;Guerrero;Jean Pierre;M;Padre;Secundaria completa;Chofer;944277865;1;1
+12172022001930;44995152;Cardenas;Nolasco;Mia;F;Madre;Superior tecnica;Empleado;925447942;1;1
+12172022001940;11456167;Bautista;Apaza;Valeria;F;Madre;Primaria completa;Chofer;962577685;1;1
+12172022001950;29900509;Leon;Leon;Yaneth;F;Madre;Superior universitaria;Empleado;950228195;0;1
+12172022001960;75564442;Cuya;Cruz;Fabiana;F;Madre;Secundaria completa;Agricultor  ;985953351;1;1
+12172022001970;56744710;Vargas;Cruz;Maricielo;F;Madre;Secundaria completa;Independiente;977933402;1;1
+12172022001980;33415899;Chambi;Guerrero;Briguitte;F;Abuela;Superior universitaria;Tecnico;987222385;1;0
+12172022001990;20013379;Sucari;Ccopa;Antonella;F;Madre;Secundaria incompleta;Ama de casa;922097044;1;1
+12172022002000;69760647;Ordonez;Arce;Ximena;F;Abuela;Secundaria incompleta;Tecnico;960751397;1;1
+12172022002010;17587742;Rios;Reyes;Jhoan;M;Padre;Secundaria completa;Desempleado;947066342;1;1
+12172022002020;55869782;Bautista;Zapata;Fabian;M;Abuelo;Secundaria incompleta;Tecnico;999 888 777;1;1
+12172022002030;48528231;Cruz;Reyes;Alejandra;F;Madre;Secundaria incompleta;Empleado;993194967;1;1
+12172022002040;30334177;Ordonez;Cardenas;Valeria;F;Abuela;Secundaria completa;Chofer;999 888 777;1;0
+12172022002050;66766022;Valdivia;Castillo;Gabriel;M;Padre;Secundaria completa;Agricultor;959632233;1;1
+12172022002060;44842267;Ruiz;Apaza;Katherine;F;Madre;Secundaria completa;Tecnico;980605133;1;1
+12172022002070;55342086;Nolasco;Castillo;Fabian;M;Padre;Superior tecnica;Chofer;973638970;1;1
+12172022002080;18545940;Riuz;Valdivia;Ximena;F;Madre;Secundaria completa;Desempleado;927446418;1;1
+12172022002090;64786748;Paredes;Chambi;Ana Lucia;F;Madre;Primaria completa;Independiente;954496684;1;1
+12172022002100;24356809;Vrgas;Mamani;Camila;F;Madre;Secundaria completa;Independiente;998895236;1;1
+12172022002110;10205736;Tarazona;Valdivia;Valeria;F;Madre;Superior tecnica;Tecnico;960023805;1;1
+12172022002120;16593002;Rios;Sanchez;Yaneth;F;Madre;Superior universitaria;Empleado;982826776;1;1
+12172022002130;54158449;Cruz;Gomez;Piero;M;Abuelo;Superior tecnia;Chofer;920213901;1;0
+12172022002140;17941504;Mamani;Quispe;Katherine;F;Madre;secundaria completa;Chofer;915026278;1;1
+12172022002150;24080929;Antezana;Cardenas;Yaneth;F;Madre;Superior tecnica;Docente;944882475;1;1
+12172022002160;36431079;Ccopa;Reyes;Dayana;F;Tia;Secundaria completa;Comerciante;984031207;1;0
+12172022002170;13815066;Nolasco;Medina;Fabiana;F;Madre;Primaria completa;Ama de casa;933198334;1;1
+12172022002180;40135450;Huaman;Medina;Nicole;F;Madre;Secundaria completa;Desempleado;967170603;0;1
+12172022002190;42774094;Ruiz;Rios;Nicole;F;Madre;Secundaria completa;Independiente;985763203;1;1
+12172022002200;22885635;Cruz;Gomez;Fabiana;F;Madre;Secundaria completa;Ama de casa;977670636;1;1
+12172022002210;73095203;Ayala;Torres;Anthony;M;Abuelo;Secundaria completa;Agricultor;962139679;1;1
+12172022002220;74895933;Soto;Sanchez;Katherine;F;Madre;Secundaria incompleta;Empleado;968519092;1;1
+12172022002230;39535672;Guerrero;Torres;Alonso;M;Padre;Primaria completa;Chofer;957462418;1;1
+12172022002240;76261651;Quispe;Tarazona;Valeria;F;Madre;Secundaria completa;Docente;928912161;1;1
+12172022002250;34381768;Gomez;Tarazona;Fabiana;F;Madre;Superior universitaria;Ama de casa;962887792;1;1
+12172022002260;64343804;Cardenas;Rios;Cristhian;M;Abuelo;Secundaria completa;Tecnico;999344707;1;1
+12172022002270;56640505;Sucari;Nolasco;Maricielo;F;Madre;Primaria completa;Comerciante;995864883;0;1
+12172022002280;25259251;Reyes;Valdivia;Fabiana;F;Madre;Primaria incompleta;Desempleado;993549771;1;1
+12172022002290;62953825;Luna;Ramos;Antonella;F;Madre;Superior tecnica;Chofer;933547258;1;1
+12172022002300;30283382;Arce;Ruiz;Rosmery;F;Madre;Primaria completa;Empleado;938142375;1;1
+12172022002310;25243457;Flores;Apaza;Ana Lucia;F;Madre;Primaria incompleta;Agricultor;977397548;1;1
+12172022002320;77154890;Bautista;Vargas;Yaneth;F;Madre;Secundaria incompleta;Independiente;935377750;0;1
+12172022002330;51231194;Antezana;Antezana;Ximena;F;Abuela;Primaria incompleta;Desempleado;992062960;1;0
+12172022002340;77878214;Nolasco;Bautista;Antonella;F;Madre;Secundaria completa;Ama de casa;975531014;1;1
+12172022002360;76012365;Bautista;Cardenas;Anthony;M;Padre;Superior universitaria;Independiente;985261540;0;1
+12172022002370;73109748;Rios;Castillo;Alonso;M;Padre;Secundaria incompleta;Independiente;914261801;1;1
+12172022002380;73051793;Ordonez;Guerrero;Briguitte;F;Madre;Secundaria incompleta;Independiente;926177660;0;1
+12172022002390;78021978;Vargas;Sanchez;Antonella;F;Madre;Primaria completa;Empleado;980725718;0;1
+12172022002400;49737871;Leon;Quispe;Ximena;F;Madre;Superior tecnica;Desempleado;989467152;1;1
+12172021002410;44420232;Valdivia;Rios;Nicole;F;Madre;Primaria completa;Empleado;944568238;0;1
+12172021002420;37675094;Vera;Paredes;Camila;F;Abuela;Secundaria completa;Desempleado;933420535;1;0
+12172021002430;30136386;Medina;Gomez;Luciana;F;Madre;Secundaria incompleta;Empleado;917692327;0;1
+12172021002440;68435651;Vargas;Arce;Piero;M;Padre;Secundaria completa;Docente;977853853;1;1
+12172021002450;28880247;Tarazona;Nolasco;Camila;F;Madre;Superior tecnica;Independiente;977861457;1;1
+12172021002460;17357506;Soto;Espinoza;Rosmery;F;Tia;Secundaria completa;Docente;959334591;1;0
+12172021002470;50726565;Ayala;Ordonez;Jean Pierre;M;Padre;Superior universitaria;Desempleado;985309394;1;1
+12172021002480;28232555;Leon;Medina;Camila;F;Madre;Secundaria completa;Comerciante;926789132;1;1
+12172021002490;24451963;Cardenas;Gomez;Adrian;M;Padre;Superior universitaria;Empleado;927018650;1;1
+12172021002500;62095816;Bautista;Leon;Renata;F;Madre;Secundaria incompleta;Chofer  ;972846919;1;1
+12172021002510;45040312;Sucari;Cruz;Nicole;F;Abuela;Secundaria incompleta;Comerciante;966754785;1;0
+12172021002520;11619067;Guerrero;Antezana;Anthony;M;Padre;Superior tecnica;Chofer;983775227;1;1
+12172021002530;27638872;Paredes;Quispe;Rodrigo;M;Padre;Primaria  incompleta;Independiente;969328295;1;1
+12172021002540;27726507;Cardenas;Ayala;Nicole;F;Abuela;Secundaria incompleta;Docente;954762191;0;0
+12172021002550;69914146;Apaza;Castillo;Valeria;F;Madre;Superior tecnica;Ama de casa;915498559;0;1
+12172021002560;44344855;Ticona;Rojas;Luciana;F;Tia;Primaria completa;Agricultor;910798537;1;0
+12172021002570;75975307;Melendez;Rojas;Nicole;F;Madre;Secundaria incompleta;Empleado;943162299;1;1
+12172021002580;69999820;Nolasco;Ticona;Alejandra;F;Tia;Secundaria incompleta;Desempleado;951110400;1;0
+12172021002590;12661873;Apaza;Ccopa;Alonso;M;Abuelo;Secundaria incompleta;Docente;968939606;1;1
+12172021002600;51312391;Flores;Flores;Fabian;M;Padre;Primaria incompleta;Comerciante;989105103;1;1
+12172021002610;62716027;Antezana;Cuya;Joaquin;M;Padre;Superior universitaria;Desempleado;971747218;1;1
+12172021002620;69119303;Bautista;Chambi;Renata;F;Madre;Secundaria incompleta;Desempleado;972669013;1;1
+12172021002630;25189917;Cuya;Mamani;Maricielo;F;Madre;Secundaria completa;Independiente;971952906;1;1
+12172021002640;25724987;Reyes;Flores;Milagros;F;Abuela;Secundaria incompleta;Empleado;939938750;1;0
+12172021002650;40373401;Vargas;Leon;Yaneth;F;Madre;Primaria  incompleta;Obrero;959345538;0;1
+12172021002660;26681898;Arce;Ticona;Nicole;F;Madre;Superior tecnica;Empleado;943387826;1;1
+12172021002670;36283645;Apaza;Medina;Gabriel;M;Abuelo;Primaria completa;Chofer;915779825;1;1
+12172021002680;32920002;Mamani;Sucari;Jazmin;F;Madre;Superior tecnica;Docente;969273887;1;1
+12172021002700;57747368;Rojas;Guerrero;Camila;F;Madre;Secundaria incompleta;Tecnico;924142296;1;1
+12172021002710;42834262;Leon;Luna;Nicole;F;Madre;SUPERIOR TECNICA;Ama de casa;957833973;1;1
+12172021002720;14929395;Valdivia;Rojas;Ximena;F;Madre;Secundaria incompleta;Chofer;920887583;1;1
+12172021002730;66262095;Cruz;Ruiz;Jazmin;F;Abuela;Secundaria completa;Desempleao;984502111;1;0
+12172021002740;19290358;Reyes;Cruz;Anthony;M;Padre;Superior tecnica;Chofer;985991310;1;1
+12172021002750;57572696;Nolasco;Guerrero;Ana Lucia;F;Madre;Secundaria completa;Tecnico;913303781;1;1
+12172021002760;76112523;Bautista;Flores;Ximena;F;Madre;Secundaria incompleta;Ama de casa;964111507;1;1
+12172021002770;35137091;Valdivia;Vera;Antonella;F;Madre;Primaria completa;Obrero;986841237;1;1
+12172021002780;51050359;Vargas;Guerrero;Jean Pierre;M;Padre;Superior tecnica;Independiente;972714185;1;1
+12172021002790;23455195;Cuya;Ordonez;Alonso;M;Hermano mayor;secundaria completa;Ama de casa;928623239;1;1
+12172021002800;65614462;Espinooza;Espinoza;Dayana;F;Madre;Secundaria completa;Ama de casa;949957980;1;1
+12172021002810;17933845;Antezana;Leon;Nicole;F;Abuela;Secundaria completa;Obrero;913646305;0;1
+12172021002820;31972234;Casillo;Vargas;Cristhian;M;Padre;Superior tecnica;Docente;918927079;1;1
+12172021002830;27982371;Cardenas;Ramos;Mia;F;Madre;Primaria incompleta;Empleado;959842050;1;1
+12172021002840;17098720;Rojas;Torres;Jazmin;F;Madre;Primaria completa;Docente;950142098;1;1
+12172021002850;34196279;Quispe;Cardenas;Nicole;F;Madre;Superior universitaria;Independiente;959203547;1;1
+12172021002860;56967862;Ticona;Cuya;Milagros;F;Madre;Secundaria incompleta;Obrero;967447523;1;1
+12172021002870;66041863;Rios;Guerrero;Valeria;F;Madre;Superior universitaria;Empleado;967054132;1;1
+12172021002880;56358435;Sucari;Antezana;Milagros;F;Madre;Superior universitaria;Tecnico;995090935;1;1
+12172021002890;35057540;Soto;Bautista;Dayana;F;Madre;Superior universitaria;Ama de casa;994191344;0;1
+12172021002900;35976325;Espinoza;Ruiz;Yaneth;F;Madre;Secundaria completa;Desempleado;973706611;1;1
+12172021002910;61760181;Rojas;Huaman;Bruno;M;Padre;Secundaria completa;Ama de casa;998541256;1;1
+12172021002920;16979960;Bautista;Sanchez;Sebastian;M;Padre;Superior tecnia;Ama de casa;999 888 777;1;1
+12172021002930;75447762;Ordonez;Guerrero;Diego;M;Padre;Secundaria incompleta;Empleado;987725913;1;1
+12172021002940;10080754;Ticona;Leon;Milagros;F;Madre;Secundaria completa;Agricultor;994464330;1;1
+12172021002950;25994715;Ticona;Luna;Fabiana;F;Madre;Secundaria completa;Independiente;923502029;1;1
+12172021002960;26918200;Nolasco;Quispe;Alejandra;F;Madre;Superior tecnica;Ama de casa;995934093;0;1
+12172021002980;48211454;Cruz;Medina;Milagros;F;Madre;Superior tecnica;Ama de casa;942579991;1;1
+12172021002990;66538453;Zapata;Nolasco;Briguitte;F;Madre;Superior universitaria;Ama de casa;994327110;1;1
+12172021003000;71684872;Leon;Quispe;Ximena;F;Abuela;Secundaria incompleta;Chofer;983344821;1;0
+12172026003010;15750312;Cruz;Medina;Valeria;F;Madre;Primaria completa;Empleado;965303790;1;1
+12172026003020;72968738;Vargas;Rojas;Camila;F;Madre;Primaria completa;Empleado;914504390;1;1
+12172026003030;53010361;Sucari;Nolasco;Flor;F;Abuela;Secundaria completa;Tecnico;989506008;1;1
+12172026003040;21105198;Apaza;Cardenas;Gabriel;M;Padre;Secundaria completa;Docente;917226741;1;1
+12172026003050;14020919;Paredes;Arce;Nicole;F;Madre;Secundaria incompleta;Ama de casa;+51987654321;1;1
+12172026003060;70728394;Valdivia;Ticona;Fabiana;F;Madre;Superior tecnica;Desempleado;913036270;1;1
+12172026003070;27194984;Zapata;Torres;Milagros;F;Madre;Secundaria completa;Comerciante;981275496;1;1
+12172026003080;36831966;Leon;Luna;Luciana;F;Tia;Superior tecnica;Tecnico;997841003;1;0
+12172026003090;45281057;Quispe;Paredes;Ana Lucia;F;Madre;Secundaria completa;Empleado;995730510;0;1
+12172026003100;76930948;Gomez;Nolasco;Yaneth  ;F;Madre;Superior tecnica;Desempleado;938319625;1;1
+12172026003110;13426261;Guerrero;Rios;Ana Lucia;F;Madre;Superior tecnica;Chofer;921179082;1;1
+12172026003120;62408485;Luna;Paredes;Jazmin;F;Madre;Primaria incompleta;Comerciante;971622576;1;1
+12172026003130;50793707;Torres;Paredes;Rodrigo;M;Padre;Secundaria completa;Obrero;977529350;1;1
+12172026003140;42553105;Paredes;Ordonez;Luciana;F;Madre;Secundaria completa;Docente;920706702;1;1
+12172026003150;34884343;Zapata;Sucari;Cristhian;M;Padre;Superior universitaria;Ama de casa;947401789;1;1
+12172026003160;19014283;Gomez;Castillo;Yaneth;F;Tia;Primaria incompleta;Comerciante;940824202;1;0
+12172026003170;46382256;Sanchez;Ccopa;Alejandra;F;Madre;Secundaria completa;Obrero;911509481;1;1
+12172026003180;63411975;Gomez;Tarazona;Valeria;F;Madre;Secundaria completa;Tecnico;982029922;1;1
+12172026003190;18435218;Ruiz;Chambi;Mateo;M;Padre;Secundaria incompleta;Ama de casa;991066828;0;1
+12172026003200;30484356;Ramos;Guerrero;Alonso;M;Padre;Secundaria completa;Independiente;960622067;1;1
+12172026003210;57363460;Sanchez;Huaman;Adrian;M;Padre;Secundaria incompleta;Chofer;955657885;1;1
+12172026003220;78206594;Luna;Apaza;Camila;F;Madre;Secundaria completa;Comerciante;932506959;0;1
+12172026003230;53568309;Ticona;Nolasco;Jazmin;F;Madre;Superior tecnica;Agricultor;917356879;1;1
+12172026003240;12260344;Sucari;Ayala;Jean Pierre;M;Hermano mayor;Secundaria completa;Empleado;954148673;1;1
+12172026003250;23905809;Torres;Apaza;Luciana;F;Madre;secundaria completa;Agricultor;956034864;1;1
+12172026003260;41929369;Castillo;Ccopa;Alejandra;F;Madre;Primaria completa;Empleado;956666585;1;1
+12172026003280;65768994;Flores;Chambi;Mia;F;Madre;Secundaria completa;Chofer;929345223;1;1
+12172026003290;15377859;Tarazona;Rios;Alonso;M;Padre;Superior tecnica;Empleado;940341051;0;1
+12172026003300;25239740;Apaza;Bautista;Ximena;F;Madre;Superior tecnica;Chofer;923893867;0;1
+12172026003310;54609915;Cuya;Zapata;Katherine;F;Madre;Primaria completa;Obrero;984089056;1;1
+12172026003320;70955941;Leon;Torres;Jazmin;F;Madre;Superior tecnica;Agricultor;953800323;1;1
+12172026003330;57209922;Ruiz;Torres;Dayana;F;Madre;Superior tecnica;Empleado;926896571;1;1
+12172026003340;64401170;Quispe;Sucari;Antonella;F;Madre;Secundaria completa;Chofer;919305727;0;1
+12172026003350;16294494;Ayala;Mamani;Milagros;F;Abuela;Secundaria incompleta;Tecnico;985993824;1;0
+12172026003360;23519396;Antezana;Leon;Rosmery;F;Madre;Superior tecnica;Tecnico;925653284;1;1
+12172026003370;25277057;Vera;Vera;Santiago;M;Padre;Superior tecnica;Empleado;984042178;1;1
+12172026003380;21462981;Quispe;Rojas;Rosmery;F;Madre;Superior tecnia;Desempleado;940249211;0;1
+12172026003390;36749458;Valdivia;Antezana;Dayana;F;Madre;Secundaria incompleta;Indepeniente;988097488;1;1
+12172026003400;39208345;Cruz;Apaza;Luciana;F;Abuela;Secundaria completa;Docente;998971078;0;1
+12172026003420;79625616;Rojas;Bautista;Santiago;M;Hermano mayor;Secundaria completa;Tecnico;931389110;1;0
+12172026003430;52766000;Arce;Espinoza;Rosmery;F;Madre;Secundaria incompleta;Chofer;998604652;1;1
+12172026003440;31096363;Castillo;Arce;Sebastian;M;Abuelo;Secundaria completa;Docente;948658040;1;0
+12172026003450;79918525;Chambi;Melendez;Renata;F;Tia;Secundaria completa;Comerciante;998849055;1;0
+12172026003460;60417381;Vera;Ccopa;Ana Lucia;F;Abuela;Primaria completa;Desempleado;940107861;1;0
+12172026003470;74369773;Soto;Castillo;Ximena;F;Madre;Primaria completa;Empleado;976417696;1;1
+12172026003480;71753363;Rojas;Mamani;Renata;F;Abuela;Secundaria incompleta;Obrero;963152350;1;1
+12172026003490;79898789;Valdivia;Flores;Ximena;F;Abuela;Superior tecnica;Chofer;938828876;1;1
+12172026003500;76962807;Reyes;Soto;Alonso;M;Padre;Secundaria completa;Obrero;985924964;1;1
+12172026003510;75103062;Antezana;Flores;Maricielo;F;Tia;Secundaria incompleta;Tecnico;993257812;1;1
+12172026003520;79931632;Arce;Antezana;Adrian;M;Abuelo;Secundaria completa;Obrero;910979583;1;1
+12172026003530;27307632;Ordonez;Rojas;Nicolas;M;Padre;Primaria completa;Chofer;981236251;1;1
+12172026003540;70671693;Ordonez;Medina;Adrian;M;Padre;Superior universitaria;Obrero;947626632;1;1
+12172026003550;64300780;Antezana;Zapata;Cristhian;M;Padre;Superior tecnica;Tecnico;994454242;1;1
+12172026003560;63284795;Espinoza;Rojas;Dayana;F;Madre;Secundaria incompleta;Agricultor;993399414;1;1
+12172026003570;31831492;Ruiz;Quispe;Alonso;M;Padre;Secundaria completa;Empleado;974040980;1;1
+12172026003580;21419692;Ramos;Soto;Gabriel;M;Abuelo;Secundaria completa;Tecnico;993480295;1;0
+12172026003590;78936645;Leon;Sanchez;Maricielo;F;Madre;Secundaria completa;Ama de casa;992265185;1;1
+12172026003600;69512537;Nolasco;Rojas;Katherine;F;Madre;Superior tecnica;Agricultor;959925187;1;1
+12172026003610;76469886;Soto;Cuya;Alejandra;F;Madre;Primaria completa;Independiente;918119369;1;1
+12172026003620;20447487;Sanchez;Ayala;Valeria;F;Madre;Secundaria completa;Docente;913423188;1;1
+12172026003630;76240141;Vera;Ccopa;Ximena;F;Madre;Superior tecnica;Ama de casa;996756647;1;1
+12172026003640;48702393;Reyes;Ruiz;Alejandra;F;Madre;Secundaria incompleta;Independiente;949415610;1;1
+12172026003650;45248926;Stoo;Rios;Milagros;F;Madre;Secundaria completa;Obrero;+51987654321;1;1
+12172026003660;10449916;Paredes;Apaza;Joaquin;M;Padre;Secundaria completa;Obrero;963847081;1;1
+12172026003670;31031130;Torres;Medina;Alonso;M;Padre;Secundaria completa;Desempleado;920544844;1;1
+12172026003680;46645396;Ccopa;Leon;Briguitte;F;Madre;Secundaria incompleta;Docente;946311393;1;1
+12172026003690;17887591;Gomez;Medina;Alejandra;F;Madre;SUPERIOR TECNICA;Agricultor;971904408;1;1
+12172026003700;78041410;Guerrero;Antezana;Dayana;F;Madre;Secundaria incompleta;Empleado;930275755;0;1
+12172026003710;78287648;Huaman;Rios;Jhoan;M;Hermano mayor;Secundaria completa;Empleado;920789744;1;0
+12172026003720;75294254;Gomez;Valdivia;Camila;F;Madre;Primaria completa;Chofer;979476772;1;1
+12172026003730;52399333;Valdivia;Ccopa;Anthony;M;Padre;Secundaria completa;Epleado;937010808;1;1
+12172026003380;21462981;Quispe;Rojas;Rosmery;F;Padre;Superior tecnia;Desempleado;940249211;0;1
+12172025000590;72796141;Rios;Guerrero;Valeria;F;Padre;Secundaria completa;Agricultor;911840836;1;1
+12172025000130;61175617;Ayala;Antezana;Jhoan;M;Padre;Secundaria incompleta;Tecnico;916732678;1;1
+12172023001460;68918715;Ordonez;Antezana;Briguitte;F;Padre;Secundaria completa;Obrero;913704045;0;1
+12172023001300;44921242;Ayala;Paredes;Nicolas;M;Padre;Primaria completa;Empleado;910150082;1;0
+12172024001180;59165666;Ruiz;Leon;Ximena;F;Padre;Primaria completa;Independiente;911766204;1;1
+12172024000740;28574222;Gomez;Ruiz;Jazmin;F;Padre;Secundaria completa;Tecnico;924756207;1;1

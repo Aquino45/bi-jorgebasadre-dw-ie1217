@@ -1,0 +1,51 @@
+MaterialID;AreaID;Grado;TipoMaterial;TituloMaterial;Condicion;Procedencia
+MTL-001;AR-MAT;1;Texto escolar;Matematica 1;Retornable;Ministerio de Educacion del Peru
+MTL-002;AR-MAT;1;Cuaderno de trabajo;Resolvamos problemas 1;Fungible;Ministerio de Educacion del Peru
+MTL-003;AR-COM;1;Texto escolar;Comunicacion 1;Retornable;Ministerio de Educacion del Peru
+MTL-004;AR-COM;1;Cuaderno de trabajo;Comprension lectora 1;Fungible;Ministerio de Educacion del Peru
+MTL-005;AR-CYT;1;Texto escolar;Ciencia y Tecnologia 1;Retornable;Ministerio de Educacion del Peru
+MTL-006;AR-CYT;1;Cuaderno de trabajo;Fichas de autoaprendizaje de Ciencia y Tecnologia 1;Fungible;Ministerio de Educacion del Peru
+MTL-007;AR-CCS;1;Texto escolar;Ciencias Sociales 1;Retornable;Ministerio de Educacion del Peru
+MTL-008;AR-CCS;1;Cuaderno de trabajo;Cuaderno de fichas Fuentes historicas 1;Fungible;Ministerio de Educacion del Peru
+MTL-009;AR-DPC;1;Texto escolar;Desarrollo Personal, Ciudadania y Civica 1;Retornable;Ministerio de Educacion del Peru
+MTL-010;AR-DPC;1;Cuaderno de trabajo;Cuaderno de trabajo de DPCC 1;Fungible;Ministerio de Educacion del Peru
+MTL-011;AR-MAT;2;Texto escolar;Matematica 2;Retornable;Ministerio de Educacion del Peru
+MTL-012;AR-MAT;2;Cuaderno de trabajo;Resolvamos problemas 2;Fungible;Ministerio de Educacion del Peru
+MTL-013;AR-COM;2;Texto escolar;Comunicacion 2;Retornable;Ministerio de Educacion del Peru
+MTL-014;AR-COM;2;Cuaderno de trabajo;Comprension lectora 2;Fungible;Ministerio de Educacion del Peru
+MTL-015;AR-CYT;2;Texto escolar;Ciencia y Tecnologia 2;Retornable;Ministerio de Educacion del Peru
+MTL-016;AR-CYT;2;Cuaderno de trabajo;Fichas de autoaprendizaje de Ciencia y Tecnologia 2;Fungible;Ministerio de Educacion del Peru
+MTL-017;AR-CCS;2;Texto escolar;Ciencias Sociales 2;Retornable;Ministerio de Educacion del Peru
+MTL-018;AR-CCS;2;Cuaderno de trabajo;Cuaderno de fichas Fuentes historicas 2;Fungible;Ministerio de Educacion del Peru
+MTL-019;AR-DPC;2;Texto escolar;Desarrollo Personal, Ciudadania y Civica 2;Retornable;Ministerio de Educacion del Peru
+MTL-020;AR-DPC;2;Cuaderno de trabajo;Cuaderno de trabajo de DPCC 2;Fungible;Ministerio de Educacion del Peru
+MTL-021;AR-MAT;3;Texto escolar;Matematica 3;Retornable;Ministerio de Educacion del Peru
+MTL-022;AR-MAT;3;Cuaderno de trabajo;Resolvamos problemas 3;Fungible;Ministerio de Educacion del Peru
+MTL-023;AR-COM;3;Texto escolar;Comunicacion 3;Retornable;Ministerio de Educacion del Peru
+MTL-024;AR-COM;3;Cuaderno de trabajo;Comprension lectora 3;Fungible;Ministerio de Educacion del Peru
+MTL-025;AR-CYT;3;Texto escolar;Ciencia y Tecnologia 3;Retornable;Ministerio de Educacion del Peru
+MTL-026;AR-CYT;3;Cuaderno de trabajo;Fichas de autoaprendizaje de Ciencia y Tecnologia 3;Fungible;Ministerio de Educacion del Peru
+MTL-027;AR-CCS;3;Texto escolar;Ciencias Sociales 3;Retornable;Ministerio de Educacion del Peru
+MTL-028;AR-CCS;3;Cuaderno de trabajo;Cuaderno de fichas Fuentes historicas 3;Fungible;Ministerio de Educacion del Peru
+MTL-029;AR-DPC;3;Texto escolar;Desarrollo Personal, Ciudadania y Civica 3;Retornable;Ministerio de Educacion del Peru
+MTL-030;AR-DPC;3;Cuaderno de trabajo;Cuaderno de trabajo de DPCC 3;Fungible;Ministerio de Educacion del Peru
+MTL-031;AR-MAT;4;Texto escolar;Matematica 4;Retornable;Ministerio de Educacion del Peru
+MTL-032;AR-MAT;4;Cuaderno de trabajo;Resolvamos problemas 4;Fungible;Ministerio de Educacion del Peru
+MTL-033;AR-COM;4;Texto escolar;Comunicacion 4;Retornable;Ministerio de Educacion del Peru
+MTL-034;AR-COM;4;Cuaderno de trabajo;Comprension lectora 4;Fungible;Ministerio de Educacion del Peru
+MTL-035;AR-CYT;4;Texto escolar;Ciencia y Tecnologia 4;Retornable;Ministerio de Educacion del Peru
+MTL-036;AR-CYT;4;Cuaderno de trabajo;Fichas de autoaprendizaje de Ciencia y Tecnologia 4;Fungible;Ministerio de Educacion del Peru
+MTL-037;AR-CCS;4;Texto escolar;Ciencias Sociales 4;Retornable;Ministerio de Educacion del Peru
+MTL-038;AR-CCS;4;Cuaderno de trabajo;Cuaderno de fichas Fuentes historicas 4;Fungible;Ministerio de Educacion del Peru
+MTL-039;AR-DPC;4;Texto escolar;Desarrollo Personal, Ciudadania y Civica 4;Retornable;Ministerio de Educacion del Peru
+MTL-040;AR-DPC;4;Cuaderno de trabajo;Cuaderno de trabajo de DPCC 4;Fungible;Ministerio de Educacion del Peru
+MTL-041;AR-MAT;5;Texto escolar;Matematica 5;Retornable;Ministerio de Educacion del Peru
+MTL-042;AR-MAT;5;Cuaderno de trabajo;Resolvamos problemas 5;Fungible;Ministerio de Educacion del Peru
+MTL-043;AR-COM;5;Texto escolar;Comunicacion 5;Retornable;Ministerio de Educacion del Peru
+MTL-044;AR-COM;5;Cuaderno de trabajo;Comprension lectora 5;Fungible;Ministerio de Educacion del Peru
+MTL-045;AR-CYT;5;Texto escolar;Ciencia y Tecnologia 5;Retornable;Ministerio de Educacion del Peru
+MTL-046;AR-CYT;5;Cuaderno de trabajo;Fichas de autoaprendizaje de Ciencia y Tecnologia 5;Fungible;Ministerio de Educacion del Peru
+MTL-047;AR-CCS;5;Texto escolar;Ciencias Sociales 5;Retornable;Ministerio de Educacion del Peru
+MTL-048;AR-CCS;5;Cuaderno de trabajo;Cuaderno de fichas Fuentes historicas 5;Fungible;Ministerio de Educacion del Peru
+MTL-049;AR-DPC;5;Texto escolar;Desarrollo Personal, Ciudadania y Civica 5;Retornable;Ministerio de Educacion del Peru
+MTL-050;AR-DPC;5;Cuaderno de trabajo;Cuaderno de trabajo de DPCC 5;Fungible;Ministerio de Educacion del Peru

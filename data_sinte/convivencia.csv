@@ -1,0 +1,737 @@
+CasoID;Anio;CodigoEstudiante;SeccionID;FechaHecho;FechaRegistro;TipoCaso;ReportadoSiseve;DerivadoPor;ResponsableAtencionID;FechaAtencion;EstadoCaso;SesionesAtencion;SeguimientoActivo;FechaCierre
+CASO-2025-0001;2025;12172025000010;SEC-2025-1A;2025-12-17;2025-12-20;Falta de conducta reiterada;0;Auxiliar de educacion;PER-004;;Programado;0;1;
+CASO-2025-0002;2025;12172025000010;SEC-2025-1A;2025-10-13;2025-10-14;Falta de conducta reiterada;0;Docente de area;PER-003;2025-10-22;Atendido;1;0;2025-12-17
+CASO-2025-0003;2025;12172025000020;SEC-2025-1A;2025-07-16;2025-07-16;Bajo rendimiento derivado a TOE;0;Docente de area;PER-004;2025-07-28;Atendido;2;1;
+CASO-2025-0004;2025;12172025000030;SEC-2025-1A;2025-03-20;2025-03-22;Falta de conducta reiterada;0;Docente de area;PER-004;2025-03-31;Atendido;1;0;
+CASO-2025-0005;2025;12172025000040;SEC-2025-1A;2025-06-12;2025-06-15;Bajo rendimiento derivado a TOE;0;Auxiliar de educacion;PER-004;2025-06-15;Atendido;2;0;
+CASO-2025-0006;2025;12172025000040;SEC-2025-1A;2025-06-11;2025-06-14;Falta de conducta reiterada;0;Tutor de aula;PER-003;2024-12-01;no asisitio;2;1;
+CASO-2025-0007;2025;12172025000040 ;SEC-2025-1A;2025-10-20;2025-10-21;Bajo rendimiento derivado a TOE;0;Auxiliar de educacion;PER-004;2025-10-29;Atendido;1;0;2025-11-09
+CASO-2025-0008;2025;12172025000050;SEC-2025-1A;2025-06-12;2025-06-15;Falta de conducta reiterada;0;Docente de area;PER-003;;Programado;0;0;
+CASO-2025-0009;2025;12172025000060;SEC-2025-1A;2025-04-16;2025-04-19;Falta de conducta reiterada;0;Auxiliar de educacion;PER-003;2025-04-22;Atendido;1;0;2025-05-20
+CASO-2025-0010;2025;12172025000080;SEC-2025-1A;2025-03-17;2025-03-17;Situacion familiar de riesgo;0;Coordinacion TOE;PER-003;2025-03-22;Atendido;4;0;2025-05-24
+CASO-2025-0011;2025;12172025000080;SEC-2025-1A;2025-09-15;2025-09-16;Violencia psicologica entre escolares;1;Docente de area;PER-004;2025-09-27;Atendido;3;0;
+CASO-2025-0012;2025;12172025000090;SEC-2025-1A;2025-09-03;2025-09-05;Violencia psicologica entre escolares;1;Auxiliar de educacion;PER-004;2025-09-05;No asistio;3;0;
+CASO-2025-0013;2025;12172025000090;SEC-2025-1A;2025-05-21;2025-05-21;Violencia fisica entre escolares;1;Coordinacion TOE;PER-004;2025-05-22;Atendido;2;0;2025-07-13
+CASO-2025-0014;2025;12172025000090;SEC-2025-1A;2025-12-01;2025-12-01;Situacion familiar de riesgo;0;Tutor de aula;PER-003;2025-12-08;Atendido;2;0;2026-01-29
+CASO-2025-0015;2025;12172025000100;SEC-2025-1A;2025-09-17;2025-09-19;Violencia psicologica entre escolares;1;Docente de area;PER-004;2025-09-26;Atendido;3;0;2025-10-12
+CASO-2025-0016;2025;12172025000110;SEC-2025-1A;2025-07-10;2025-07-10;Violencia psicologica entre escolares;1;Auxiliar de educacion;PER-004;;No asistio;0;0;
+CASO-2025-0017;2025;12172025000150;SEC-2025-1A;2025-10-10;2025-10-10;Bajo rendimiento derivado a TOE;0;Auxiliar de educacion;PER-003;2025-10-12;Atendido;3;1;2025-11-16
+CASO-2025-0018;2025;12172025000150 ;SEC-2025-1A;2025-04-23;2025-04-24;Violencia fisica entre escolares;0;Coordinacion TOE;PER-004;2025-05-03;Atendio;4;0;2025-05-25
+CASO-2025-0019;2025;12172025000150;SEC-2025-1A;2025-07-18;2025-07-18;Violencia psicologica entre escolares;1;Auxiliar de educacion;PER-004;;No asistio;0;1;
+CASO-2025-0020;2025;12172025000160;SEC-2025-1A;2025-11-17;2025-11-19;Bajo rendimiento derivado a TOE;0;Tutor de aula;PER-003;2025-11-25;Atendido;1;0;
+CASO-2025-0021;2025;12172025000160 ;SEC-2025-1A;2025-09-26;2025-09-29;Violencia fisica entre escolares;1;Auxiliar de educacion;PER-003;2025-09-28;Atendido;1;1;2025-10-29
+CASO-2025-0022;2025;12172025000180;SEC-2025-1A;2025-11-14;2025-11-16;Violencia psicologica entre escolares;1;Docente de area;PER-003;;Programado;3;1;
+CASO-2025-0023;2025;12172025000180;SEC-2025-1A;2025-05-14;2025-05-15;Falta de conducta reiterada;0;Docente de area;PER-003;2025-05-23;Atendido;0;0;
+CASO-2025-0024;2025;12172025000190;SEC-2025-1A;2025-03-20;2025-03-23;Falta de conducta reiterada;0;Auxiliar de educacion;PER-004;;Atendidoo;3;1;
+CASO-2025-0025;2025;12172025000200;SEC-2025-1A;2025-05-14;2025-05-17;Falta de conducta reiterada;0;Auxiliar de educacion;PER-003;2025-05-26;Atendido;1;1;2025-06-04
+CASO-2025-0026;2025;12172025000210;SEC-2025-1A;2025-06-20;2025-06-23;Violencia psicologica entre escolares;1;Docente de area;PER-004;2025-06-30;Atendido;0;1;2025-08-08
+CASO-2025-0027;2025;12172025000220;SEC-2025-1A;2025-08-26;2025-08-29;Violencia fisica entre escolares;1;Docente de area;PER-004;2025-08-31;Atendido;0;0;
+CASO-2025-0028;2025;12172025000230;SEC-2025-1A;2025-04-22;2025-04-25;Bajo rendimiento derivado a TOE;0;Docente de area;PER-004;2025-04-24;Atendido;2;0;
+CASO-2025-0029;2025;12172025000230;SEC-2025-1A;2025-03-18;2025-03-18;Violencia psicologica entre escolares;1;Auxiliar de educacion;PER-003;2025-03-20;Atendido ;0;0;2025-05-21
+CASO-2025-0030;2025;12172025000230;SEC-2025-1A;2025-05-05;2025-05-05;Falta de conducta reiterada;0;Tutor de aula;PER-003;;No asistio;2;1;
+CASO-2025-0031;2025;12172025000250;SEC-2025-1A;2025-05-14;2025-05-17;Violencia fisica entre escolares;0;Coordinacion TOE;PER-003;2025-05-26;no asisitio;1;0;2025-06-12
+CASO-2025-0032;2025;12172025000280;SEC-2025-1A;2025-07-24;2025-07-25;Bajo rendimiento derivado a TOE;0;Docente de area;PER-004;2025-07-31;no asisitio;2;0;2025-08-19
+CASO-2025-0033;2025;12172025000280;SEC-2025-1A;2025-05-01;2025-05-04;Violencia psicologica entre escolares;1;Coordinacion TOE;PER-003;2025-05-11;no asisitio;1;0;2025-06-18
+CASO-2025-0034;2025;12172025000290;SEC-2025-1A;2025-07-24;2025-07-26;Falta de conducta reiterada;0;Tutor de aula;PER-004;2025-07-26;Atendido;2;0;2025-09-27
+CASO-2025-0035;2025;12172025000290;SEC-2025-1A;2025-04-16;2025-04-17;Falta de conducta reiterada;0;Docente de area;PER-003;2025-04-17;Atendido;1;0;2025-06-25
+CASO-2025-0036;2025;12172025000290;SEC-2025-1A;2025-06-23;2025-06-26;Violencia psicologica entre escolares;1;Docente de area;PER-004;2025-06-27;Atendido;0;0;2025-07-16
+CASO-2025-0037;2025;12172025000300;SEC-2025-1A;2025-11-17;2025-11-18;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-004;2025-11-19;Atendido;0;0;
+CASO-2025-0038;2025;12172025000310;SEC-2025-1B;2025-09-23;2025-09-26;Bajo rendimiento derivado a TOE;0;Auxiliar de educacion;PER-004;2025-09-27;Programdo;2;0;2025-11-05
+CASO-2025-0039;2025;12172025000320;SEC-2025-1B;2025-06-12;2025-06-12;Falta de conducta reiterada;0;Auxiliar de educacion;PER-004;2025-06-19;Atendido;1;1;
+CASO-2025-0040;2025;12172025000340;SEC-2025-1B;2025-04-17;2025-04-19;Falta de conducta reiterada;0;Auxiliar de educacion;PER-003;2025-04-24;Atendido;2;1;2025-05-30
+CASO-2025-0041;2025;12172025000350;SEC-2025-1B;2025-11-18;2025-11-21;Violencia fisica entre escolares;0;Auxiliar de educacion;PER-003;2025-11-21;Atendido;3;0;2026-01-06
+CASO-2025-0042;2025;12172025000350;SEC-2025-1B;2025-09-08;2025-09-11;Bajo rendimiento derivado a TOE;0;Docente de area;PER-003;;Programado;2;0;
+CASO-2025-0043;2025;12172025000360;SEC-2025-1B;2025-11-20;2025-11-22;Bajo rendimiento derivado a TOE;0;Tutor de aula;PER-004;2025-12-02;Atendido;4;0;2025-12-22
+CASO-2025-0044;2025;12172025000370;SEC-2025-1B;2025-07-16;2025-07-18;Consumo de sustancias;0;Tutor de aula;PER-003;;No asistio;0;1;
+CASO-2025-0045;2025;12172025000370;SEC-2025-1B;2025-07-04;2025-07-05;Bajo rendimiento derivado a TOE;0;Auxiliar de educacion;PER-003;2025-07-13;Atendido;4;0;
+CASO-2025-0046;2025;12172025000370;SEC-2025-1B;2025-07-28;2025-07-31;Situacion familiar de riesgo;0;Docente de area;PER-003;;Atendio;3;0;
+CASO-2025-0047;2025;12172025000380;SEC-2025-1B;2025-11-26;2025-11-27;Situacion familiar de riesgo;0;Coordinacion TOE;PER-004;2025-12-05;Atendido;2;0;
+CASO-2025-0048;2025;12172025000390;SEC-2025-1B;2025-04-11;2025-04-13;Violencia fisica entre escolares;1;Docente de area;PER-003;2025-04-18;Atendido;2;0;
+CASO-2025-0049;2025;12172025000400;SEC-2025-1B;2025-06-13;2025-06-15;Violencia fisica entre escolares;1;Coordinacion TOE;PER-004;2025-06-19;Atendido;2;0;2025-08-09
+CASO-2025-0050;2025;12172025000400;SEC-2025-1B;2025-09-15;2025-09-15;Situacion familiar de riesgo;0;Auxiliar de educacion;PER-003;;Atendido;1;0;
+CASO-2025-0051;2025;12172025000400;SEC-2025-1B;2025-05-23;2025-05-25;Falta de conducta reiterada;0;Docente de area;PER-003;2025-05-24;Atendido;2;0;2025-07-09
+CASO-2025-0052;2025;12172025000410;SEC-2025-1B;2025-10-24;2025-10-27;Situacion familiar de riesgo;0;Coordinacion TOE;PER-004;2025-10-25;Atendido;2;0;
+CASO-2025-0053;2025;12172025000430;SEC-2025-1B;2025-04-16;2025-04-18;Violencia fisica entre escolares;1;Auxiliar de educacion;PER-003;2025-04-23;Atendido;0;0;
+CASO-2025-0054;2025;12172025000440;SEC-2025-1B;2025-09-24;2025-09-26;Falta de conducta reiterada;0;Coordinacion TOE;PER-003;2025-10-05;Atendido;3;1;2025-10-26
+CASO-2025-0055;2025;12172025000440;SEC-2025-1B;2025-05-27;2025-05-29;Violencia psicologica entre escolares;1;Tutor de aula;PER-004;2025-06-05;Atendido;1;1;2025-06-15
+CASO-2025-0056;2025;12172025000450;SEC-2025-1B;2025-05-19;2025-05-22;Falta de conducta reiterada;0;Tutor de aula;PER-004;;Programado;1;0;
+CASO-2025-0057;2025;12172025000450;SEC-2025-1B;2025-10-24;2025-10-24;Violencia psicologica entre escolares;0;Auxiliar de educacion;PER-003;2025-11-02;Atendido;2;0;2025-12-04
+CASO-2025-0058;2025;12172025000460;SEC-2025-1B;2025-10-28;2025-10-30;Falta de conducta reiterada;0;Auxiliar de educacion;PER-003;2025-11-08;Atendido;0;1;2025-11-24
+CASO-2025-0059;2025;12172025000470;SEC-2025-1B;2025-05-21;2025-05-23;Violencia fisica entre escolares;0;Docente de area;PER-004;2025-05-29;Atendido;1;0;2025-06-14
+CASO-2025-0060;2025;12172025000470;SEC-2025-1B;2025-04-11;2025-04-14;Violencia fisica entre escolares;1;Tutor de aula;PER-004;2025-04-19;Atendido;1;0;2025-06-09
+CASO-2025-0061;2025;12172025000470;SEC-2025-1B;2025-06-24;2025-06-25;Bajo rendimiento derivado a TOE;0;Docente de area;PER-004;2025-06-30;Atendido;0;0;2025-07-25
+CASO-2025-0062;2025;12172025000470;SEC-2025-1B;2025-08-29;2025-08-29;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-004;2025-09-09;Atendidoo;1;0;2025-09-27
+CASO-2025-0063;2025;12172025000480;SEC-2025-1B;2025-07-10;2025-07-10;Violencia fisica entre escolares;0;Docente de area;PER-003;;No asistio;1;1;
+CASO-2025-0064;2025;12172025000510;SEC-2025-1B;2025-10-20;2025-10-22;Bajo rendimiento derivado a TOE;0;Auxiliar de educacion;PER-004;2025-10-23;Atendido;1;1;2025-11-20
+CASO-2025-0065;2025;12172025000510;SEC-2025-1B;2025-05-28;2025-05-30;Consumo de sustancias;0;Docente de area;PER-004;;Atendido;1;1;
+CASO-2025-0066;2025;12172025000510;SEC-2025-1B;2025-07-07;2025-07-09;Falta de conducta reiterada;0;Auxiliar de educacion;PER-004;2025-07-19;Atendido;0;0;2025-09-15
+CASO-2025-0067;2025;12172025000520;SEC-2025-1B;2025-05-13;2025-05-13;Falta conducta reiterada;0;Tutor de aula;PER-004;2025-05-25;Atendido;3;1;
+CASO-2025-0068;2025;12172025000520;SEC-2025-1B;2025-04-17;2025-04-20;Violencia psicologica entre escolares;1;Coordinacion TOE;PER-004;2025-04-21;Atendido;0;0;2025-05-18
+CASO-2025-0069;2025;12172025000520;SEC-2025-1B;2025-05-12;2025-05-14;Violencia psicologica entre escolares;1;Auxiliar de educacion;PER-003;;No asistio;1;0;
+CASO-2025-0070;2025;12172025000540;SEC-2025-1B;2025-07-30;2025-08-01;Violencia psicologica entre escolares;1;Coordinacion TOE;PER-004;2025-08-09;Atendido;3;0;
+CASO-2025-0071;2025;12172025000540;SEC-2025-1B;2025-10-09;2025-10-10;Falta de conducta reiterada;0;Coordinacion TOE;PER-003;2025-10-18;Atendido;2;0;
+CASO-2025-0072;2025;12172025000540;SEC-2025-1B;2025-08-25;2025-08-28;Violencia psicologica entre escolares;1;Coordinacion TOE;PER-004;2025-08-26;Atendido;1;1;2025-09-24
+CASO-2025-0073;2025;12172025000550;SEC-2025-1B;2025-06-24;2025-06-26;Falta de conducta reiterada;0;Auxiliar de educacion;PER-004;;Atendido;0;1;
+CASO-2025-0074;2025;12172025000550;SEC-2025-1B;2025-12-04;2025-12-05;Violencia fisica entre escolares;1;Tutor de aula;PER-003;;No asistio;1;0;
+CASO-2025-0075;2025;12172025000550;SEC-2025-1B;2025-11-19;2025-11-20;Falta de conducta reiterada;0;Coordinacion TOE;PER-004;2025-11-22;Atendido;1;0;2025-12-15
+CASO-2025-0076;2025;12172025000560;SEC-2025-1B;2025-04-22;2025-04-24;Falta de conducta reiterada;0;Coordinacion TOE;PER-004;2025-04-23;Atendido;4;1;2025-06-23
+CASO-2025-0077;2025;12172025000570;SEC-2025-1B;2025-07-21;2025-07-21;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-003;2025-08-02;Atendido;2;1;2025-09-21
+CASO-2025-0078;2025;12172025000570;SEC-2025-1B;2025-06-24;2025-06-25;Bajo rendimiento derivado a TOE;0;Docente de area;PER-003;2025-06-29;Atendido;1;1;2025-08-31
+CASO-2025-0079;2025;12172025000570 ;SEC-2025-1B;2025-11-27;2025-11-29;Falta de conducta reiterada;0;Coordinacion TOE;PER-003;;Programado;1;1;
+CASO-2025-0080;2025;12172025000570;SEC-2025-1B;2025-06-27;2025-06-30;Falta conducta reiterada;0;Coordinacion TOE;PER-004;2025-06-28;Atendido;1;0;
+CASO-2025-0081;2025;12172024000610;SEC-2025-2A;2025-09-11;2025-09-14;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-004;2025-09-17;Atendido;3;0;2025-10-14
+CASO-2025-0082;2025;12172024000620;SEC-2025-2A;2025-11-28;2025-11-28;Situacion familiar de riesgo;0;Coordinacion TOE;PER-003;2025-12-07;Atendido ;1;1;2026-01-16
+CASO-2025-0083;2025;12172024000640;SEC-2025-2A;2025-05-02;2025-05-02;Situacion familiar de riesgo;0;Coordinacion TOE;PER-004;2024-12-01;No asistio;1;0;2025-07-01
+CASO-2025-0084;2025;12172024000640;SEC-2025-2A;2025-03-20;2025-03-23;Violencia psicologica entre escolares;1;Auxiliar de educacion;PER-004;2025-03-25;Atendido;1;1;
+CASO-2025-0085;2025;12172024000680;SEC-2025-2A;2025-04-25;2025-04-26;Consumo de sustancias;0;Tutor de aula;PER-004;2025-05-03;Atendido;2;0;
+CASO-2025-0086;2025;12172024000690;SEC-2025-2A;2025-06-10;2025-06-13;Falta de conducta reiterada;0;Coordinacion TOE;PER-004;;Programado;4;0;
+CASO-2025-0087;2025;12172024000700;SEC-2025-2A;2025-08-20;2025-08-22;Bajo rendimiento derivado a TOE;0;Tutor de aula;PER-003;2025-08-31;Atendido;0;0;
+CASO-2025-0088;2025;12172024000700;SEC-2025-2A;2025-04-03;2025-04-05;Situacion familiar de riesgo;0;Coordinacion TOE;PER-004;;Programado;1;1;
+CASO-2025-0089;2025;12172024000700;SEC-2025-2A;2025-10-10;2025-10-10;Violencia psicologica entre escolares;1;Tutor de aula;PER-004;2025-10-17;Atendido;1;1;
+CASO-2025-0090;2025;12172024000710;SEC-2025-2A;2025-07-24;2025-07-26;Violencia psicologica entre escolares;1;Coordinacion TOE;PER-004;2025-07-29;Atendido;2;1;2025-10-02
+CASO-2025-0091;2025;12172024000710;SEC-2025-2A;2025-03-31;2025-04-03;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-004;;Atendido;2;0;2025-06-05
+CASO-2025-0092;2025;12172024000720;SEC-2025-2A;2025-07-17;2025-07-20;Violencia psicologica entre escolares;1;Auxiliar de educacion;PER-004;2025-07-24;Atendido;2;0;
+CASO-2025-0093;2025;12172024000720;SEC-2025-2A;2025-06-12;2025-06-15;Violencia fisica entre escolares;1;Auxiliar de educacion;PER-003;;Programado;1;0;
+CASO-2025-0094;2025;12172024000720;SEC-2025-2A;2025-07-31;2025-08-03;Violencia psicologica entre escolares;0;Coordinacion TOE;PER-003;;No asistio;0;0;
+CASO-2025-0095;2025;12172024000720;SEC-2025-2A;2025-12-19;2025-12-21;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-003;2025-12-29;Atendido;1;1;2026-02-07
+CASO-2025-0096;2025;12172024000730;SEC-2025-2A;2025-04-01;2025-04-03;Violencia psicologica entre escolares;1;Auxiliar de educacion;PER-004;2025-04-05;Atendido;1;1;2025-05-18
+CASO-2025-0097;2025;12172024000730;SEC-2025-2A;2025-07-28;2025-07-29;Falta de conducta reiterada;0;Tutor de aula;PER-004;2025-08-01;Atendido;0;0;
+CASO-2025-0098;2025;12172024000730;SEC-2025-2A;2025-12-10;2025-12-11;Violencia fisica entre escolares;1;Coordinacion TOE;PER-003;2025-12-22;Atendido;1;0;2026-02-03
+CASO-2025-0099;2025;12172024000740;SEC-2025-2A;2025-05-02;2025-05-04;Violencia psicologica entre escolares;1;Coordinacion TOE;PER-003;2025-05-13;Atendido;0;1;2025-06-29
+CASO-2025-0100;2025;12172024000740;SEC-2025-2A;2025-06-27;2025-06-27;Violencia psicologica entre escolares;1;Docente de area;PER-004;2025-06-30;Atendido;2;0;2025-08-19
+CASO-2025-0101;2025;12172024000740;SEC-2025-2A;2025-12-16;2025-12-18;Violencia psicologica entre escolares;1;Coordinacion TOE;PER-004;2025-12-20;Atendido;1;1;2026-01-25
+CASO-2025-0102;2025;12172024000740;SEC-2025-2A;2025-10-10;2025-10-12;Situacion familiar de riesgo;0;Docente de area;PER-003;;No asistio;2;0;
+CASO-2025-0103;2025;12172024000750;SEC-2025-2A;2025-09-22;2025-09-25;Violencia psicologica entre escolares;1;Docente de area;PER-004;2025-09-29;Atendido;1;0;2025-10-11
+CASO-2025-0104;2025;12172024000760;SEC-2025-2A;2025-06-24;2025-06-26;Falta de conducta reiterada;0;Tutor de aula;PER-004;2025-07-01;Atendido;1;0;
+CASO-2025-0105;2025;12172024000770;SEC-2025-2A;2025-05-01;2025-05-04;Falta de conducta reiterada;0;Tutor de aula;PER-004;2025-05-11;Atendido;2;0;2025-07-10
+CASO-2025-0106;2025;12172024000790;SEC-2025-2A;2025-05-20;2025-05-20;Falta de conducta reiterada;0;Coordinacion TOE;PER-004;2025-05-29;Atendido;0;1;2025-06-25
+CASO-2025-0107;2025;12172024000790;SEC-2025-2A;2025-04-15;2025-04-17;Falta de conducta reiterada;0;Coordinacion TOE;PER-003;2025-04-17;Atendido;1;0;2025-05-01
+CASO-2025-0108;2025;12172024000800 ;SEC-2025-2A;2025-11-27;2025-11-29;Situacion familiar de riesgo;0;Docente de area;PER-004;2025-12-08;Atendido;2;0;2025-12-12
+CASO-2025-0109;2025;12172024000800;SEC-2025-2A;2025-07-10;2025-07-11;Violencia psicologica entre escolares;1;Tutor de aula;PER-003;2025-07-18;Atendido;0;0;2025-08-13
+CASO-2025-0110;2025;12172024000800;SEC-2025-2A;2025-11-17;2025-11-17;Violencia psicologica entre escolares;0;Docente de area;PER-004;2025-11-22;Atendido;0;1;2025-12-27
+CASO-2025-0111;2025;12172024000830;SEC-2025-2A;2025-07-25;2025-07-25;Falta de conducta reiterada;0;Tutor de aula;PER-004;;Programado;2;1;
+CASO-2025-0112;2025;12172024000850;SEC-2025-2A;2025-09-17;2025-09-18;Falta de conducta reiterada;0;Tutor de aula;PER-003;2025-09-27;Atendido;4;1;2025-11-13
+CASO-2025-0113;2025;12172024000860;SEC-2025-2A;2025-04-02;2025-04-03;Falta de conducta reiterada;0;Coordinacion TOE;PER-004;2024-12-01;Atendido;0;0;2025-04-29
+CASO-2025-0114;2025;12172024000880;SEC-2025-2A;2025-11-19;2025-11-22;Falta de conducta reiterada;0;Auxiliar de educacion;PER-004;;No asistio;1;1;
+CASO-2025-0115;2025;12172024000880;SEC-2025-2A;2025-04-14;2025-04-15;Violencia psicologica entre escolares;1;Docente de area;PER-004;2025-04-19;Atendido;3;0;
+CASO-2025-0116;2025;12172024000880;SEC-2025-2A;2025-10-29;2025-10-31;Falta de conducta reiterada;0;Coordinacion TOE;PER-003;2025-10-30;Atendido;2;0;
+CASO-2025-0117;2025;12172024000890;SEC-2025-2A;2025-07-08;2025-07-08;Falta de conducta reiterada;0;Tutor de aula;PER-004;;No asistio;2;0;
+CASO-2025-0118;2025;12172024000890;SEC-2025-2A;2025-05-21;2025-05-23;Falta de conducta reiterada;0;Docente de area;PER-004;2025-05-24;Atendido;3;0;2025-06-28
+CASO-2025-0119;2025;12172024000920;SEC-2025-2B;2025-07-07;2025-07-07;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-004;2025-07-15;Atendido;3;0;2025-08-24
+CASO-2025-0120;2025;12172024000920;SEC-2025-2B;2025-05-13;2025-05-16;Consumo de sustancias;0;Auxiliar de educacion;PER-004;2025-05-17;Atendido;2;0;2025-05-28
+CASO-2025-0121;2025;12172024000930 ;SEC-2025-2B;2025-10-07;2025-10-09;Violencia psicologica entre escolares;1;Tutor de aula;PER-004;2025-10-08;Atendido;4;1;2025-11-01
+CASO-2025-0122;2025;12172024000940;SEC-2025-2B;2025-06-27;2025-06-30;Bajo rendimiento derivado a TOE;0;Docente de area;PER-003;2025-07-08;Atendido;2;0;2025-07-12
+CASO-2025-0123;2025;12172024000940;SEC-2025-2B;2025-10-03;2025-10-05;Violencia psicologica entre escolares;1;Docente de area;PER-003;2025-10-04;Atendidoo;2;0;2025-12-10
+CASO-2025-0124;2025;12172024000940;SEC-2025-2B;2025-09-12;2025-09-15;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-004;2025-09-14;Atendido;4;0;2025-10-07
+CASO-2025-0125;2025;12172024000980;SEC-2025-2B;2025-07-04;2025-07-04;Violencia psicologica entre escolares;1;Auxiliar de educacion;PER-004;;Atendio;2;0;
+CASO-2025-0126;2025;12172024001000;SEC-2025-2B;2025-04-22;2025-04-23;Situacion familiar de riesgo;0;Tutor de aula;PER-003;;No asistio;0;0;
+CASO-2025-0127;2025;12172024001000;SEC-2025-2B;2025-10-30;2025-10-30;Violencia fisica entre escolares;1;Coordinacion TOE;PER-004;2025-11-07;Atendido;1;1;
+CASO-2025-0128;2025;12172024001010;SEC-2025-2B;2025-10-09;2025-10-11;FALTA DE CONDUCTA REITERADA;0;Coordinacion TOE;PER-004;2024-12-01;Atendido;2;0;
+CASO-2025-0129;2025;12172024001010 ;SEC-2025-2B;2025-04-16;2025-04-19;Falta de conducta reiterada;0;Docente de area;PER-004;2025-04-22;Atendido;2;0;2025-06-01
+CASO-2025-0130;2025;12172024001030;SEC-2025-2B;2025-07-14;2025-07-14;Bajo rendimiento derivado a TOE;0;Docente de area;PER-004;2025-07-16;Atendido;2;1;2025-08-17
+CASO-2025-0131;2025;12172024001030;SEC-2025-2B;2025-04-04;2025-04-05;Violencia psicologica entre escolares;0;Auxiliar de educacion;PER-004;2025-04-12;Atendido;2;0;2025-05-07
+CASO-2025-0132;2025;12172024001060;SEC-2025-2B;2025-06-06;2025-06-06;Violencia psicologica entre escolares;1;Tutor de aula;PER-003;2025-06-12;Atendido;1;0;2025-08-05
+CASO-2025-0133;2025;12172024001080;SEC-2025-2B;2025-04-15;2025-04-18;Violencia psicologica entre escolares;1;Docente de area;PER-004;2025-04-26;Atendido;2;1;2025-05-06
+CASO-2025-0134;2025;12172024001080;SEC-2025-2B;2025-11-11;2025-11-11;Violencia psicologica entre escolares;0;Docente de area;PER-004;2025-11-18;Atendido;2;0;2026-01-19
+CASO-2025-0135;2025;12172024001090;SEC-2025-2B;2025-06-13;2025-06-16;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-003;2025-06-15;Atendido;1;0;2025-08-13
+CASO-2025-0136;2025;12172024001100;SEC-2025-2B;2025-03-24;2025-03-25;FALTA DE CONDUCTA REITERADA;0;Tutor de aula;PER-004;;Programado;2;0;
+CASO-2025-0137;2025;12172024001110;SEC-2025-2B;2025-05-01;2025-05-04;Violencia fisica entre escolares;1;Tutor de aula;PER-003;2025-05-07;Atendido;0;0;2025-07-01
+CASO-2025-0138;2025;12172024001120;SEC-2025-2B;2025-06-26;2025-06-26;Violencia fisica entre escolares;0;Docente de area;PER-003;2025-07-01;Programdo;0;1;2025-08-01
+CASO-2025-0139;2025;12172024001130;SEC-2025-2B;2025-05-28;2025-05-31;Violencia psicologica entre escolares;1;Coordinacion TOE;PER-003;2025-05-29;Atendido;4;0;2025-07-10
+CASO-2025-0140;2025;12172024001130;SEC-2025-2B;2025-10-31;2025-10-31;Falta de conducta reiterada;0;Tutor de aula;PER-004;2025-11-11;No asistio;0;0;2025-12-21
+CASO-2025-0141;2025;12172024001140;SEC-2025-2B;2025-06-17;2025-06-17;Falta de conducta reiterada;0;Coordinacion TOE;PER-003;2025-06-28;Atendido;1;0;2025-07-24
+CASO-2025-0142;2025;12172024001140;SEC-2025-2B;2025-10-29;2025-10-31;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-004;;No asistio;1;0;
+CASO-2025-0143;2025;12172024001150;SEC-2025-2B;2025-08-22;2025-08-25;Situacion familiar de riesgo;0;Tutor de aula;PER-004;2025-08-31;Atendido;0;1;
+CASO-2025-0144;2025;12172024001160;SEC-2025-2B;2025-06-20;2025-06-22;Bajo rendimiento derivado a TOE;0;Docente de area;PER-004;2025-07-02;Atendido;0;0;2025-08-05
+CASO-2025-0145;2025;12172024001190;SEC-2025-2B;2025-12-15;2025-12-17;Violencia fisica entre escolares;0;Coordinacion TOE;PER-003;2024-12-01;Atendido;1;1;2026-02-21
+CASO-2025-0146;2025;12172024001190;SEC-2025-2B;2025-09-15;2025-09-16;Bajo rendimiento derivado a TOE;0;Auxiliar de educacion;PER-004;2025-09-26;Atendido;0;0;2025-10-11
+CASO-2025-0147;2025;12172024001190;SEC-2025-2B;2025-04-15;2025-04-17;Falta de conducta reiterada;0;Tutor de aula;PER-004;2025-04-23;Atendido;0;0;
+CASO-2025-0148;2025;12172023001210;SEC-2025-3A;2025-05-13;2025-05-13;Falta de conducta reiterada;0;Auxiliar de educacion;PER-004;2025-05-18;No asistio;0;0;
+CASO-2025-0149;2025;12172023001210;SEC-2025-3A;2025-12-15;2025-12-17;Falta de conducta reiterada;0;Tutor de aula;PER-003;2025-12-22;Atendido;1;1;2025-12-31
+CASO-2025-0150;2025;12172023001230;SEC-2025-3A;2025-09-22;2025-09-24;Consumo de sustancias;0;Tutor de aula;PER-004;2024-12-01;Atendido;2;1;2025-11-15
+CASO-2025-0151;2025;12172023001240 ;SEC-2025-3A;2025-05-06;2025-05-09;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-003;;No asistio;1;0;
+CASO-2025-0152;2025;12172023001300;SEC-2025-3A;2025-08-25;2025-08-25;Violencia psicologica entre escolares;1;Tutor de aula;PER-004;2024-12-01;Atendido;99;0;2025-10-27
+CASO-2025-0153;2025;12172023001330;SEC-2025-3A;2025-10-13;2025-10-15;Violencia psicologica entre escolares;1;Coordinacion TOE;PER-004;;Programado;1;0;
+CASO-2025-0154;2025;12172023001340;SEC-2025-3A;2025-10-13;2025-10-13;Violencia psicologica entre escolares;0;Auxiliar de educacion;PER-003;2025-10-17;Atendido;0;0;
+CASO-2025-0155;2025;12172023001350;SEC-2025-3A;2025-04-14;2025-04-14;Situacion familiar de riesgo;0;Tutor de aula;PER-004;2025-04-23;Atendido;1;0;2025-06-17
+CASO-2025-0156;2025;12172023001350;SEC-2025-3A;2025-11-04;2025-11-07;Violencia psicologica entre escolares;0;Tutor de aula;PER-003;;Programado;0;1;
+CASO-2025-0157;2025;12172023001350;SEC-2025-3A;2025-08-21;2025-08-21;Violencia psicologica entre escolares;1;Docente de area;PER-004;2025-08-28;Atendido;0;1;2025-09-20
+CASO-2025-0158;2025;12172023001370;SEC-2025-3A;2025-03-27;2025-03-30;Bajo rendimiento derivado a TOE;0;Tutor de aula;PER-003;2025-04-05;Atendido;1;1;
+CASO-2025-0159;2025;12172023001370;SEC-2025-3A;2025-12-17;2025-12-19;Falta de conducta reiterada;0;Auxiliar de educacion;PER-004;2025-12-26;Atendido;1;0;
+CASO-2025-0160;2025;12172023001380;SEC-2025-3A;2025-06-04;2025-06-07;Bajo rendimiento derivado a TOE;0;Auxiliar de educacion;PER-003;2025-06-08;Atendido;2;0;2025-06-25
+CASO-2025-0161;2025;12172023001390;SEC-2025-3A;2025-07-31;2025-08-02;Falta de conducta reiterada;0;Auxiliar de educacion;PER-003;;No asistio;2;1;
+CASO-2025-0162;2025;12172023001400;SEC-2025-3A;2025-05-15;2025-05-15;Falta de conducta reiterada;0;Coordinacion TOE;PER-004;2025-05-25;Atendido;1;1;
+CASO-2025-0163;2025;12172023001400;SEC-2025-3A;2025-09-11;2025-09-11;Falta de conducta reiterada;0;Docente de area;PER-004;2025-09-15;Atendido;1;0;
+CASO-2025-0164;2025;12172023001430;SEC-2025-3A;2025-10-16;2025-10-18;Violencia psicologica entre escolares;1;Docente de area;PER-003;2025-10-18;Atendido;3;0;2025-11-24
+CASO-2025-0165;2025;12172023001440;SEC-2025-3A;2025-08-28;2025-08-29;Violencia psicologica entre escolares;1;Auxiliar de educacion;PER-003;;Atendido;2;0;2025-10-23
+CASO-2025-0166;2025;12172023001450;SEC-2025-3A;2025-10-03;2025-10-05;Situacion familiar de riesgo;0;Auxiliar de educacion;PER-003;;No asistio;1;0;
+CASO-2025-0167;2025;12172023001450;SEC-2025-3A;2025-08-22;2025-08-25;Situacion familiar de riesgo;0;Auxiliar de educacion;PER-004;2025-08-30;Atendido;0;1;2025-09-18
+CASO-2025-0168;2025;12172023001470;SEC-2025-3A;2025-05-22;2025-05-23;Violencia psicologica entre escolares;1;Docente de area;PER-004;2025-05-23;Atendido;2;0;2025-07-12
+CASO-2025-0169;2025;12172023001490;SEC-2025-3A;2025-04-16;2025-04-17;Violencia psicologica entre escolares;0;Auxiliar de educacion;PER-004;2025-04-23;Atendido;1;0;
+CASO-2025-0170;2025;12172023001500;SEC-2025-3A;2025-03-31;2025-03-31;Falta de conducta reiterada;0;Docente de area;PER-003;2025-04-02;Atendido;0;0;2025-04-29
+CASO-2025-0171;2025;12172023001510 ;SEC-2025-3B;2025-05-06;2025-05-09;Falta de conducta reiterada;0;Auxiliar de educacion;PER-003;2025-05-17;Atendido;1;1;
+CASO-2025-0172;2025;12172023001520;SEC-2025-3B;2025-05-22;2025-05-24;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-003;2025-05-24;Atendido;0;1;
+CASO-2025-0173;2025;12172023001530;SEC-2025-3B;2025-06-06;2025-06-09;Violencia psicologica entre escolares;0;Coordinacion TOE;PER-004;;No asistio;2;0;
+CASO-2025-0174;2025;12172023001530;SEC-2025-3B;2025-11-25;2025-11-27;Violencia fisica entre escolares;1;Tutor de aula;PER-003;2025-11-29;Atendido;-2;0;2026-01-04
+CASO-2025-0175;2025;12172023001530;SEC-2025-3B;2025-05-27;2025-05-30;Falta de conducta reiterada;0;Coordinacion TOE;PER-004;2025-06-07;Atendido;2;1;2025-06-27
+CASO-2025-0176;2025;12172023001540;SEC-2025-3B;2025-06-25;2025-06-28;Situacion familiar de riesgo;0;Tutor de aula;PER-003;;Atendidoo;0;0;
+CASO-2025-0177;2025;12172023001540;SEC-2025-3B;2025-03-25;2025-03-26;Falta de conducta reiterada;0;Coordinacion TOE;PER-004;;Programado;1;1;
+CASO-2025-0178;2025;12172023001580;SEC-2025-3B;2025-06-16;2025-06-18;Violencia fisica entre escolares;0;Tutor de aula;PER-004;2025-06-28;Atendido;3;1;2025-07-14
+CASO-2025-0179;2025;12172023001590;SEC-2025-3B;2025-07-09;2025-07-10;Violencia psicologica entre escolares;1;Docente de area;PER-003;2024-12-01;Atendido;2;0;2025-09-13
+CASO-2025-0180;2025;12172023001600;SEC-2025-3B;2025-05-05;2025-05-06;Violencia psicologica entre escolares;1;Tutor de aula;PER-004;2025-05-09;Atendido;3;1;2025-05-27
+CASO-2025-0181;2025;12172023001600;SEC-2025-3B;2025-08-26;2025-08-28;Bajo rendimiento derivado a TOE;0;Tutor de aula;PER-003;2025-08-30;Atendido;3;1;2025-09-14
+CASO-2025-0182;2025;12172023001600;SEC-2025-3B;2025-05-09;2025-05-11;Falta de conducta reiterada;0;Auxiliar de educacion;PER-004;;Programado;1;0;
+CASO-2025-0183;2025;12172023001620;SEC-2025-3B;2025-07-03;2025-07-04;Falta de conducta reiterada;0;Auxiliar de educacion;PER-004;2024-12-01;Atendido;0;0;2025-07-22
+CASO-2025-0184;2025;12172023001640;SEC-2025-3B;2025-08-27;2025-08-29;Violencia psicologica entre escolares;1;Coordinacion TOE;PER-003;2025-09-05;Atendido;1;0;2025-09-20
+CASO-2025-0185;2025;12172023001640;SEC-2025-3B;2025-11-11;2025-11-13;Situacion familiar de riesgo;0;Docente de area;PER-004;2024-12-01;Atendido;1;0;2025-12-23
+CASO-2025-0186;2025;12172023001640;SEC-2025-3B;2025-09-10;2025-09-11;Violencia fisica entre escolares;1;Tutor de aula;PER-003;2025-09-21;Atendido;3;1;2025-11-06
+CASO-2025-0187;2025;12172023001670;SEC-2025-3B;2025-08-27;2025-08-29;Violencia psicologica entre escolares;1;Auxiliar de educacion;PER-004;2025-09-08;Atendido ;2;0;2025-11-04
+CASO-2025-0188;2025;12172023001670;SEC-2025-3B;2025-11-05;2025-11-06;Bajo rendimiento derivado a TOE;0;Docente de area;PER-004;2025-11-15;Atendido;2;0;2025-12-22
+CASO-2025-0189;2025;12172023001670;SEC-2025-3B;2025-09-15;2025-09-17;Violencia fisica entre escolares;0;Tutor de aula;PER-003;2025-09-18;Atendido;1;1;
+CASO-2025-0190;2025;12172023001680;SEC-2025-3B;2025-11-13;2025-11-14;Violencia psicologica entre escolares;1;Tutor de aula;PER-004;;No asistio;1;0;
+CASO-2025-0191;2025;12172023001680;SEC-2025-3B;2025-12-18;2025-12-20;Falta de conducta reiterada;0;Auxiliar de educacion;PER-003;2025-12-20;Atendido;1;0;2026-02-12
+CASO-2025-0192;2025;12172023001690;SEC-2025-3B;2025-05-26;2025-05-26;Falta de conducta reiterada;0;Tutor de aula;PER-003;2025-05-28;Atendido;1;0;2025-06-12
+CASO-2025-0193;2025;12172023001700;SEC-2025-3B;2025-11-18;2025-11-19;Falta de conducta reiterada;0;Docente de area;PER-004;2025-11-20;Atendido;1;1;
+CASO-2025-0194;2025;12172023001700;SEC-2025-3B;2025-06-20;2025-06-21;Falta de conducta reiterada;0;Auxiliar de educacion;PER-004;2024-12-01;Atendido;1;0;
+CASO-2025-0195;2025;12172023001700;SEC-2025-3B;2025-08-28;2025-08-30;Falta de conducta reiterada;0;Auxiliar de educacion;PER-004;2025-09-08;Atendido;2;0;2025-11-04
+CASO-2025-0196;2025;12172023001700;SEC-2025-3B;2025-10-27;2025-10-28;Bajo rendimiento derivado a TOE;0;Docente de area;PER-004;2025-11-07;Atendido;0;1;
+CASO-2025-0197;2025;12172023001710;SEC-2025-3B;2025-04-04;2025-04-04;Violencia psicologica entre escolares;1;Docente de area;PER-004;;No asistio;0;1;
+CASO-2025-0198;2025;12172023001720;SEC-2025-3B;2025-10-20;2025-10-20;falta de conducta;0;Auxiliar de educacion;PER-004;;Atendido;3;0;
+CASO-2025-0199;2025;12172023001730;SEC-2025-3B;2025-03-24;2025-03-27;Violencia fisica entre escolares;1;Coordinacion TOE;PER-004;2025-03-25;Atendio;1;1;2025-05-19
+CASO-2025-0200;2025;12172023001730;SEC-2025-3B;2025-05-08;2025-05-09;Falta de conducta reiterada;0;Docente de area;PER-004;;Atendido;1;0;2025-07-04
+CASO-2025-0201;2025;12172023001750;SEC-2025-3B;2025-06-26;2025-06-27;Violencia psicologica entre escolares;0;Auxiliar de educacion;PER-003;;Programado;1;1;
+CASO-2025-0202;2025;12172023001750;SEC-2025-3B;2025-04-16;2025-04-17;Falta de conducta reiterada;0;Docente de area;PER-004;2025-04-25;Atendido;2;0;2025-06-09
+CASO-2025-0203;2025;12172023001760 ;SEC-2025-3B;2025-08-20;2025-08-21;Falta de conducta reiterada;0;Tutor de aula;PER-004;;Programado;2;1;
+CASO-2025-0204;2025;12172023001760;SEC-2025-3B;2025-10-30;2025-10-31;Bajo rendimiento derivado a TOE;0;Auxiliar de educacion;PER-003;2025-11-08;Atendido;0;0;
+CASO-2025-0205;2025;12172023001770;SEC-2025-3B;2025-11-06;2025-11-09;Falta de conducta reiterada;0;Docente de area;PER-004;2025-11-13;Atendido;1;0;
+CASO-2025-0206;2025;12172023001770;SEC-2025-3B;2025-05-28;2025-05-30;Violencia psicologica entre escolares;0;Coordinacion TOE;PER-003;2025-06-07;Atendido;0;1;
+CASO-2025-0207;2025;12172023001790;SEC-2025-3B;2025-11-17;2025-11-17;Situacion familiar de riesgo;0;Docente de area;PER-003;2025-11-25;Atendido;2;0;2025-12-31
+CASO-2025-0208;2025;12172022001840;SEC-2025-4A;2025-11-03;2025-11-04;Violencia psicologica entre escolares;1;Auxiliar de educacion;PER-004;2025-11-12;Atendido;0;1;2025-12-31
+CASO-2025-0209;2025;12172022001850;SEC-2025-4A;2025-08-28;2025-08-30;Violencia psicologica entre escolares;1;Auxiliar de educacion;PER-003;2024-12-01;Atendido;0;0;2025-10-27
+CASO-2025-0210;2025;12172022001850;SEC-2025-4A;2025-05-15;2025-05-15;Falta de conducta reiterada;0;Auxiliar de educacion;PER-003;2024-12-01;Atendido;1;0;
+CASO-2025-0211;2025;12172022001860;SEC-2025-4A;2025-06-26;2025-06-29;Violencia fisica entre escolares;0;Coordinacion TOE;PER-004;;No asistio;3;0;
+CASO-2025-0212;2025;12172022001860;SEC-2025-4A;2025-10-02;2025-10-04;Falta de conducta reiterada;0;Tutor de aula;PER-003;2025-10-12;Atendido;3;0;2025-11-02
+CASO-2025-0213;2025;12172022001860;SEC-2025-4A;2025-07-14;2025-07-17;Situacion familiar de riesgo;0;Tutor de aula;PER-003;;Programado;0;1;
+CASO-2025-0214;2025;12172022001870;SEC-2025-4A;2025-08-20;2025-08-21;Violencia psicologica entre escolares;1;Docente de area;PER-004;;Atendido;3;0;2025-10-15
+CASO-2025-0215;2025;12172022001880;SEC-2025-4A;2025-07-10;2025-07-10;Violencia psicologica entre escolares;0;Auxiliar de educacion;PER-003;2025-07-19;Atendido;3;0;
+CASO-2025-0216;2025;12172022001880;SEC-2025-4A;2025-03-20;2025-03-23;Bajo rendimiento derivado a TOE;0;Docente de area;PER-004;2024-12-01;Atendido;2;1;2025-05-29
+CASO-2025-0217;2025;12172022001880;SEC-2025-4A;2025-03-25;2025-03-27;Falta de conducta reiterada;0;Auxiliar de educacion;PER-003;;Atendio;0;0;2025-05-09
+CASO-2025-0218;2025;12172022001900;SEC-2025-4A;2025-05-21;2025-05-21;Falta de conducta reiterada;0;Coordinacion TOE;PER-004;;Atendido;0;1;2025-06-09
+CASO-2025-0219;2025;12172022001910;SEC-2025-4A;2025-06-10;2025-06-11;Violencia psicologica entre escolares;1;Docente de area;PER-004;2025-06-11;Atendido;3;0;2025-07-25
+CASO-2025-0220;2025;12172022001910;SEC-2025-4A;2025-05-26;2025-05-27;Violencia fisica entre escolares;1;Docente de area;PER-003;;Atendido;2;0;2025-06-24
+CASO-2025-0221;2025;12172022001920;SEC-2025-4A;2025-07-29;2025-07-30;falta de conducta;0;Auxiliar de educacion;PER-004;;No asistio;2;0;
+CASO-2025-0222;2025;12172022001920;SEC-2025-4A;2025-03-25;2025-03-27;Falta de conducta reiterada;0;Auxiliar de educacion;PER-003;2025-04-05;Atendido;1;1;2025-05-09
+CASO-2025-0223;2025;12172022001920;SEC-2025-4A;2025-12-12;2025-12-15;Situacion familiar de riesgo;0;Auxiliar de educacion;PER-004;2025-12-23;Atendido;2;0;
+CASO-2025-0224;2025;12172022001920;SEC-2025-4A;2025-04-02;2025-04-05;Falta conducta reiterada;0;Docente de area;PER-004;2025-04-13;Atendido;1;0;2025-04-19
+CASO-2025-0225;2025;12172022001930;SEC-2025-4A;2025-10-24;2025-10-25;Violencia fisica entre escolares;1;Tutor de aula;PER-004;2025-10-27;Atendido;4;0;
+CASO-2025-0226;2025;12172022001930;SEC-2025-4A;2025-04-24;2025-04-25;Falta de conducta reiterada;0;Docente de area;PER-003;2025-05-04;no asisitio;1;1;
+CASO-2025-0227;2025;12172022001930;SEC-2025-4A;2025-04-24;2025-04-27;Violencia psicologica entre escolares;1;Tutor de aula;PER-003;2025-04-25;Atendido;0;0;2025-05-30
+CASO-2025-0228;2025;12172022001940;SEC-2025-4A;2025-04-22;2025-04-25;falta de conducta;0;Tutor de aula;PER-003;;Atendido;0;1;2025-06-12
+CASO-2025-0229;2025;12172022001950;SEC-2025-4A;2025-10-07;2025-10-08;Violencia fisica entre escolares;0;Tutor de aula;PER-004;2025-10-12;Atendido;1;1;2025-12-15
+CASO-2025-0230;2025;12172022001950;SEC-2025-4A;2025-11-03;2025-11-04;Violencia fisica entre escolares;0;Coordinacion TOE;PER-004;;Programado;1;1;
+CASO-2025-0231;2025;12172022001950;SEC-2025-4A;2025-06-13;2025-06-14;Violencia psicologica entre escolares;1;Docente de area;PER-003;2025-06-24;Atendido;4;0;2025-07-19
+CASO-2025-0232;2025;12172022001970;SEC-2025-4A;2025-11-21;2025-11-22;Bajo rendimiento derivado a TOE;0;Tutor de aula;PER-004;2025-11-27;Atendido;1;1;
+CASO-2025-0233;2025;12172022001970;SEC-2025-4A;2025-05-01;2025-05-04;Falta conducta reiterada;0;Coordinacion TOE;PER-004;2025-05-10;Atendido;1;1;2025-05-27
+CASO-2025-0234;2025;12172022001990 ;SEC-2025-4A;2025-07-09;2025-07-12;Falta de conducta reiterada;0;Docente de area;PER-004;2025-07-21;Atendido;0;0;2025-08-11
+CASO-2025-0235;2025;12172022001990;SEC-2025-4A;2025-12-19;2025-12-20;Situacion familiar de riesgo;0;Docente de area;PER-003;2025-12-30;Atendido;0;1;
+CASO-2025-0236;2025;12172022001990;SEC-2025-4A;2025-08-29;2025-08-31;Bajo rendimiento derivado a TOE;0;Docente de area;PER-004;2024-12-01;Atendido;3;0;2025-10-05
+CASO-2025-0237;2025;12172022002000;SEC-2025-4A;2025-10-02;2025-10-05;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-004;;Programado;4;0;
+CASO-2025-0238;2025;12172022002000;SEC-2025-4A;2025-07-24;2025-07-26;Violencia fisica entre escolares;1;Auxiliar de educacion;PER-004;2025-08-02;no asisitio;1;1;2025-09-30
+CASO-2025-0239;2025;12172022002050;SEC-2025-4A;2025-05-29;2025-05-29;Situacion familiar de riesgo;0;Docente de area;PER-003;2025-06-10;Atendido;2;0;
+CASO-2025-0240;2025;12172022002050;SEC-2025-4A;2025-10-03;2025-10-03;Falta de conducta reiterada;0;Coordinacion TOE;PER-004;;Atendido ;0;1;
+CASO-2025-0241;2025;12172022002050;SEC-2025-4A;2025-07-24;2025-07-27;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-003;2025-08-05;Atendido;2;0;
+CASO-2025-0242;2025;12172022002060;SEC-2025-4A;2025-10-27;2025-10-30;Violencia psicologica entre escolares;1;Auxiliar de educacion;PER-003;2025-11-02;Atendido;1;0;2025-12-19
+CASO-2025-0243;2025;12172022002080;SEC-2025-4A;2025-04-11;2025-04-14;Violencia psicologica entre escolares;1;Tutor de aula;PER-003;2025-04-18;Atendio;2;0;
+CASO-2025-0244;2025;12172022002080;SEC-2025-4A;2025-04-04;2025-04-04;Falta de conducta reiterada;0;Coordinacion TOE;PER-004;2025-04-12;Atendido;0;0;2025-06-13
+CASO-2025-0245;2025;12172022002090;SEC-2025-4A;2025-12-03;2025-12-05;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-004;;Atendido;2;0;2025-12-29
+CASO-2025-0246;2025;12172022002090;SEC-2025-4A;2025-04-29;2025-04-30;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-004;;No asistio;1;1;
+CASO-2025-0247;2025;12172022002090;SEC-2025-4A;2025-07-08;2025-07-10;Violencia psicologica entre escolares;0;Coordinacion TOE;PER-004;;Programado;1;0;
+CASO-2025-0248;2025;12172022002110;SEC-2025-4B;2025-07-23;2025-07-23;Violencia psicologica entre escolares;1;Tutor de aula;PER-003;2025-07-24;Atendido;1;1;2025-08-30
+CASO-2025-0249;2025;12172022002110;SEC-2025-4B;2025-09-09;2025-09-09;Situacion familiar de riesgo;0;Docente de area;PER-004;2025-09-16;Atendido;1;0;
+CASO-2025-0250;2025;12172022002110;SEC-2025-4B;2025-12-01;2025-12-02;Violencia psicologica entre escolares;0;Docente de area;PER-004;2025-12-12;Atendido;1;0;2026-02-07
+CASO-2025-0251;2025;12172022002130;SEC-2025-4B;2025-12-16;2025-12-16;Falta de conducta reiterada;0;Tutor de aula;PER-003;;Programado;1;1;
+CASO-2025-0252;2025;12172022002140;SEC-2025-4B;2025-05-02;2025-05-03;Violencia fisica entre escolares;0;Docente de area;PER-004;2025-05-13;Atendido ;3;0;2025-06-04
+CASO-2025-0253;2025;12172022002150;SEC-2025-4B;2025-12-01;2025-12-03;Situacion familiar de riesgo;0;Tutor de aula;PER-003;2025-12-10;Atendio;1;0;2025-12-16
+CASO-2025-0254;2025;12172022002160;SEC-2025-4B;2025-07-07;2025-07-08;Falta de conducta reiterada;0;Tutor de aula;PER-004;2025-07-10;Atendido;0;1;
+CASO-2025-0255;2025;12172022002160;SEC-2025-4B;2025-09-11;2025-09-13;Situacion familiar de riesgo;0;Auxiliar de educacion;PER-004;2025-09-21;Atendido;1;0;2025-10-17
+CASO-2025-0256;2025;12172022002160;SEC-2025-4B;2025-09-24;2025-09-25;Bajo rendimiento derivado a TOE;0;Tutor de aula;PER-003;2025-09-26;Atendido;1;1;2025-11-10
+CASO-2025-0257;2025;12172022002200;SEC-2025-4B;2025-06-20;2025-06-21;Falta conducta reiterada;0;Docente de area;PER-004;;Programado;2;0;
+CASO-2025-0258;2025;12172022002200;SEC-2025-4B;2025-06-03;2025-06-04;Bajo rendimiento derivado a TOE;0;Docente de area;PER-003;2025-06-09;Atendido;2;1;2025-08-06
+CASO-2025-0259;2025;12172022002210;SEC-2025-4B;2025-06-09;2025-06-09;falta de conducta;0;Coordinacion TOE;PER-004;2025-06-20;Atendido;0;0;
+CASO-2025-0260;2025;12172022002210;SEC-2025-4B;2025-10-29;2025-10-31;Falta de conducta reiterada;0;Docente de area;PER-004;2025-11-01;Atendido;1;0;2025-12-11
+CASO-2025-0261;2025;12172022002210;SEC-2025-4B;2025-11-04;2025-11-06;Falta de conducta reiterada;0;Docente de area;PER-003;2025-11-08;Atendido;1;0;
+CASO-2025-0262;2025;12172022002240;SEC-2025-4B;2025-10-23;2025-10-25;Bajo rendimiento derivado a TOE;0;Auxiliar de educacion;PER-004;;Atendido;2;0;2025-11-26
+CASO-2025-0263;2025;12172022002250;SEC-2025-4B;2025-06-05;2025-06-06;Violencia fisica entre escolares;0;Auxiliar de educacion;PER-003;2025-06-08;Atendido;0;0;2025-07-16
+CASO-2025-0264;2025;12172022002250;SEC-2025-4B;2025-10-21;2025-10-21;Bajo rendimiento derivado a TOE;0;Auxiliar de educacion;PER-004;2025-11-01;Atendido;2;0;
+CASO-2025-0265;2025;12172022002250;SEC-2025-4B;2025-09-26;2025-09-29;Falta de conducta reiterada;0;Coordinacion TOE;PER-003;2025-10-08;Atendido;1;1;
+CASO-2025-0266;2025;12172022002260;SEC-2025-4B;2025-06-16;2025-06-18;Violencia psicologica entre escolares;1;Auxiliar de educacion;PER-003;2025-06-17;Atendido;3;0;2025-08-03
+CASO-2025-0267;2025;12172022002280;SEC-2025-4B;2025-08-19;2025-08-21;Violencia psicologica entre escolares;1;Auxiliar de educacion;PER-004;2025-08-30;Atendido;4;1;
+CASO-2025-0268;2025;12172022002280;SEC-2025-4B;2025-12-10;2025-12-10;Violencia fisica entre escolares;1;Coordinacion TOE;PER-003;2025-12-15;Atendido;1;1;2026-02-08
+CASO-2025-0269;2025;12172022002300;SEC-2025-4B;2025-10-13;2025-10-13;FALTA DE CONDUCTA REITERADA;0;Tutor de aula;PER-004;2025-10-14;Atendido;1;1;
+CASO-2025-0270;2025;12172022002300;SEC-2025-4B;2025-03-24;2025-03-27;Falta de conducta reiterada;0;Auxiliar de educacion;PER-003;;Programado;1;0;
+CASO-2025-0271;2025;12172022002300;SEC-2025-4B;2025-09-25;2025-09-28;Violencia fisica entre escolares;0;Tutor de aula;PER-004;2025-09-28;Atendido;1;1;
+CASO-2025-0272;2025;12172022002340;SEC-2025-4B;2025-08-28;2025-08-31;Falta de conducta reiterada;0;Tutor de aula;PER-004;2025-09-07;Atendido ;2;0;2025-09-13
+CASO-2025-0273;2025;12172022002340;SEC-2025-4B;2025-07-25;2025-07-26;Situacion familiar de riesgo;0;Auxiliar de educacion;PER-003;;No asistio;1;1;
+CASO-2025-0274;2025;12172022002340;SEC-2025-4B;2025-03-25;2025-03-25;Bajo rendimiento derivado a TOE;0;Docente de area;PER-004;2025-03-29;Atendido;1;0;
+CASO-2025-0275;2025;12172022002360;SEC-2025-4B;2025-10-29;2025-10-31;Falta de conducta reiterada;0;Tutor de aula;PER-004;2025-11-10;Atendido;1;0;
+CASO-2025-0276;2025;12172022002360;SEC-2025-4B;2025-07-08;2025-07-10;Falta de conducta reiterada;0;Docente de area;PER-004;2025-07-10;Atendido;2;0;2025-09-11
+CASO-2025-0277;2025;12172022002380;SEC-2025-4B;2025-12-03;2025-12-04;Violencia fisica entre escolares;1;Coordinacion TOE;PER-004;2025-12-07;No asistio;1;1;2025-12-22
+CASO-2025-0278;2025;12172022002380;SEC-2025-4B;2025-04-11;2025-04-12;Falta de conducta reiterada;0;Tutor de aula;PER-004;;Programado;2;1;
+CASO-2025-0279;2025;12172022002390;SEC-2025-4B;2025-10-27;2025-10-30;Situacion familiar de riesgo;0;Docente de area;PER-004;2025-11-04;Atendido;0;0;2025-12-27
+CASO-2025-0280;2025;12172022002390;SEC-2025-4B;2025-04-18;2025-04-21;Violencia psicologica entre escolares;1;Coordinacion TOE;PER-003;2025-04-29;Atendido;0;0;2025-05-31
+CASO-2025-0281;2025;12172022002400;SEC-2025-4B;2025-11-24;2025-11-27;Falta de conducta reiterada;0;Docente de area;PER-004;2025-11-26;Atendido;0;1;
+CASO-2025-0282;2025;12172022002400;SEC-2025-4B;2025-12-08;2025-12-11;Violencia psicologica entre escolares;1;Tutor de aula;PER-004;2025-12-11;Atendido;0;0;2026-01-12
+CASO-2025-0283;2025;12172022002400;SEC-2025-4B;2025-09-03;2025-09-04;Falta de conducta reiterada;0;Docente de area;PER-004;2024-12-01;Atendido;2;1;2025-10-25
+CASO-2025-0284;2025;12172021002410;SEC-2025-5A;2025-10-28;2025-10-28;Consumo de sustancias;0;Auxiliar de educacion;PER-004;2025-10-29;Atendido;1;1;
+CASO-2025-0285;2025;12172021002420;SEC-2025-5A;2025-05-20;2025-05-21;Violencia fisica entre escolares;0;Docente de area;PER-003;2025-05-21;Atendido;1;1;2025-07-08
+CASO-2025-0286;2025;12172021002420;SEC-2025-5A;2025-12-09;2025-12-11;Falta de conducta reiterada;0;Tutor de aula;PER-004;2025-12-21;Atendido;0;0;2025-12-28
+CASO-2025-0287;2025;12172021002440;SEC-2025-5A;2025-06-27;2025-06-30;Violencia psicologica entre escolares;1;Docente de area;PER-004;2025-07-07;Atendido;2;0;
+CASO-2025-0288;2025;12172021002440;SEC-2025-5A;2025-12-10;2025-12-13;Falta de conducta reiterada;0;Coordinacion TOE;PER-003;2025-12-14;Atendido;0;1;2026-02-09
+CASO-2025-0289;2025;12172021002440;SEC-2025-5A;2025-09-18;2025-09-19;falta de conducta;0;Coordinacion TOE;PER-004;2025-09-20;Atendido;2;0;2025-11-23
+CASO-2025-0290;2025;12172021002450;SEC-2025-5A;2025-05-27;2025-05-28;Falta de conducta reiterada;0;Tutor de aula;PER-004;2025-05-29;Atendido;0;0;
+CASO-2025-0291;2025;12172021002460;SEC-2025-5A;2025-07-15;2025-07-18;Falta de conducta reiterada;0;Auxiliar de educacion;PER-003;;No asistio;4;0;
+CASO-2025-0292;2025;12172021002460;SEC-2025-5A;2025-11-10;2025-11-11;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-004;2025-11-12;Atendido;2;1;2025-12-04
+CASO-2025-0293;2025;12172021002470;SEC-2025-5A;2025-04-04;2025-04-06;Violencia fisica entre escolares;0;Auxiliar de educacion;PER-003;2025-04-10;Atendido;3;0;
+CASO-2025-0294;2025;12172021002470;SEC-2025-5A;2025-05-12;2025-05-13;Violencia fisica entre escolares;0;Tutor de aula;PER-003;2025-05-21;Atendido;3;0;
+CASO-2025-0295;2025;12172021002470;SEC-2025-5A;2025-09-01;2025-09-02;Falta de conducta reiterada;0;Tutor de aula;PER-003;2025-09-03;Atendido;4;1;2025-11-07
+CASO-2025-0296;2025;12172021002490;SEC-2025-5A;2025-09-16;2025-09-19;Falta de conducta reiterada;0;Coordinacion TOE;PER-003;;Atendido;2;0;2025-11-05
+CASO-2025-0297;2025;12172021002500;SEC-2025-5A;2025-08-21;2025-08-21;Falta de conducta reiterada;0;Auxiliar de educacion;PER-004;2025-08-26;Atendido;3;1;2025-10-01
+CASO-2025-0298;2025;12172021002510;SEC-2025-5A;2025-11-10;2025-11-13;Falta de conducta reiterada;0;Auxiliar de educacion;PER-004;2025-11-20;Atendido;4;0;
+CASO-2025-0299;2025;12172021002520;SEC-2025-5A;2025-05-06;2025-05-09;Falta conducta reiterada;0;Coordinacion TOE;PER-003;2025-05-18;Atendido;3;0;2025-06-24
+CASO-2025-0300;2025;12172021002520;SEC-2025-5A;2025-04-30;2025-05-01;Violencia fisica entre escolares;1;Auxiliar de educacion;PER-004;;No asistio;2;1;
+CASO-2025-0301;2025;12172021002530;SEC-2025-5A;2025-09-11;2025-09-13;Consumo de sustancias;0;Tutor de aula;PER-003;2025-09-15;Atendido;0;1;2025-10-19
+CASO-2025-0302;2025;12172021002530;SEC-2025-5A;2025-06-10;2025-06-12;Violencia fisica entre escolares;1;Docente de area;PER-003;2025-06-21;Atendido;0;0;2025-07-26
+CASO-2025-0303;2025;12172021002530;SEC-2025-5A;2025-12-10;2025-12-11;Situacion familiar de riesgo;0;Docente de area;PER-004;2025-12-18;Atendido;0;0;2026-01-01
+CASO-2025-0304;2025;12172021002530;SEC-2025-5A;2025-08-28;2025-08-30;Violencia fisica entre escolares;1;Tutor de aula;PER-004;2025-08-30;Atendido;2;0;2025-10-15
+CASO-2025-0305;2025;12172021002550;SEC-2025-5A;2025-11-17;2025-11-20;Violencia fisica entre escolares;1;Tutor de aula;PER-003;2025-11-22;Atendido;1;0;2025-12-29
+CASO-2025-0306;2025;12172021002550;SEC-2025-5A;2025-08-26;2025-08-28;Falta de conducta reiterada;0;Coordinacion TOE;PER-003;2025-09-05;Atendido;1;0;2025-10-01
+CASO-2025-0307;2025;12172021002550;SEC-2025-5A;2025-09-02;2025-09-03;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-004;2025-09-06;Atendido;3;0;2025-10-01
+CASO-2025-0308;2025;12172021002550;SEC-2025-5A;2025-04-01;2025-04-01;Falta de conducta reiterada;0;Coordinacion TOE;PER-003;2025-04-05;Atendido;3;0;2025-05-18
+CASO-2025-0309;2025;12172021002560;SEC-2025-5A;2025-05-19;2025-05-19;Violencia psicologica entre escolares;1;Auxiliar de educacion;PER-004;2025-05-25;Programdo;1;0;2025-06-18
+CASO-2025-0310;2025;12172021002560;SEC-2025-5A;2025-10-28;2025-10-30;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-003;2025-10-31;Atendido;3;0;
+CASO-2025-0311;2025;12172021002560;SEC-2025-5A;2025-11-17;2025-11-18;Bajo rendimiento derivado a TOE;0;Docente de area;PER-003;;Programado;1;0;
+CASO-2025-0312;2025;12172021002560;SEC-2025-5A;2025-05-01;2025-05-04;Violencia fisica entre escolares;0;Docente de area;PER-004;;Atendido;2;0;2025-07-09
+CASO-2025-0313;2025;12172021002570;SEC-2025-5A;2025-03-26;2025-03-28;Violencia psicologica entre escolares;1;Auxiliar de educacion;PER-004;2025-04-01;Atendido;0;0;2025-04-24
+CASO-2025-0314;2025;12172021002580;SEC-2025-5A;2025-09-03;2025-09-06;Falta conducta reiterada;0;Auxiliar de educacion;PER-003;2025-09-13;Atendido;2;0;2025-10-14
+CASO-2025-0315;2025;12172021002580;SEC-2025-5A;2025-05-19;2025-05-21;Violencia fisica entre escolares;0;Tutor de aula;PER-004;2025-05-23;Atendido;4;0;
+CASO-2025-0316;2025;12172021002580;SEC-2025-5A;2025-05-27;2025-05-30;Falta de conducta reiterada;0;Coordinacion TOE;PER-004;2025-06-02;Atendido;1;0;2025-07-21
+CASO-2025-0317;2025;12172021002580;SEC-2025-5A;2025-09-08;2025-09-08;Falta de conducta reiterada;0;Auxiliar de educacion;PER-004;2024-12-01;No asistio;1;1;2025-09-23
+CASO-2025-0318;2025;12172021002590;SEC-2025-5A;2025-10-02;2025-10-05;Violencia psicologica entre escolares;1;Coordinacion TOE;PER-004;2025-10-10;Atendido;1;0;2025-10-29
+CASO-2025-0319;2025;12172021002600;SEC-2025-5A;2025-06-05;2025-06-06;Situacion familiar de riesgo;0;Docente de area;PER-003;2025-06-16;Atendido;2;1;2025-07-27
+CASO-2025-0320;2025;12172021002600;SEC-2025-5A;2025-04-18;2025-04-20;Falta de conducta reiterada;0;Auxiliar de educacion;PER-004;2025-04-20;Atendido;0;0;2025-05-17
+CASO-2025-0321;2025;12172021002610;SEC-2025-5A;2025-12-01;2025-12-01;Consumo de sustancias;0;Tutor de aula;PER-003;2025-12-12;Atendido;2;1;
+CASO-2025-0322;2025;12172021002610;SEC-2025-5A;2025-04-01;2025-04-01;Violencia fisica entre escolares;1;Auxiliar de educacion;PER-004;2025-04-06;Atendido;1;0;2025-04-17
+CASO-2025-0323;2025;12172021002620;SEC-2025-5A;2025-04-28;2025-04-29;Falta de conducta reiterada;0;Auxiliar de educacion;PER-003;;No asistio;4;0;
+CASO-2025-0324;2025;12172021002620;SEC-2025-5A;2025-07-02;2025-07-04;Consumo de sustancias;0;Coordinacion TOE;PER-004;2025-07-07;Atendido;1;0;2025-07-31
+CASO-2025-0325;2025;12172021002630;SEC-2025-5A;2025-06-20;2025-06-22;Violencia psicologica entre escolares;1;Coordinacion TOE;PER-004;2025-07-01;Atendido;2;1;
+CASO-2025-0326;2025;12172021002630;SEC-2025-5A;2025-07-03;2025-07-03;Bajo rendimiento derivado a TOE;0;Docente de area;PER-004;2025-07-05;No asistio;0;0;2025-07-18
+CASO-2025-0327;2025;12172021002640;SEC-2025-5A;2025-12-10;2025-12-11;Bajo rendimiento derivado a TOE;0;Tutor de aula;PER-003;2025-12-17;Atendido;1;0;
+CASO-2025-0328;2025;12172021002640;SEC-2025-5A;2025-09-25;2025-09-26;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-003;2025-09-29;Atendido;0;0;2025-10-24
+CASO-2025-0329;2025;12172021002650;SEC-2025-5A;2025-04-08;2025-04-10;Violencia fisica entre escolares;1;Auxiliar de educacion;PER-003;2025-04-12;Atendido;1;1;
+CASO-2025-0330;2025;12172021002660;SEC-2025-5A;2025-05-15;2025-05-15;Situacion familiar de riesgo;0;Auxiliar de educacion;PER-004;2025-05-23;Atendido;2;1;2025-07-19
+CASO-2025-0331;2025;12172021002660;SEC-2025-5A;2025-12-11;2025-12-11;Falta de conducta reiterada;0;Docente de area;PER-004;2025-12-14;Atendido;1;0;2026-01-30
+CASO-2025-0332;2025;12172021002660;SEC-2025-5A;2025-06-20;2025-06-20;Bajo rendimiento derivado a TOE;0;Auxiliar de educacion;PER-004;;Programado;3;0;
+CASO-2025-0333;2025;12172021002680;SEC-2025-5A;2025-09-29;2025-09-30;Falta conducta reiterada;0;Tutor de aula;PER-004;2025-10-03;Atendido;3;0;
+CASO-2025-0334;2025;12172021002680;SEC-2025-5A;2025-04-17;2025-04-20;Violencia psicologica entre escolares;1;Docente de area;PER-004;;Atendido;2;0;2025-05-02
+CASO-2025-0335;2025;12172021002690;SEC-2025-5A;2025-05-01;2025-05-03;Violencia fisica entre escolares;0;Docente de area;PER-004;2025-05-12;Atendido;2;0;2025-06-07
+CASO-2025-0336;2025;12172021002690;SEC-2025-5A;2025-09-02;2025-09-02;Violencia psicologica entre escolares;1;Tutor de aula;PER-003;2025-09-13;Atendido;0;1;
+CASO-2025-0337;2025;12172021002710;SEC-2025-5B;2025-04-21;2025-04-24;Falta de conducta reiterada;0;Coordinacion TOE;PER-003;;Atendido;0;0;2025-05-12
+CASO-2025-0338;2025;12172021002730 ;SEC-2025-5B;2025-04-22;2025-04-25;Situacion familiar de riesgo;0;Docente de area;PER-004;2025-04-24;Atendido;1;0;2025-05-29
+CASO-2025-0339;2025;12172021002730 ;SEC-2025-5B;2025-11-03;2025-11-03;Bajo rendimiento derivado a TOE;0;Docente de area;PER-004;2025-11-05;Atendido;1;1;2025-12-24
+CASO-2025-0340;2025;12172021002750;SEC-2025-5B;2025-07-28;2025-07-29;Violencia psicologica entre escolares;1;Docente de area;PER-003;2025-08-02;Atendido;1;0;2025-09-24
+CASO-2025-0341;2025;12172021002750;SEC-2025-5B;2025-06-25;2025-06-26;Falta de conducta reiterada;0;Tutor de aula;PER-004;2025-06-27;Atendido;3;0;
+CASO-2025-0342;2025;12172021002760;SEC-2025-5B;2025-07-22;2025-07-24;Falta de conducta reiterada;0;Docente de area;PER-004;2025-08-03;Atendido ;3;0;2025-09-06
+CASO-2025-0343;2025;12172021002760;SEC-2025-5B;2025-11-11;2025-11-12;Falta de conducta reiterada;0;Tutor de aula;PER-004;2025-11-13;Atendido;2;1;2026-01-04
+CASO-2025-0344;2025;12172021002760;SEC-2025-5B;2025-06-09;2025-06-12;Consumo de sustancias;0;Coordinacion TOE;PER-004;2024-12-01;Atendido;0;0;2025-08-18
+CASO-2025-0345;2025;12172021002760;SEC-2025-5B;2025-04-14;2025-04-14;Situacion familiar de riesgo;0;Coordinacion TOE;PER-004;2025-04-21;Atendido;1;0;
+CASO-2025-0346;2025;12172021002770;SEC-2025-5B;2025-07-25;2025-07-25;Violencia psicologica entre escolares;1;Tutor de aula;PER-004;2025-08-02;Atendido;3;0;2025-09-21
+CASO-2025-0347;2025;12172021002770;SEC-2025-5B;2025-09-08;2025-09-09;falta de conducta;0;Auxiliar de educacion;PER-003;;Atendio;1;0;
+CASO-2025-0348;2025;12172021002780;SEC-2025-5B;2025-10-09;2025-10-11;Bajo rendimiento derivado a TOE;0;Tutor de aula;PER-004;;Programado;1;1;
+CASO-2025-0349;2025;12172021002780;SEC-2025-5B;2025-05-27;2025-05-28;Violencia fisica entre escolares;1;Auxiliar de educacion;PER-004;2025-06-06;Atendido;1;1;
+CASO-2025-0350;2025;12172021002800;SEC-2025-5B;2025-03-19;2025-03-21;Violencia psicologica entre escolares;1;Tutor de aula;PER-004;2025-03-27;Atendido;2;1;
+CASO-2025-0351;2025;12172021002800;SEC-2025-5B;2025-03-20;2025-03-22;Consumo de sustancias;0;Tutor de aula;PER-004;;No asistio;1;1;
+CASO-2025-0352;2025;12172021002800;SEC-2025-5B;2025-12-01;2025-12-02;Violencia fisica entre escolares;1;Docente de area;PER-003;2025-12-12;Atendido;2;0;
+CASO-2025-0353;2025;12172021002830;SEC-2025-5B;2025-09-25;2025-09-26;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-004;2025-10-07;Atendido;1;0;2025-11-17
+CASO-2025-0354;2025;12172021002830;SEC-2025-5B;2025-03-24;2025-03-27;Violencia fisica entre escolares;0;Tutor de aula;PER-004;2025-03-28;Atendido;3;0;2025-05-14
+CASO-2025-0355;2025;12172021002830;SEC-2025-5B;2025-11-17;2025-11-18;Falta de conducta reiterada;0;Docente de area;PER-003;2025-11-20;Atendido;3;0;2026-01-26
+CASO-2025-0356;2025;12172021002840;SEC-2025-5B;2025-04-04;2025-04-04;Violencia fisica entre escolares;0;Tutor de aula;PER-004;;Programado;1;1;
+CASO-2025-0357;2025;12172021002840;SEC-2025-5B;2025-09-19;2025-09-20;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-004;2025-09-21;Atendio;1;0;2025-10-29
+CASO-2025-0358;2025;12172021002840;SEC-2025-5B;2025-11-05;2025-11-07;Violencia psicologica entre escolares;1;Tutor de aula;PER-004;2025-11-10;Atendido;2;0;
+CASO-2025-0359;2025;12172021002850;SEC-2025-5B;2025-03-20;2025-03-21;Situacion familiar de riesgo;0;Auxiliar de educacion;PER-003;2024-12-01;Atendido;2;1;2025-05-27
+CASO-2025-0360;2025;12172021002870;SEC-2025-5B;2025-06-13;2025-06-14;Violencia fisica entre escolares;1;Docente de area;PER-004;2025-06-21;Atendido;2;0;2025-07-09
+CASO-2025-0361;2025;12172021002870;SEC-2025-5B;2025-11-21;2025-11-24;Falta de conducta reiterada;0;Auxiliar de educacion;PER-003;2025-11-26;Atendido;4;1;2025-12-09
+CASO-2025-0362;2025;12172021002880;SEC-2025-5B;2025-03-27;2025-03-29;Consumo de sustancias;0;Auxiliar de educacion;PER-003;2025-04-03;Atendido;2;1;
+CASO-2025-0363;2025;12172021002880;SEC-2025-5B;2025-05-16;2025-05-18;Violencia psicologica entre escolares;1;Tutor de aula;PER-004;2025-05-19;Atendido;1;0;2025-07-17
+CASO-2025-0364;2025;12172021002880;SEC-2025-5B;2025-05-06;2025-05-08;Violencia psicologica entre escolares;1;Docente de area;PER-003;;Programado;4;1;
+CASO-2025-0365;2025;12172021002880;SEC-2025-5B;2025-04-09;2025-04-09;Violencia fisica entre escolares;1;Auxiliar de educacion;PER-004;2025-04-11;Atendido;3;0;
+CASO-2025-0366;2025;12172021002890;SEC-2025-5B;2025-12-11;2025-12-12;Violencia psicologica entre escolares;0;Coordinacion TOE;PER-003;;No asistio;0;0;
+CASO-2025-0367;2025;12172021002900;SEC-2025-5B;2025-08-22;2025-08-22;Situacion familiar de riesgo;0;Coordinacion TOE;PER-004;;No asistio;N/A;1;
+CASO-2025-0368;2025;12172021002910;SEC-2025-5B;2025-11-19;2025-11-19;Violencia psicologica entre escolares;1;Docente de area;PER-003;;Atendido;1;0;2026-01-13
+CASO-2025-0369;2025;12172021002920;SEC-2025-5B;2025-05-02;2025-05-02;Consumo de sustancias;0;Tutor de aula;PER-004;2025-05-07;Atendido;2;1;
+CASO-2025-0370;2025;12172021002920;SEC-2025-5B;2025-10-29;2025-10-29;Violencia fisica entre escolares;1;Docente de area;PER-004;2025-11-06;Atendido;2;1;2025-11-25
+CASO-2025-0371;2025;12172021002930;SEC-2025-5B;2025-07-10;2025-07-13;Falta de conducta reiterada;0;Tutor de aula;PER-003;2025-07-17;no asisitio;2;0;2025-07-26
+CASO-2025-0372;2025;12172021002930;SEC-2025-5B;2025-09-08;2025-09-11;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-003;2025-09-19;Atendido;1;1;
+CASO-2025-0373;2025;12172021002930;SEC-2025-5B;2025-12-02;2025-12-03;Bajo rendimiento derivado a TOE;0;Auxiliar de educacion;PER-004;2025-12-07;Atendido;2;0;
+CASO-2025-0374;2025;12172021002940;SEC-2025-5B;2025-09-17;2025-09-18;Situacion familiar de riesgo;0;Coordinacion TOE;PER-004;2025-09-22;Atendido;0;0;
+CASO-2025-0375;2025;12172021002960;SEC-2025-5B;2025-09-17;2025-09-19;Situacion familiar de riesgo;0;Auxiliar de educacion;PER-004;;No asistio;1;1;
+CASO-2025-0376;2025;12172021002970;SEC-2025-5B;2025-10-03;2025-10-05;Falta de conducta reiterada;0;Coordinacion TOE;PER-003;;No asistio;0;1;
+CASO-2025-0377;2025;12172021002970;SEC-2025-5B;2025-03-28;2025-03-29;Violencia psicologica entre escolares;1;Coordinacion TOE;PER-004;2025-04-08;Atendido;3;1;
+CASO-2025-0378;2025;12172021002980 ;SEC-2025-5B;2025-11-05;2025-11-08;Violencia psicologica entre escolares;1;Tutor de aula;PER-004;;Programado;1;0;
+CASO-2025-0379;2025;12172021002980;SEC-2025-5B;2025-05-30;2025-06-02;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-003;2024-12-01;Atendido;0;1;
+CASO-2025-0380;2025;12172021002980;SEC-2025-5B;2025-06-18;2025-06-19;Bajo rendimiento derivado a TOE;0;Docente de area;PER-003;2025-06-21;Atendido;1;0;
+CASO-2025-0381;2025;12172021002980;SEC-2025-5B;2025-07-15;2025-07-15;Situacion familiar de riesgo;0;Tutor de aula;PER-003;2025-07-20;Atendido;2;0;2025-09-08
+CASO-2025-0382;2025;12172021002990;SEC-2025-5B;2025-12-08;2025-12-11;Situacion familiar de riesgo;0;Auxiliar de educacion;PER-004;2025-12-17;Atendido;4;1;2026-01-08
+CASO-2026-0383;2026;12172025000040;SEC-2026-1A;2026-05-04;2026-05-06;Falta de conducta reiterada;0;Tutor de aula;PER-004;2026-05-12;Atendido;0;0;2026-07-01
+CASO-2026-0384;2026;12172025000040;SEC-2026-1A;2026-07-17;2026-07-19;Violencia psicologica entre escolares;1;Auxiliar de educacion;PER-003;2026-07-29;Atendido;2;1;2026-09-19
+CASO-2026-0385;2026;12172025000090;SEC-2026-1A;2026-09-10;2026-09-10;Violencia fisica entre escolares;1;Coordinacion TOE;PER-003;2024-12-01;no asisitio;3;1;
+CASO-2026-0386;2026;12172025000090;SEC-2026-1A;2026-07-07;2026-07-09;Violencia fisica entre escolares;0;Auxiliar de educacion;PER-004;2026-07-12;Atendido;1;0;2026-09-02
+CASO-2026-0387;2026;12172025000090;SEC-2026-1A;2026-07-02;2026-07-05;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-004;2026-07-12;Atendido;1;0;2026-08-21
+CASO-2026-0388;2026;12172025000090;SEC-2026-1A;2026-09-10;2026-09-10;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-003;;Programado;3;0;
+CASO-2026-0389;2026;12172025000100;SEC-2026-1A;2026-03-20;2026-03-22;Violencia fisica entre escolares;1;Coordinacion TOE;PER-003;;Programado;1;1;
+CASO-2026-0390;2026;12172025000180;SEC-2026-1A;2026-09-04;2026-09-04;Bajo rendimiento derivado a TOE;0;Tutor de aula;PER-003;2026-09-14;Atendido;4;1;2026-09-20
+CASO-2026-0391;2026;12172025000180;SEC-2026-1A;2026-03-23;2026-03-23;falta de conducta;0;Docente de area;PER-004;2026-03-30;Atendido;2;1;
+CASO-2026-0392;2026;12172025000180;SEC-2026-1A;2026-03-25;2026-03-27;Violencia psicologica entre escolares;1;Coordinacion TOE;PER-003;;No asistio;1;1;
+CASO-2026-0393;2026;12172025000300;SEC-2026-1A;2026-04-22;2026-04-24;Violencia fisica entre escolares;1;Docente de area;PER-004;2026-05-02;Atendido;1;0;2026-06-20
+CASO-2026-0394;2026;12172025000300;SEC-2026-1A;2026-03-26;2026-03-29;Situacion familiar de riesgo;0;Coordinacion TOE;PER-004;2026-03-31;Atendido;4;1;
+CASO-2026-0395;2026;12172025000370;SEC-2026-1A;2026-03-24;2026-03-24;Violencia psicologica entre escolares;0;Auxiliar de educacion;PER-004;;Programado;2;1;
+CASO-2026-0396;2026;12172025000370;SEC-2026-1A;2026-07-06;2026-07-06;Bajo rendimiento derivado a TOE;0;Tutor de aula;PER-003;2026-07-13;Atendido;3;1;2026-08-17
+CASO-2026-0397;2026;12172025000380;SEC-2026-1A;2026-07-31;2026-07-31;Falta de conducta reiterada;0;Docente de area;PER-003;2026-08-09;Atendido;2;0;2026-09-19
+CASO-2026-0398;2026;12172025000380;SEC-2026-1A;2026-05-05;2026-05-07;Violencia psicologica entre escolares;1;Docente de area;PER-004;2026-05-13;Atendido;1;1;2026-06-11
+CASO-2026-0399;2026;12172025000380;SEC-2026-1A;2026-06-09;2026-06-10;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-003;2026-06-11;No asistio;1;0;
+CASO-2026-0400;2026;12172025000400;SEC-2026-1A;2026-07-24;2026-07-24;Situacion familiar de riesgo;0;Docente de area;PER-003;2026-07-29;Atendido;2;0;2026-08-09
+CASO-2026-0401;2026;12172025000400 ;SEC-2026-1A;2026-03-18;2026-03-21;Bajo rendimiento derivado a TOE;0;Tutor de aula;PER-004;2026-03-27;Atendido;3;1;2026-05-01
+CASO-2026-0402;2026;12172025000400;SEC-2026-1A;2026-08-18;2026-08-19;Violencia psicologica entre escolares;0;Tutor de aula;PER-003;2026-08-19;Atendido;1;1;2026-09-13
+CASO-2026-0403;2026;12172025000400;SEC-2026-1A;2026-05-04;2026-05-04;Falta de conducta reiterada;0;Auxiliar de educacion;PER-003;2024-12-01;Atendido;0;1;
+CASO-2026-0404;2026;12172025000540;SEC-2026-1A;2026-08-19;2026-08-20;Violencia psicologica entre escolares;1;Docente de area;PER-004;2026-08-22;Atendido;2;0;2026-10-19
+CASO-2026-0405;2026;12172025000540;SEC-2026-1A;2026-05-20;2026-05-22;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-003;;Programado;1;0;
+CASO-2026-0406;2026;12172025000540;SEC-2026-1A;2026-03-16;2026-03-16;Violencia fisica entre escolares;1;Coordinacion TOE;PER-003;2024-12-01;Atendido;3;1;
+CASO-2026-0407;2026;12172025000570;SEC-2026-1A;2026-04-17;2026-04-20;Violencia fisica entre escolares;1;Docente de area;PER-003;2026-04-21;No asistio;2;1;2026-05-15
+CASO-2026-0408;2026;12172025000570;SEC-2026-1A;2026-09-01;2026-09-03;Bajo rendimiento derivado a TOE;0;Auxiliar de educacion;PER-003;2026-09-02;Atendido;4;1;
+CASO-2026-0409;2026;12172025000570;SEC-2026-1A;2026-06-26;2026-06-27;Falta de conducta reiterada;0;Coordinacion TOE;PER-004;2026-07-03;Atendido;2;1;
+CASO-2026-0410;2026;12172025000010;SEC-2026-2A;2026-03-27;2026-03-28;Violencia psicologica entre escolares;1;Auxiliar de educacion;PER-004;2026-03-28;Atendido;1;0;2026-05-24
+CASO-2026-0411;2026;12172025000010;SEC-2026-2A;2026-03-27;2026-03-29;Falta de conducta reiterada;0;Tutor de aula;PER-004;2026-03-31;Atendido;1;0;
+CASO-2026-0412;2026;12172025000010;SEC-2026-2A;2026-09-11;2026-09-14;Violencia psicologica entre escolares;1;Coordinacion TOE;PER-003;2026-09-23;Atendido;4;0;
+CASO-2026-0413;2026;12172025000020;SEC-2026-2A;2026-08-18;2026-08-20;Violencia fisica entre escolares;0;Coordinacion TOE;PER-004;2024-12-01;Programdo;3;0;2026-10-03
+CASO-2026-0414;2026;12172025000020;SEC-2026-2A;2026-07-15;2026-07-18;Bajo rendimiento derivado a TOE;0;Docente de area;PER-003;;Atendido;0;1;
+CASO-2026-0415;2026;12172025000020;SEC-2026-2A;2026-07-09;2026-07-09;Bajo rendimiento derivado a TOE;0;Auxiliar de educacion;PER-004;2026-07-16;Atendido;0;0;2026-08-24
+CASO-2026-0416;2026;12172025000050;SEC-2026-2A;2026-08-25;2026-08-27;Falta de conducta reiterada;0;Auxiliar de educacion;PER-004;2026-08-30;Atendido;3;0;
+CASO-2026-0417;2026;12172025000050;SEC-2026-2A;2026-08-28;2026-08-30;Violencia fisica entre escolares;0;Tutor de aula;PER-003;2026-08-30;Atendido ;2;0;
+CASO-2026-0418;2026;12172025000060;SEC-2026-2A;2026-05-08;2026-05-08;Falta de conducta reiterada;0;Tutor de aula;PER-004;2026-05-11;Atendido;0;0;
+CASO-2026-0419;2026;12172025000060;SEC-2026-2A;2026-04-08;2026-04-10;Violencia fisica entre escolares;1;Tutor de aula;PER-004;2026-04-10;Atendido;1;1;2026-06-03
+CASO-2026-0420;2026;12172025000070;SEC-2026-2A;2026-07-27;2026-07-28;Bajo rendimiento derivado a TOE;0;Docente de area;PER-004;2024-12-01;Atendido;1;1;2026-10-03
+CASO-2026-0421;2026;12172025000070;SEC-2026-2A;2026-08-24;2026-08-25;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-004;2026-09-01;Atendido;2;0;
+CASO-2026-0422;2026;12172025000080;SEC-2026-2A;2026-04-10;2026-04-10;Violencia psicologica entre escolares;1;Coordinacion TOE;PER-004;2026-04-20;Programdo;2;0;
+CASO-2026-0423;2026;12172025000080;SEC-2026-2A;2026-09-10;2026-09-10;Consumo de sustancias;0;Tutor de aula;PER-004;2026-09-15;Atendido;2;0;2026-10-20
+CASO-2026-0424;2026;12172025000120;SEC-2026-2A;2026-04-14;2026-04-15;Falta de conducta reiterada;0;Docente de area;PER-004;2026-04-22;Atendido;3;0;2026-05-30
+CASO-2026-0425;2026;12172025000140;SEC-2026-2A;2026-07-27;2026-07-29;Falta conducta reiterada;0;Tutor de aula;PER-004;2026-08-08;Atendido;1;1;2026-08-22
+CASO-2026-0426;2026;12172025000160;SEC-2026-2A;2026-04-21;2026-04-21;Falta de conducta reiterada;0;Coordinacion TOE;PER-004;2026-04-28;Atendido;0;1;2026-06-22
+CASO-2026-0427;2026;12172025000190;SEC-2026-2A;2026-05-05;2026-05-05;Violencia psicologica entre escolares;1;Auxiliar de educacion;PER-003;2026-05-07;Atendido;1;0;2026-06-19
+CASO-2026-0428;2026;12172025000190;SEC-2026-2A;2026-04-14;2026-04-15;Falta de conducta reiterada;0;Docente de area;PER-003;2026-04-21;Atendido;2;0;2026-06-15
+CASO-2026-0429;2026;12172025000190;SEC-2026-2A;2026-04-09;2026-04-10;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-004;2026-04-11;Atendido;2;0;
+CASO-2026-0430;2026;12172025000210;SEC-2026-2A;2026-06-16;2026-06-18;Violencia psicologica entre escolares;1;Tutor de aula;PER-003;2026-06-23;Atendido;1;1;
+CASO-2026-0431;2026;12172025000210;SEC-2026-2A;2026-06-22;2026-06-24;Situacion familiar de riesgo;0;Docente de area;PER-004;2026-06-23;Atendido;4;1;2026-08-28
+CASO-2026-0432;2026;12172025000210;SEC-2026-2A;2026-07-08;2026-07-10;Bajo rendimiento derivado a TOE;0;Tutor de aula;PER-004;2026-07-15;Atendido;0;1;2026-08-14
+CASO-2026-0433;2026;12172025000250;SEC-2026-2A;2026-07-21;2026-07-24;Violencia psicologica entre escolares;1;Auxiliar de educacion;PER-003;;No asistio;3;1;
+CASO-2026-0434;2026;12172025000250;SEC-2026-2A;2026-09-10;2026-09-12;Situacion familiar de riesgo;0;Coordinacion TOE;PER-004;;No asistio;3;0;
+CASO-2026-0435;2026;12172025000280;SEC-2026-2A;2026-08-28;2026-08-28;Violencia fisica entre escolares;1;Tutor de aula;PER-004;2026-08-31;Atendido;2;1;
+CASO-2026-0436;2026;12172025000280;SEC-2026-2A;2026-04-29;2026-04-29;Violencia psicologica entre escolares;1;Auxiliar de educacion;PER-004;2026-05-01;Atendido;0;1;2026-05-31
+CASO-2026-0437;2026;12172025000290;SEC-2026-2A;2026-04-22;2026-04-23;Violencia fisica entre escolares;0;Docente de area;PER-004;;No asistio;3;0;
+CASO-2026-0438;2026;12172025000330;SEC-2026-2A;2026-06-04;2026-06-06;Situacion familiar de riesgo;0;Coordinacion TOE;PER-004;2026-06-06;Atendio;3;1;
+CASO-2026-0439;2026;12172025000340;SEC-2026-2A;2026-06-26;2026-06-26;Violencia psicologica entre escolares;0;Docente de area;PER-003;2026-07-03;Atendidoo;3;0;
+CASO-2026-0440;2026;12172025000340;SEC-2026-2A;2026-04-02;2026-04-03;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-004;2026-04-11;Atendidoo;2;1;2026-04-17
+CASO-2026-0441;2026;12172025000340;SEC-2026-2A;2026-05-04;2026-05-05;Bajo rendimiento derivado a TOE;0;Tutor de aula;PER-004;;Atendido;1;1;2026-06-16
+CASO-2026-0442;2026;12172025000350;SEC-2026-2A;2026-03-20;2026-03-22;Violencia psicologica entre escolares;1;Auxiliar de educacion;PER-003;2026-03-23;Atendido;4;0;
+CASO-2026-0443;2026;12172025000350;SEC-2026-2A;2026-03-18;2026-03-20;Falta de conducta reiterada;0;Coordinacion TOE;PER-004;2026-03-26;Atendido;3;1;
+CASO-2026-0444;2026;12172025000350;SEC-2026-2A;2026-07-09;2026-07-09;Situacion familiar de riesgo;0;Coordinacion TOE;PER-004;2024-12-01;Atendido;0;0;2026-09-06
+CASO-2026-0445;2026;12172025000360;SEC-2026-2A;2026-05-28;2026-05-30;Falta de conducta reiterada;0;Coordinacion TOE;PER-003;2026-06-05;Atendido;2;0;2026-06-20
+CASO-2026-0446;2026;12172025000390;SEC-2026-2A;2026-05-28;2026-05-30;Bajo rendimiento derivado a TOE;0;Auxiliar de educacion;PER-003;2026-05-29;Atendido;1;0;2026-07-02
+CASO-2026-0447;2026;12172025000390;SEC-2026-2A;2026-04-08;2026-04-08;Situacion familiar de riesgo;0;Coordinacion TOE;PER-003;2026-04-18;Atendido;2;0;2026-05-05
+CASO-2026-0448;2026;12172025000410;SEC-2026-2A;2026-07-27;2026-07-30;Falta de conducta reiterada;0;Auxiliar de educacion;PER-004;2026-08-05;Atendido;0;0;
+CASO-2026-0449;2026;12172025000410;SEC-2026-2A;2026-08-24;2026-08-26;Situacion familiar de riesgo;0;Auxiliar de educacion;PER-003;;Atendido;0;0;2026-10-04
+CASO-2026-0450;2026;12172025000420;SEC-2026-2B;2026-04-17;2026-04-19;Falta de conducta reiterada;0;Auxiliar de educacion;PER-004;;Programado;0;0;
+CASO-2026-0451;2026;12172025000430;SEC-2026-2B;2026-09-15;2026-09-18;Violencia psicologica entre escolares;0;Coordinacion TOE;PER-004;2026-09-24;Atendido;1;0;2026-11-19
+CASO-2026-0452;2026;12172025000450;SEC-2026-2B;2026-07-24;2026-07-24;Violencia psicologica entre escolares;1;Tutor de aula;PER-004;2026-08-01;Atendido;1;1;
+CASO-2026-0453;2026;12172025000450;SEC-2026-2B;2026-03-25;2026-03-28;Consumo de sustancias;0;Docente de area;PER-004;;Programado;0;0;
+CASO-2026-0454;2026;12172025000450;SEC-2026-2B;2026-03-17;2026-03-17;Falta de conducta reiterada;0;Docente de area;PER-003;2026-03-24;Atendido;3;1;2026-04-08
+CASO-2026-0455;2026;12172025000470;SEC-2026-2B;2026-05-15;2026-05-17;falta de conducta;0;Docente de area;PER-004;2026-05-20;Atendido;3;1;
+CASO-2026-0456;2026;12172025000480;SEC-2026-2B;2026-05-19;2026-05-19;falta de conducta;0;Coordinacion TOE;PER-004;;Atendido;2;1;
+CASO-2026-0457;2026;12172025000500;SEC-2026-2B;2026-04-16;2026-04-19;Violencia psicologica entre escolares;0;Coordinacion TOE;PER-004;2026-04-27;Atendido;1;1;2026-05-28
+CASO-2026-0458;2026;12172025000500;SEC-2026-2B;2026-06-12;2026-06-14;Consumo de sustancias;0;Auxiliar de educacion;PER-004;;No asistio;2;0;
+CASO-2026-0459;2026;12172025000520;SEC-2026-2B;2026-04-23;2026-04-24;Violencia psicologica entre escolares;1;Docente de area;PER-003;2026-04-29;Atendido;2;1;
+CASO-2026-0460;2026;12172025000550;SEC-2026-2B;2026-07-08;2026-07-09;Falta de conducta reiterada;0;Tutor de aula;PER-004;;Programado;2;0;
+CASO-2026-0461;2026;12172025000550;SEC-2026-2B;2026-04-06;2026-04-09;Falta de conducta reiterada;0;Coordinacion TOE;PER-004;2026-04-13;no asisitio;3;0;
+CASO-2026-0462;2026;12172025000550;SEC-2026-2B;2026-03-24;2026-03-24;Falta de conducta reiterada;0;Tutor de aula;PER-004;2026-03-31;Atendido;3;1;2026-05-01
+CASO-2026-0463;2026;12172025000560;SEC-2026-2B;2026-08-27;2026-08-28;Situacion familiar de riesgo;0;Docente de area;PER-004;2026-09-01;Atendido;1;0;2026-11-05
+CASO-2026-0464;2026;12172025000580;SEC-2026-2B;2026-06-04;2026-06-05;Consumo de sustancias;0;Tutor de aula;PER-003;;Programado;0;0;
+CASO-2026-0465;2026;12172025000580;SEC-2026-2B;2026-06-04;2026-06-05;Situacion familiar de riesgo;0;Tutor de aula;PER-004;2026-06-11;No asistio;2;0;2026-07-17
+CASO-2026-0466;2026;12172025000590;SEC-2026-2B;2026-06-24;2026-06-27;Situacion familiar de riesgo;0;Coordinacion TOE;PER-004;;No asistio;4;1;
+CASO-2026-0467;2026;12172025000590;SEC-2026-2B;2026-04-02;2026-04-03;Violencia fisica entre escolares;1;Coordinacion TOE;PER-004;2024-12-01;Atendido;0;1;
+CASO-2026-0468;2026;12172024000640;SEC-2026-2B;2026-09-03;2026-09-05;Violencia fisica entre escolares;1;Tutor de aula;PER-003;;Programado;1;1;
+CASO-2026-0469;2026;12172024000640;SEC-2026-2B;2026-04-24;2026-04-26;Violencia fisica entre escolares;0;Coordinacion TOE;PER-003;2026-04-29;Atendido;1;1;2026-06-16
+CASO-2026-0470;2026;12172024000640;SEC-2026-2B;2026-05-12;2026-05-15;Bajo rendimiento derivado a TOE;0;Tutor de aula;PER-004;2026-05-15;Atendido;0;1;
+CASO-2026-0471;2026;12172024000640;SEC-2026-2B;2026-04-03;2026-04-03;Bajo rendimiento derivado a TOE;0;Auxiliar de educacion;PER-004;2024-12-01;Atendido;1;0;2026-04-25
+CASO-2026-0472;2026;12172024000700;SEC-2026-2B;2026-04-21;2026-04-22;Violencia psicologica entre escolares;0;Auxiliar de educacion;PER-004;2026-04-29;Atendido;0;0;2026-06-10
+CASO-2026-0473;2026;12172024001060;SEC-2026-2B;2026-03-26;2026-03-28;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-004;2024-12-01;Atendido;2;0;2026-05-28
+CASO-2026-0474;2026;12172024001060;SEC-2026-2B;2026-03-27;2026-03-30;Falta de conducta reiterada;0;Tutor de aula;PER-004;2026-03-31;Atendido;2;1;2026-05-24
+CASO-2026-0475;2026;12172024001060;SEC-2026-2B;2026-05-29;2026-05-30;Falta de conducta reiterada;0;Coordinacion TOE;PER-004;;No asistio;1;1;
+CASO-2026-0476;2026;12172024001060;SEC-2026-2B;2026-07-27;2026-07-30;Violencia fisica entre escolares;0;Coordinacion TOE;PER-003;2026-08-06;Atendido;0;1;
+CASO-2026-0477;2026;12172024001080;SEC-2026-2B;2026-04-30;2026-05-03;Falta de conducta reiterada;0;Auxiliar de educacion;PER-004;2026-05-11;Atendido;0;1;
+CASO-2026-0478;2026;12172024001080;SEC-2026-2B;2026-05-20;2026-05-21;Violencia psicologica entre escolares;1;Docente de area;PER-004;2026-05-27;Atendido;2;0;
+CASO-2026-0479;2026;12172024001080;SEC-2026-2B;2026-09-03;2026-09-04;Violencia psicologica entre escolares;1;Coordinacion TOE;PER-004;;Atendido;0;0;2026-11-04
+CASO-2026-0480;2026;12172024000610;SEC-2026-3A;2026-06-24;2026-06-27;Situacion familiar de riesgo;0;Auxiliar de educacion;PER-004;2026-07-02;Atendido;1;1;2026-07-13
+CASO-2026-0481;2026;12172024000620;SEC-2026-3A;2026-05-28;2026-05-31;Violencia fisica entre escolares;1;Tutor de aula;PER-003;2026-06-01;Atendido;1;1;
+CASO-2026-0482;2026;12172024000650;SEC-2026-3A;2026-04-29;2026-04-29;Situacion familiar de riesgo;0;Auxiliar de educacion;PER-004;2026-05-02;Atendido;1;1;
+CASO-2026-0483;2026;12172024000670;SEC-2026-3A;2026-07-20;2026-07-20;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-004;;No asistio;0;1;
+CASO-2026-0484;2026;12172024000680;SEC-2026-3A;2026-06-01;2026-06-01;Falta de conducta reiterada;0;Tutor de aula;PER-004;;Atendido;0;0;
+CASO-2026-0485;2026;12172024000680;SEC-2026-3A;2026-06-17;2026-06-17;Falta de conducta reiterada;0;Tutor de aula;PER-004;2026-06-27;Atendido;2;0;
+CASO-2026-0486;2026;12172024000690;SEC-2026-3A;2026-07-01;2026-07-03;Violencia fisica entre escolares;1;Auxiliar de educacion;PER-003;2026-07-07;Atendidoo;0;0;
+CASO-2026-0487;2026;12172024000690;SEC-2026-3A;2026-08-25;2026-08-26;FALTA DE CONDUCTA REITERADA;0;Coordinacion TOE;PER-004;2026-09-03;Atendido;1;0;2026-09-14
+CASO-2026-0488;2026;12172024000690;SEC-2026-3A;2026-05-07;2026-05-08;Falta de conducta reiterada;0;Auxiliar de educacion;PER-003;2026-05-15;Atendido;2;0;2026-06-01
+CASO-2026-0489;2026;12172024000710;SEC-2026-3A;2026-08-26;2026-08-27;Violencia psicologica entre escolares;1;Tutor de aula;PER-003;;Programado;1;0;
+CASO-2026-0490;2026;12172024000710;SEC-2026-3A;2026-07-16;2026-07-18;Situacion familiar de riesgo;0;Docente de area;PER-003;2026-07-27;Atendido;3;1;2026-08-16
+CASO-2026-0491;2026;12172024000710;SEC-2026-3A;2026-08-27;2026-08-29;Falta de conducta reiterada;0;Auxiliar de educacion;PER-004;2026-09-02;Atendido;1;0;
+CASO-2026-0492;2026;12172024000720;SEC-2026-3A;2026-07-13;2026-07-16;Bajo rendimiento derivado a TOE;0;Tutor de aula;PER-004;2026-07-14;Atendido;1;0;2026-09-18
+CASO-2026-0493;2026;12172024000720;SEC-2026-3A;2026-03-23;2026-03-23;Bajo rendimiento derivado a TOE;0;Tutor de aula;PER-004;2026-03-25;Atendido;1;0;2026-05-02
+CASO-2026-0494;2026;12172024000720;SEC-2026-3A;2026-04-27;2026-04-28;Consumo de sustancias;0;Docente de area;PER-004;2026-05-06;Atendio;1;1;
+CASO-2026-0495;2026;12172024000730;SEC-2026-3A;2026-04-06;2026-04-06;Falta de conducta reiterada;0;Docente de area;PER-004;2026-04-09;Atendido;0;0;2026-06-01
+CASO-2026-0496;2026;12172024000740;SEC-2026-3A;2026-04-22;2026-04-24;Bajo rendimiento derivado a TOE;0;Auxiliar de educacion;PER-003;;Programado;0;1;
+CASO-2026-0497;2026;12172024000750;SEC-2026-3A;2026-06-17;2026-06-19;Violencia fisica entre escolares;0;Tutor de aula;PER-004;2026-06-21;Atendido;1;1;
+CASO-2026-0498;2026;12172024000770;SEC-2026-3A;2026-04-28;2026-04-28;Falta de conducta reiterada;0;Auxiliar de educacion;PER-004;;Atendido;4;1;2026-05-17
+CASO-2026-0499;2026;12172024000770;SEC-2026-3A;2026-06-17;2026-06-17;Bajo rendimiento derivado a TOE;0;Docente de area;PER-004;2026-06-18;Atendido;0;1;2026-07-18
+CASO-2026-0500;2026;12172024000770;SEC-2026-3A;2026-03-27;2026-03-30;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-004;2026-03-28;Atendido;1;1;2026-05-29
+CASO-2026-0501;2026;12172024000770;SEC-2026-3A;2026-05-08;2026-05-09;FALTA DE CONDUCTA REITERADA;0;Coordinacion TOE;PER-004;2026-05-17;Atendido;0;1;
+CASO-2026-0502;2026;12172024000790;SEC-2026-3A;2026-07-08;2026-07-09;Falta de conducta reiterada;0;Auxiliar de educacion;PER-004;;No asistio;2;1;
+CASO-2026-0503;2026;12172024000820;SEC-2026-3A;2026-09-10;2026-09-13;Bajo rendimiento derivado a TOE;0;Auxiliar de educacion;PER-004;2026-09-11;Atendido;1;1;
+CASO-2026-0504;2026;12172024000820;SEC-2026-3A;2026-05-07;2026-05-07;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-004;;No asistio;1;0;
+CASO-2026-0505;2026;12172024000830;SEC-2026-3A;2026-04-08;2026-04-11;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-004;;Programado;2;0;
+CASO-2026-0506;2026;12172024000870;SEC-2026-3A;2026-06-23;2026-06-24;Falta de conducta reiterada;0;Coordinacion TOE;PER-003;;No asistio;1;0;
+CASO-2026-0507;2026;12172024000880;SEC-2026-3A;2026-07-13;2026-07-15;Falta de conducta reiterada;0;Docente de area;PER-004;2026-07-22;Atendido;2;0;2026-08-21
+CASO-2026-0508;2026;12172024000890;SEC-2026-3A;2026-05-06;2026-05-09;Violencia psicologica entre escolares;1;Tutor de aula;PER-004;;No asistio;4;1;
+CASO-2026-0509;2026;12172024000890;SEC-2026-3A;2026-03-24;2026-03-27;Bajo rendimiento derivado a TOE;0;Docente de area;PER-004;2026-03-28;Atendido;1;1;
+CASO-2026-0510;2026;12172024000930;SEC-2026-3A;2026-08-25;2026-08-25;Violencia psicologica entre escolares;1;Auxiliar de educacion;PER-004;;No asistio;2;1;
+CASO-2026-0511;2026;12172024000940;SEC-2026-3B;2026-04-07;2026-04-08;Violencia psicologica entre escolares;1;Auxiliar de educacion;PER-004;2026-04-15;Atendido;1;1;2026-06-01
+CASO-2026-0512;2026;12172024000940;SEC-2026-3B;2026-08-27;2026-08-29;Bajo rendimiento derivado a TOE;0;Docente de area;PER-004;2026-09-03;Atendido;1;1;2026-10-15
+CASO-2026-0513;2026;12172024000940;SEC-2026-3B;2026-05-06;2026-05-09;Violencia psicologica entre escolares;1;Auxiliar de educacion;PER-004;2026-05-11;Atendido;2;1;2026-06-20
+CASO-2026-0514;2026;12172024000970;SEC-2026-3B;2026-08-31;2026-09-03;Bajo rendimiento derivado a TOE;0;Tutor de aula;PER-004;2026-09-08;Atendido;2;0;2026-10-26
+CASO-2026-0515;2026;12172024001010;SEC-2026-3B;2026-06-08;2026-06-10;Bajo rendimiento derivado a TOE;0;Docente de area;PER-004;2026-06-15;Atendido;3;1;
+CASO-2026-0516;2026;12172024001010;SEC-2026-3B;2026-03-20;2026-03-21;Violencia psicologica entre escolares;1;Docente de area;PER-004;;No asistio;0;1;
+CASO-2026-0517;2026;12172024001020;SEC-2026-3B;2026-07-29;2026-07-31;Violencia fisica entre escolares;1;Coordinacion TOE;PER-003;2026-07-30;Atendido;1;1;
+CASO-2026-0518;2026;12172024001020;SEC-2026-3B;2026-07-02;2026-07-02;Violencia fisica entre escolares;0;Auxiliar de educacion;PER-004;;Programdo;2;0;
+CASO-2026-0519;2026;12172024001030;SEC-2026-3B;2026-03-27;2026-03-29;Falta de conducta reiterada;0;Tutor de aula;PER-004;2026-04-06;Atendidoo;1;0;
+CASO-2026-0520;2026;12172024001030;SEC-2026-3B;2026-06-23;2026-06-23;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-004;;No asistio;1;1;
+CASO-2026-0521;2026;12172024001030;SEC-2026-3B;2026-06-10;2026-06-10;Falta de conducta reiterada;0;Auxiliar de educacion;PER-004;;No asistio;2;0;
+CASO-2026-0522;2026;12172024001040;SEC-2026-3B;2026-06-24;2026-06-26;Bajo rendimiento derivado a TOE;0;Tutor de aula;PER-004;2026-06-27;Atendido;1;1;2026-08-28
+CASO-2026-0523;2026;12172024001090;SEC-2026-3B;2026-09-15;2026-09-15;Bajo rendimiento derivado a TOE;0;Tutor de aula;PER-004;2026-09-22;Atendido;1;0;
+CASO-2026-0524;2026;12172024001110;SEC-2026-3B;2026-05-07;2026-05-10;Bajo rendimiento derivado a TOE;0;Tutor de aula;PER-003;2026-05-16;Atendido;0;1;2026-05-26
+CASO-2026-0525;2026;12172024001110;SEC-2026-3B;2026-05-27;2026-05-28;Violencia psicologica entre escolares;1;Docente de area;PER-003;2026-06-01;Atendido;1;0;2026-06-11
+CASO-2026-0526;2026;12172024001110;SEC-2026-3B;2026-03-27;2026-03-28;Falta conducta reiterada;0;Docente de area;PER-004;;Programado;4;0;
+CASO-2026-0527;2026;12172024001120;SEC-2026-3B;2026-08-26;2026-08-26;Situacion familiar de riesgo;0;Tutor de aula;PER-004;;No asistio;2;0;
+CASO-2026-0528;2026;12172024001130;SEC-2026-3B;2026-06-15;2026-06-17;Situacion familiar de riesgo;0;Auxiliar de educacion;PER-003;;No asistio;0;0;
+CASO-2026-0529;2026;12172024001140;SEC-2026-3B;2026-04-01;2026-04-03;Violencia fisica entre escolares;0;Docente de area;PER-004;2026-04-02;Atendido;2;0;2026-06-04
+CASO-2026-0530;2026;12172024001150;SEC-2026-3B;2026-07-13;2026-07-13;Bajo rendimiento derivado a TOE;0;Tutor de aula;PER-004;2026-07-22;Atendido;0;1;
+CASO-2026-0531;2026;12172024001150;SEC-2026-3B;2026-05-01;2026-05-02;Violencia psicologica entre escolares;1;Coordinacion TOE;PER-004;2026-05-07;Atendido;1;1;2026-06-12
+CASO-2026-0532;2026;12172024001160;SEC-2026-3B;2026-05-22;2026-05-25;Violencia psicologica entre escolares;1;Docente de area;PER-003;;No asistio;3;0;
+CASO-2026-0533;2026;12172024001160;SEC-2026-3B;2026-08-17;2026-08-17;Bajo rendimiento derivado a TOE;0;Tutor de aula;PER-004;2026-08-19;Atendido;1;0;2026-09-12
+CASO-2026-0534;2026;12172024001190;SEC-2026-3B;2026-06-26;2026-06-29;Violencia psicologica entre escolares;1;Auxiliar de educacion;PER-003;2026-07-03;Atendido;1;0;
+CASO-2026-0535;2026;12172024001190;SEC-2026-3B;2026-08-19;2026-08-20;Violencia fisica entre escolares;1;Tutor de aula;PER-003;2026-08-26;Atendido;3;1;
+CASO-2026-0536;2026;12172024001200;SEC-2026-3B;2026-07-02;2026-07-04;Consumo de sustancias;0;Coordinacion TOE;PER-004;;Programado;2;0;
+CASO-2026-0537;2026;12172023001340;SEC-2026-3B;2026-08-28;2026-08-28;Violencia fisica entre escolares;0;Auxiliar de educacion;PER-004;2026-08-31;Atendio;3;1;2026-10-02
+CASO-2026-0538;2026;12172023001340;SEC-2026-3B;2026-04-06;2026-04-08;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-003;;No asistio;0;0;
+CASO-2026-0539;2026;12172023001350;SEC-2026-3B;2026-08-25;2026-08-25;Bajo rendimiento derivado a TOE;0;Tutor de aula;PER-004;2026-08-27;Atendido;2;0;2026-09-16
+CASO-2026-0540;2026;12172023001350;SEC-2026-3B;2026-05-12;2026-05-14;Bajo rendimiento derivado a TOE;0;Auxiliar de educacion;PER-004;2026-05-13;Atendido;1;1;2026-07-15
+CASO-2026-0541;2026;12172023001350;SEC-2026-3B;2026-06-25;2026-06-26;FALTA DE CONDUCTA REITERADA;0;Docente de area;PER-003;2026-07-03;Atendido;3;0;2026-08-22
+CASO-2026-0542;2026;12172023001380;SEC-2026-3B;2026-04-22;2026-04-24;Violencia psicologica entre escolares;1;Docente de area;PER-003;2026-04-29;Atendido;4;1;
+CASO-2026-0543;2026;12172023001710;SEC-2026-3B;2026-07-01;2026-07-02;Bajo rendimiento derivado a TOE;0;Tutor de aula;PER-004;2026-07-07;Atendido;1;1;2026-08-03
+CASO-2026-0544;2026;12172023001710;SEC-2026-3B;2026-04-02;2026-04-02;Violencia fisica entre escolares;0;Auxiliar de educacion;PER-004;2026-04-13;Atendido;3;0;
+CASO-2026-0545;2026;12172023001710;SEC-2026-3B;2026-06-09;2026-06-11;Falta de conducta reiterada;0;Docente de area;PER-003;2026-06-10;Atendido;1;0;2026-07-17
+CASO-2026-0546;2026;12172023001770;SEC-2026-3B;2026-07-17;2026-07-20;Violencia psicologica entre escolares;1;Auxiliar de educacion;PER-003;2024-12-01;Atendido;2;1;2026-09-25
+CASO-2026-0547;2026;12172023001770;SEC-2026-3B;2026-03-31;2026-03-31;Falta de conducta reiterada;0;Coordinacion TOE;PER-003;;Programado;1;0;
+CASO-2026-0548;2026;12172023001210;SEC-2026-4A;2026-09-10;2026-09-10;Falta de conducta reiterada;0;Tutor de aula;PER-003;2026-09-14;Atendido;3;0;2026-09-27
+CASO-2026-0549;2026;12172023001240;SEC-2026-4A;2026-07-10;2026-07-11;Situacion familiar de riesgo;0;Tutor de aula;PER-004;2026-07-13;Atendido;2;0;2026-07-29
+CASO-2026-0550;2026;12172023001240;SEC-2026-4A;2026-06-10;2026-06-10;Violencia fisica entre escolares;1;Coordinacion TOE;PER-004;2026-06-21;Atendido;2;0;2026-07-19
+CASO-2026-0551;2026;12172023001280;SEC-2026-4A;2026-04-20;2026-04-21;Falta de conducta reiterada;0;Auxiliar de educacion;PER-004;;Atendido;0;1;2026-06-04
+CASO-2026-0552;2026;12172023001310;SEC-2026-4A;2026-06-03;2026-06-04;Falta de conducta reiterada;0;Coordinacion TOE;PER-003;2026-06-14;Atendido;4;1;
+CASO-2026-0553;2026;12172023001330;SEC-2026-4A;2026-04-30;2026-05-03;Falta de conducta reiterada;0;Auxiliar de educacion;PER-004;;Atendido;3;1;2026-05-22
+CASO-2026-0554;2026;12172023001360;SEC-2026-4A;2026-07-13;2026-07-15;Violencia fisica entre escolares;1;Docente de area;PER-004;;No asistio;3;0;
+CASO-2026-0555;2026;12172023001360;SEC-2026-4A;2026-06-29;2026-06-30;Falta de conducta reiterada;0;Tutor de aula;PER-003;2026-07-07;Atendido;2;0;2026-07-20
+CASO-2026-0556;2026;12172023001360;SEC-2026-4A;2026-07-20;2026-07-23;Violencia psicologica entre escolares;0;Auxiliar de educacion;PER-004;2026-07-30;Atendido;1;1;
+CASO-2026-0557;2026;12172023001370;SEC-2026-4A;2026-03-26;2026-03-28;Violencia psicologica entre escolares;1;Coordinacion TOE;PER-004;;No asistio;4;0;
+CASO-2026-0558;2026;12172023001400;SEC-2026-4A;2026-06-02;2026-06-05;Violencia psicologica entre escolares;0;Coordinacion TOE;PER-004;2026-06-14;Atendido;2;0;2026-07-30
+CASO-2026-0559;2026;12172023001400;SEC-2026-4A;2026-04-22;2026-04-25;Falta de conducta reiterada;0;Coordinacion TOE;PER-003;2026-04-24;Atendido;1;1;2026-05-15
+CASO-2026-0560;2026;12172023001440;SEC-2026-4A;2026-04-24;2026-04-24;Violencia psicologica entre escolares;1;Tutor de aula;PER-004;2026-04-26;Atendido ;2;1;2026-06-14
+CASO-2026-0561;2026;12172023001440;SEC-2026-4A;2026-09-01;2026-09-03;Falta de conducta reiterada;0;Auxiliar de educacion;PER-004;;No asistio;4;0;
+CASO-2026-0562;2026;12172023001440;SEC-2026-4A;2026-06-04;2026-06-04;Violencia fisica entre escolares;1;Docente de area;PER-004;;no asisitio;3;0;
+CASO-2026-0563;2026;12172023001450;SEC-2026-4A;2026-09-10;2026-09-13;Violencia fisica entre escolares;1;Docente de area;PER-004;;No asistio;3;0;
+CASO-2026-0564;2026;12172023001450;SEC-2026-4A;2026-04-15;2026-04-17;FALTA DE CONDUCTA REITERADA;0;Tutor de aula;PER-003;2026-04-21;Atendido;0;0;
+CASO-2026-0565;2026;12172023001460;SEC-2026-4A;2026-04-16;2026-04-19;Situacion familiar de riesgo;0;Tutor de aula;PER-003;2026-04-23;Atendido;4;1;2026-05-16
+CASO-2026-0566;2026;12172023001460;SEC-2026-4A;2026-04-16;2026-04-18;Falta de conducta reiterada;0;Docente de area;PER-004;;Programado;1;0;
+CASO-2026-0567;2026;12172023001470;SEC-2026-4A;2026-09-01;2026-09-01;Bajo rendimiento derivado a TOE;0;Auxiliar de educacion;PER-004;2026-09-06;Atendido;3;1;
+CASO-2026-0568;2026;12172023001490;SEC-2026-4A;2026-05-21;2026-05-24;Situacion familiar de riesgo;0;Coordinacion TOE;PER-004;2026-06-01;Atendido;99;0;2026-06-08
+CASO-2026-0569;2026;12172023001510;SEC-2026-4A;2026-03-20;2026-03-20;Falta de conducta reiterada;0;Tutor de aula;PER-004;2024-12-01;Atendido;1;1;2026-05-07
+CASO-2026-0570;2026;12172023001520;SEC-2026-4A;2026-05-14;2026-05-14;Bajo rendimiento derivado a TOE;0;Auxiliar de educacion;PER-003;2026-05-18;Atendido;2;0;2026-07-21
+CASO-2026-0571;2026;12172023001530;SEC-2026-4A;2026-07-15;2026-07-17;Situacion familiar de riesgo;0;Auxiliar de educacion;PER-003;;No asistio;2;1;
+CASO-2026-0572;2026;12172023001530;SEC-2026-4A;2026-09-14;2026-09-16;Falta de conducta reiterada;0;Tutor de aula;PER-004;2026-09-24;Atendido;1;0;
+CASO-2026-0573;2026;12172023001540;SEC-2026-4A;2026-04-29;2026-05-01;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-003;2026-05-01;no asisitio;1;1;
+CASO-2026-0574;2026;12172023001540;SEC-2026-4A;2026-03-25;2026-03-26;Falta de conducta reiterada;0;Auxiliar de educacion;PER-004;2026-04-03;Atendido;2;0;
+CASO-2026-0575;2026;12172023001540;SEC-2026-4A;2026-04-01;2026-04-03;Violencia psicologica entre escolares;1;Docente de area;PER-003;2026-04-08;Atendido;1;0;
+CASO-2026-0576;2026;12172023001540;SEC-2026-4A;2026-05-01;2026-05-01;Falta de conducta reiterada;0;Docente de area;PER-003;;Programado;1;0;
+CASO-2026-0577;2026;12172023001560;SEC-2026-4B;2026-03-24;2026-03-25;FALTA DE CONDUCTA REITERADA;0;Auxiliar de educacion;PER-004;2026-03-28;No asistio;2;1;
+CASO-2026-0578;2026;12172023001580;SEC-2026-4B;2026-05-28;2026-05-31;Consumo de sustancias;0;Tutor de aula;PER-003;2026-06-03;Atendido;2;1;2026-07-25
+CASO-2026-0579;2026;12172023001580;SEC-2026-4B;2026-06-25;2026-06-27;Violencia psicologica entre escolares;0;Tutor de aula;PER-004;2026-07-06;Atendido;2;1;2026-07-16
+CASO-2026-0580;2026;12172023001580;SEC-2026-4B;2026-07-20;2026-07-23;Situacion familiar de riesgo;0;Coordinacion TOE;PER-004;2026-07-30;Atendido;1;1;2026-08-13
+CASO-2026-0581;2026;12172023001600;SEC-2026-4B;2026-04-14;2026-04-14;Falta de conducta reiterada;0;Coordinacion TOE;PER-003;2026-04-16;Atendido;2;1;2026-05-23
+CASO-2026-0582;2026;12172023001600;SEC-2026-4B;2026-08-25;2026-08-27;Falta de conducta reiterada;0;Auxiliar de educacion;PER-003;2026-09-03;Atendido;2;0;2026-10-05
+CASO-2026-0583;2026;12172023001620;SEC-2026-4B;2026-06-22;2026-06-22;Violencia fisica entre escolares;1;Tutor de aula;PER-003;2026-06-28;Atendido;2;0;2026-08-11
+CASO-2026-0584;2026;12172023001640;SEC-2026-4B;2026-04-01;2026-04-01;Violencia fisica entre escolares;1;Coordinacion TOE;PER-004;2026-04-12;Atendido;0;1;2026-05-10
+CASO-2026-0585;2026;12172023001640;SEC-2026-4B;2026-09-09;2026-09-09;Violencia psicologica entre escolares;1;Tutor de aula;PER-003;;Programado;4;0;
+CASO-2026-0586;2026;12172023001670;SEC-2026-4B;2026-08-25;2026-08-27;Violencia psicologica entre escolares;1;Auxiliar de educacion;PER-003;2026-09-05;Atendido;1;0;2026-10-27
+CASO-2026-0587;2026;12172023001680;SEC-2026-4B;2026-04-27;2026-04-29;Bajo rendimiento derivado a TOE;0;Docente de area;PER-003;2026-05-05;Atendido;3;0;2026-06-15
+CASO-2026-0588;2026;12172023001680;SEC-2026-4B;2026-08-25;2026-08-28;Violencia psicologica entre escolares;0;Auxiliar de educacion;PER-004;;Programado;1;0;
+CASO-2026-0589;2026;12172023001690;SEC-2026-4B;2026-06-29;2026-06-30;Violencia psicologica entre escolares;0;Docente de area;PER-004;2026-06-30;Atendido;1;0;2026-08-04
+CASO-2026-0590;2026;12172023001700;SEC-2026-4B;2026-05-28;2026-05-30;Bajo rendimiento derivado a TOE;0;Tutor de aula;PER-004;2026-06-03;Atendido;0;1;2026-07-17
+CASO-2026-0591;2026;12172023001700;SEC-2026-4B;2026-09-04;2026-09-07;Violencia fisica entre escolares;1;Docente de area;PER-003;2026-09-14;Atendido;1;0;2026-11-11
+CASO-2026-0592;2026;12172023001700;SEC-2026-4B;2026-05-27;2026-05-30;Bajo rendimiento derivado a TOE;0;Auxiliar de educacion;PER-004;2026-05-31;Atendido;1;0;2026-07-13
+CASO-2026-0593;2026;12172023001720;SEC-2026-4B;2026-05-07;2026-05-10;Falta de conducta reiterada;0;Coordinacion TOE;PER-004;2026-05-18;Atendido;1;0;2026-05-22
+CASO-2026-0594;2026;12172023001720;SEC-2026-4B;2026-07-15;2026-07-16;Bajo rendimiento derivado a TOE;0;Tutor de aula;PER-004;;No asistio;1;0;
+CASO-2026-0595;2026;12172023001720;SEC-2026-4B;2026-05-25;2026-05-28;Bajo rendimiento derivado a TOE;0;Docente de area;PER-004;2026-06-04;Atendido;0;0;2026-06-20
+CASO-2026-0596;2026;12172023001730;SEC-2026-4B;2026-04-07;2026-04-07;Falta de conducta reiterada;0;Tutor de aula;PER-003;;Atendido;1;1;
+CASO-2026-0597;2026;12172023001750;SEC-2026-4B;2026-06-19;2026-06-20;Violencia fisica entre escolares;1;Docente de area;PER-004;2026-06-29;Atendido;1;0;2026-07-11
+CASO-2026-0598;2026;12172023001760;SEC-2026-4B;2026-04-02;2026-04-02;Consumo de sustancias;0;Tutor de aula;PER-004;2026-04-13;Atendido;3;0;2026-05-07
+CASO-2026-0599;2026;12172023001760;SEC-2026-4B;2026-09-03;2026-09-03;Situacion familiar de riesgo;0;Docente de area;PER-003;2026-09-13;Atendido;2;0;
+CASO-2026-0600;2026;12172023001760;SEC-2026-4B;2026-05-06;2026-05-07;Falta de conducta reiterada;0;Docente de area;PER-004;;No asistio;0;0;
+CASO-2026-0601;2026;12172023001790;SEC-2026-4B;2026-04-07;2026-04-09;Falta de conducta reiterada;0;Coordinacion TOE;PER-004;2026-04-18;Atendido;1;0;2026-06-06
+CASO-2026-0602;2026;12172022001880;SEC-2026-4B;2026-06-17;2026-06-17;Situacion familiar de riesgo;0;Docente de area;PER-004;2026-06-24;Atendido;3;0;2026-08-07
+CASO-2026-0603;2026;12172022001880;SEC-2026-4B;2026-05-05;2026-05-05;Bajo rendimiento derivado a TOE;0;Tutor de aula;PER-004;2026-05-11;Atendido;1;1;
+CASO-2026-0604;2026;12172022001910;SEC-2026-4B;2026-07-10;2026-07-13;Violencia psicologica entre escolares;1;Auxiliar de educacion;PER-003;2026-07-22;Atendido;2;1;
+CASO-2026-0605;2026;12172022001930;SEC-2026-4B;2026-05-18;2026-05-21;Falta de conducta reiterada;0;Tutor de aula;PER-003;;Programado;0;1;
+CASO-2026-0606;2026;12172022001930;SEC-2026-4B;2026-03-24;2026-03-26;Falta de conducta reiterada;0;Coordinacion TOE;PER-004;2026-04-03;Atendido;0;1;
+CASO-2026-0607;2026;12172022001970;SEC-2026-4B;2026-04-20;2026-04-22;Falta de conducta reiterada;0;Auxiliar de educacion;PER-003;2026-05-01;Atendidoo;2;0;2026-05-15
+CASO-2026-0608;2026;12172022001970;SEC-2026-4B;2026-03-30;2026-04-01;Bajo rendimiento derivado a TOE;0;Auxiliar de educacion;PER-003;2026-04-01;Atendido;1;1;2026-04-19
+CASO-2026-0609;2026;12172022001970;SEC-2026-4B;2026-06-19;2026-06-20;Bajo rendimiento derivado a TOE;0;Docente de area;PER-004;2026-07-01;Atendido;0;1;2026-07-19
+CASO-2026-0610;2026;12172022002050;SEC-2026-4B;2026-06-30;2026-07-02;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-004;2026-07-06;Atendido;2;1;2026-08-08
+CASO-2026-0611;2026;12172022002080;SEC-2026-4B;2026-08-20;2026-08-22;Falta de conducta reiterada;0;Docente de area;PER-004;2026-08-23;Atendido;1;0;2026-10-23
+CASO-2026-0612;2026;12172022002080;SEC-2026-4B;2026-07-06;2026-07-08;Bajo rendimiento derivado a TOE;0;Docente de area;PER-004;2026-07-10;Atendido;0;1;2026-07-22
+CASO-2026-0613;2026;12172022002080;SEC-2026-4B;2026-04-30;2026-05-01;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-003;;Programado;2;0;
+CASO-2026-0614;2026;12172022002120;SEC-2026-4B;2026-05-07;2026-05-10;Violencia fisica entre escolares;1;Coordinacion TOE;PER-003;2026-05-17;Atendido;1;0;
+CASO-2026-0615;2026;12172022002120;SEC-2026-4B;2026-05-21;2026-05-22;Falta de conducta reiterada;0;Auxiliar de educacion;PER-003;2026-05-24;Programdo;3;1;2026-07-08
+CASO-2026-0616;2026;12172022001820;SEC-2026-5A;2026-09-09;2026-09-11;Falta de conducta reiterada;0;Docente de area;PER-004;2026-09-12;No asistio;1;1;2026-11-08
+CASO-2026-0617;2026;12172022001820;SEC-2026-5A;2026-07-03;2026-07-03;Violencia fisica entre escolares;1;Auxiliar de educacion;PER-004;;Atendido;1;0;2026-08-15
+CASO-2026-0618;2026;12172022001840;SEC-2026-5A;2026-04-02;2026-04-04;Violencia fisica entre escolares;1;Tutor de aula;PER-004;2024-12-01;Atendido;0;0;
+CASO-2026-0619;2026;12172022001840;SEC-2026-5A;2026-04-02;2026-04-05;Falta de conducta reiterada;0;Docente de area;PER-004;2026-04-11;Atendido;1;1;
+CASO-2026-0620;2026;12172022001850;SEC-2026-5A;2026-06-23;2026-06-26;Bajo rendimiento derivado a TOE;0;Tutor de aula;PER-004;;No asistio;3;0;
+CASO-2026-0621;2026;12172022001850;SEC-2026-5A;2026-05-25;2026-05-28;Violencia fisica entre escolares;0;Coordinacion TOE;PER-004;2026-06-02;Atendido;1;0;2026-08-02
+CASO-2026-0622;2026;12172022001900;SEC-2026-5A;2026-07-10;2026-07-13;Consumo de sustancias;0;Docente de area;PER-004;2026-07-19;Atendido;4;1;
+CASO-2026-0623;2026;12172022001920;SEC-2026-5A;2026-08-21;2026-08-21;Falta de conducta reiterada;0;Docente de area;PER-003;2026-08-27;Atendido;3;0;2026-09-28
+CASO-2026-0624;2026;12172022001940;SEC-2026-5A;2026-06-23;2026-06-26;Situacion familiar de riesgo;0;Tutor de aula;PER-004;;No asistio;1;1;
+CASO-2026-0625;2026;12172022001950;SEC-2026-5A;2026-06-30;2026-07-02;Consumo de sustancias;0;Tutor de aula;PER-004;2026-07-12;Atendido;1;1;
+CASO-2026-0626;2026;12172022001960;SEC-2026-5A;2026-06-19;2026-06-20;Falta de conducta reiterada;0;Docente de area;PER-003;;No asistio;1;0;
+CASO-2026-0627;2026;12172022001960;SEC-2026-5A;2026-05-13;2026-05-15;Falta de conducta reiterada;0;Docente de area;PER-004;2026-05-20;Atendido;1;1;
+CASO-2026-0628;2026;12172022001960;SEC-2026-5A;2026-06-29;2026-06-30;Violencia psicologica entre escolares;1;Coordinacion TOE;PER-003;;Programado;2;0;
+CASO-2026-0629;2026;12172022001980;SEC-2026-5A;2026-05-27;2026-05-30;Falta de conducta reiterada;0;Tutor de aula;PER-003;2026-06-07;Atendido;1;0;2026-07-24
+CASO-2026-0630;2026;12172022001990;SEC-2026-5A;2026-06-12;2026-06-12;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-004;2026-06-21;Atendido;0;0;2026-07-03
+CASO-2026-0631;2026;12172022001990;SEC-2026-5A;2026-09-02;2026-09-02;Falta de conducta reiterada;0;Coordinacion TOE;PER-003;2026-09-09;Atendido;99;0;2026-10-19
+CASO-2026-0632;2026;12172022002020;SEC-2026-5A;2026-05-14;2026-05-15;Falta de conducta reiterada;0;Docente de area;PER-004;2026-05-24;Atendido;2;0;
+CASO-2026-0633;2026;12172022002030;SEC-2026-5A;2026-05-29;2026-05-30;falta de conducta;0;Coordinacion TOE;PER-004;2026-06-05;Atendido;0;0;2026-08-06
+CASO-2026-0634;2026;12172022002030;SEC-2026-5A;2026-06-16;2026-06-19;falta de conducta;0;Docente de area;PER-003;2026-06-23;Atendido ;1;0;2026-07-15
+CASO-2026-0635;2026;12172022002060;SEC-2026-5A;2026-05-28;2026-05-29;Falta de conducta reiterada;0;Tutor de aula;PER-004;2026-06-04;Atendido;3;1;2026-08-05
+CASO-2026-0636;2026;12172022002090;SEC-2026-5A;2026-07-28;2026-07-30;Situacion familiar de riesgo;0;Tutor de aula;PER-004;2026-08-06;Atendido;1;0;2026-09-01
+CASO-2026-0637;2026;12172022002090;SEC-2026-5A;2026-04-13;2026-04-16;Falta de conducta reiterada;0;Coordinacion TOE;PER-004;2026-04-15;Atendido;3;1;2026-05-15
+CASO-2026-0638;2026;12172022002110;SEC-2026-5A;2026-05-27;2026-05-28;Falta de conducta reiterada;0;Auxiliar de educacion;PER-004;;Programado;1;0;
+CASO-2026-0639;2026;12172022002110;SEC-2026-5A;2026-09-07;2026-09-07;Violencia psicologica entre escolares;1;Tutor de aula;PER-004;2026-09-17;Atendido;2;0;2026-10-12
+CASO-2026-0640;2026;12172022002110;SEC-2026-5A;2026-09-10;2026-09-10;Bajo rendimiento derivado a TOE;0;Docente de area;PER-004;;No asistio;1;1;
+CASO-2026-0641;2026;12172022002130;SEC-2026-5A;2026-08-18;2026-08-20;Falta de conducta reiterada;0;Auxiliar de educacion;PER-004;;Programado;0;1;
+CASO-2026-0642;2026;12172022002130;SEC-2026-5A;2026-05-18;2026-05-18;Violencia psicologica entre escolares;1;Docente de area;PER-004;;Programado;0;0;
+CASO-2026-0643;2026;12172022002140;SEC-2026-5A;2026-04-08;2026-04-09;Falta de conducta reiterada;0;Auxiliar de educacion;PER-003;;Programado;1;1;
+CASO-2026-0644;2026;12172022002140;SEC-2026-5A;2026-06-22;2026-06-25;Bajo rendimiento derivado a TOE;0;Auxiliar de educacion;PER-004;2026-07-01;Atendido;1;0;2026-08-02
+CASO-2026-0645;2026;12172022002150;SEC-2026-5A;2026-04-01;2026-04-04;Falta de conducta reiterada;0;Coordinacion TOE;PER-003;2026-04-02;Atendido;3;1;
+CASO-2026-0646;2026;12172022002160;SEC-2026-5A;2026-03-30;2026-04-02;Bajo rendimiento derivado a TOE;0;Auxiliar de educacion;PER-004;;No asistio;0;0;
+CASO-2026-0647;2026;12172022002160;SEC-2026-5A;2026-07-21;2026-07-21;Situacion familiar de riesgo;0;Docente de area;PER-003;2026-07-30;Atendido;4;1;2026-09-01
+CASO-2026-0648;2026;12172022002200;SEC-2026-5B;2026-04-28;2026-05-01;Bajo rendimiento derivado a TOE;0;Tutor de aula;PER-004;;Programado;1;0;
+CASO-2026-0649;2026;12172022002210;SEC-2026-5B;2026-05-08;2026-05-11;Situacion familiar de riesgo;0;Auxiliar de educacion;PER-004;2026-05-13;Atendido;0;1;
+CASO-2026-0650;2026;12172022002210;SEC-2026-5B;2026-05-05;2026-05-08;Violencia psicologica entre escolares;1;Auxiliar de educacion;PER-004;2026-05-15;Atendido;0;0;
+CASO-2026-0651;2026;12172022002250;SEC-2026-5B;2026-08-27;2026-08-28;Situacion familiar de riesgo;0;Auxiliar de educacion;PER-003;2026-09-02;Atendido;0;1;2026-10-06
+CASO-2026-0652;2026;12172022002250;SEC-2026-5B;2026-06-17;2026-06-17;Falta de conducta reiterada;0;Docente de area;PER-004;2026-06-27;Atendido;3;0;2026-07-12
+CASO-2026-0653;2026;12172022002260;SEC-2026-5B;2026-07-14;2026-07-16;Falta de conducta reiterada;0;Tutor de aula;PER-003;;Atendido;2;0;
+CASO-2026-0654;2026;12172022002280;SEC-2026-5B;2026-06-26;2026-06-27;Situacion familiar de riesgo;0;Docente de area;PER-003;2024-12-01;Atendido;2;0;2026-07-25
+CASO-2026-0655;2026;12172022002280;SEC-2026-5B;2026-03-19;2026-03-19;Violencia psicologica entre escolares;1;Auxiliar de educacion;PER-004;2026-03-29;Atendido;2;0;2026-05-07
+CASO-2026-0656;2026;12172022002300;SEC-2026-5B;2026-08-21;2026-08-23;Violencia fisica entre escolares;1;Coordinacion TOE;PER-003;2026-08-31;Atendido;0;0;
+CASO-2026-0657;2026;12172022002350;SEC-2026-5B;2026-05-01;2026-05-04;Bajo rendimiento derivado a TOE;0;Docente de area;PER-003;2026-05-12;Atendido;0;1;
+CASO-2026-0658;2026;12172022002350;SEC-2026-5B;2026-07-15;2026-07-16;Bajo rendimiento derivado a TOE;0;Docente de area;PER-004;2026-07-16;Atendido;1;0;2026-08-02
+CASO-2026-0659;2026;12172022002360;SEC-2026-5B;2026-04-29;2026-04-29;Violencia psicologica entre escolares;1;Auxiliar de educacion;PER-003;2026-05-11;Atendido;1;1;2026-07-02
+CASO-2026-0660;2026;12172022002380;SEC-2026-5B;2026-04-29;2026-04-30;Situacion familiar de riesgo;0;Docente de area;PER-003;2026-05-03;Atendido;0;0;
+CASO-2026-0661;2026;12172022002400;SEC-2026-5B;2026-08-28;2026-08-31;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-004;2026-09-02;Atendido;1;0;2026-10-08
+CASO-2026-0662;2026;12172026003010;SEC-2026-1A;2026-03-27;2026-03-29;Violencia fisica entre escolares;1;Tutor de aula;PER-003;;No asistio;3;1;
+CASO-2026-0663;2026;12172026003010;SEC-2026-1A;2026-03-16;2026-03-17;Situacion familiar de riesgo;0;Docente de area;PER-004;2026-03-27;Atendido;3;0;
+CASO-2026-0664;2026;12172026003010;SEC-2026-1A;2026-04-10;2026-04-11;Falta de conducta reiterada;0;Tutor de aula;PER-004;;Programado;4;1;
+CASO-2026-0665;2026;12172026003020;SEC-2026-1A;2026-08-27;2026-08-27;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-004;2024-12-01;Atendido;2;1;2026-09-19
+CASO-2026-0666;2026;12172026003040;SEC-2026-1A;2026-03-30;2026-03-31;Consumo de sustancias;0;Auxiliar de educacion;PER-004;2026-04-11;Atendido;2;0;2026-05-22
+CASO-2026-0667;2026;12172026003050;SEC-2026-1A;2026-09-15;2026-09-17;Consumo de sustancias;0;Docente de area;PER-004;;Atendio;0;0;
+CASO-2026-0668;2026;12172026003050;SEC-2026-1A;2026-04-16;2026-04-18;Violencia psicologica entre escolares;1;Auxiliar de educacion;PER-003;2026-04-21;no asisitio;1;1;2026-05-03
+CASO-2026-0669;2026;12172026003060;SEC-2026-1A;2026-06-22;2026-06-22;Violencia fisica entre escolares;1;Auxiliar de educacion;PER-003;2026-06-28;Atendido;1;0;2026-08-05
+CASO-2026-0670;2026;12172026003060;SEC-2026-1A;2026-05-28;2026-05-31;Bajo rendimiento derivado a TOE;0;Auxiliar de educacion;PER-003;2026-06-02;Atendido;2;0;2026-07-23
+CASO-2026-0671;2026;12172026003080;SEC-2026-1A;2026-04-29;2026-04-29;FALTA DE CONDUCTA REITERADA;0;Auxiliar de educacion;PER-003;2026-05-01;No asistio;2;0;
+CASO-2026-0672;2026;12172026003080 ;SEC-2026-1A;2026-07-01;2026-07-01;Situacion familiar de riesgo;0;Auxiliar de educacion;PER-004;2026-07-11;Atendido;1;1;2026-09-01
+CASO-2026-0673;2026;12172026003120;SEC-2026-1A;2026-06-22;2026-06-24;Violencia psicologica entre escolares;1;Auxiliar de educacion;PER-004;;Programado;3;0;
+CASO-2026-0674;2026;12172026003120;SEC-2026-1A;2026-03-17;2026-03-20;Bajo rendimiento derivado a TOE;0;Auxiliar de educacion;PER-004;2026-03-25;Atendido;0;1;2026-05-17
+CASO-2026-0675;2026;12172026003160;SEC-2026-1A;2026-06-02;2026-06-02;Falta de conducta reiterada;0;Auxiliar de educacion;PER-004;2024-12-01;Atendido;1;1;
+CASO-2026-0676;2026;12172026003160;SEC-2026-1A;2026-05-15;2026-05-17;Falta de conducta reiterada;0;Auxiliar de educacion;PER-004;2026-05-27;Atendido;1;1;
+CASO-2026-0677;2026;12172026003170;SEC-2026-1A;2026-08-17;2026-08-18;Falta de conducta reiterada;0;Docente de area;PER-004;2026-08-21;Atendido;N/A;0;
+CASO-2026-0678;2026;12172026003200;SEC-2026-1B;2026-06-19;2026-06-22;Violencia psicologica entre escolares;1;Docente de area;PER-004;2026-06-24;Atendido;0;0;2026-08-16
+CASO-2026-0679;2026;12172026003220;SEC-2026-1B;2026-04-16;2026-04-18;Situacion familiar de riesgo;0;Docente de area;PER-004;2026-04-23;Atendido;2;0;
+CASO-2026-0680;2026;12172026003230;SEC-2026-1B;2026-03-25;2026-03-28;Falta de conducta reiterada;0;Tutor de aula;PER-004;;Programado;1;1;
+CASO-2026-0681;2026;12172026003260;SEC-2026-1B;2026-05-11;2026-05-14;Violencia fisica entre escolares;0;Docente de area;PER-003;2026-05-23;Atendido;0;0;
+CASO-2026-0682;2026;12172026003260;SEC-2026-1B;2026-09-15;2026-09-18;Falta de conducta reiterada;0;Coordinacion TOE;PER-004;2026-09-26;Atendido;1;0;2026-10-07
+CASO-2026-0683;2026;12172026003270;SEC-2026-1B;2026-04-14;2026-04-16;Violencia psicologica entre escolares;1;Auxiliar de educacion;PER-003;2026-04-16;Atendido;2;0;2026-06-01
+CASO-2026-0684;2026;12172026003280;SEC-2026-1B;2026-06-19;2026-06-20;Bajo rendimiento derivado a TOE;0;Tutor de aula;PER-004;2026-07-01;Atendido;0;1;2026-08-21
+CASO-2026-0685;2026;12172026003290;SEC-2026-1B;2026-07-13;2026-07-16;Bajo rendimiento derivado a TOE;0;Tutor de aula;PER-004;2026-07-19;Atendido;1;0;
+CASO-2026-0686;2026;12172026003310;SEC-2026-1B;2026-07-02;2026-07-04;Bajo rendimiento derivado a TOE;0;Auxiliar de educacion;PER-003;2026-07-08;Atendido;4;1;2026-08-07
+CASO-2026-0687;2026;12172026003310;SEC-2026-1B;2026-09-07;2026-09-10;Falta de conducta reiterada;0;Tutor de aula;PER-003;2026-09-18;Atendido;1;0;
+CASO-2026-0688;2026;12172026003310;SEC-2026-1B;2026-06-01;2026-06-03;Falta de conducta reiterada;0;Coordinacion TOE;PER-003;2026-06-10;Atendidoo;0;0;
+CASO-2026-0689;2026;12172026003310;SEC-2026-1B;2026-05-21;2026-05-24;Violencia psicologica entre escolares;1;Tutor de aula;PER-004;;No asistio;1;1;
+CASO-2026-0690;2026;12172026003320;SEC-2026-1B;2026-05-04;2026-05-04;Falta de conducta reiterada;0;Tutor de aula;PER-004;2026-05-09;Atendido;1;0;
+CASO-2026-0691;2026;12172026003320;SEC-2026-1B;2026-04-28;2026-04-28;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-004;2026-05-01;Atendido ;1;0;
+CASO-2026-0692;2026;12172026003330;SEC-2026-1B;2026-08-27;2026-08-29;Violencia psicologica entre escolares;1;Coordinacion TOE;PER-003;2026-08-29;Atendido;2;1;
+CASO-2026-0693;2026;12172026003330;SEC-2026-1B;2026-08-20;2026-08-22;Situacion familiar de riesgo;0;Tutor de aula;PER-003;2026-08-25;Atendido;N/A;1;2026-09-08
+CASO-2026-0694;2026;12172026003330;SEC-2026-1B;2026-05-05;2026-05-07;Situacion familiar de riesgo;0;Auxiliar de educacion;PER-004;;No asistio;2;1;
+CASO-2026-0695;2026;12172026003330;SEC-2026-1B;2026-07-22;2026-07-23;Falta de conducta reiterada;0;Docente de area;PER-003;2026-07-27;Atendido;2;0;
+CASO-2026-0696;2026;12172026003350;SEC-2026-1B;2026-09-14;2026-09-15;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-004;;No asistio;3;1;
+CASO-2026-0697;2026;12172026003350;SEC-2026-1B;2026-04-09;2026-04-12;Violencia fisica entre escolares;0;Coordinacion TOE;PER-004;2026-04-19;Atendido;0;1;
+CASO-2026-0698;2026;12172026003360;SEC-2026-1B;2026-04-30;2026-04-30;Falta de conducta reiterada;0;Tutor de aula;PER-003;2026-05-04;Atendido;2;1;2026-06-30
+CASO-2026-0699;2026;12172026003360;SEC-2026-1B;2026-05-04;2026-05-05;Falta de conducta reiterada;0;Auxiliar de educacion;PER-004;;Programado;0;1;
+CASO-2026-0700;2026;12172026003360;SEC-2026-1B;2026-04-08;2026-04-08;Violencia psicologica entre escolares;1;Auxiliar de educacion;PER-003;2026-04-09;Atendido;2;1;2026-05-25
+CASO-2026-0701;2026;12172026003360;SEC-2026-1B;2026-04-27;2026-04-27;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-004;2026-04-28;Atendido;1;1;
+CASO-2026-0702;2026;12172026003390;SEC-2026-1B;2026-09-08;2026-09-11;Violencia psicologica entre escolares;1;Docente de area;PER-003;2026-09-16;Atendido;0;0;2026-10-30
+CASO-2026-0703;2026;12172026003390;SEC-2026-1B;2026-04-08;2026-04-09;Falta de conducta reiterada;0;Docente de area;PER-004;2026-04-12;Atendido;3;1;2026-05-05
+CASO-2026-0704;2026;12172026003400;SEC-2026-1B;2026-05-06;2026-05-07;Falta de conducta reiterada;0;Docente de area;PER-003;;Programado;1;1;
+CASO-2026-0705;2026;12172026003420;SEC-2026-1B;2026-04-03;2026-04-04;Bajo rendimiento derivado a TOE;0;Auxiliar de educacion;PER-003;;Programado;0;1;
+CASO-2026-0706;2026;12172026003420;SEC-2026-1B;2026-06-22;2026-06-23;Falta conducta reiterada;0;Docente de area;PER-004;2026-06-26;Atendido;1;0;
+CASO-2026-0707;2026;12172026003420;SEC-2026-1B;2026-07-24;2026-07-24;Violencia fisica entre escolares;1;Tutor de aula;PER-003;2026-07-29;Atendido;1;0;2026-08-17
+CASO-2026-0708;2026;12172026003430;SEC-2026-1B;2026-05-27;2026-05-29;Violencia psicologica entre escolares;1;Coordinacion TOE;PER-003;2026-05-30;Atendido;4;1;
+CASO-2026-0709;2026;12172026003440;SEC-2026-1B;2026-05-05;2026-05-05;Falta conducta reiterada;0;Auxiliar de educacion;PER-003;2026-05-14;Atendido;3;0;2026-06-08
+CASO-2026-0710;2026;12172026003440;SEC-2026-1B;2026-03-20;2026-03-20;Falta de conducta reiterada;0;Docente de area;PER-004;;Atendido ;0;0;2026-04-08
+CASO-2026-0711;2026;12172026003440;SEC-2026-1B;2026-06-25;2026-06-25;Situacion familiar de riesgo;0;Docente de area;PER-004;2026-06-27;Atendido;2;1;2026-07-22
+CASO-2026-0712;2026;12172026003460;SEC-2026-1B;2026-05-08;2026-05-08;Violencia psicologica entre escolares;1;Tutor de aula;PER-004;2026-05-20;Atendido;1;1;2026-07-08
+CASO-2026-0713;2026;12172026003460;SEC-2026-1B;2026-06-11;2026-06-13;Violencia psicologica entre escolares;0;Tutor de aula;PER-003;;Programado;1;0;
+CASO-2026-0714;2026;12172026003470;SEC-2026-1B;2026-03-25;2026-03-27;Bajo rendimiento derivado a TOE;0;Coordinacion TOE;PER-004;2026-03-28;Atendido;0;0;2026-04-17
+CASO-2026-0715;2026;12172026003470;SEC-2026-1B;2026-08-18;2026-08-18;Falta de conducta reiterada;0;Coordinacion TOE;PER-003;2026-08-27;Atendido;1;0;2026-09-29
+CASO-2026-0716;2026;12172026003510;SEC-2026-2B;2026-04-23;2026-04-24;FALTA DE CONDUCTA REITERADA;0;Tutor de aula;PER-004;;No asistio;3;0;
+CASO-2026-0717;2026;12172026003530;SEC-2026-2B;2026-03-31;2026-04-02;Falta de conducta reiterada;0;Tutor de aula;PER-004;2026-04-04;Atendido;2;0;2026-04-27
+CASO-2026-0718;2026;12172026003530;SEC-2026-2B;2026-04-24;2026-04-26;Falta de conducta reiterada;0;Docente de area;PER-004;2026-04-29;no asisitio;1;1;2026-05-22
+CASO-2026-0719;2026;12172026003530;SEC-2026-2B;2026-08-28;2026-08-28;Falta de conducta reiterada;0;Coordinacion TOE;PER-003;2026-09-08;Atendido;1;0;2026-09-29
+CASO-2026-0720;2026;12172026003540;SEC-2026-2B;2026-03-25;2026-03-26;Consumo de sustancias;0;Docente de area;PER-003;2026-03-27;Atendido;3;0;2026-04-24
+CASO-2026-0721;2026;12172026003560;SEC-2026-2B;2026-03-20;2026-03-21;Situacion familiar de riesgo;0;Tutor de aula;PER-003;2026-04-01;Atendido;1;0;2026-05-24
+CASO-2026-0722;2026;12172026003570;SEC-2026-2B;2026-04-14;2026-04-17;Violencia psicologica entre escolares;1;Auxiliar de educacion;PER-004;2026-04-22;Atendido;3;0;2026-05-21
+CASO-2026-0723;2026;12172026003570;SEC-2026-2B;2026-06-16;2026-06-17;Falta de conducta reiterada;0;Coordinacion TOE;PER-004;;Programado;2;0;
+CASO-2026-0724;2026;12172026003600;SEC-2026-2B;2026-05-22;2026-05-25;Violencia psicologica entre escolares;1;Auxiliar de educacion;PER-004;2026-05-31;Atendido;3;0;
+CASO-2026-0725;2026;12172026003600;SEC-2026-2B;2026-09-04;2026-09-06;Violencia psicologica entre escolares;0;Coordinacion TOE;PER-004;2026-09-12;Atendido;1;1;2026-10-15
+CASO-2026-0726;2026;12172026003640;SEC-2026-4B;2026-04-16;2026-04-19;Falta de conducta reiterada;0;Docente de area;PER-004;2026-04-22;Atendido;1;0;2026-06-15
+CASO-2026-0727;2026;12172026003670;SEC-2026-5B;2026-05-14;2026-05-17;Falta de conducta reiterada;0;Tutor de aula;PER-004;;Programado;1;0;
+CASO-2026-0728;2026;12172026003680;SEC-2026-5B;2026-06-05;2026-06-06;Falta de conducta reiterada;0;Auxiliar de educacion;PER-004;2026-06-09;Atendido;0;0;2026-07-19
+CASO-2026-0729;2026;12172026003680;SEC-2026-5B;2026-08-24;2026-08-27;Falta de conducta reiterada;0;Coordinacion TOE;PER-004;2026-08-27;Atendido;2;0;2026-10-31
+CASO-2026-0730;2026;12172026003680;SEC-2026-5B;2026-08-28;2026-08-31;Situacion familiar de riesgo;0;Auxiliar de educacion;PER-004;2026-09-06;Atendido;-2;0;2026-09-13
+CASO-2026-0731;2026;12172026003680 ;SEC-2026-5B;2026-05-14;2026-05-16;Falta de conducta reiterada;0;Auxiliar de educacion;PER-004;;No asistio;4;0;
+CASO-2026-0732;2026;12172026003700;SEC-2026-5B;2026-05-11;2026-05-11;Violencia fisica entre escolares;1;Tutor de aula;PER-004;2026-05-23;Atendido;4;1;2026-05-29
+CASO-2026-0733;2026;12172026003700;SEC-2026-5B;2026-04-20;2026-04-22;Situacion familiar de riesgo;0;Auxiliar de educacion;PER-004;2026-04-22;Atendido;1;1;2026-05-12
+CASO-2026-0734;2026;12172026003720;SEC-2026-5B;2026-06-24;2026-06-25;Violencia fisica entre escolares;1;Coordinacion TOE;PER-003;2026-07-02;Atendido;3;0;2026-08-04
+CASO-2026-0735;2026;12172026003730;SEC-2026-5B;2026-07-31;2026-08-01;Situacion familiar de riesgo;0;Auxiliar de educacion;PER-004;2026-08-04;Atendidoo;1;0;
+CASO-2026-0736;2026;12172026003730;SEC-2026-5B;2026-08-25;2026-08-25;Situacion familiar de riesgo;0;Coordinacion TOE;PER-004;2026-08-29;Atendido;0;0;2026-10-22
